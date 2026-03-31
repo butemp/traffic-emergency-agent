@@ -1,0 +1,21 @@
+{
+  "doc_id": "91fbe59584f6bc231953d8f9b200757f514cf25f",
+  "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50518-2010 矿井通风安全装备标准.pdf",
+  "file_type": ".pdf",
+  "num_chunks": 1,
+  "chunks": [
+    {
+      "chunk_id": 0,
+      "text": "hQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50518-2010 矿井通风安全装备标准.pdf",
+        "file_type": ".pdf",
+        "doc_id": "91fbe59584f6bc231953d8f9b200757f514cf25f",
+        "page_start": 2,
+        "page_end": 38,
+        "token_count": 340,
+        "char_count": 681
+      }
+    }
+  ]
+}

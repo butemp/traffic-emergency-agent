@@ -1,0 +1,21 @@
+{
+  "doc_id": "ef543c8f7346fc3d797c7e7fe1762422970554ce",
+  "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB2811-2007 安全帽.pdf",
+  "file_type": ".pdf",
+  "num_chunks": 1,
+  "chunks": [
+    {
+      "chunk_id": 0,
+      "text": "易施网 www.shigoog.com 免费下载\n易施网 www.shigoog.com 免费下载\n易施网 www.shigoog.com 免费下载\n易施网 www.shigoog.com 免费下载",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB2811-2007 安全帽.pdf",
+        "file_type": ".pdf",
+        "doc_id": "ef543c8f7346fc3d797c7e7fe1762422970554ce",
+        "page_start": 1,
+        "page_end": 9,
+        "token_count": 49,
+        "char_count": 99
+      }
+    }
+  ]
+}

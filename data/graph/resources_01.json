@@ -1,0 +1,150 @@
+[
+  {
+    "id": "res_002",
+    "name": "南宁市消防救援支队特勤大队",
+    "type": "fire",
+    "status": "active",
+    "location": {
+      "latitude": 22.8521,
+      "longitude": 108.3245,
+      "address": "南宁市西乡塘区大学东路118号"
+    },
+    "description": {
+      "summary": "特种消防救援力量，擅长高层灭火及地震坍塌救援。",
+      "capabilities": ["高层灭火", "地震救援", "防化处理", "破拆救援"],
+      "capacity": { "fire_trucks": 12, "rescue_robots": 2 }
+    },
+    "contact": {
+      "general_phone": "0771-3180119",
+      "emergency_channel": "410.250MHz",
+      "duty_roster": [
+        {
+          "type": "specific_date",
+          "date": "2026-03-01",
+          "name": "陈队长",
+          "phone": "13907718888"
+        },
+        {
+          "type": "fixed_weekly",
+          "day_of_week": 7,
+          "shift": "full_day",
+          "name": "李教导员",
+          "phone": "13907719999"
+        }
+      ],
+      "default_contact": { "name": "中队值班室", "phone": "0771-3180119" }
+    },
+    "metadata": { "last_updated": "2026-02-25", "priority_level": 1 }
+  },
+  {
+    "id": "res_003",
+    "name": "自治区救灾物资储备总库",
+    "type": "inventory",
+    "status": "active",
+    "location": {
+      "latitude": 22.8892,
+      "longitude": 108.3912,
+      "address": "南宁市兴宁区昆仑大道15号"
+    },
+    "description": {
+      "summary": "省级大型救灾物资仓库，储备有帐篷、防汛器材及应急食品。",
+      "capabilities": ["物资转运", "防汛支持", "应急保障"],
+      "capacity": { "tents": 5000, "life_jackets": 10000, "ready_to_eat_meals": 20000 }
+    },
+    "contact": {
+      "general_phone": "0771-5858001",
+      "duty_roster": [
+        {
+          "type": "fixed_weekly",
+          "day_of_week": 7,
+          "shift": "09:00-17:00",
+          "name": "赵库管",
+          "phone": "13511112222"
+        }
+      ],
+      "default_contact": { "name": "库区警卫室", "phone": "0771-5858999" }
+    },
+    "metadata": { "last_updated": "2026-01-10", "priority_level": 2 }
+  },
+  {
+    "id": "res_004",
+    "name": "南宁交警支队指挥中心",
+    "type": "police",
+    "status": "active",
+    "location": {
+      "latitude": 22.8220,
+      "longitude": 108.3750,
+      "address": "南宁市青秀区凤岭北路"
+    },
+    "description": {
+      "summary": "城市交通管控与事故快速处理指挥枢纽。",
+      "capabilities": ["交通疏导", "道路封控", "无人机巡视"],
+      "capacity": { "patrol_motorcycles": 50, "uav_drones": 5 }
+    },
+    "contact": {
+      "general_phone": "0771-122",
+      "duty_roster": [
+        {
+          "type": "specific_date",
+          "date": "2026-03-01",
+          "name": "周警官",
+          "phone": "13766665555"
+        }
+      ],
+      "default_contact": { "name": "交通指挥专席", "phone": "0771-2892122" }
+    },
+    "metadata": { "last_updated": "2026-03-01", "priority_level": 1 }
+  },
+  {
+    "id": "res_005",
+    "name": "广西航空应急救援中心(直升机基地)",
+    "type": "transport",
+    "status": "maintenance",
+    "location": {
+      "latitude": 22.6100,
+      "longitude": 108.1750,
+      "address": "南宁吴圩国际机场通用航空基地"
+    },
+    "description": {
+      "summary": "提供重症伤员远程转运及森林灭火吊桶作业。",
+      "capabilities": ["航空医疗转运", "森林灭火", "空中巡查"],
+      "capacity": { "helicopters": 3, "medical_pods": 2 }
+    },
+    "contact": {
+      "general_phone": "0771-6112345",
+      "duty_roster": [],
+      "default_contact": { "name": "塔台值班", "phone": "0771-6112346" }
+    },
+    "metadata": { "last_updated": "2026-02-28", "priority_level": 2 }
+  },
+  {
+    "id": "res_006",
+    "name": "广西壮族自治区人民医院(凤岭医院)",
+    "type": "medical",
+    "status": "active",
+    "location": {
+      "latitude": 22.8125,
+      "longitude": 108.4350,
+      "address": "南宁市青秀区佛子岭路1号"
+    },
+    "description": {
+      "summary": "综合性公立三甲医院，东部城区重要的医疗救援支点。",
+      "capabilities": ["创伤外科", "脑卒中中心", "核磁共振"],
+      "capacity": { "emergency_beds": 30, "icu_beds": 15 }
+    },
+    "contact": {
+      "general_phone": "0771-2186111",
+      "duty_roster": [
+        {
+          "type": "fixed_weekly",
+          "day_of_week": 7,
+          "shift": "08:00-18:00",
+          "name": "刘主任",
+          "phone": "18877110000"
+        }
+      ],
+      "default_contact": { "name": "急诊分诊台", "phone": "0771-2186120" }
+    },
+    "metadata": { "last_updated": "2026-02-15", "priority_level": 1 }
+  }
+]

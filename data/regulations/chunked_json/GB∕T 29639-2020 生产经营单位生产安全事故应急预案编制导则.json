@@ -1,0 +1,385 @@
+{
+  "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+  "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+  "file_type": ".pdf",
+  "num_chunks": 29,
+  "chunks": [
+    {
+      "chunk_id": 0,
+      "text": "书\n书\n书\n犐犆犛\n犆\n/G21 /G22 /G23 /G24 /G25 /G26 /G27 /G27 /G28 /G29 /G2A\n犌犅\n犜\n/G21 /G22\n/G21 /G22 /G23 /G24 /G25 /G26 /G21 /G22 /G27 /G28 /G29 /G2A\n/G2B /G2C /G2D /G2E /G2F /G30 /G31 /G32\n犌狌犻犱犲犾犻狀犲狊犳狅狉犲狀狋犲狉狆狉犻狊犲狊狋狅犱犲狏犲犾狅狆犲犿犲狉犵犲狀犮狔狉犲狊狆狅狀狊犲狆犾犪狀犳狅狉狑狅狉犽狆犾犪犮犲犪犮犮犻犱犲狀狋狊\n/G33 /G34\n/G35 /G36\n/G27 /G28 /G2B /G2C /G2D /G2E /G2F /G30 /G31 /G32\n/G27 /G28 /G29 /G2A /G33 /G2F /G30 /G34 /G35 /G36\n/G33 /G34\n^揘N www.kqqw.com c蠴汵弣",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 1,
+        "page_end": 1,
+        "token_count": 204,
+        "char_count": 409
+      }
+    },
+    {
+      "chunk_id": 1,
+      "text": "/G21\n/G22\n/G21 /G22\n…………………………………………………………………………………………………………\n/G23 /G24\n………………………………………………………………………………………………………\n/G25 /G23 /G26 /G27 /G28 /G29 /G2A\n…………………………………………………………………………………………\n/G2B /G2C /G2D /G2E /G2F\n………………………………………………………………………………………………\n/G30 /G31 /G32 /G33 /G34 /G35 /G36 /G37\n………………………………………………………………………………………\n/G30 /G31 /G32 /G33 /G38 /G39\n……………………………………………………………………………………………\n/G3A /G3B /G30 /G31 /G32 /G33 /G3C /G3D\n………………………………………………………………………………………\n/G3E /G3F /G30 /G31 /G32 /G33 /G3C /G3D\n………………………………………………………………………………………\n/G40 /G41 /G42 /G43 /G44 /G33 /G3C /G3D\n………………………………………………………………………………………\n/G45 /G2A\n………………………………………………………………………………………………………\n/G45 /G46\n/G47 /G48 /G26 /G45 /G46\n/G49 /G4A /G4B /G4C /G4D /G4E /G4F /G50 /G51 /G52 /G53 /G54 /G34 /G35 /G55 /G56\n/G45 /G46\n/G47 /G48 /G26 /G45 /G46\n/G49 /G4A /G4B /G4C /G4D /G4E /G30 /G31 /G47 /G57 /G58 /G59 /G53 /G54 /G34 /G35 /G55 /G56\n/G45 /G46\n/G47 /G48 /G26 /G45 /G46\n/G30 /G31 /G32 /G33 /G34 /G35 /G5A /G5B /G2D /G5C /G5D\n………………………………………………………\n/G5E /G5F /G29 /G60\n……………………………………………………………………………………………………\n犌犅\n犜\n^揘N www.kqqw.com c蠴汵弣",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 2,
+        "page_end": 2,
+        "token_count": 546,
+        "char_count": 1092
+      }
+    },
+    {
+      "chunk_id": 2,
+      "text": "/G23\n/G24\n/G61 /G62 /G63 /G64 /G65\n/G66 /G67 /G68 /G25 /G69 /G6A /G6B\n/G61 /G62 /G63 /G6C /G6D\n/G49 /G4A /G6E /G6F /G70 /G71 /G49 /G4A /G4B /G4C /G4D /G4E /G30 /G31 /G32 /G33 /G34 /G35 /G72 /G69\n/G73\n/G74 /G75\n/G76 /G34 /G77 /G26 /G78 /G79 /G7A /G7B /G5C /G7C /G2B /G7D /G7E /G7F /G80\n/G78 /G79 /G81 /G30 /G31 /G32 /G33 /G34 /G35 /G36 /G37\n/G82 /G83\n/G84\n/G85 /G86 /G68 /G83\n/G84\n/G30 /G31 /G32 /G33 /G34 /G35 /G87 /G88 /G30 /G31 /G89 /G8A /G51 /G52 /G78 /G79 /G8B /G30 /G31 /G47 /G57 /G58 /G59\n/G82\n/G85 /G86 /G68\n/G8C /G7E /G81 /G30 /G31 /G32 /G33 /G51 /G8D /G3C /G3D\n/G82\n/G85 /G86 /G68\n/G78 /G79 /G81 /G3A /G3B /G30 /G31 /G32 /G33 /G68 /G5C /G8E /G3C /G3D\n/G8F /G90 /G34 /G35 /G91 /G68\n/G88 /G4F /G50 /G51 /G52 /G92 /G93 /G94 /G95 /G45 /G2A\n/G82\n/G2D /G83\n/G84\n/G85 /G86 /G68\n/G78 /G79 /G81 /G3E /G3F /G30 /G31 /G32 /G33 /G68 /G5C /G8E /G3C /G3D\n/G96 /G97 /G81 /G98 /G28 /G23 /G24\n/G8F /G90 /G4D /G4E /G4F /G50 /G99 /G9A\n/G82\n/G85 /G86 /G68\n/G9B /G9C /G81 /G30 /G31 /G32 /G33 /G45 /G2A /G9D /G9E\n/G96 /G97 /G81\n/G49 /G4A /G6E /G6F /G70 /G71 /G9F /GA0\n/G4F /G50 /G51 /G52 /G68 /G92 /G93 /G2D\n/G32 /G33 /G38\n/G39 /G73 /GA1 /GA2\n/G82\n/G96 /G97 /G81 /G45 /G46\n/G49 /G4A /G4B /G4C /G4D /G4E /G4F /G50 /G51 /G52 /G53 /G54 /G34 /G35 /G55 /G56\n/G45 /G46\n/G49 /G4A /G4B /G4C /G4D /G4E /G30 /G31 /G47 /G57 /G58 /G59",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 3,
+        "page_end": 3,
+        "token_count": 654,
+        "char_count": 1309
+      }
+    },
+    {
+      "chunk_id": 3,
+      "text": "/G53\n/G54 /G34 /G35 /G55 /G56\n/G82 /G45 /G46\n/G45 /G46\n/G61 /G62 /G63 /GA3 /G87 /GA4 /GA5 /GA6 /GA7 /G2D /GA8 /G30 /G31 /GA9 /GAA /GAB /GAC /G67\n/G61 /G62 /G63 /GA3 /G4C /GA8 /G4B /G4C /G49 /G4A /G62 /G63 /G7E /G7C /G2B /GAD /GAE /GAF\n/GB0 /GB1\n/G61 /G62 /G63 /G6A /G6B /G70 /G71\n/G87 /GA8 /G4B /G4C /G49 /G4A /GB2 /GB3 /GB4 /GB5 /GB6\n/GA8 /GB7 /G4B /G4C /G49 /G4A /G30 /G31 /GB8 /GB9 /G87 /GBA\n/GBB /G44 /GBC /GBD /G58 /GBE /G58 /GBF /GC0 /GBC\n/GC1 /GC2 /GC3 /GC4\n/G61 /G62 /G63 /G7B /G5C /G6A /G6B /GA5\n/GC5 /GC6 /GC7\n/GC8 /GC9 /GCA\n/GCB /GCC /GCD\n/GCE /GCF\n/GD0 /GD1 /GD2\n/GD3 /GD4 /GD5\n/GD6 /GD7\n/GD8 /GA8 /GD9\n/GC5 /GDA\n/GDB /G2E /GDC\n/GDD /G29 /GDE\n/GDF /GE0\n/GDD /GE1 /GE2\n/GDB /GE3\n/GE4 /GE5 /GE6\n/GE7 /GE8\n/GE9 /GEA /GEB\n/G61 /G62 /G63 /GEC /G6C /G6D /G62 /G63 /G68 /GED /GEE /G86 /G61 /GC0 /GEF /GF0 /GA0 /G8B\n犌犅\n犜\n^揘N www.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 3,
+        "page_end": 3,
+        "token_count": 416,
+        "char_count": 833
+      }
+    },
+    {
+      "chunk_id": 4,
+      "text": "/G25 /G26 /G27 /G28 /G29 /G2A /G25 /G26 /G2B /G2C /G2D /G2E\n/G2F /G30 /G31 /G32 /G33 /G34 /G35 /G36\n/G37 /G38\n/G61 /G62 /G63 /G25 /G2E /G81 /G49 /G4A /G6E /G6F /G70 /G71 /G49 /G4A /G4B /G4C /G4D /G4E /G30 /G31 /G32 /G33 /G68 /G34 /G35 /G36 /G37\n/G38 /G39 /GF1 /G9E /G2D /G3A /G3B /G30 /G31 /G32 /G33\n/G3E /G3F /G30\n/G31 /G32 /G33\n/G40 /G41 /G42 /G43 /G44 /G33 /G68 /G7B /G5C /G3C /G3D /GF2 /GF3 /G45 /G2A /GF4 /GF5\n/G61 /G62 /G63 /G98 /G28 /GF6 /G49 /G4A /G6E /G6F /G70 /G71 /G49 /G4A /G4B /G4C /G4D /G4E /G30 /G31 /G32 /G33\n/GF2 /G80 /GF7 /GF8 /G30 /G31 /G32 /G33\n/G34 /G35 /GF9 /GFA\n/GFB /GBC /GFC\n/GFD /GFE /GFF\n/GAF /G9D\n/G21\n/G2D /G70 /G71 /G68 /G30 /G31 /G32 /G33 /G34 /G35\n/G22\n/G5E /G65 /G61 /G62 /G63\n/G23 /G24\n/G39 /G37 /G3A /G3B /G3C /G3D /G3E\n/G80\n/G25\n/G29 /G2A\n/G26\n/GF6 /G61 /G29 /G2A /G68 /G30 /G28\n/G27 /G28 /G29 /G22 /G2A\n/G68\n/G2B /G27 /G2C /G2D /G2E\n/G68 /G27 /G28 /G29 /G2A\n/G2F /G2C /G2D /G2E\n/G68 /G86 /G61 /G98 /G28 /GF6 /G61 /G29\n/G2A\n/G2B /G27 /G29 /G2C /G2D /G2E\n/G68 /G27 /G28 /G29 /G2A\n/GFD\n/G30 /G31\n/G86 /G61\n/G32 /G33\n/GEC /GC1 /G68 /G78 /G79 /G70\n/G98 /G28 /GF6 /G61 /G29 /G2A\n/G49 /G4A /G4B /G4C /G4D /G4E /G30 /G31\n/G34 /G35 /G36\n/G61 /G25 /G23\n/G3F /G40 /G41 /G42 /G43\n/G80\n/G25\n/G2B /G2C /G2D /G2E /G2F /G98 /G28 /GF6 /G61 /G29 /G2A\n/G2F /G30 /G31 /G32",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 4,
+        "page_end": 4,
+        "token_count": 644,
+        "char_count": 1289
+      }
+    },
+    {
+      "chunk_id": 5,
+      "text": "犲犿犲狉犵犲狀犮狔狉犲狊狆狅狀狊犲狆犾犪狀\n/G37 /G26 /G22\n/G89 /GC0 /G49 /G68 /G4D /G4E\n/G8B\n/G30\n/G55 /G36\n/G38 /G39 /G2A\n/G4D /G4E\n/G3A /G3B /G3C\n/G32 /GD2 /G35 /G2E /G68 /G30 /G31 /G63\n/G3D\n/GF9 /GFA /G44 /G33\n/G2F /G30 /G44 /G2F\n犲犿犲狉犵犲狀犮狔狉犲狊狆狅狀狊犲\n/G37 /G26\n/G4D /G4E /G50 /GF0\n/G3E\n/G4D /G4E\n/G3F /G40\n/G30 /G31 /G32 /G33\n/G41 /G42\n/G68 /G30 /G31\n/G24 /G43\n/G2F /G30 /G45 /G46\n犲犿犲狉犵犲狀犮狔犲狓犲狉犮犻狊犲\n/G37 /G26 /G22\n/G89 /GC0 /G49 /G68 /G4D /G4E /GF0\n/G44\n/G3F /G40\n/G30 /G31 /G32 /G33\n/G45 /G46 /G47 /G48\n/G68 /G30 /G31\n/G49 /G43\n/G2F /G30 /G31 /G32 /G47 /G48\n犲犿犲狉犵犲狀犮狔狉犲狊狆狅狀狊犲狆犾犪狀狉犲狏犻犲狑\n/G26 /G31\n/G34 /G35\n/G3E\n/G78\n/G4A\n/G68 /G30 /G31 /G32 /G33 /G3C /G3D /G68 /G98 /G28 /G26 /GEC\n/G47 /G48\n/G68 /G99 /G9A /G51 /G52 /GF3 /G8D /G2E\n/G4B\n/G36\n/G2F /G30 /G31 /G32 /G33 /G34 /G49 /G4A\n/G4B /G4C\n/G49 /G4A /G6E /G6F /G70 /G71 /G30 /G31 /G32 /G33 /G34 /G35 /G36 /G37\n/G32 /G33\n/G9E /GD7 /G30 /G31 /G32 /G33 /G34 /G35 /GF9 /GFA /G9D\n/G47 /G48\n/G4C /G4D\n/G4F /G50 /G51 /G52\n/G30 /G31 /G47 /G57 /G58\n/G59\n/G30 /G31 /G32 /G33 /G34 /G35\n/G4E /G4F /G50 /G34\n/G30 /G31 /G32 /G33 /G51 /G8D /G2D\n/G51\n/G63\n/G52 /G53\n/G54 /G55 /G56",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 4,
+        "page_end": 4,
+        "token_count": 547,
+        "char_count": 1095
+      }
+    },
+    {
+      "chunk_id": 6,
+      "text": "/G4D /G4E /G2F /G30 /G31 /G32 /G33 /G34 /G4F /G50 /G51\n/G92 /G3B /G61 /G70 /G71\n/G57\n/G89 /G2D /G99 /GF9\n/G9E /GD7 /GF2 /G70 /G71 /GC1\n/G58 /G59 /G5A\n/GA5 /G8B /G9D /GC9\n/G70 /G71 /G74\n/G58\n/GAB\n/G5B\n/GA5 /GAE\n/G7F /G49 /G4A\n/G7C /G2B\n/G5C /G3D\n/G4B\n犌犅\n犜\n^揘N www.kqqw.com c蠴汵弣",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 4,
+        "page_end": 4,
+        "token_count": 138,
+        "char_count": 276
+      }
+    },
+    {
+      "chunk_id": 7,
+      "text": "/G4C\n/G24 /G5D\n/GA5 /G4D\n/G5E /G5F\n/GA5 /GAE\n/G5E /G97 /G68 /G30 /G31 /G32 /G33 /G34 /G35 /GF9 /GFA /G9D\n/GDA\n/G60\n/GF9 /GFA\n/G57 /G5A\n/G2D\n/G61 /G5F\n/G99 /GF9\n/G35\n/G4A\n/GF9 /GFA\n/G62 /G63\n/G9D\n/G21\n/G47 /G48\n/G30 /G31 /G32 /G33 /G34 /G35 /GF9 /GFA\n/G32 /G33 /G34 /G35 /GF9 /GFA /G9D /G87 /G30\n/G64 /G65\n/G74\n/G58\n/GB8 /GB9\n/G66 /G67\n/GF2 /GF3 /GE9\n/G68\n/G74\n/G58 /G69 /G6A\n/G70 /G71\n/G3E\n/GFF\n/G6B\n/G6C\n/G6C\n/G5E /G97\n/G52 /G53 /G54 /G55\n/G30 /G31 /G32 /G33 /G34 /G35 /GF9 /GFA /G9D /G30\n/G4C /G4D\n/G80\n/G25\n/G74\n/G58\n/G47 /G48\n/G98 /G28 /G68\n/G6D /G6E /G6D\n/G25\n/GAB\n/G5B\n/G25 /G84\n/G6F\n/G44 /G26\n/G6D\n/G25 /G2D\n/G5D /G70\n/G25 /G84\n/G7C /G2B /G62 /G63 /GF3 /G25 /G23 /G26 /G29 /G2A\n/G69 /G6A\n/GE9\n/G68 /G6F /G71\n/G6F /G72\n/G73 /G74\n/GF0 /GA0 /GF3\n/G75 /G76\n/G77\n/G29\n/G78 /G79\n/G47 /G48\n/G69 /G6A\n/G40 /G41\n/G7A\n/G89\n/G6B /G63\n/G99\n/G7B\n/GF1\n/G7C /G7D /G7E /G4F\n/GEF /G43 /GF3 /G4B /G4C\n/G7F /G80\n/G47 /G48\n/G69 /G6A\n/GF9\n/G81 /G82\n/G36\n/GF9\n/G81\n/G5E\n/G83\n/GFA\n/G6A /G84\n/G2A\n/G5C /G3D /G85\n/G43 /GF3 /G4F /G50 /G51 /G52 /G47 /G48\n/G61\n/G69 /G6A\n/GED\n/G86\n/G4D /G4E /G73\n/G87 /G88\n/GA8 /G3C /G7A\n/G89 /G24 /G6A\n/G4D /G4E /G47 /G48\n/G8A /G6F /G5D /G70\n/GF3 /GE9\n/G68 /G69 /G6A\n/G70 /G71 /G30 /G31 /G32 /G33",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 5,
+        "page_end": 5,
+        "token_count": 604,
+        "char_count": 1209
+      }
+    },
+    {
+      "chunk_id": 8,
+      "text": "/G56 /G57 /G47 /G58\n/G47 /G48\n/G49 /G4A /G4B /G4C /G4D /G4E /G4F /G50 /G51 /G52\n/G8B /G8C\n/G51 /G52 /G53 /G54\n/G34 /G35 /G55 /G56 /G5E /G82 /G45 /G46\n/GFD /G3C /G3D\n/G32 /G33 /G8D /G29\n/GC2 /GF6\n/G8E /G8F\n/G49 /G4A /G6E /G6F /G70 /G71\n/G90 /G91\n/G68\n/G92\n/G50 /GC1\n/G3B /G93\n/G8E\n/G60\n/G2E\n/G22\n/G89 /GC0 /G49 /G68 /G49 /G4A /G4B /G4C /G4D /G4E\n/G94 /G95\n/G99 /G9A\n/G96 /G97\n/G4D /G4E\n/G94 /G95\n/GC0 /G49 /G68\n/G22\n/G89 /G26\n/G92 /G3B /G98\n/G93 /G2D\n/G99 /G9A\n/G23 /G24\n/G51 /G52\n/G60\n/G2E /G74 /G30 /G4D /G4E\n/G94 /G95\n/G68 /G4F /G50\n/G9B /G9C\n/G2F /G30 /G52 /G59 /G5A /G5B\n/G4C\n/G4F\n/G58 /G59 /G2D\n/G9D /G9E\n/G99 /G9A /G61 /G70 /G71 /GF2 /GF3 /GE9\n/G68\n/G70 /G71 /G2D\n/G5D /G70\n/GAB\n/G5B /G22 /G65\n/G5D /GB9\n/G9F\n/G68 /G30 /G31 /G47 /G57\n/GA0\n/GA0\n/G8B /G8C\n/G30 /G31 /G47 /G57\n/G58 /G59 /G53 /G54\n/G34 /G35 /G55 /G56 /G5E /G82 /G45 /G46\n/GFD /G3C /G3D\n/G32 /G33 /G8D /G29\n/GC2 /GF6\n/G61 /G70 /G71\n/G22\n/G58 /G28 /G68 /G30 /G31\n/G66 /G67\n/G85 /G3D\n/G7D\n/G47\n/G41 /GEC\n/G37 /G26\n/G49 /G4A\n/G4B\n/G36 /GF3\n/G90 /G91\n/G68 /G4F /G50\n/G22 /G41 /G42\n/G68\n/GA1 /GA2\n/GA1 /GA3\n/G53\n/GA4 /GA5 /GA6\n/GA7 /G9C\n/G70 /G71\n/GA8 /G6F /G5D /G70\n/GF3 /GE9\n/G68 /G69 /G6A /G22\n/GAC\n/GA9\n/G68 /G30 /G31 /G47 /G57",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 5,
+        "page_end": 5,
+        "token_count": 597,
+        "char_count": 1194
+      }
+    },
+    {
+      "chunk_id": 9,
+      "text": "/G22 /GAA\n/G58\n/GAB\n/G28 /G68\n/GAC /GAD\n/GAE /GAF\n/G3E\n/G6A /GB0\n/G50 /GB8 /GB9\n/GB1\n/GF1 /GF3 /GFD /GFE /GFF /GAF /G7E /G30 /G31 /GB8 /GB9 /G8A\n/GB2\n/G2F /G30 /G31 /G32 /G33 /G34\n/G30 /G31 /G32 /G33 /G34 /G35 /G30\n/GA8 /GB3 /GB4\n/GF2 /GA5 /G8B /G61\n/G3F /G6D /G3F\n/G25\n/GB5\n/G3B\n/G52 /GB6\n/G2C /GB7 /G52 /GB8\n/G68\n/GB9\n/G69\n/GF2 /G30 /G31 /G42 /G43 /G8B /GFB /GBA\n/G38\n/G40\n/GBA\n/GB8\n/GBB\n/GB8 /G2D /GD2\n/G2E\n/G42 /G43 /G68\n/GBC /GBD\n/GBE /GBF /G57 /G5A\n/GDA\n/G60\n/G36 /G37 /G25 /G23\n/GC0 /G53\n/GB2 /GB3\n/GC1 /G22\n/G89 /GF7 /GDA /G7E\n/GC2 /G6C\n/G7E\n/G82\n/G36 /G7E\n/G30\n/G31 /G32 /G33 /G34 /G35 /G5A /G5B /G2D /G5C /G5D /G5E /G82 /G45 /G46\n/G30 /G31 /G32 /G33 /G34 /G35 /GF9 /GFA\n/G32 /G33 /G8D /G29\n/GC2 /G80\n/G25\n/G3F /G40\n/G4D /G4E /G4F /G50 /G51 /G52 /GF3 /G30 /G31 /G47 /G57 /G58 /G59 /G92 /G93\n/G92 /G3B /G61 /G70 /G71 /G9D\n/G21\n/GA9 /GAA /G38 /G39\n/G49 /G4A /G25\n/G45\n/GF3 /G42 /G43\n/GBC /GBD\n/G3B\n/GAA\n/G60\n/GD7 /G61 /G70 /G71 /G30 /G31 /G32 /G33 /G38 /G39\n/G92 /G3B /G9D\n/G21\n/GA9 /GAA /G38 /G39 /GF3 /GAB\n/G5B /G6A /G5F /G57\n/G89\n/G63\n/G99\n/GB2 /GB3\n/G5C\n/G2E /G61 /G70 /G71 /G30 /G31 /G9D\n/G21 /GB1\n/GF1 /GF3\n/G57 /G5A\n/G99 /GF9",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 5,
+        "page_end": 5,
+        "token_count": 569,
+        "char_count": 1139
+      }
+    },
+    {
+      "chunk_id": 10,
+      "text": "/G3F /G40\n/G4D /G4E\n/G22\n/G89 /G68\n/G92 /G3B\n/G36\n/G38\n/G2D\n/G6B /GC3\n/G23 /G24\n/G92 /G3B /G30 /G31 /G42 /G43\n/GC4\n/GC2 /GF3 /G89 /G8A\n/GC5 /GC6 /GC7\n/G2E /G61 /G70 /G71 /G68\n/G9A\n/G30 /G99\n/G9C\n/G62 /G63\n/G35 /G2E /G74 /G30\n/GC8 /G9C\n/G68 /G30 /G31 /G42 /G43\n/GC0 /G53\n/G64 /G65 /GC1\n/G58\n/G25 /G2E /G2D /G5C /G5D\n/G60\n/G2E /G4D /G4E /GF4 /GF5 /G53 /G54\n/G9A\n/G30 /G99\n/G9C\n/G73\n/GC9 /G43\n/GCA /GCB /GC4 /GCC /G78\n/GA4 /GCD /GCE /GCF\n/G44\n/G4F\n/G68 /G3C\n/G3D\n/GD0 /G52\n/G73 /G74\n/G58\n/GAB\n/G5B\n/G2D /G70 /G71 /G30 /G31 /G32 /G33 /G68 /GA1 /GA2\n/G5C /G5D /G5E /G45\n/G64 /G65 /G30 /G31 /G32 /G33 /GDA\n/G60\n/G68\n/G57 /G5A\n/G99 /GF9 /G2D /G30 /G31\n/G9A\n/G30 /G36 /G37\n/G92 /G3B /GC1\n/G58\n/G6E\n/GD1 /GD2\n/GD1\n/G74\n/G58\n/GAB\n/G5B\n/GF3 /GFD /GA5 /GAE\n/G22 /G41 /G42 /G4E /G4F\n/G34 /G35\n/G68\n/G72\n/G5B\n/G45 /G46\n/G49 /G4A /G4B /G4C /G4D /G4E /G30\n/G26 /G4B\n/G36\n/GD3 /G55\n/G99 /G9A\n/GD4 /GD5 /GD6 /G72\n/G9E\n/GD7\n/G46\n/GD8 /GD1\n/G30 /G31 /G32 /G33 /G68\n/G22 /G24\n/G26\n/GD6 /GD9 /GDA /G55\n犌犅\n犜\n^揘N www.kqqw.com c蠴汵弣",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 5,
+        "page_end": 5,
+        "token_count": 503,
+        "char_count": 1006
+      }
+    },
+    {
+      "chunk_id": 11,
+      "text": "/GDB /GDC\n/G30 /G31 /G32 /G33\n/G4E /G4F /G34 /G35\n/G68 /G74\n/G58\n/G5C /G5D /G82\n/G2F /G30 /G31 /G32 /G47 /G48\n/G47 /G48 /G5F /G60\n/G30 /G31 /G32 /G33 /G34 /G35\n/GDB\n/G9E\n/G98\n/G49 /G4A /G6E /G6F /G70 /G71 /G30 /G64\n/G6D /G6E /G6D\n/G25 /GC1\n/G58\n/G25 /G2E /G9D\n/G21\n/G51 /G8D\n/G3E /GD5 /GDD\n/G5E /G97 /G30 /G31 /G32 /G33 /G51 /G8D\n/G68 /GA5 /GAE\n/G22 /G32 /G33\n/GC1\n/G58\n/G4B /G4C /G49 /G4A /GF3 /G30 /G31 /GA9 /GAA /G44\n/G4F\n/G68\n/GC1 /G40 /G41 /G42 /G43 /G6E\n/GD1\n/G68 /G3E /GB7\n/G30 /G31 /G32 /G33\n/GD5 /GDD /G22 /G79 /G4B /G50 /G34\n/G68\n/G44 /G5B\n/G47 /G48\n/G47 /G48 /G61 /G62\n/G30 /G31 /G32 /G33 /G51 /G8D /G3C /G3D /G7B /G5C\n/G32 /G33\n/G4F /G50 /G51 /G52 /G2D /G30 /G31 /G47 /G57 /G58 /G59 /G68 /G4C\n/G4F\n/G26\n/G30 /G31 /G32 /G33 /G38 /G39\n/G5C /G62\n/G68\n/G37 /G26\n/G26\n/G30\n/G31 /G9D\n/G21\n/G38 /G39 /G68 /G3B /GAA /G26\n/G30 /G31\n/G9A\n/G30 /G36 /G37 /G2D\n/GC0 /G53\n/G68 /GB2 /GB3 /G26\n/G30 /G31\n/GDE /GDF /GC0 /G53\n/G68\n/G22 /G24\n/G26\n/G30 /G31 /G32 /G33 /G68 /GA1 /GA2 /G26\n/G47 /G48 /G49 /G4A\n/G30 /G31 /G32 /G33 /G51 /G8D /G36 /G37\n/G32 /G33\n/G80\n/G25 /G55 /G56",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 6,
+        "page_end": 6,
+        "token_count": 534,
+        "char_count": 1069
+      }
+    },
+    {
+      "chunk_id": 12,
+      "text": "/G51 /G8D /G63\n/G3D\n/G9E /GD7 /G30 /G31 /G32 /G33 /G51 /G8D /GF9 /GFA /G9D\n/GD0 /G52\n/G5E /G97 /G51 /G8D /G68 /G3E /GB7\n/G88 /G30 /G31 /G32 /G33\n/G34 /G35\n/GE0\n/GDA\n/G4F /G50 /G51\n/G52\n/G30 /G31 /G47 /G57 /G58 /G59 /G53 /G54 /GF3 /GFD /GFE /GC1\n/G58\n/G47 /G48\n/G91\n/G51 /G8D /G21\n/GE1 /GE2\n/G5E /G97 /G51 /G8D /G68 /G70 /G71\n/G3E\n/GA5 /GAE\n/G9D\n/G21\n/G51 /G8D\n/G51 /G8D\n/G41 /G42\n/GAF\n/GE3\n/G8D /G59\n/G72\n/G5B\n/G69 /G6A\n/G7B /G5C\n/G59 /G5A\n/GA5 /G5E /G97 /GAF\n/GE3\n/GAF\n/GE3\n/GA3 /G5E /G97 /G51 /G8D /G68 /G3E /GB7 /GA7\n/G89 /G50\n/GE4\n/G67 /G68 /G9D /GC9 /G7B\n/GE5\n/G64 /G65\n/GE3\n/G36 /G9D\n/G21\n/G51 /G8D\n/G6C /GE6\n/GD0\n/G30 /GC1\n/G29 /G2A\n/GF6 /G67\n/GE7\n/GAF\n/GE3\n/G3E /GB7 /GA5\n/G83\n/G68\n/GE8\n/G99\n/GE9 /GEA /G89 /GEB\n/G44 /G8B\n/G79 /G4B\n/G51 /G8D /GAF\n/GE3\n/G30\n/G72\n/G9E /G51 /G8D\n/GEB\n/G82\n/G6E /G51 /G8D /G9D /G9D /GC9\n/GEC /GED\n/G45 /G5E /G97 /G51 /G8D /GAF\n/GE3\n/G68 /G3E /GB7\n/GEC /GED /G6C\n/G6C\n/GE6\n/G68\n/GEE /GEF\n/GF0 /GA0 /G30 /GF2\n/GF0 /G4F /GF1\n/G48\n/GD7\n/G46\n/G91\n/G33\n/GD6\n/GFA /G8B /G51 /G8D\n/GEB\n/G82 /G68 /G45 /G2A",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 6,
+        "page_end": 6,
+        "token_count": 517,
+        "char_count": 1034
+      }
+    },
+    {
+      "chunk_id": 13,
+      "text": "/G78 /G79\n/GDB /GDC\n/G49 /G4A /G6E /G6F /G70 /G71 /G30\n/GF2 /GF3\n/G99 /G9A /GB4 /GB5\n/G64 /G65 /G51 /G8D\n/GEB\n/G82\n/G26\n/G30 /G31 /G32 /G33\n/GD9 /G24\n/G78\n/G4A\n/G2D\n/GDB /GDC\n/G51 /G8D\n/G6C /GE6 /G29 /G79 /G4B\n/G68\n/G49 /G4A /G6E /G6F /G70 /G71 /G30 /G78 /G79\n/GDB /GDC /G98\n/G64 /G51 /G8D /G36 /G37\n/GB7 /G31\n/G9D\n/G21\n/G3E /GB7 /G51 /G8D\n/G49 /G4A /G6E /G6F /G70 /G71 /G30\n/G8C\n/G67\n/GF4 /G40\n/G3E /GB7 /G51 /G8D\n/GEB\n/G82 /G68 /G78 /G79 /GF0 /GA0\n/GE0\n/GDA\n/GD6\n/G6E /G3E /GB7 /G9D /G9D /GC9\n/GEC /GED /G60 /GF2\n/G63 /G64 /G65 /G66\n/G79 /G4B\n/G51 /G8D /G68 /G30 /G31 /G32 /G33\n/GA3 /G49 /G4A /G6E /G6F /G70 /G71 /G7B /G5C\n/G59 /G5A\n/GA5\n/GEC\n/GC0\n/G52 /G53\n/G2F /G30 /G31 /G32 /G67 /G68\n/G4B /G4C\n/G49 /G4A /G6E /G6F /G70 /G71 /G30 /G31 /G32 /G33 /G99 /G8B /G3A /G3B /G30 /G31 /G32 /G33\n/G3E /G3F /G30 /G31 /G32 /G33 /G2D /G40 /G41 /G42 /G43 /G44 /G33\n/G49 /G4A /G6E /G6F /G70 /G71 /G30\n/GF4 /G40\n/GC1\n/G58 /G6D /G6E\n/G6D\n/G25 /G2D /G74\n/G58\n/G62 /G63\n/G92 /G3B /G61 /G70 /G71 /G9D\n/G21\n/GA9 /GAA /G38 /G39\n/G49 /G4A /G25\n/G45\n/G2D\n/G22\n/G89 /GC0 /G49 /G68 /G4D /G4E\n/GBC /GBD\n/GB2 /GB3 /G3B /GAA\n/G60\n/GD7\n/G61 /G70 /G71 /G68 /G30 /G31 /G32 /G33 /G38 /G39\n/GD6 /G2C /GEB\n/G73 /GFD /GFE\n/G94 /G95\n/G30 /G31 /G32 /G33 /G74 /GA1 /GA2",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 6,
+        "page_end": 6,
+        "token_count": 617,
+        "char_count": 1234
+      }
+    },
+    {
+      "chunk_id": 14,
+      "text": "/G69 /G6A /G2F /G30 /G31 /G32\n/G3A /G3B /G30 /G31 /G32 /G33\n/G27\n/G49 /G4A /G6E /G6F /G70 /G71 /G8B /G30\n/G26 /G96 /G97\n/G49 /G4A /G4B /G4C /G4D /G4E\n/G3C\n/G35 /G2E /G68 /G3A /G3B /G26 /GF9 /GFA /G44 /G33\n/G27\n/G61 /G70 /G71 /G30\n/G26\n/G49 /G4A /G4B /G4C /G4D /G4E /G68\n/GF5\n/G38 /GF9 /GFA /G36 /G37\n/GC0 /G53\n/G2D /G30 /G31 /G32 /G33 /G38 /G39 /G68\n/GF5\n/G56\n/G6B /G6C /G2F /G30 /G31 /G32\n/G3E /G3F /G30 /G31 /G32 /G33\n/G27\n/G49 /G4A /G6E /G6F /G70 /G71 /G8B /G30\n/G26 /GF6 /GDA /G97 /G3E /GF7 /GF8 /G97 /G94 /GF9\n/G49 /G4A /G4B /G4C /G4D /G4E\n/G3E /GF7 /G37 /G26 /GB7\n/G5C /G49 /G4A\n/G5C /G53\n/GB7\n/G55\n/G92\n/G50 /G57\n/GB7\n/G55\n/G49 /G43 /GAF /GFA\n/G49 /G4A /G4B /G4C /G4D /G4E\n/G3C\n/G35 /G2E /G68 /G3E /G3F /GF9 /GFA /G44 /G33\n/G3E /G3F /G30 /G31 /G32 /G33 /G73 /G3A /G3B /G30 /G31 /G32 /G33 /G87 /G68 /G30 /G31 /G9D\n/G21 /GB1\n/GF1\n/G30 /G31\n/G9A\n/G30 /G36 /G37 /G74\n/GFB\n/GD0\n/G22 /G29\n/G34\n/G8C\n/G3E /G3F /G30 /G31 /G32 /G33\n犌犅\n犜\n^揘N www.kqqw.com c蠴汵弣",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 6,
+        "page_end": 6,
+        "token_count": 478,
+        "char_count": 956
+      }
+    },
+    {
+      "chunk_id": 15,
+      "text": "/G74 /G30 /G68 /G30 /G31 /G42 /G43\n/GC0 /G53 /GD6\n/G95 /G3A /G3B /G30 /G31 /G32 /G33\n/G6D /G6E /G6F /G70 /G71 /G32\n/G40 /G41 /G42 /G43 /G44 /G33\n/G27\n/G49 /G4A /G6E /G6F /G70 /G71\n/GF4 /G40 /G29 /G89\n/G49 /G4A /G4B /G4C /G4D /G4E\n/G94 /GF9\n/G37 /G26 /GFC\n/G38 /G41 /GEC\n/G85\n/G43\n/G3E /GF7 /G5C /G53\n/GEC /G35 /G2E /G68\n/G30 /G31 /G42 /G43\n/GC0 /G53\n/G40 /G41 /G42 /G43 /G44 /G33\n/GB7 /GBD\n/G25 /G23 /G4D /G4E /G4F /G50\n/GFD /GFE\n/G30 /G31 /GF9 /GFA\n/G57 /G5A\n/G30 /G31 /G42 /G43\n/GC0 /G53\n/G2D\n/G2C /GEB\n/G4D /G3F\n/G30 /G38\n/G40\n/GBA\n/GB8\n/GBB\n/GB8\n/GF4 /GF5 /G53 /G54 /G2D /GD2\n/G2E\n/G42 /G43 /G68\n/GBC /GBD\n/G4D /G4E /G4F /G50 /G70\n/GDA\n/G92\n/G50 /G26\n/GFF\n/G68 /G49 /G4A /G6E /G6F /G70 /G71\n/G22\n/G21\n/G34 /G35 /G40 /G41 /G42 /G43 /G44 /G33\n/G69 /G6A /G2F /G30 /G31 /G32 /G61 /G62\n/G72 /G36\n/G73 /G3C /G37 /G38\n/GE0\n/GDA /G30 /G31 /G32 /G33 /G98 /G28 /G68 /G23 /G24\n/G44 /G2F /G74 /G75\n/G3F /G40\n/G4D /G4E\n/G92 /G3B\n/G36\n/G38\n/G99 /G9A\n/G23 /G24 /G2D /G49 /G4A /G6E /G6F /G70 /G71\n/GA3\n/G35 /G4D\n/G22\n/G68 /G89 /G8A\n/G26\n/G4D /G4E /G30 /G31\n/G9A\n/G30\n/GD9 /G24\n/G99\n/G9C\n/GDA\n/G60\n/G99\n/G9C /G9A\n/G30 /G68\n/G36\n/G61\n/GB9\n/G69\n/G9A\n/G30 /G99\n/G9C /G29 /G28\n/G65\n/G23\n/G4D /G4E /G99\n/G9C",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 7,
+        "page_end": 7,
+        "token_count": 594,
+        "char_count": 1189
+      }
+    },
+    {
+      "chunk_id": 16,
+      "text": "/G2F /G30 /G51 /G76 /G77 /G78 /G79 /G7A /G7B\n/GDA\n/G60\n/G30 /G31 /G9D\n/G21 /G72\n/G5B\n/G22\n/G28\n/GC2\n/G24\n/GF3 /GF1 /G9E /G70 /G71\n/GAB\n/G5B\n/G68 /G30 /G31 /G42 /G43\n/G57 /G5A\n/G30 /G31 /G9D\n/G21 /GB1\n/GF1\n/G22 /G5C\n/G43 /G74 /G30 /G68 /GF9\n/GFA\n/GFF\n/G9D\n/G96 /GFF\n/G9D\n/GFC\n/G38 /GF1 /G9E\n/G57 /G5A\n/G99 /GF9 /GF3\n/G24 /G43 /G61 /G5F\n/G30 /GF2 /GF9 /GFA /G44 /G33 /G68\n/G72\n/G5B /GFA /G8B /G45 /G2A\n/G2F /G30 /G44 /G2F\n/G7C /G7D /G7E /G7F\n/G7C /G7D /G80 /G7E\n/GDA\n/G60\n/G30 /G31\n/G25 /G26\n/GBC\n/G27\n/G4D /G4E /GF4 /GF5 /GA2\n/G4C\n/G3C /GAB\n/G79\n/G53 /G36 /G37\n/G44 /G5B /G2D\n/G5A /G61\n/GA5\n/G28\n/GA7 /G9C\n/G7B /GA9 /GAB\n/G5B\n/GA7 /G9C\n/G70 /G71 /G53 /G54\n/G4D /G4E /GF4 /GF5 /G68\n/G82\n/G36\n/G3C /G3D\n/GD0 /GC2 /G2D\n/G5A /G61\n/GA5\n/GF2 /GF3\n/G28\n/G61 /G70 /G71 /GF2 /G7A /G68 /GC1\n/G58\n/GAB\n/G5B /G3E\n/G70 /G71\n/G79\n/G53 /G4D /G4E /GF4 /GF5 /G68 /G44\n/G6D\n/G36 /G37\n/G2D\n/G5A /G61\n/GA5\n/G7C /G7D /G6F /G70 /G81 /G82 /G83",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 7,
+        "page_end": 7,
+        "token_count": 459,
+        "char_count": 919
+      }
+    },
+    {
+      "chunk_id": 17,
+      "text": "/GDA\n/G60 /G9A\n/G30\n/GC9 /G43\n/G68 /G36 /G37 /G2D /G44 /G5B\n/GF4 /G40\n/G4D /G4E /G26\n/G71\n/G29\n/GB7\n/G36\n/G38\n/G99 /G9A\n/G23 /G24 /G2D\n/G22 /GA3\n/G26\n/G92 /G3B\n/G9A\n/G30 /G99\n/G9C\n/GDA\n/G60\n/G68\n/G84\n/G2A\n/G22\n/GA3 /G30 /G31 /GD9 /G72\n/GFF\n/G9D /GFA /G67\n/G9A\n/G30\n/GC9 /G43\n/G68\n/GE6\n/G2A\n/GD6\n/G2B\n/GEF\n/G3E /GF7 /G3F /G40\n/G4D /G4E /GF4 /GF5\n/G27\n/G2C\n/GE2 /GBF /G9A\n/G30\n/GC9 /G43\n/G68\n/G84\n/G2A\n/GBA /G43 /GC9 /G43\n/G2D /G2E\n/GE2 /GBF /G9A\n/G30\n/GC9 /G43 /G84\n/G2A\n/G30 /G31 /GD9 /G72\n/GFF\n/G9D\n/G22\n/GFA /G67 /G32\n/GA4 /GC9 /G43\n/G68\n/GE6\n/G2A\n/GBE\n/G2F\n/G9A\n/G30 /G63\n/G3D\n/G52\n/GD0\n/G30 /G31\n/G4D\n/G22\n/GC0\n/G48\n/G9A\n/G30\n/GC9 /G43 /G98\n/G30\n/G2C /GEB\n/G30 /G31\n/G4D\n/G22\n/GC0\n/G48\n/GB2 /GB3 /G99 /G9A /G42 /G43\n/G32\n/G5D\n/GF3 /GD0 /G58\n/G33\n/G9A\n/G30\n/G9C /G95\n/G34 /G35\n/G9A\n/G30\n/G29\n/G36\n/G3E\n/G4B /G38 /G9A\n/G30\n/G31 /G84\n/G31 /G84 /G85 /G86\n/GDA\n/G60\n/G32\n/GA4\n/GF4 /GF5 /GC0 /GEF\n/G37 /G38\n/G44 /G5B /G2D /G3C /G3D\n犌犅\n犜\n^揘N www.kqqw.com c蠴汵弣",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 7,
+        "page_end": 7,
+        "token_count": 478,
+        "char_count": 956
+      }
+    },
+    {
+      "chunk_id": 18,
+      "text": "/G44 /G2F /G64 /G87\n/GDA\n/G60\n/GFA /G67 /G32\n/GA4 /GC9 /G43 /G98\n/G30\n/G47 /G48\n/G68\n/G9A\n/G30 /G63\n/G3D\n/GF9 /GFA\n/G32 /G33 /G66 /G67\n/G7D\n/G47\n/G85 /G3D\n/G98\n/G39\n/GF3\n/G79\n/GF4\n/G31 /G84 /G88 /G89\n/GDA\n/G60\n/G32\n/GA4\n/G3A\n/G76 /G68\n/G36\n/G61\n/G84\n/G2A\n/G5C /G5D /GF3\n/G5A /G61\n/GA5\n/G44 /G2F /G85 /G86\n/G60\n/G2E\n/G9A\n/G30\n/G9C /G95\n/GDA\n/G60 /G9A\n/G30\n/GC9 /G43 /G98\n/G68 /G36 /G37 /G26 /GF9 /GFA\n/G32 /G33\n/G30 /G31 /GAF\n/GE3\n/G3B\n/G47\n/GF4 /GF5\n/GA7\n/G53\n/G47 /G57\n/GAA\n/G58\n/GF4 /GF5 /GC3\n/G47\n/G98\n/G39\n/GF3\n/G5E\n/G8A\n/GDE /GDF\n/GF9 /GFA\n/G2F /G30 /G6F /G70\n/GDA\n/G60\n/G4D /G4E /G40 /G41 /G68\n/GA4 /GCD /GCE /GCF\n/GA5 /GAE\n/G3C\n/GB8\n/GAC /GAD\n/GB8\n/G3D\n/G40 /G41\n/GA1 /GA2\n/G7C /G2B\n/G3E\n/GE5\n/GF9 /G36\n/GB0\n/G50 /GF3\n/G73 /G74 /GDE\n/G3F\n/G44\n/G4F\n/G68\n/G30 /G31 /G42 /G43\n/GC0 /G53\n/GD6\n/GDA\n/G60\n/GA5 /GAE\n/GAF\n/G3F\n/G68 /G5C /G5D\n/G2F /G30 /G8A /G8B\n/GDA\n/G60 /GA8\n/G4D\n/G22 /G40\n/G6D /GA3\n/G35 /GF0 /GA0 /G80\n/G28\n/G7A /GAB\n/GB8 /GB9\n/G8A\n/GB2 /G65\n/G5D\n/G3E\n/GB9 /G68 /G36 /G37 /GF3 /G5C /G5D\n/G41\n/G43\n/G36 /G37 /GF3 /G5C /G5D\n/GF2 /GF3 /G7A\n/GAB\n/GB8 /GB9\n/G8A\n/GB2 /GBF /GE2 /G98\n/G68\n/GCA /GCB /G58\n/G39\n/G44 /G2F /G8C /G8D\n/GDA\n/G60 /G9A\n/G30\n/G42\n/GFA\n/G68\n/G36\n/G61\n/G84\n/G2A\n/G5C /G5D /G2D\n/G5A /G61\n/GA5",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 8,
+        "page_end": 8,
+        "token_count": 612,
+        "char_count": 1224
+      }
+    },
+    {
+      "chunk_id": 19,
+      "text": "/G8E /G8F /G6F /G70\n/GDA\n/G60\n/G43 /G44\n/G7D\n/G42 /GAA\n/G49 /G4A\n/G45\n/G37\n/G46 /G47\n/GA5 /GAE /G4B /G43 /G44\n/G4F\n/G68 /G3C /G3D\n/G2F /G30 /G90 /G91\n/G92 /G7C /G81 /G7C /G7D /G90 /G91\n/GDA\n/G60\n/G30 /G31\n/GDE /GDF\n/G68 /G74\n/G58\n/G70 /G71 /GF3 /GA5 /GAE\n/G79\n/GF4\n/G41\n/G39 /G44 /G5B /G2D /G44\n/G6D\n/GF2 /GF3\n/G3D\n/G28 /G44 /G33 /G2D\n/GDE /GDF /G5A /G61\n/GA5\n/G2F /G30 /G93 /G94 /G90 /G91\n/GDA\n/G60\n/G74\n/G58\n/G68 /G30 /G31 /GA5 /G8A /G47 /G57\n/G32 /G33\n/G3E /GB7\n/G3E\n/G48\n/G57\n/G30 /G31 /GB8 /GB9\n/G66 /G67\n/GF3\n/GAA /GE3\n/G30 /G31 /GB8 /GB9\n/G66 /G67\n/G95 /G52 /G96 /G87 /G90 /G91\n/GDA\n/G60\n/G61 /G70 /G71 /G68 /G30 /G31\n/G7D\n/G47 /G2D\n/G85 /G3D\n/G68\n/G94 /GF9\n/G83 /GB2\n/G26 /G89\n/G90\n/G94 /G71 /G43\n/G49 /G4A\n/GF3\n/GAB\n/G28\n/G84\n/G2A\n/G4B\n/G31\n/GF3 /G9B /G9C /GD0 /GC2\n/GA9\n/GAA\n/G5A /G61\n/GA5 /GF3 /GFD\n/G41\n/G39 /G44 /G5B\n/GD6 /G7B\n/GD7\n/G4C /G4D\n/G97 /G98 /G90 /G91\n/GF4 /G40\n/G30 /G31 /GF9 /GFA\n/G32\n/G5D\n/G3C /G60\n/G2E /G68 /GFD /GFE /G74\n/G58 /GDE /GDF /GC0 /G53\n/G7F\n/G89 /G57\n/GDE /GDF\n/G6E\n/G4E\n/GDE /GDF\n/G78 /G79\n/G49 /G4A\n/GDE /GDF\n/G3D\n/G4B\n/GDE /GDF\n/G7C /G2B\n/GDE /GDF\n/GAC /GAD /GDE /GDF\n/GF3\n/G98\n/G39\n/GDE /GDF\n/G99\n/G68 /G74\n/G58\n/G3C /G3D\n/GC1 /G22\n/G89\n/G91\n/G30 /G31 /G32 /G33 /G68 /G45 /G2A /G87 /G38 /G40\n犌犅\n犜\n^揘N www.kqqw.com c蠴汵弣",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 8,
+        "page_end": 8,
+        "token_count": 630,
+        "char_count": 1261
+      }
+    },
+    {
+      "chunk_id": 20,
+      "text": "/G6B /G6C /G2F /G30 /G31 /G32 /G61 /G62\n/G73 /G3C /G37 /G38\n/GE0\n/GDA /G3E /G3F /G30 /G31 /G32 /G33 /G98 /G28 /G68 /G23 /G24\n/GF2 /GF3 /G73 /G3A /G3B /G30 /G31 /G32 /G33 /G68\n/G58\n/G39\n/G2F /G30 /G51 /G76 /G77 /G78 /G79 /G7A /G7B\n/GDA\n/G60\n/G30 /G31 /G9D\n/G21 /G72\n/G5B\n/G22\n/G28\n/GC2\n/G24\n/GF3 /GF1 /G9E /G70 /G71\n/GAB\n/G5B\n/G68 /G30 /G31 /G42 /G43\n/G57 /G5A\n/G30 /G31 /G9D\n/G21 /GB1\n/GF1 /GF2 /GF3\n/G96\n/G9E /GAE /G70 /G71\n/G3E\n/GA5 /GAE /G68\n/GFC\n/G38\n/G57 /G5A\n/G30 /G31 /G9D\n/G21 /GB1\n/GF1\n/G22\n/GF2\n/G5C\n/G43 /G74 /G30 /G68 /G30 /G31 /GF9 /GFA\n/GFF\n/G9D\n/G96 /GFF\n/G9D\n/GFC\n/G38 /GF1 /G9E\n/G57 /G5A\n/G99 /GF9 /GF3\n/G24 /G43 /G61\n/G5F /G7B /GE3\n/GF2 /GF9 /GFA /G44 /G33 /G68\n/G72\n/G5B /GFA /G8B /G45 /G2A\n/G44 /G2F /G85 /G86\n/GDA\n/G60 /G9A\n/G30\n/GC9 /G43 /G98\n/G68 /G36 /G37 /G26 /GF9 /GFA\n/G32 /G33\n/G30 /G31 /GAF\n/GE3\n/G3B\n/G47\n/GF4 /GF5\n/GA7\n/G53\n/G47 /G57\n/GAA\n/G58\n/GF4 /GF5 /GC3\n/G47\n/G98\n/G39\n/GF3\n/G5E\n/G8A\n/GDE\n/GDF\n/GF9 /GFA\n/G6F /G70 /G9A /G66\n/G37 /G26 /G22\n/G89 /GC0 /G49 /G68 /G4D /G4E /G4F /G50\n/G92 /G3B\n/G36\n/G38\n/G2D\n/G99 /G9A\n/G23 /G24\n/GDA\n/G60\n/G30 /G31 /G42 /G43\n/GCA\n/G72\n/GB9\n/G69\n/G35 /G2E /G74 /G30 /G68 /G30 /G31 /G42 /G43\n/GC0 /G53\n/G2F /G30 /G90 /G91\n/GF4 /G40\n/G30 /G31 /GF9 /GFA\n/G32\n/G5D /GDA\n/G60 /GDE /GDF\n/G68 /G3C /G3D",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 9,
+        "page_end": 9,
+        "token_count": 629,
+        "char_count": 1259
+      }
+    },
+    {
+      "chunk_id": 21,
+      "text": "/G99\n/G3E /G3F /G30 /G31 /G32 /G33\n/G32 /G33 /G8D /G29\n/GC2 /GF6\n/G68 /G3C /G3D\n/G6D /G6E /G6F /G70 /G71 /G32 /G61 /G62\n/G2D /G2E /G56 /G57 /G9B /G4C\n/GF7\n/GFE\n/G4D /G4E /G4F /G50 /G51 /G52 /G68 /G92 /G93\n/G22\n/G28\n/G25 /G6C\n/G68\n/G72\n/G5B\n/G25 /G91\n/G45 /G2A /G87\n/G2F /G30 /G4F /G50 /G7A /G7B\n/GDA\n/G60\n/G30 /G31 /G9D\n/G21\n/G99 /GF9 /G2D\n/G57 /G5A\n/G2F /G30 /G6F /G70\n/G32 /G33 /G8D /G29\n/GC2 /GF6 /G80\n/G25\n/G3C /G3D\n/G30 /G31 /G42 /G43 /G36 /G37\n/GF4 /G40 /G22\n/G89 /GC0 /G49 /G68 /G4D /G4E /GF3 /G40 /G41 /GF0 /GA0\n/GDA\n/G60\n/G4D /G4E /G53\n/GA4\n/G96\n/G3F /G30 /G31\n/GC0 /G53 /GC9 /G43\n/G30 /G31 /GB8\n/G3F\n/GA5 /GAE /G68 /G27 /G72\n/G4D /G4E\n/G4F\n/G55 /GF3\n/G89\n/G49 /G4A /G6E /G6F /G70 /G71 /G30 /G31 /G32 /G33 /G68 /GA1 /GA2 /G36 /G37\n/G40 /G41 /G30 /G31 /G42 /G43\n/GC0 /G53\n/G37 /G26 /G22\n/G89 /GC0 /G49 /G68 /G4D /G4E\n/G50\n/GA5 /GAE /GB8\n/G3F\n/GF9\n/G81\n/G51\n/GFA\n/G4D /G4E\n/GA3\n/G35\n/GAE /GAF\n/G40 /G41\n/G46 /G47\n/G9B\n/G44\n/G4F\n/G35 /G2E /GDA\n/G60\n/G68 /G30 /G31 /G42 /G43\n/GC0 /G53\n/GDA\n/G60\n/G53\n/GA4 /G59 /G5A\n/GA5 /GF2 /GF3 /G53\n/GA4\n/GBC\n/G27\n/GF3\n/GA7 /G9C\n/GA9 /GAA /GAB\n/G5B\n/G74\n/G58\n/G30 /G31 /GB8 /GB9 /G70 /G71\n/G41 /G52\n/G44 /G5B /G2D\n/G41\n/G39 /GA5 /GAE\n/G4D /G4E\n/G53 /G54\n/G36\n/G61 /G5C /G5D /G2D /G3C /G3D",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 9,
+        "page_end": 9,
+        "token_count": 614,
+        "char_count": 1229
+      }
+    },
+    {
+      "chunk_id": 22,
+      "text": "/G99 /G9C /G2D /G6C\n/G32 /G33\n/GA5 /GAE\n/GAF\n/G3F\n/G2D\n/GBA\n/GB8\n/GBB\n/GB8\n/G85 /G3D /GAB\n/G28\n/G40 /G41 /G4B /G4C\n/G9B\n/G44\n/G4F\n/G68 /G3C /G3D\n犌犅\n犜\n^揘N www.kqqw.com c蠴汵弣",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 9,
+        "page_end": 9,
+        "token_count": 85,
+        "char_count": 171
+      }
+    },
+    {
+      "chunk_id": 23,
+      "text": "/G9D /G3E\n/G25 /G26 /G27 /G28 /G29 /G2A /G4B /G9E\n/GF7 /G5C\n/GFD /GFE\n/G61 /G70 /G71\n/G6F\n/G53\n/G50\n/G6A\n/GA5\n/G83\n/G54\n/G8A /G58\n/G39\n/G7B /G5C\n/GB9 /GF1\n/G48\n/G7B /G5C /G4A\n/G55\n/G4A\n/GB2\n/GF2 /GF3\n/GB7 /GBD\n/G56\n/G71\n/GB7 /GBD /G6B /GC3\n/GE9\n/G68 /GB7\n/G55\n/G92\n/G50 /G57\n/GB7\n/G5C\n/G5C /G53\n/G91 /G62\n/G41 /GEC /G2D /GE9\n/G68\n/GEF\n/G57\n/GF0 /GA0\n/G56 /G57 /G47 /G58 /G9F /GA0 /GA1\n/GF7\n/GFE\n/G61 /G70 /G71 /G4F /G50 /G51 /G52 /G68 /G92 /G93\n/G31 /G32 /G67 /G68 /G81 /GA2 /G80\n/GF7\n/GFE\n/G61 /G70 /G71 /G30 /G31 /G32 /G33 /G38 /G39 /GF1 /G9E /G2D /G99\n/G9C\n/GF0 /GA0\n/GDA\n/G60\n/G73\n/G6F\n/G44\n/G5D /G70\n/GF3 /GFD /GC1\n/G58\n/GAB\n/G5B\n/GFD /GFE /G74\n/G58\n/G70 /G71 /G30 /G31 /G32 /G33\n/G68 /GA1 /GA2\n/G58\n/G39\n/G22\n/G28\n/GC2\n/G24\n/G2F /G30 /G95 /G52 /G96 /G87 /G9F /GA3 /GA4 /GA5 /GA6 /G29\n/G25\n/G67 /G30 /G31 /G32 /G33\n/G58\n/GF3 /G68 /G7B /G5C\n/G7D\n/G47 /G2D\n/G85 /G3D\n/G59\n/GF8\n/GF9\n/G5A\n/G26 /G89\n/G83 /GB2\n/G90\n/G94\n/G6F /GBD\n/G49 /G4A\n/G2D\n/GAB\n/G28\n/G84\n/G2A\n/GA9 /GAA\n/G5A /G61\n/GA5 /G2D\n/G41\n/G39 /GBC\n/G27\n/G9B\n/GA7 /GA8 /G2F /G30 /GA9 /GAA\n/G77 /G78 /GA5 /GAB /GAC /G9F /GAD /G68 /G71 /G60\n/G25\n/G67 /G30 /G31 /GF9 /GFA /G87\n/G32\n/G5C\n/G41\n/G39 /G68 /GAB\n/G5B\n/GB1\n/GF1\n/G3E\n/GA5 /GAE /GF3 /GFD\n/GF8 /G97\n/G41\n/G39 /G44 /G5B",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 10,
+        "page_end": 10,
+        "token_count": 617,
+        "char_count": 1234
+      }
+    },
+    {
+      "chunk_id": 24,
+      "text": "/GAE /G60 /GAF /G3D /GB0\n/G25\n/G67 /GF4 /GF5 /GA2 /G53\n/G32 /G33\n/GC9 /G43\n/GF4 /GF5 /GC0 /GEF\n/G9B\n/G5A /G5B /G7E /G29 /G61\n/GA8 /GB1 /G9F /GB2 /GB3\n/GB4 /GB5 /G41 /GB6 /GB7\n/G32 /G33 /G8D /G29\n/GC2 /GF6\n/GA4\n/G53 /G39\n/G5B\n/G99 /GEF /GF3\n/G5C /G5D\n/G23 /G24\n/GB7\n/G5C\n/GAF\n/G3F\n/G91 /G62\n/G4F /G50\n/GC5\n/G70 /GF3 /G99 /GEF\n/GC2\n/G30 /G31\n/GCA /GCB\n/GAB\n/G40 /G41\n/GCA /GCB\n/GAB\n/G71 /G43 /GF3 /GB8 /GB9\n/G66 /G67 /G24 /G43\n/G5E /G5F\n/GCE /GCF\n/G5E /G5F\n/G4D\n/G92\n/GBD\n/GA4 /GCD\n/G23 /G24\n/GB7\n/G5C\n/G6F /GBD\n/G68 /G62\n/G8F\n/G74\n/G58 /G7E /G4F\n/GEF /G43\n/G30 /G31 /G47 /G57 /G99 /GEF /G68\n/GC2\n/G60\n/G49 /G4A /G6E /G6F /G70 /G71 /G68\n/G6F\n/GAA /G71 /G43\n/GC2\n/GE9\n/G68 /G58\n/G39\n/GC2\n/G45\n/GFB /G78 /G79 /GC2\n/G4D /G4E /G4F /G50\n/G22\n/G89 /G72\n/G61\n/G68\n/G99 /G9A\n/G23 /G24\n/GC2\n/G45\n/GFB /GAC\n/GB6\n/G6F\n/GAA /G71 /G43\n/GC2\n/GF3\n/G5E /G5F\n/GC2\n/GA7 /GA8 /GB8 /GB9 /GA5 /GBA /G87 /GBB /GA4\n/G25\n/G67 /G73 /G74\n/G58\n/G30 /G31 /GB8 /GB9 /GAB\n/G5B /GEC /G4A\n/G68 /G30 /G31 /GB8 /GB9\n/GAA /GE3 /G3E /G3D\n/G62\n/G46\n犌犅\n犜\n^揘N www.kqqw.com c蠴汵弣",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 10,
+        "page_end": 10,
+        "token_count": 518,
+        "char_count": 1036
+      }
+    },
+    {
+      "chunk_id": 25,
+      "text": "/G9D\n/GA4\n犃\n/G52 /G53 /G3A /G9D /GA4\n/G25 /G26 /G2B /G2C /G2D /G2E /G56 /G57 /G47 /G58 /G7E /G7F /G33 /G34 /GBC /GBD\n犃\n/GBE /G57 /GA7 /GBF /GC0 /GC1 /GC2 /GB5\n/GFD /GFE\n/G49 /G4A /G6E /G6F /G70 /G71\n/G92\n/G50 /GC1\n/G3B /G93\n/G8E\n/G8E /G8F\n/G68 /GF0 /GA0\n/G22\n/G28\n/G25 /G6C /G72\n/G5B\n/G6C /GFE\n犃\n/G2D /G2E /G56 /G57 /G74 /GC3\n/GFD /GFE\n/G49 /G4A /G6E /G6F /G70 /G71 /G4D /G4E /G4F /G50 /G68\n/G94 /GF9\n/G4D /G4E /GC0 /G49 /G68\n/G22\n/G89 /G26\n/G92 /G3B /G98\n/G93 /G2D\n/G99 /G9A\n/G23 /G24\n/G22\n/G28\n/G25 /G6C /G72\n/G5B\n/G6C\n/GFE\n犃\n/G2D /G2E /G56 /G57 /G47 /GC4\n/GFD /GFE\n/G49 /G4A /G6E /G6F /G70 /G71 /G4D /G4E /G4F /G50 /G68\n/G94 /G95\n/GF3 /G4F /G50\n/G9B /G9C\n/G22\n/G28\n/G25 /G6C /G72\n/G5B\n/G6C /GFE\n犃\n/GA0 /GC5 /GC6 /GB9\n/G63\n/G67 /G49 /G4A /G6E /G6F /G70 /G71 /G30 /G31 /G32 /G33 /G38 /G39\n/G7B /G5C\n/G68\n/G62 /G63 /G7B /GE3\n犌犅\n犜\n^揘N www.kqqw.com c蠴汵弣",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 11,
+        "page_end": 11,
+        "token_count": 425,
+        "char_count": 851
+      }
+    },
+    {
+      "chunk_id": 26,
+      "text": "/G9D\n/GA4\n犅\n/G52 /G53 /G3A /G9D /GA4\n/G25 /G26 /G2B /G2C /G2D /G2E /G2F /G30 /G52 /G59 /G5A /G5B /G7E /G7F /G33 /G34 /GBC /GBD\n犅\n/G29 /G2A /G61 /GA9 /G2F /G30 /G52 /G59\n/G64 /G65 /G30 /G31 /G47 /G57 /G68 /G99\n/G94\n/G99\n/G95 /GFD /GFE\n/G74\n/G58\n/G30 /G31 /G47 /G57 /G68\n/G36\n/G61 /G40\n/GA0\n/G7A\n/G89\n/GDB /GDC\n/G36\n/G38\n/G64\n/G22\n/G89 /GC0 /G49 /G68 /G4D /G4E /G68\n/G99\n/G9A\n/G36\n/G38\n/G22\n/G28\n/G25 /G6C /G72\n/G5B\n/G6C /GFE\n犅\n/G29 /G2A /GC7 /GA9 /G2F /G30 /G52 /G59\n/GFD /GFE\n/G61 /G70 /G71 /G89\n/G65\n/G58 /G59\n/G3E\n/G66 /G67\n/G22\n/G28 /GF6 /G5E /G73 /G4D /G4E /G42 /G43 /G68 /G7A /GAB /G30 /G31 /G47 /G57 /GF0 /GA0\n/G22\n/G28\n/G25 /G6C /G72\n/G5B\n/G6C /GFE\n犅\n/G2F /G30 /G52 /G59 /GC8 /GC9 /G74 /GC3\n/G3F /G40\n/G4F /G50 /G51 /G52 /G92 /G93\n/G63\n/G67 /G61 /G70 /G71 /G68 /G30 /G31 /G47 /G57\n/G32\n/G5D\n/G73 /G61 /G70 /G71 /G40 /GC1 /G3C /G7A /GAB /G30 /G31 /G47 /G57\n/G26\n/G75\n/GAC /G67 /G61 /G70 /G71 /G3C\n/G7A /GAB /G30 /G31 /G47 /G57 /G9B /G9C\n/G7B /GE3\n犌犅\n犜\n^揘N www.kqqw.com c蠴汵弣",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 12,
+        "page_end": 12,
+        "token_count": 489,
+        "char_count": 979
+      }
+    },
+    {
+      "chunk_id": 27,
+      "text": "/G9D\n/GA4\n犆\n/G52 /G53 /G3A /G9D /GA4\n/G2F /G30 /G31 /G32 /G33 /G34 /GAE /G60 /G41 /GCA /GCB\n犆\n/GCC /G5D\n/G30 /G31 /G32 /G33\n/G68\n/G4F\n/G7B /G5C\n/G32 /G33\n/G30 /G31 /G32 /G33 /G34\n/G5A\n/G30 /G31 /G32 /G33 /G86 /G61\n/G5A\n/G49 /G4A /G6E /G6F /G70 /G71\n/G59\n/GF8\n/G30 /G31 /G32 /G33\n/G59\n/GF8 /GF3\n/G69\n/GEF\n/G2D /G2E\n犆\n/G63 /G64 /GCD\n/G30 /G31 /G32 /G33 /G30 /G6E /G49 /G4A /G6E /G6F /G70 /G71 /G7B /G5C\n/G59 /G5A\n/GA5\n/G51\n/G63 /G44\n/G22\n/GC0 /GEF\n犆\n/G21 /G22\n/G30 /G31 /G32 /G33 /G30\n/G5C\n/G43 /G91 /GEE\n/G91 /GEE /G87 /GEC\n/G25\n/G68 /G3C /G3D /GF3 /GEE /G37 /G7F /G80\n/G51\n/G63\n/G6A\n/G30 /G31 /G32 /G33\n/G23 /G24\n/GAB\n/G5B /GEC\n/G6B /G6A\n/G84 /G68 /G34\n/G5A\n/G62\n/G6C\n/G6D\n/GC1 /G62\n/G6C\n/G68\n/G84\n/G68 /G34\n/G5A\n/G62\n/G6C\n/G32\n/G5C /GD0\n/G25\n/G67\n/G45 /G2A\n/G28 /G37\n/G5A\n/G6C\n/GDA /GFD /GE2 /G37\n犌犅\n犜\n^揘N www.kqqw.com c蠴汵弣",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 13,
+        "page_end": 13,
+        "token_count": 412,
+        "char_count": 824
+      }
+    },
+    {
+      "chunk_id": 28,
+      "text": "/GCE\n/GCF\n/G3D\n/GD0\n/G4F /G50 /GA9 /GAA\n/GB9\n/G69 /G73\n/G52 /G53 /GCA\n/GBB\n/G4F /G50 /GA9 /GAA\n/G4F /G50 /G51 /G52 /G7C /G2B\n/GA8\n/G5F\n/GB6\n/G6E\n/GC3\n/G6F\n/G58\n/GF6\n/G70\n/GC0\n/G71\n/GC0 /G4D /G2A /G30 /G31 /G32 /G33 /GA9 /GAA\n/G6E\n/G6D\n/G68\n/G79\n/G72\n/GA8\n/G6E\n/GC0\n/G5A\n/G30 /G31 /GA9 /GAA /GAB\n/G58\n/GF6 /G78 /G79\n/G49 /G4A /G4B /G4C /G4D /G4E /G30 /G31 /G32 /G33 /GA9 /GAA\n/G6E\n/G6D\n/G68\n/GE6\n/G2E\n/G30 /G31 /GA9 /GAA /GAB\n/G73\n/G83\n/G5A\nＮＦＰＡ１６００ＳｔａｎｄａｒｄｏｎＤｉｓａｓｔｅｒ\nＥｍｅｒｇｅｎｃｙＭａｎａｇｅｍｅｎｔａｎｄＢｕｓｉｎｅｓｓＣｏｎｔｉｎｕｉｔｙＰｒｏ\n犌犅\n犜\n^揘N www.kqqw.com c蠴汵弣",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\文件规范\\GB∕T 29639-2020 生产经营单位生产安全事故应急预案编制导则.pdf",
+        "file_type": ".pdf",
+        "doc_id": "abdfe76bee95ff855bc964115193532efd77fa23",
+        "page_start": 14,
+        "page_end": 14,
+        "token_count": 269,
+        "char_count": 538
+      }
+    }
+  ]
+}

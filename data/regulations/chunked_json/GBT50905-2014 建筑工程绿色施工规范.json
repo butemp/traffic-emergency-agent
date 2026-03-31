@@ -1,0 +1,775 @@
+{
+  "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+  "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+  "file_type": ".pdf",
+  "num_chunks": 59,
+  "chunks": [
+    {
+      "chunk_id": 0,
+      "text": "UDC\n中华人民共和国国家标准\nP\nGB/T 50905-2014\n建筑工程绿色施工规范\nCode for green construction of building\n-29 发布 2014-10-01 实施\n中华人民共和国住房和城乡建设部\n中华人民共和国国家质量监督检验检疫总局\n建筑工程 绿色 施工规范\nCode for green construction of building\nGB/T 50905 -2014\n主编部门：中华人民共和国住房和城乡建设部\n批准部门：中华人民共和国住房和城乡建设部\n施行日期 ：2 0 1 4 年 1 0 月 1 日\n中华人民共和国国家标准\n中国建筑工业出版社\n2 0 1 4北京\n中华人民共和国国家标准\n建筑工程绿色施工规范\nCode for green construction of building\nGB/T 50905 - 2014\n中国建 筑工业出版社 出版、发行（ 北京西郊百万庄）\n各地新华书店、建 筑书店经 销\n北京红光制版公司制版\n北京同文印刷有限责 任公司印刷\n开本：850X1168毫 米1/32 印张：2 字数：52千字\n2014年5月第一版 2014 年5月第一次印刷\n定价：10. 00元\n统一书号 ：15112 . 23879\n版权所有 翻印必究\n如有印装质量问题， 可寄本社 退换\n(邮政编码 100037)\n本社-网址：http ： //www. cabp. com. cn\n网上书店 ：http： //www. china-building, com. cn\n中华人民共和国住房和城乡建设部\n公 告\n第 321 号\n住房城乡建设部关于发布国家标准\n《 建筑工程绿色施工规范》的公告\n现批准《建 筑工程 绿色 施工规范》为国家标准，编号为\nGB/T 50905-2014 ，自 2014 年 10 月 1 日起实施。\n本规范由我部标准定额研究所组织中国建 筑工业出版社出版\n发行。\n中华人民共和国住房和城乡建设部\n2014年 1月29日",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 1,
+        "page_end": 4,
+        "token_count": 428,
+        "char_count": 857
+      }
+    },
+    {
+      "chunk_id": 1,
+      "text": "根据住房和城乡建设部《 关于印发〈 2010年工程建设标准规\n范制订、修订计划〉 的通知》(建标[2010]43号） 的要求，规范编\n制组经广泛调 查研究，认真总结实践经验， 参考有关国际标准和\n国外先进标准，并在广泛征求意见的基础上，编制本规范。\n本规范的主要技术内容是： 1总则；2术语 ；3基本规定 ；4\n施工准 备；5施工场地；6地基与基础工程 ；7主体结 构工程；8\n装饰装修工程 ；9保温和防水工程 ；10机电安装工程 ；11拆除\n工程。\n本规范由住房和城乡建设部负责管 理，由中国建 筑股份有限\n公司负责 具体技术内容的 解释。执行过程中如有意见 或建议，请\n寄送中国建 筑股份 有限公司（ 地址：北京三里河 路15号中建\n大厦，邮政编码： 100037)。\n本规范主编单位：中国建 筑股份有限公司\n中国建筑技术集团有限公司\n本规范 参 编单位：中国建 筑业协会绿色施工分会\n中国建筑第八工程局有限公司\n中国建 筑一局（集团）有限公司\n中国建筑第七工程局有限公司\n中国建筑第四工程局有限公司\n中国建筑设计咨询公司\n北京建工 集团有限责任公司\n北京远达国际工程管 理咨询有限公司\n上海市建设工程质量 安全监督总站\n湖南省建筑工程集团总公司\n中天建设集团有限公司\n山西建 筑工程（集团）总公司\n江苏省苏中建设集团股份有限公司\n广州市建筑集团有限公司\n广东省建筑工程集团有限公司\n浙江宝业建设集团有限公司\n北京城建 集团有限责任公司\n吉林建工集团有限公司\n云南官房建筑集团股份有限公司\n中国航天建设集团有限公司\n中国建筑第三工程局有限公司\n成都市第一建 筑工程公司\n本规范主要起 草人员：肖绪文 赵 伟 王玉岭 张晶波\n潘延平 马荣全 薛 刚 何 瑞\n王世亮 霍瑞琴 余海敏 焦安亮\n董晓辉 冯 跃 李泰炯 冯大阔\n郝 军 蒋金生 冉志伟 张晋勋\n潘丽玲 杜 杰 黄 健 苏建华\n陈 浩 王 伟 于亚龙 李 娟\n刘小虎 王 茜\n本规范主要审 查人员：杨嗣信 孙振声 汪道金 高本礼\n贺贤娟 王存贵 段 恺 范 峰\n李东彬 孙永民 吴聚龙",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 5,
+        "page_end": 6,
+        "token_count": 436,
+        "char_count": 872
+      }
+    },
+    {
+      "chunk_id": 2,
+      "text": "目 次\n細 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n1\n彩吾 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n2\n基本规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n3\n3.\n1 组织与管 理.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 7,
+        "page_end": 7,
+        "token_count": 333,
+        "char_count": 666
+      }
+    },
+    {
+      "chunk_id": 3,
+      "text": "目 次\n細 .\n彩吾 .\n基本规定 .\n1 组织与管 理.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n3\n3.\n2 资源节约.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n4\n3.\n3 环境保 护.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n5\n施工准 备.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n8\n施工场地.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 7,
+        "page_end": 7,
+        "token_count": 349,
+        "char_count": 699
+      }
+    },
+    {
+      "chunk_id": 4,
+      "text": "目 次\n細 .\n彩吾 .\n基本规定 .\n1 组织与管 理.\n2 资源节约.\n3 环境保 护.\n施工准 备.\n施工场地.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n10\n5.\n1 一般规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n10\n5.\n2 施工总平面布置.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n10\n5.\n3 场区围护及道路.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n11\n5.\n4 临时设施 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n11\n地基与基础工程 .\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 7,
+        "page_end": 7,
+        "token_count": 372,
+        "char_count": 744
+      }
+    },
+    {
+      "chunk_id": 5,
+      "text": "目 次\n細 .\n彩吾 .\n基本规定 .\n1 组织与管 理.\n2 资源节约.\n3 环境保 护.\n施工准 备.\n施工场地.\n1 一般规定 .\n2 施工总平面布置.\n3 场区围护及道路.\n4 临时设施 .\n地基与基础工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n12\n6.\n1 —般规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n12\n6.\n2 土石方工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n12\n6.\n3 桩基工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n13\n6.\n4 地基处理工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 7,
+        "page_end": 7,
+        "token_count": 394,
+        "char_count": 788
+      }
+    },
+    {
+      "chunk_id": 6,
+      "text": "目 次\n細 .\n彩吾 .\n基本规定 .\n1 组织与管 理.\n2 资源节约.\n3 环境保 护.\n施工准 备.\n施工场地.\n1 一般规定 .\n2 施工总平面布置.\n3 场区围护及道路.\n4 临时设施 .\n地基与基础工程 .\n1 —般规定 .\n2 土石方工程.\n3 桩基工程 .\n4 地基处理工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n13\n6.\n5 地下水控制.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n14\n主体结 构工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n15\n7.\n1 —般规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n15\n7.\n2 混凝土结构工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 7,
+        "page_end": 7,
+        "token_count": 411,
+        "char_count": 823
+      }
+    },
+    {
+      "chunk_id": 7,
+      "text": ".\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n15\n7.\n3 砌体结构工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n17\n7.\n4 钢结构工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n17\n7.\n5 其他.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n18\n装饰装修工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 7,
+        "page_end": 7,
+        "token_count": 338,
+        "char_count": 676
+      }
+    },
+    {
+      "chunk_id": 8,
+      "text": "3 砌体结构工程.\n4 钢结构工程.\n5 其他.\n装饰装修工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n19",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 7,
+        "page_end": 7,
+        "token_count": 32,
+        "char_count": 64
+      }
+    },
+    {
+      "chunk_id": 9,
+      "text": "8.\n1 —般规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n19\n8.\n2 地面工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n19\n8 .\n3 门窗及幕墙T程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n20\n8.\n4 吊顶工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n20\n8 .\n5 隔墙及内墙面工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 8,
+        "page_end": 8,
+        "token_count": 342,
+        "char_count": 685
+      }
+    },
+    {
+      "chunk_id": 10,
+      "text": "1 —般规定 .\n2 地面工程 .\n3 门窗及幕墙T程 .\n4 吊顶工程 .\n5 隔墙及内墙面工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n21\n9 保温和防水工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n22\n9.\n1 一般规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n22\n9 .\n2保温工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n22\n9.\n3 防水工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 8,
+        "page_end": 8,
+        "token_count": 364,
+        "char_count": 728
+      }
+    },
+    {
+      "chunk_id": 11,
+      "text": "1 —般规定 .\n2 地面工程 .\n3 门窗及幕墙T程 .\n4 吊顶工程 .\n5 隔墙及内墙面工程.\n9 保温和防水工程 .\n1 一般规定 .\n2保温工程 .\n3 防水工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n23\n1 0机电安装工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n25\n10.\n1 一般规定.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n25\n10.\n2 管道工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n25\n10.\n3 通风工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 8,
+        "page_end": 8,
+        "token_count": 383,
+        "char_count": 766
+      }
+    },
+    {
+      "chunk_id": 12,
+      "text": "1 —般规定 .\n2 地面工程 .\n3 门窗及幕墙T程 .\n4 吊顶工程 .\n5 隔墙及内墙面工程.\n9 保温和防水工程 .\n1 一般规定 .\n2保温工程 .\n3 防水工程 .\n1 0机电安装工程 .\n1 一般规定.\n2 管道工程.\n3 通风工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n25\n10.\n4 电气工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n26\n11 拆除工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n27\n11.\n1 一般规定.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n27\n11.\n2 拆除施工准 备.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n27\n11.\n3 拆除施工 .",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 8,
+        "page_end": 8,
+        "token_count": 404,
+        "char_count": 809
+      }
+    },
+    {
+      "chunk_id": 13,
+      "text": ".\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n28\n11.\n4 拆除物的综合利用.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n29\n本规范 用词说明 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n30\n引用 标准 名录.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n31\n附：条文 说明 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 8,
+        "page_end": 8,
+        "token_count": 338,
+        "char_count": 676
+      }
+    },
+    {
+      "chunk_id": 14,
+      "text": "4 拆除物的综合利用.\n本规范 用词说明 .\n引用 标准 名录.\n附：条文 说明 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n33",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 8,
+        "page_end": 8,
+        "token_count": 75,
+        "char_count": 151
+      }
+    },
+    {
+      "chunk_id": 15,
+      "text": "Contents\nGeneral Provisions .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\nTerms .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\nBasic Requirements .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n3.\n1 Organization and Management\n3.\n2 Resource Saving .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n3.\n3 Environmental Protection .\n.\n.\n.\n.\n.\n.\nConstruction Preparation .\n.\n.\n.\n.\n.\nConstruction Site .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n5.\n1 General Requirements .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n5.\n2 General Layout .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n5.\n3 Enclosing Wall and Road Works\n5.\n4 Temporary Facilities .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\nFoundation Engineering\n6.\n1 General Requirements .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n6.\n2 Earthwork and Rock work .\n.\n.\n.\n.\n6.\n3 Piled Foundation.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n6.\n4 Foundation Treatment.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 9,
+        "page_end": 9,
+        "token_count": 430,
+        "char_count": 860
+      }
+    },
+    {
+      "chunk_id": 16,
+      "text": "6.\n5 Groundwater Control .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\nMain structure Engineering ••\n7.\n1 General Requirements .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n7.\n2 Concrete Engineering .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n7.\n3 Masonry Engineering .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n7.\n4 Steel Structure Engineering\n7.\n5 Other Items .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\nDecoration Engineering",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 9,
+        "page_end": 9,
+        "token_count": 184,
+        "char_count": 368
+      }
+    },
+    {
+      "chunk_id": 17,
+      "text": "8.\n1 General Requirements .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n19\n8.\n2 Ground Engineering .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n19\n8.\n3 Door, Window and Curtain Wall Works .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n20\n8.\n4 Ceiling Works .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n20\n8.\n5 Partition and Inner Wall Works .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n21\n9 Heat-insulating and Water-proofing Engineering .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n22\n9.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 10,
+        "page_end": 10,
+        "token_count": 376,
+        "char_count": 753
+      }
+    },
+    {
+      "chunk_id": 18,
+      "text": "1 General Requirements .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n22\n9.\n2 Heat-insulating Work .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n22\n9.\n3 Water-proofing Work .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n23\n10 Electromechanical Fixing Engineering\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n25\n10.\n1 General Requirements .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n25\n10.\n2 Pipeline Engineering .\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 10,
+        "page_end": 10,
+        "token_count": 371,
+        "char_count": 742
+      }
+    },
+    {
+      "chunk_id": 19,
+      "text": ".\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n25\n10.\n3 Ventilation Engineering\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n25\n10.\n4 Electrical Engineering .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n26\n11 Dismantling Engineering .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n27\n11.\n1 General Requirements .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n27\n11.\n2 Dismantling Preparation .\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 10,
+        "page_end": 10,
+        "token_count": 364,
+        "char_count": 729
+      }
+    },
+    {
+      "chunk_id": 20,
+      "text": "3 Ventilation Engineering\n4 Electrical Engineering .\n11 Dismantling Engineering .\n1 General Requirements .\n2 Dismantling Preparation .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n27\n11.\n3 Dismantling Work.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n28\n11.\n4 Comprehensive Utilization .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n29\nExplanation of Wording in This Code.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n30\nList of Quoted Standards .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n31\nAddition： Explanation of Provisions .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 10,
+        "page_end": 10,
+        "token_count": 434,
+        "char_count": 869
+      }
+    },
+    {
+      "chunk_id": 21,
+      "text": "1.0.1 为规范建 筑工程绿色施工，做到节约资源、保护环境以\n及保障施工人 员的安全与健康，制定本规范。\n1.0.2 本规范 适用于新建、 扩建、改建及拆除等建 筑工程的 绿\n色施工。\n1.0.3 建筑工程绿色施工除 应符合 本规范的规定外， 尚应符合\n国家现行有关标准的规定。\n2 术 语\n2. 0.1 绿色施工 green construction\n在保证质量、安全等基本要求的前 提下，通过科学管理和技\n术进步，最大限 度地节约资源，减少对环境 负面影响，实现节\n能、节材、节水、节地和 环境保 护（“四节一环保”）的建筑工程\n施工活动。\n2. 0. 2 建筑垃圾 construction trash\n新建、 扩建、改建和拆除各类建筑物、构筑物 、管网等以 及\n装饰装修房 屋过程中产生的 废物料。\n2. 0. 3 建筑废弃物 building waste\n建筑垃圾分类后， 丧失施工现 场再利用价值的部分。\n2. 0. 4 绿色施工评价 green construction evaluation\n对工程建设 项目绿色施工水 平及效 果所进行的评估活动。\n2. 0. 5 信息化施工 informative construction\n利用计算机、网络和数据库等信息化 手段，对工程项目实施\n过程的信息 进行有序存储、处理、传输和反馈的施工 模式。\n2. 0. 6 建筑工业化 construction industrialization\n以现代化工业生产 方式，在工厂完成建 筑构、配件制造，在\n施工现 场进行安装的建 造模式。\n3 基本规定\n3 .1组织与管 理\n3.1.1 建设单位 应履行下列职责：\n1 在编制工程 概算和招标文件时，应明确绿色施工的要求，\n并提供 包括场地、环境、工期、 资金等方面的条 件保障。\n2 应向施工单位 提供建设工程 绿色施工的设计文 件、产品\n要求等相关 资料，保证资料 的真实性和完 整性。\n3 应建立工程项目绿色施工的 协调机制。\n3.1.2 设计单位 应履行下列职责：\n1 应按国家现行有关标准和建设单位的要求 进行工程的 绿\n色设计。\n2 应协助、支持、配合施工单位 做好建筑工程绿色施工的\n有关设计工作。\n3.1.3 监理单位应履行下列职责：\n1 应对建筑工程绿色施工承担监理责任。\n2 应审查绿色施工组织设计、 绿色施工方案或绿色施工专\n项方案，并在实施过程中 做好监督检 查工作。\n3.1.4 施工单位 应履行下列职责：\n1 施工单位是建 筑工程绿色施工的实施主体， 应组织绿色\n施工的 全面实施。\n2 实行总 承包管理的建设工程，总 承包单位 应对绿色施工\n负总责。\n3 总承包单位 应对专业承包单位的 绿色施工实施管 理，专\n业承包单位 应对工程承包范围的绿色施工负责。\n4 施工单位 应建立以项目经理为第一责 任人的绿色施工管\n理体系，制定绿色施工管 理制度，负责绿色施工的组织实施， 进",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 11,
+        "page_end": 13,
+        "token_count": 614,
+        "char_count": 1229
+      }
+    },
+    {
+      "chunk_id": 22,
+      "text": "行绿色施工教育培训 ，定期开展自检、联检和评价工作。\n5 绿色施工组织设计、 绿色施工方案或绿色施工专项方案\n编制前， 应进行绿色施工影响因素分析，并据此制定实施 对策和\n绿色施工评价方案。\n3.\n1.\n5 参建各方应积极 推进建筑工业化和信息化施工。\n建 筑工\n业化宜重点推进结构构件预制化和建 筑配件整 体装配化。\n3.\n1.\n6 应做好施工协同，加强施工管 理，协商确定工期。\n3.\n1.\n7 施工现 场应建立机械设备保养、限额 领料、建筑垃圾再\n利用的台账和清单。\n工程 材料和机械设备的存放、运输应制定保\n护措施。\n3.\n1.\n8 施工单位 应强化技术管 理，绿色施工过程技术 资料应 收\n集和归档。\n3.\n1.\n9 施工单位 应根据 绿色 施工要求， 对传统施工工 艺进行\n改进。\n3.\n1.\n10 施工单位 应建立不符合 绿色施工要求的施工工 艺、设备\n和材料的限制、 淘汰等制度。\n3.\n1.\n11 应按现行国家标准《 建筑工程绿色施工评价标准》 GB/\nT 50640的规定 对施工现 场绿色施工实施 情况进行评价，并根据\n绿色施工评价情况，采取改进措施。\n3.\n1.\n12 施工单位 应按照国家法律、法规的有关要求，制定施工\n现场环境保 护和人员安全等突发事件的应急预案。\n3 .\n2资源 节 约\n3.\n2.\n1 节材及材料利用应符合下 列规定：\n1 应根据施工 进度、材料使用时点 、库存情况等制定 材料\n的采购和使用计划。\n2 现场材料应 堆放有序，并满足材料 储存及质量保持的\n要求。\n3 工程施工 使用的材料宜选用距施工现 场500km以内生产\n的建筑材料 。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 14,
+        "page_end": 14,
+        "token_count": 347,
+        "char_count": 694
+      }
+    },
+    {
+      "chunk_id": 23,
+      "text": "3.\n2.\n2 节水及水资源利用应符合下 列规定：\n1 现场应结合给排水点位置进行管线线路 和阀门预设位置\n的设计， 并采取管网和 用水器具防渗漏的措施。\n2 施工现 场办公区、生活区的生活 用水应采用节水器具。\n3 宜建立雨水、中水 或其他可利用水资源的收集利用系统。\n4 应按生活用水与工程 用水的定额 指标进行控制。\n5 施工现 场喷洒路面、绿化浇灌不宜使用自来水。\n3.\n2.\n3 节能及能源利用应符合下 列规定：\n1 应合理安 排施工顺序及施工区 域，减少作业区 机械设备\n数量。\n2 应选择功率 与负荷相匹配的施工 机械设备，机械设备不\n宜低负荷运行，不宜采用自备电源。\n3 应制定施工能 耗指标，明确节能措施。\n4 应建立施工机械设备档案和管理制度，机械设备应定期\n保养维修。\n5 生产、生活、 办公区域及主要机械设备宜分别进行耗能、\n耗水及排污计量，并做好相应记录。\n6 应合理 布置临时用电线路，选用节能器具，采用声控、\n光控和节能灯具；照明照度宜按 最低照度设计。\n7 宜利用太阳能、地热能、风能等可再生能源。\n8 施工现 场宜错峰用电。\n3.\n2.\n4 节地及土地资源保 护应符合下 列规定：\n1 应根据工程规 模及施工要求布置施工 临时设施。\n2 施工 临时设施不宜占用绿地、耕地以及规划红线以外\n场地。\n3 施工现 场应避让、保护场区及周边的古树名木。\n3 .\n3环境保 护\n3.\n3.\n1 施工现 场扬尘控制应符合下 列规定:\n1 施工现 场宜搭设封闭式垃圾站。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 15,
+        "page_end": 15,
+        "token_count": 322,
+        "char_count": 645
+      }
+    },
+    {
+      "chunk_id": 24,
+      "text": "2 细散颗粒材料、易扬尘材料应 封闭堆放、存储和运输。\n3 施工现 场出口应设冲洗池，施工场地、道路应 采取定期\n洒水抑尘措施。\n4 土石方作业区内 扬尘目测高度应小于1.\n5m，结构施工、\n安装、装饰装修 阶段目测扬尘高度 应小于0.\n5m，不得扩散到工\n作区域外。\n5 施工现 场使用 的热水锅炉等宜使用清 洁燃料。\n不得在施\n工现场融化沥青或焚烧油毡、油漆以及其他产生有 毒、有害烟尘\n和恶臭气体的物质。\n3.\n3 .\n2 噪声控制应符合下 列规定：\n1 施工现 场宜对噪声进行实时监测；施工场界环境 噪声排\n放昼间不应 超过70dB (A ),夜间不应 超过55dB (A )。\n噪声测\n量方法应符合 现行国家标准《建 筑施工场界环境 噪声排放标准》\nGB 12523的规定。\n2 施工过程 宜使用低噪声、低振动的施工 机械设备，对噪\n声控制要求 较高的区域应采取隔声措施。\n3 施工车辆进出现场，不宜鸣笛。\n3.\n3 .\n3 光污染控 制应符合下 列规定：\n1 应根据现 场和周边环境采取限时施工、遮光和全封闭等\n避免或减少施工过程中 光污染的措施。\n2 夜间室外照明灯应加设灯罩，光照方向应 集中在施工范\n围内。\n3 在光线作用敏感区域施工时，电焊作业和大 型照明灯具\n应采取防光外泄措施。\n3.\n3 .\n4 水污染控 制应符合下 列规定：\n1 污水排放应符合 现行行业标准《 污水排入城镇下水道水\n质标准 》CJ 343的有关要求。\n2 使用非传统水源和现场循环水时，宜根据实际 情况对水\n质进行检测。\n3 施工现 场存放的油料和化学溶剂等物品应 设专门库房，\n地面应做防渗漏处理 。废弃的油料和化学溶剂应集中处理，不得\n随意倾倒。\n4 易挥发、易污染的液态材料 ，应使用 密闭容器存放。\n5 施工机械设备使用 和检修 时，应控制油料污染； 清洗机\n具的废水和废油不得直接排放。\n6 食堂、盥洗室、淋浴间的下水管线应设置过 滤网，食堂\n应另设隔油池。\n7 施工现 场宜采用移动式厕所，并应定期清理。固定厕所\n应设化粪池。\n8 隔油池和化粪池应做防渗处理，并应进 行定期 清运和\n消毒。\n3. 3. 5 施工现 场垃圾处理应符合下 列规定：\n1 垃圾应分类存放、按时处置。\n2 应制定建 筑垃圾减量计划，建 筑垃圾的回收利用应符合\n现行国家标准《工程施工 废弃 物再生利用 技术规范》 GB/T\n50743的规定。\n3 有毒有害废弃物的分类 率应达到 100%; 对有可能造成\n二次污染的废弃物应单独储存，并设置醒目标识。\n4 现场清理时 ，应采用封闭式运输，不得将施工垃圾从窗\n口、洞口、阳台等处抛撒。\n3.3.6 施工使用的乙炔、氧气、油漆、防腐剂等危险品、化学\n品的运输和储存应采取隔离措施。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 16,
+        "page_end": 17,
+        "token_count": 577,
+        "char_count": 1155
+      }
+    },
+    {
+      "chunk_id": 25,
+      "text": "4 施工准 备\n4.0.1 施工单位 应根据设计文 件、场地条 件、周边环境 和\n绿色 施工总体要求， 明确绿色 施工的 目标、 材料 、方法和\n实施内容， 并在图纸会审 时提 出需设计单位 配合的建 议和\n意见。\n4.0.2 施工单位 应编制包 含绿色施工管 理和技术要求的工程 绿\n色施工组织设计、 绿色施工方案或绿色施工专项方案，并经审批\n通过后实施。\n4.0.3 绿色施工组织设计、 绿色施工方案或绿色施工专项方案\n编制应符合下 列规定：\n1 应考虑施工现 场的自然与人文 环境特点。\n2 应有减少资源浪费和环境污染的措施。\n3 应明确绿色施工的组织管 理体系、技术要求和 措施。\n4 应选用先进 的产品、技术、设 备、施工工 艺和方法，利\n用规划区 域内设施。\n5 应包含改善作业条 件、降低劳动强度、节约人力资源 等\n内容。\n4.0.4 施工现 场宜实行电子文 档管理。\n4.0.5 施工单位 宜建立建筑材料 数据库，应采用绿色性能相 对\n优良的建筑材料 。\n4.0.6 施工单位 宜建立施工 机械设备数据库。应根据现 场\n和周边环境 情况 ，对施工 机械和设 备进 行节能、 减排和降\n耗指标分 析和比较，采用高性能、 低噪声和低能耗的机械\n设备。\n4.0.7 在绿色施工评价前，依据工程 项目环境影响因素分析情\n况，应对绿色施工评价要素中一般项和优选项 的条目数进行相应\n调整，并经工程 项目建设和监 理方确认后，作为绿色施工的相 应\n评价依据。\n4.0.8 在工程 开工前，施工单位 应完成绿色施工的 各项准备\n工作。\n5 施工 场 地\n5.1 一 般 规定\n5.1.1 在施工总 平面设计 时，应针对施工场地、环境和条件进\n行分析，制定具体实施 方案。\n5.1.2 施工总 平面布置 宜利用场 地及周边现有和 拟建建筑物、\n构筑物 、道路和管线等。\n5.1.3 施工前 应制定合理的场地使用计划；施工中 应减少场地\n干扰，保护环境。\n5.1.4 临时设施的 占地面积可按最低面积指标设计，有 效使用\n临时设施用地。\n5.1.5 塔吊等垂直运输设施基座 宜采用可重复利用的装配式基\n座或利用 在建工程的结 构。\n5 .2施工总平面布置\n5. 2.1 施工现 场平面布置 应符合下 列规定：\n1 在满足施工需要前提下，应减少施工用地。\n2 应合理 布置起 重机械和各项施工设施，统 筹规划施工\n道路。\n3 应合理 划分施工分区和 流水段，减少专业工种之间交 叉\n作业。\n5.2.2 施工现 场平面布置 应根据施工 各阶段的特点和要求，实\n行动态管理。\n5.2.3 施工现 场生产区、 办公区和生活区 应实现相 对隔离。\n5.2.4 施工现 场作业棚、库房、材料堆场等布置 宜靠近交通线\n路和主要 用料部位。\n5.2.5 施工现 场的强噪声机械设备宜远离噪声敏感区。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 18,
+        "page_end": 20,
+        "token_count": 595,
+        "char_count": 1190
+      }
+    },
+    {
+      "chunk_id": 26,
+      "text": "5.3.1 施工现 场大门、围挡和围墙宜采用可重复利用的材料和\n部件，并应工具化、标准化。\n5.3.2 施工现 场人口应设置绿色施工制 度图牌。\n5. 3. 3 施工现 场道路 布置应遵循永久道路和临时道路 相结合的\n原则。\n5.3.4 施工现 场主要道路的硬化处理宜采用可周 转使用的材料\n和构件。\n5.3.5 施工现 场围墙、大门和施工 道路周 边宜设绿化隔离带。\n5 .4临 时 设施\n5.4.1 临时设施的设计、布置和 使用，应采取有效的节能降耗\n措施，并应符合下 列规定：\n1 应利用场 地自然条件，临时建筑的体形宜规整，应有自\n然通风和采光，并应满足节能要求。\n2 临时设施宜选用由高效保温、隔热、防火材料制成的 复\n合墙体和屋面，以及密封保温隔热性能好的门窗。\n3 临时设施建设 不宜使用一次性 墙体材料。\n5.4.2 办公和生活 临时用房应采用可重复利用的房屋。\n5.4.3 严寒和寒冷地区外门 应采取防寒措施。夏季炎热地区的\n外窗宜设置外 遮阳。\n5 . 3 场区围护及道路\n6 地基与基础工程\n6.1 一 般 规定\n6.1.1 桩基施工 应选用低噪、环保 、节能、高效的机械设备和\n工艺。\n6.1.2 地基与基础工程施工 时，应识别场地内及周边现有的自\n然、文化和建（ 构）筑物特征，并采取相应保护措施。场内发现\n文物时，•应立即停止施工， 派专人看管，并通知当地文物主管\n部门。\n6 . 1 . 3应根据气候特征选择施工方法、施工 机械、安排施工顺\n序、布置施工 场地。\n6.1. 4 地基与基础工程施工 应符合下 列规定：\n1 现场土、料存放应采取加盖或植被覆盖措 施。\n2 土方、渣土装卸车和运输车应有防止遗撒和扬尘的措施。\n3 对施工过程产生的泥 浆应设置专门的泥 浆池或泥浆罐车\n存储。\n6 . 1 . 5基础工程 涉及的混凝土 结构、钢结构、砌体结构工程应\n按本规范第 7章的有关要求执行。\n6. 2 土石方工程\n6. 2.1 土石方工程开挖前应进行挖、填方的平衡计算，在土石\n方场内应有效利用 、运距最短和工序衔接紧密。\n6. 2 .2工程渣土应分类堆放和运输，其再生利用应符合 现行国\n家标准《工程施工 废弃 物再生利用 技术规范》 GB/T 50743 的\n规定。\n6. 2.3 土石方工程开挖宜采用逆作法或半逆作法进行施工，施\n工中应采取通风和降温等改善地下工程作业条 件的措施。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 21,
+        "page_end": 22,
+        "token_count": 505,
+        "char_count": 1010
+      }
+    },
+    {
+      "chunk_id": 27,
+      "text": "6.\n2.\n4 在受污染的场地进行施工 时，应对土质进行专项检测和\n治理。\n6.\n2.\n5 土石方工程爆破施工前， 应进行爆破方案的编制和 评审；\n应采取防尘和飞石控制措施。\n6.\n2.\n6 4 级风以上天气，严禁土石方工程爆破施工作业。\n6 .\n3桩 基工程\n6.\n3 .\n1成桩工艺应根据桩的类型、使用功能、土层特性、地下\n水位、施工 机械、施工环境、施工经验、制 桩材料供应 条件等，\n按安全适用 、经济合理 的原则 选择。\n6.\n3.\n2 混凝土 灌注桩施工应符合下 列规定：\n1 灌注桩采用泥浆护壁成孔时，应采取导流沟和泥浆池等\n排浆及储浆措施。\n2 施工现 场应设置专用泥浆池，并及时清理 沉淀的废渣。\n6.\n3.\n3 工程桩不宜采用人工挖孔成桩。\n当特殊情况采 用时，应\n采取护壁、通风和防坠落措施。\n6.\n3 .\n4在城区 或人口密集地区施工 混凝土预 制桩和钢桩时，宜\n采用静压沉桩工艺。\n静力压装宜选择 液压式和绳索式压桩工艺。\n6.\n3.\n5 工程桩桩顶剔除部分的 再生利用应符合 现行国家标准\n《 工程施工废弃物再生利用技术规范》 GB/T 50743的规定。\n6 .\n4地基处理工程\n6.\n4 .\n1换填法施工应符合下 列规定：\n1 回填土施工应采取防止扬尘的措施，4级风以上天气严\n禁回填土施工。\n施工 间歇时应对 回填土进行覆盖。\n2 当采用砂石料作为回填材料时 ，宜采用振动碾压。\n3 灰土过筛施工应采取避风措施。\n4 开挖原土的土质不适宜回填时，应采取土质改良措施后\n加以利用。\n6.\n4.\n2 在城区 或人口密集地区，不宜使用强夯法施工。\n6.4.3 高压喷射注浆法施工的 浆液应有专用容器存放，置换出\n的废浆应收集清理。\n6. 4 .4采用砂石回填时，砂石填 充料应保 持湿润。\n6. 4 .5基坑支护结构采用锚杆（锚索）时，宜采用可拆式锚杆。\n6. 4 .6喷射混凝土 施工宜采用湿喷或水泥裹砂喷射工艺，并采\n取防尘措施。喷射混凝土 作业区的 粉尘浓度不应大于10mg/m3，\n喷射混凝土 作业人 员应佩戴防尘用具。\n6. 5 地下水控制\n6. 5 .1基坑降水宜采用基坑封闭降水方法。\n6. 5 .2基坑施工排出的地 下水应加以利用。\n6. 5 .3采用井点降水施工 时，地下水位与作业面 高差宜控制在\n250mm以内，并应根据施工 进度进行水位自动 控制。\n6. 5 .4当无法采用基坑封闭降水，且基坑抽水对周围环境可 能\n造成不良影响 时，应采用对地下水无污染 的回灌方法。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 23,
+        "page_end": 24,
+        "token_count": 530,
+        "char_count": 1060
+      }
+    },
+    {
+      "chunk_id": 28,
+      "text": "7 主体结构工程\n7.1 一 般 规定\n7.1.1 预制装配式结构构件，宜采取工厂化加工；构件的存放\n和运输应采取防止变形和损坏的措施；构件的加工和进场顺序应\n与现场安装顺序一致，不宜二次倒运。\n7.1.2 基础和主体结 构施工应统筹安排垂直和水平运输机械。\n7.1.3 施工现 场宜采用预拌混凝土 和预拌砂浆 。现场搅拌混凝\n土和砂浆时，应使用散 装水泥 ；搅拌机棚应 有封闭降噪和防尘\n措施。\n7 .2混凝土结构工程\nI 钢筋 工程\n7.2.1 钢筋宜采 用专用软件优化放样下料，根据优化配料结果\n确定进场钢筋的定尺长度。\n7.2.2 钢筋工程宜采用专业化生产的成 型钢筋。钢筋现场加工\n时，宜采取集中加工方式。\n7. 2 .3钢筋连接宜采用机械连接方式。\n7.2.4 进场钢筋原材料和加工半成品应存放有序、标识清晰、\n储存环境适 宜，并应制定保管制度，采取防潮、防污染等措施。\n7. 2 .5钢筋除锈时，应采取避免扬尘和防止土壤污染的措施。\n7.2.6 钢筋加工中使用的冷却液体，应过滤后循环使用 ，不得\n随意排放。\n7. 2 .7钢筋加工产生的 粉末状废料，应收集和处理，不得随意\n掩埋或丢弃。\n7.2.8 钢筋安装时，绑扎 丝、焊剂等材料应 妥善保管和使用，\n散落的余废料应收集利用。\n7.\n2.\n9 箍筋宜采 用一笔箍或焊接封闭箍。\nn 模 板工程\n7.\n2.\n10 应选用周转率高的模板和支撑体系。\n模板宜选用可回收\n利用高的塑料、铝合金等材料。\n7.\n2.\n11 宜使用大模板、定型模板、爬升模板和早拆模板等工业\n化模板及支撑体系。\n7.\n2.\n12 当采用木或竹制模板时，宜采取工厂化定型加工、现场\n安装的方式，不得在工作面上 直接加工拼装。\n在现 场加工时，应\n设封闭场所集中加工，并采取隔声和防粉尘污染措 施。\n7.\n2.\n13 模板安装精度应符合 现行国家标准《 混凝土结构工程施\n工质量验收规范》 GB 50204的要求。\n7.\n2.\n14 脚手架 和模板支撑宜选 用承插式、碗扣式、盘扣式等管\n件合一的脚手架 材料搭设。\n7.\n2.\n15 高层建筑结构施工，应采用整体或分片提升的工具式脚\n手架和分段悬挑式脚手架 。\n7.\n2.\n16 模板及脚手架 施工应回收散落的铁钉、铁丝、扣件、螺\n栓等材料。\n7.\n2.\n17 短木方应叉接接长，木、竹胶合板的边角余料应拼接并\n利用。\n7.\n2.\n18 模板脱模剂应选用环保型 产品，并派专人保管和涂刷，\n剩余部分应加以利用。\n7.\n2.\n19 模板拆除宜按支 设的逆向顺序进行，不得硬撬或重砸。\n拆除平台楼层的底模，应采取临时支撑、支垫等防止模板坠落和\n损坏的措施。\n并应建立维护维修制度。\nD I 混凝土 工程\n7.\n2.\n20 在混凝土配 合比设计时，应减少水泥用量，增加工业废\n料、矿山废渣的掺量；当混凝土 中添加粉煤灰时，宜利用其后期",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 25,
+        "page_end": 26,
+        "token_count": 603,
+        "char_count": 1206
+      }
+    },
+    {
+      "chunk_id": 29,
+      "text": "强度。\n7.\n2.\n21 混凝土宜采 用泵送、布料机布料浇筑；地下大体积混凝\n土宜采 用溜槽或串筒浇筑。\n7.\n2.\n22 超长无缝混凝土 结构宜采用滑动支座法、跳仓法和综合\n治理法施工；当裂缝控 制要求 较高时，可采用低温补仓法施工。\n7.\n2.\n23 混凝土 振捣应采用低噪声振捣设备，也可采取围挡等降\n噪措施；在噪声敏感环境或 钢筋密集时，宜采用自密实混凝土 。\n7.\n2.\n24 混凝土宜采 用塑料薄膜加保温材料覆盖保湿、保温养\n护；当采 用洒水或喷雾养护时，养护用水宜使用回收的基坑降水\n或雨水；混凝土 竖向构件宜采 用养护剂 进行养护。\n7.\n2.\n25 混凝土 结构宜采用清水混凝土 ，其表面应涂刷保护剂。\n7.\n2.\n26 混凝土 浇筑余料应制成小型预制件，或采用其他措施加\n以利用，不得随意倾倒。\n7.\n2.\n27 清洗泵送设备和管道的污水应经沉淀后回收利用，浆料\n分离后可作室外道路、地面等 垫层的回填材料。\n7 .\n3砌体结构工程\n7.\n3.\n1 砌体结构宜采用工业废料或废渣制作的 砌块及其他节能\n环保的砌块。\n7.\n3 .\n2砌块运输宜采用托板整体包装，现 场应减少二次搬运。\n7.\n3.\n3 砌块湿润和砌体养护宜 使用检验合格的非自来水 源。\n7.\n3.\n4 混合砂浆掺合料可使用 粉煤灰等工业 废料。\n7.\n3.\n5 砌筑施工时，落地灰应随即清理、收集和再利用。\n7.\n3 .\n6砌块应按组硇图砌筑；非标准硇块应在工厂加工按计划\n进场，现场切割时应集中加工，并采取防尘降噪措施。\n7.\n3 .\n7毛石砌体砌筑时产生的 碎石块，应加以回收利用。\n7 .\n4钢结构工程\n7.\n4.\n1 钢结构深化设计 时，应结合加工、运输、安装方案和焊\n接工艺要求，确定分段、分节数量和位置， 优化节点构造，减少",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 27,
+        "page_end": 28,
+        "token_count": 380,
+        "char_count": 761
+      }
+    },
+    {
+      "chunk_id": 30,
+      "text": "6砌块应按组硇图砌筑；非标准硇块应在工厂加工按计划\n进场，现场切割时应集中加工，并采取防尘降噪措施。\n7毛石砌体砌筑时产生的 碎石块，应加以回收利用。\n4钢结构工程\n1 钢结构深化设计 时，应结合加工、运输、安装方案和焊\n接工艺要求，确定分段、分节数量和位置， 优化节点构造，减少\n钢材用量。\n7.4.2 钢结构安装连接宜选用高强螺栓连接，钢结构宜采用金\n属涂层进行防腐处理。\n7.4.3 大跨度钢结构安装宜采用起重机吊装、整体提升、顶升\n和滑移等机械化程度高、劳动强度低的方法。\n7.4.4 钢结构加工应制定废料减量计划， 优化下料，综合利用\n余料，废料应分类收 集、集中堆放、定期回收处理。\n7.4.5 钢材、零 （ 部）件、成品、半成品件和标准 件等应堆放\n在平整、干燥场地或仓库内。\n7.4.6 复杂空间钢结构制作和 安装，应预先采用仿真技术模拟\n施工过程和 状态。\n7.4.7 钢结构现场涂料应采用无污染 、耐候性好的材料。防火\n涂料喷涂施工 时，应采取防止涂料外泄的专项措 施。\n7 .5其 他\n7. 5. 1 装配式混凝土 结构安装所需的埋件和连接件以及室内外\n装饰装修所 需的连接件，应在工厂制作时准确预留、预埋。\n7.5.2 钢混组合结构中的钢结构构件，应结合配筋情况 ，在深\n化设计 时确定与钢筋的连接方式。钢筋连接、套筒焊接、钢筋连\n接板焊接及预留孔应在工厂加工时完成，严 禁安装时随意割孔或\n后焊接。\n7. 5 .3索膜结构施工 时，索、膜应工厂化制作和 裁剪，现场\n安装。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 27,
+        "page_end": 28,
+        "token_count": 324,
+        "char_count": 649
+      }
+    },
+    {
+      "chunk_id": 31,
+      "text": "8 装饰装修工程\n8.1 一 般 规定\n8.1.1 施工前， 块材、板材和卷材应进 行排版优化设计。\n8.1.2 门窗、幕墙、块材、板材宜采用工厂化加工。\n8.1 .3 装饰用砂浆宜采 用预拌砂浆； 落地灰应回收使用。\n8.1 .4 装饰装修成 品、半成品应采取保护措施。\n8.1 .5 材料的包装 物应分类回收。\n8.1.6 不得采用沥青类、煤焦油类等材料作为室内防腐、防潮\n处理剂。\n8.1 .7 应制定材料使用 的减量计划， 材料损 耗宜比额定损耗率\n降低30%。\n8.1.8 室内装饰装修 材料应 按现行国家标准《民 用建筑工程室\n内环境污染控 制规范 》GB 50325的要求 进行甲醛、氨、挥发性\n有机化合物和放射性等有 害指标的检测。\n8.1 .9 民用建筑工程验收 时，必须进行室内环境污染物浓度检\n测，其限量 应符合表 8. 1.9的规定。\n表8.1.9 民用建筑工程室内环境污染物浓度限量\n污染物 I类民用建筑工程 n类民用建筑工程\n氡(Bq/m3) <200 <400\n甲酸(mg/m3) <0. 08 <0. 1\n苯（mg/m3) <0. 09 <0. 09\n氨(mg/ m3 ) <0.2 <0. 2\nTV()C(mg/m3) <0. 5 <0. 6\n8.2 地面工程\n8. 2. 1 地面基层 处理应符合下 列规定：\n1 基层粉尘清理宜采用吸尘器；没有防潮要求的， 可采用\n洒水降尘等措施。\n2 基层需剔凿的，应采用低噪声的剔凿机具和剔凿方式。\n•\n8.\n2.\n2 地面找平层、隔汽层、隔声层施工 应符合下 列规定：\n1 找平层、隔汽层、隔声层厚度应控制在允许偏差 的负值\n范围内。\n2 干作业应有防尘措施。\n3 湿作业应采用喷洒方式保湿养护 。\n8.\n2.\n3 水磨石地面施工 应符合下 列规定：\n1 应对 地面 洞口、管线口进行封堵，墙面应采取防污染\n措施。\n2 应采取水泥 浆收集处理措施。\n3 其他饰面层的施工 宜在水磨石地面完成后 进行。\n4 现制水 磨石地面应采取控制污水和噪声的措施。\n8.\n2.\n4 施工现 场切割地面块材时，应采取降噪措施；污水应集\n中收集处理。\n8.\n2.\n5 地面养护期内不得上人或堆物，地面 养护用水，应采用\n喷洒方式，严禁养护用水溢流。\n8 .\n3门窗及幕墙工程\n8.\n3.\n1 木制、 塑钢、金属门窗应采取成品保护措施。\n8.\n3.\n2 外门窗安装应与外墙面装修同 步进行。\n8.\n3.\n3 门窗框周围的缝隙填 充应采用憎水保温材料。\n8.\n3 .\n4幕墙与主体结 构的预埋件应在结构施工时埋设。\n8.\n3.\n5 连接件应采用耐腐蚀材料或 采取可靠的防腐措施。\n8.\n3.\n6 硅胶使用前应进行相容性和 耐候性复试。\n8.\n4 吊 顶 工程\n8.\n4 .\n1吊顶施工应减少板材、型材的切割。\n8.\n4.\n2 应避免采用温湿度 敏感材料进 行大面 积吊顶施工。\n8.\n4.\n3 高大空间的整体顶棚施工，宜采用地面拼装、整体提升",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 29,
+        "page_end": 30,
+        "token_count": 624,
+        "char_count": 1248
+      }
+    },
+    {
+      "chunk_id": 32,
+      "text": "就位的方式。\n8.4.4 高大空间吊顶施工时，宜采用可移动式操作平台等节能\n节材设施。\n8 .5隔墙及内墙面工程\n8.5.1 隔墙材料 宜采用轻质砌块砌体或轻质墙板，严禁采用实\n心烧结黏土砖。\n8. 5. 2 预制板或轻质隔墙板间的填塞材料应 采用弹性或微膨胀\n的材料。\n8. 5. 3 抹灰墙面宜采用喷雾方法进 行养护。\n8.5.4 使用溶剂型腻子找平或直 接涂刷 溶剂型涂料时，混凝土\n或抹灰基层含水率不得大于8% ;使用乳液型腻子找平或直 接涂\n刷乳液型涂料时，混凝土 或抹灰基层含水率不得大于10%。木\n材基层的 含水率不得大于12%。\n8. 5 .5涂料施工应采取遮挡、防止挥发和劳动保护等措施。\n9 保温和防水工程\n9.1 一 般 规定\n9.1.1 保温和防水工程施工 时，应分别满足建筑节能和防水设\n计的要求。\n9.1.2 保温和防水 材料及 辅助用材，应根据材料特性进行有害\n物质限量的现 场复检。\n9.1.3 板材、块材和卷材施工应结合保温和防水的工 艺要求，\n进行预先排版。\n9.1.4 保温和防水 材料在运输、存放和使用时应 根据其性能 采\n取防水、防 潮和防火措施。\n9 .2保 温 工程\n9.2.1 保温施工宜选用结构自保温、保温与装饰一体化、 保温\n板兼作模板、全现浇混凝土外墙与保温一体化和管 道保温一体化\n等方案。\n9.2.2 采用外保温材料的墙面和屋顶，不宜进行焊接、钻孔等\n施工作业。 确需施工作业 时，应采取防火保护措施，并应在施工\n完成后， 及时对 裸露的外保温材料进 行防护处理。\n9.2.3 应在外门 窗安装，水 暖及装饰工程 需要的管 卡、挂件，\n电气工程的 暗管、接 线盒及穿线等施工完成后， 进行内 保温.\n施工。\n9. 2. 4 现浇泡沫混凝土 保温层施工 应符合下 列规定：\n1 水泥、 集料、掺合料等宜工厂干拌、封闭运输。\n2 泡沫混凝土宜 泵送浇筑。\n3 搅拌和泵送设备及管道等冲洗水应收集处理。\n4 养护应采用覆盖、喷洒等节水方式。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 31,
+        "page_end": 32,
+        "token_count": 423,
+        "char_count": 846
+      }
+    },
+    {
+      "chunk_id": 33,
+      "text": "9.\n2.\n5 保温砂浆 施工应符合下 列规定：\n1 保温砂浆 材料宜采用预拌砂浆 。\n2 现场拌合应随用随拌。\n3 落地灰应收集利用。\n9.\n2.\n6 玻璃棉、岩棉保温层施工 应符合下 列规定：\n1 玻璃棉、岩棉类保温材料，应封闭存 放。\n2 玻璃棉、岩棉类保温材料裁切后的剩余材料应 封闭包装、\n回收利用。\n3 雨天、4级以上大 风天气不 得进行室外作业。\n9.\n2.\n7 泡沫塑料类保温层施工 应符合下 列规定：\n1 聚苯乙烯泡 沫塑料板余料应全 部回收。\n2 现场喷涂硬泡聚氨酯时，应对作业面 采取遮挡、防风和\n防护措施。\n3 现场喷涂硬泡聚氨酯时，环境温度宜 为10°C〜40°C，空\n气相对湿度宜小 于80%，风力不宜大于3级。\n4 硬泡聚氨酯现场作业应预先计算使用量，随配随用。\n9 .\n3防水工程\n9.\n3.\n1 基层清理应 采取控制扬尘的措施。\n9.\n3.\n2 卷材防水层施工 应符合下 列规定：\n1 宜采用自粘型防水卷材。\n2 采用热熔法施工时，应控制燃料泄漏 ，并控制易燃材料\n储存地点与作业 点的间距。\n高温环境或 封闭条件施工时，应采取\n措施加强通风。\n3 防水层 不宜采用热粘法施工。\n4 采用的基层 处理剂和胶粘剂 应选用环保型材料 ，并封闭\n存放。\n5 防水卷材余料应回收处理。\n9.\n3.\n3 涂膜防水层施工 应符合下 列规定：\n1 液态防水涂 料和粉末状涂料应采用封闭容器存放，余料\n应及时 回收。\n2 涂膜防水宜采用滚涂或涂刷工 艺，当采用喷涂工艺时，\n应采取遮挡等防止污染的措施。\n3 涂膜固化期内 应采取保护措施。\n9.3.4 块瓦屋面宜采用干挂法施工。\n9.3.5* 蓄水、淋水试验宜采用非自来水 源。\n9. 3 .6防水层 应采取成品保护措施。\n1 0 机电安装工程\n10.1 一 般 规定\n10.1.1 机电安装工程施工 应采用工厂化制作， 整体化安装的\n方法。\n10.1.2 机电安装工程施工前 应对通风空调、给水排水、强弱\n电、末端设施布置 及装修等 进行综合分析，并绘制综合管线图。\n10.1. 3 机电安装工程的 临时设施安排应与工程总体部 署协调。\n10.1.4 管线的预埋、预留应与土建及装修工程同 步进行，不得\n现场临时剔凿。\n10.1.5 除锈、防腐宜在工厂内完成，现 场涂装时应采用无污\n染、耐候性好的材料。\n10.1. 6 机电安装工程 应采用低能耗的施工 机械。\n10.2 管 道 工程\n10.2.1 管道连接宜采用机械连接方式。\n10.2.2 采暖散热片组装应在工厂完成。\n10.2.3 设备安装产生的 油污应随即清理。\n10.2.4 管道试验及冲洗用水应有组织 排放，处理后重复利用。\n10.2.5 污水管 道、雨水管 道试 验及冲洗用水宜利用 非自来\n水源。\n10.3 通 风 工程\n10.3.1 预制风管下料宜按先大管料，后小管料，先长料 ，后短\n料的顺序进行。\n10.3.2 预制风管安装前应将内壁清扫干净。\n10. 3. 3 预制风管连接宜采用机械连接方式。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 33,
+        "page_end": 35,
+        "token_count": 635,
+        "char_count": 1270
+      }
+    },
+    {
+      "chunk_id": 34,
+      "text": "10. 3. 4 冷媒储存应采用压力 密闭容器。\n10.4 电 气 工程\n10.4.1 电线导管暗敷应做到线路 最短。\n10.4.2 应选用节能型电线、电缆和灯具等，并应进 行节能\n测试。\n10.4.3 预埋管线口应采取临时封堵措施。\n10.4.4 线路连 接宜采用免焊接头和机械压接方式。\n10. 4. 5 不间断电源柜试运行时应进 行噪声监测。\n10.4.6 不间断电源安装应采取防止电池液泄漏的措施，废旧电\n池应回收。\n10.4.7 电气设备的试运行不得低于规定 时间，且不应超过规定\n时间 的1.5倍。\n1 1 拆 除工程\n11.1 一 般 规定\n11.1.1 拆除工程 应制定专项方案。拆除方案应明确拆除的对象\n及其结构特点、拆除方法 、安全 措施、拆除物的回收利用方\n法等。\n11.1.2 建筑物拆除过程 应控制废水、废弃 物、粉尘的产生和\n排放。\n11.1.3 建筑物拆除应按规定进行公示。\n11.1.4 4 级风 以上、大 雨或冰雪天气 ，不得进行露天拆除\n施工。\n11.1.5 建筑拆除物处理应符合充 分利用、就近消纳的原则。\n11.1.6 拆除物应根据材料性质进行分类， 并加以利用；剩余的\n废弃物应做 无害化处理。\n11.2 拆除施工准 备\n11.2.1 拆除施工前， 拆除方案应得到相关方批准；应对周边环\n境进行调查和记录，界定影响区域。\n11.2.2 拆除工程 应按建筑构配件的情况，确定保护性拆除或破\n坏性拆除。\n11.2.3 拆除施工 应依据实际 情况，分别采用人工拆除、机械拆\n除、爆破拆除和静 力破碎的方法。\n11.2.4 拆除施工前， 应制定应急预案。\n11.2.5 拆除施工前， 应制定防 尘措施；采取水淋法降尘时，应\n采取控制用水量和 污水流淌的措施。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 36,
+        "page_end": 37,
+        "token_count": 373,
+        "char_count": 746
+      }
+    },
+    {
+      "chunk_id": 35,
+      "text": "1 1 .\n3拆除施工\n11.\n3.\n1 人工拆除前应制定安全防护和降尘措施。\n拆除管道及容\n器时，应查清 残留物性质并采取相应安全 措施，方可进 行拆除\n施工。\n11.\n3.\n2 机械拆除宜选用低能耗、低排放、低噪声的机械；并应\n合理确定机械作业位置和 拆除顺序，采取保护机械和人员安全的\n措施。\n11.\n3.\n3 在爆破拆除前，应进行试爆，并根据试爆结果，对拆除\n方案进行完善。\n11.\n3.\n4 爆破拆除时防尘和飞石控制应符合下 列规定：\n1 钻机成孔时，应设置粉尘收集装置，或采取钻杆带水作\n业等降尘措施。\n2 爆破拆除时，可采用在爆点位置设置水 袋的方法或 多孔\n微量爆破方法。\n3 爆破完成后， 宜采用高压水枪进行水雾消尘。\n4 对重点防护的范围，应在其附近 架设防护排架 ，并挂金\n属网防护。\n11.\n3.\n5 对烟囱、水塔等高大建（构）筑物进 行爆破拆除时，应\n在倒塌范围内采取铺设缓冲垫层或开挖减振沟等触地防振措施。\n11.\n3.\n6 在城镇或人员密集 区域，爆破拆除宜采用对环境 影响小\n的静力爆破，并应符合下 列规定：\n1 采用具有腐蚀性的静 力破碎剂作业时，灌浆人员必须戴\n防护手套和防护眼镜。\n2 静力破碎剂不得与其他材料混放。\n3 爆破成孔与破碎剂注人不宜同步施工。\n4 破碎剂注人时，不得进行相邻区域的钻孔施工。\n5 孔内注入破碎剂后，作业人 员应保持安全距离，不得在\n注孔区域行走。\n6 使用静力破碎发生异常情况时，必须停止作业；待查清\n原因采取安全措施后，方可继续施工。\n11.4 拆除物的综合利用\n11. 4. 1 建筑拆除物分类和 处理应符合 现行国家标准《 工程施工\n废弃物再生利用技术规范》 GB/T 50743 的规定 ；剩余的废弃物\n应做无害化处理。\n11.4.2 不得将建筑拆除物混入生活垃圾，不得将危险废弃物混\n入建筑拆除物。\n11.4.3 拆除的门 窗、管材、电线、设备等材料应 回收利用。\n11.4.4 拆除的钢筋和型材应 经分拣后再生利用。\n本规范用词说明\n1 为便于在执行本规范条文 时区别对待，对于要求严格程\n度不同的用词说明 如下：\n1) 表示很严格，非这样做不可 的：\n正面词采用“必须”，反面词采用“严禁”；\n2) 表示严格，在 正常情况下均应这样做的：\n正面词采用“应”，反面词采用“不应” 或 “不得”；\n3) 表示允许稍 有选择，在条件许可时首先应这 样做的：\n正面词采用“宜”，反面词采用“不宜”；\n4 )表示有选择 ，在一定条 件下可 以这样做的，采用\n“可”。\n2 条文中 指明应按其他标准执行的 写法为：“应符合 …… 的\n规定” 或 “应按……执行”。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 38,
+        "page_end": 41,
+        "token_count": 558,
+        "char_count": 1117
+      }
+    },
+    {
+      "chunk_id": 36,
+      "text": "2 条文中 指明应按其他标准执行的 写法为：“应符合 …… 的\n规定” 或 “应按……执行”。\n引用标准名录\n1 《混凝土 结构工程施工质量验收规范 》GB 50204\n2 《民用建筑工程室内环境污染控制规范》GB 50325\n3 《 建筑工程绿色施工评价标准》 GB/T 50640\n4 《 工程施工废弃物再生利用技术规范》 GB/T 50743\n5 《 建筑施工场界环境 噪声排放标准》GB 12523\n6 《污水排入城镇下水道水质标准 》QJ 343",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 38,
+        "page_end": 41,
+        "token_count": 114,
+        "char_count": 228
+      }
+    },
+    {
+      "chunk_id": 37,
+      "text": "建筑工程 绿色 施工规范\nGB/T 50905 - 2014\n中华人民共和国国家标准\n条文 说明\n制订 说明\n《建筑工程绿色施工规范》 GB/T 50905 - 2014经住房和城\n乡建设部 2014年 1月29日以第 321号公告批准、发布。\n本规范编制过程中，编制组 进行了广泛的调 查研究，总结了\n我国建 筑工程绿色施工的实践经验，同 时参考了国外先进技术法\n规、技术标准，与国内相关标准 协调；开展了多项专题研究， 并\n以多种方式广泛征求了有关单位和 专家的意见， 对主要问题 进行\n了反复讨论、论证、协调和修 改。\n为便于广大施工、监 理、质检、设计、科研、 学校等单位有\n关人员在使用本规范 时能正确理解和执行条文规定，《建 筑工程\n绿色施工规范》编制组 按章、节、条顺序编制了本规范的条文 说\n明，对条文规定的 目的、依据以及执行中需注意的有关 事项进行\n了说明。但是，本条文 说明不具备 与规范 正文同等的 法律效力，\n仅供使用 者作为理解和把握规范规定的 参考。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 42,
+        "page_end": 43,
+        "token_count": 220,
+        "char_count": 440
+      }
+    },
+    {
+      "chunk_id": 38,
+      "text": "1 总则.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n37\n2 术语.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n38\n3 基本规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n39\n3.\n1 组织与管 理.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 44,
+        "page_end": 44,
+        "token_count": 335,
+        "char_count": 670
+      }
+    },
+    {
+      "chunk_id": 39,
+      "text": "1 总则.\n2 术语.\n3 基本规定 .\n1 组织与管 理.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n39\n3.\n2 资源节约 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n39\n3.\n3 环境保护 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n40\n4 施工准备.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n41\n5 施工场地.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 44,
+        "page_end": 44,
+        "token_count": 352,
+        "char_count": 704
+      }
+    },
+    {
+      "chunk_id": 40,
+      "text": "1 总则.\n2 术语.\n3 基本规定 .\n1 组织与管 理.\n2 资源节约 .\n3 环境保护 .\n4 施工准备.\n5 施工场地.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n42\n5.\n1 一般规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n42\n5.\n2 施工总 平面布置 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n42\n5.\n3 场区围护 及道路 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n42\n5.\n4 临 时 设施 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 44,
+        "page_end": 44,
+        "token_count": 373,
+        "char_count": 746
+      }
+    },
+    {
+      "chunk_id": 41,
+      "text": "1 总则.\n2 术语.\n3 基本规定 .\n1 组织与管 理.\n2 资源节约 .\n3 环境保护 .\n4 施工准备.\n5 施工场地.\n1 一般规定 .\n2 施工总 平面布置 .\n3 场区围护 及道路 .\n4 临 时 设施 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n42\n6 地基与基础工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n44\n6.\n1 一般规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n44\n6.\n2 土石方工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n44\n6.\n4 地基处理工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 44,
+        "page_end": 44,
+        "token_count": 394,
+        "char_count": 789
+      }
+    },
+    {
+      "chunk_id": 42,
+      "text": "1 总则.\n2 术语.\n3 基本规定 .\n1 组织与管 理.\n2 资源节约 .\n3 环境保护 .\n4 施工准备.\n5 施工场地.\n1 一般规定 .\n2 施工总 平面布置 .\n3 场区围护 及道路 .\n4 临 时 设施 .\n6 地基与基础工程 .\n1 一般规定 .\n2 土石方工程.\n4 地基处理工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n44\n6.\n5 地下水控制.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n44\n7 主体结构工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n45\n7.\n1 —般规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n45\n7.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 44,
+        "page_end": 44,
+        "token_count": 408,
+        "char_count": 817
+      }
+    },
+    {
+      "chunk_id": 43,
+      "text": "2 混凝土 结构工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n45\n7.\n4 钢结构工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n48\n7.\n5 其 他 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n48\n8 装饰装修工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 44,
+        "page_end": 44,
+        "token_count": 337,
+        "char_count": 675
+      }
+    },
+    {
+      "chunk_id": 44,
+      "text": "2 混凝土 结构工程 .\n4 钢结构工程.\n5 其 他 .\n8 装饰装修工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n49\n8.\n1 —般规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n49\n8.\n4 吊顶工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n49",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 44,
+        "page_end": 44,
+        "token_count": 246,
+        "char_count": 493
+      }
+    },
+    {
+      "chunk_id": 45,
+      "text": "8.\n5 隔墙及内墙面工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n50\n9 保温和防水工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n51\n9.\n1 一般规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n51\n9 .\n2 保温工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n51\n1 0机电安装工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 45,
+        "page_end": 45,
+        "token_count": 341,
+        "char_count": 683
+      }
+    },
+    {
+      "chunk_id": 46,
+      "text": "5 隔墙及内墙面工程.\n9 保温和防水工程 .\n1 一般规定 .\n2 保温工程 .\n1 0机电安装工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n52\n10.\n1 一般规定.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n52\n10.\n2 管道工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n52\n10.\n4 电气工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n52\n1 1拆除工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 45,
+        "page_end": 45,
+        "token_count": 364,
+        "char_count": 729
+      }
+    },
+    {
+      "chunk_id": 47,
+      "text": "5 隔墙及内墙面工程.\n9 保温和防水工程 .\n1 一般规定 .\n2 保温工程 .\n1 0机电安装工程 .\n1 一般规定.\n2 管道工程.\n4 电气工程.\n1 1拆除工程 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n53\n11.\n1 一般规定.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n53\n11.\n2 拆除施工准 备.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n53\n11.\n3 拆除施工.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n53\n11.\n4 拆除物的综合利用.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 45,
+        "page_end": 45,
+        "token_count": 384,
+        "char_count": 768
+      }
+    },
+    {
+      "chunk_id": 48,
+      "text": "5 隔墙及内墙面工程.\n9 保温和防水工程 .\n1 一般规定 .\n2 保温工程 .\n1 0机电安装工程 .\n1 一般规定.\n2 管道工程.\n4 电气工程.\n1 1拆除工程 .\n1 一般规定.\n2 拆除施工准 备.\n3 拆除施工.\n4 拆除物的综合利用.\n.\n.\n.\n.\n.\n.\n53",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 45,
+        "page_end": 45,
+        "token_count": 70,
+        "char_count": 141
+      }
+    },
+    {
+      "chunk_id": 49,
+      "text": "1 总 则\n1.0.3 有关标准主要包括 但不限于：《 建筑工程绿色施工评价标\n准》GB/T 50640、《 工程施工废弃物再生利用技术规范》 GB/T\n50743、《锚杆喷射混凝土支护 技术规范 》GB 50086、《 建筑装饰\n装修工程施工质量验收规范 》GB 50210、《建筑施工场界环境 噪\n声排放标准》GB 12523、《混凝土 用水标准》 JGJ63 、《民用建筑\n工程室内环境污染控 制规范 》GB 50325、《建筑防水涂 料中有害\n物质限量 》JC 1066、《 建筑施工安全检查标准》JGJ 59、《 施工\n现场临时建筑物技术规范》 JGJ/T 188、 《绿色建筑评价标准》\nGB/T 50378 等。\n2 术 语\n2. 0 .6建筑工业化的基本要求为建 筑设计标准化、 构配件生产\n工厂化、现场施工机械化和组织管 理科学化。\n3 基本规定\n3.\n1 组织与管 理\n3.\n1.\n3 本条中 绿色施工组织设计与 绿色施工方案为配套使用的\n技术文 件；绿色施工专项方案是与传统施工组织设计和施工 方案\n配套使用的技术文 件。\n3.\n1.\n4 本条第 4款规定的 对现场作业人 员的教育培训 应包括与\n绿色施工有关 法律法规、规范规程等内容。\n3.\n1.\n5 本条强调了建 筑工业化和信息化施工的 重要性，它们是\n推进绿色施工的 重要举措，应积极 推进。\n3.\n1.\n6 确定合理工期，强调 参建方的协作与配合，是绿色施工\n推进的重要方面。\n3.\n1.\n9 施工企业应针对绿色施工总体要求，结 合具体工程的实\n际情况，积极应用 住房和城乡建设部发布的《建 筑业10项新技\n术》，组织专门人员进行传统施工技术 绿色化改造，开发岩土工\n程、主体结 构工程、装饰装修工程、 机电安装工程和 拆除工程等\n不同领域的绿色施工技术， 并实施。\n3.\n1.\n1 0原建设部 2007年第 659号公告《关于发布建设 事业\n“十一五” 推广应用 和限制 禁止使用 技术（ 第一批）的公告》 、\n2012年第 1338号公告《 关于发布墙体保温系统与墙体材料推广\n应用和限制、 禁止使用技术的公告》 及工业和信息化部 2012年\n第 14号公告《 高耗能落后机电设 备（ 产品）淘汰 目录（ 第二\n批） 》分别对推广应用、限制使用的建筑技术和 应淘汰的高耗能\n落后机电设备作出明确规定，应予执行。\n3.\n2 资源 节 约\n3.\n2.\n3 本条规定了 节能及能源利用应符合 的主要规定：",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 46,
+        "page_end": 48,
+        "token_count": 521,
+        "char_count": 1042
+      }
+    },
+    {
+      "chunk_id": 50,
+      "text": "4 施工机械设备档案包括产地、 型号、大 小、功率 、耗油\n量或耗电量、使用寿 命和已使用时间 等内容。 合理选择和使用施\n工机械，避免造成不必要的 损耗和浪费。\n6 施工现 场合理 布置临时用电线路，主要是要 做到线路 最\n短，变压器、配电室（ 总配电箱）与用电负荷中心尽可能靠近。\n照明照度宜按 最低照度设计。\n8 错峰用电，可避开用电高峰，平衡用电。\n3 .3环境保 护\n3.3.1 施工现 场易扬尘材料运 输、存储方式常见的有 封闭式货\n车运输、袋装运输、库房存储、袋装存储、封闭式料池、料斗或\n料仓存储、封闭覆盖等方式，具有防 尘、防变质、防 遗撒等作\n用，降低材料损 耗。\n3.3.3 本条规定了 光污染控 制应符合 的主要规定：\n3 焊 接（ 包括钢筋对焊）等产生强 光的作业 及大功率照明\n灯具，采取光线外泄的遮挡措施，其目的主要是防 止施工扰民。\n4 施工准 备\n4. 0 .2编制工程 项目绿色施工组织设计、 绿色施工方案时，应\n在各个章节中，通篇体现绿色施工管 理和技术要求，如： 绿色施\n工组织管 理体系、管理目标设定、 岗位职责分解、监督管 理机\n制、施工部 署、分部分 项工程施工要求、 保证措施和绿色施工评\n价方案等内容要求。编制工程 项目绿色施工专项方案时，也应体\n现以上相 应要求，并与传统施工组织设计、施工 方案配套使用。\n4.0.4 电子文 档的推行，将减少纸质文件，利于环境保 护。\n4.0.5 不同厂家生产的 材料性能是有 差别的，宜对同类建 筑材\n料进行绿色性能评价，并形成数据库，在具体工程实施中 选用性\n能相对绿色的材料。\n4.0.7 根据工程 特点和环境不 同，可对 现行国家标准《 建筑工\n程绿色施工评价标准》 GB/T 50640 的一般项和优选项 进行调\n整，以便使评价更符合工程实际。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 49,
+        "page_end": 51,
+        "token_count": 385,
+        "char_count": 771
+      }
+    },
+    {
+      "chunk_id": 51,
+      "text": "4.\n0.\n5 不同厂家生产的 材料性能是有 差别的，宜对同类建 筑材\n料进行绿色性能评价，并形成数据库，在具体工程实施中 选用性\n能相对绿色的材料。\n4.\n0.\n7 根据工程 特点和环境不 同，可对 现行国家标准《 建筑工\n程绿色施工评价标准》 GB/T 50640 的一般项和优选项 进行调\n整，以便使评价更符合工程实际。\n5 施工 场 地\n5.1 — 般 规定\n5.1.1 本条规定了 应对施工场地、环境条件进行分析，内容包\n括：施工现 场的作业 时间和作业 空间、具有的能 源和设施、自 然\n环境、社会环境、工程施工所 选用的料具性能等。\n5.1.2 在施工总 平面布置 时，应充分利用现有和 拟建建筑物、\n道路、给水、排水、供暖、供电、燃气、电信等设施和 场地等，\n提高资源利用 率。\n5.1.3 场地平整、土方开挖、施工降水、永久及临时设施建 造、\n场地废物处理 等均会对场地上现 存的动植物资源 、地形地貌、地\n下水位等 造成影响；甚至还会对场地内现 存的文物、地方特色资\n源等带来破坏，影响当 地文脉的继承和发扬。施工单位 应结合实\n际，制定 合理的用地计划。\n5 .2施工总平面布置\n5.2.5 噪声敏感区包括 医院、学校 、机关、科研单位、住 宅和\n工人生活区等 需要保持安静的建 筑物区域。\n5 .3场区围护及道路\n5. 3.1 施工现 场围墙可采用预制轻钢结构等可重复利用材料 ，\n提高材料使用 率。\n5 .4临 时 设施\n5.4.2 办公和生活 临时用房应采用可重复利用的房屋，可重复\n利用的房屋包括多层轻钢活动板房、 钢骨架多层水泥活动板房、\n集装箱式用房等。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 49,
+        "page_end": 51,
+        "token_count": 347,
+        "char_count": 694
+      }
+    },
+    {
+      "chunk_id": 52,
+      "text": "5.4.3 夏季炎热地区，由于 太阳辐射原因，应在其外 窗设置外\n遮阳，以减少太阳辐射热。严寒和寒冷地区外门 应设置防 寒措\n施，以 满足保温和节能要求。\n6 地基与基础工程\n6.1 一 般 规定\n6.1.1 桩基施工 可采用螺旋、静压、喷注式等成桩工艺，以减\n少噪声、振动、大气污染等对周边环境的影响。\n6. 2 土石方工程\n6.2.5 土石方爆破防尘和飞右控制措施包括 清理积 尘、淋湿地\n面、外设 高压喷雾状水系统、设置防 尘排栅和直升机投水弹等。\n6 . 4 地基处理工程\n6 . 4 . 1本条规定了换 填法施工的 绿色施工的条款 ：\n4 对具有膨胀性土质地区的 土方回填，可在膨胀土中掺人\n石灰、水泥或其他固化材料，令其满足回填土土 质要求， 从而减\n少土方外运，保护土地资源。\n6 . 5 地下水控制\n6. 5 . 1施工降水应遵循保护优先、合理抽取、抽水有偿、综合利\n用的原则，宜采用连续墙、“护坡桩+桩间旋喷桩”、“水泥土桩+ 型\n钢” 等全封闭帷幕隔水施工方法，隔断地下水进入基坑施工区域。\n6. 5 . 2基坑施工排出的地 下水可用于冲洗、降尘、绿化、养护\n混凝土 等。\n6. 5 . 3轻型井点降水应根据土层渗透系数、合理确定降水深度、\n井点间距和井点管长度；管井降水应在合理位置设置自动水位 控\n制装置 ；在满足施工需要的前 提下，尽量减少地下水抽取。\n6 . 5 . 4不同地区 应根据建设行政主管部门的规定执行。 鼓励采\n取措施避免工程施工 降水，保护地下水资源。\n7 主体结构工程\n7.\n1 一 般 规定\n7.\n1.\n1 钢结构、预制装配式混凝土 结构、木结构采取工厂化生\n产、现 场安装，有利于保证质量、提高机械化作业水 平和减少施\n工现场土地占用，应大力提倡 。\n当采取工厂化生产 时，构件的加\n工和进场，应按照安装的顺序，随安装随进场，减少现场存放场\n地和二次 倒运。\n构件在运输和存放时，应采取正确支垫或专用支\n架存放，防止构件变形或损坏 。\n7.\n1.\n2 基础和主体施工 阶段的大型结构件安装，一般需要较大\n能力的起重设备，为节省机械费用，在安排构件安装机械的同时\n应考虑混凝土 、钢筋等其他分部分 项工程施工 垂直运输的需要。\n7.\n1.\n3 预拌砂浆 是指由专业生产 厂生产的 湿拌砂浆 或干混砂浆 。\n其中， 干混砂浆 需现场拌合，应采取防尘措施。\n经批准 进行混凝\n土现场搅拌时，宜使用散 装水泥 节省包装材料；搅拌机应设在封\n闭的棚内，以降噪和防尘。\n7 .\n2混凝土结构工程\nI 钢筋 工程\n7.\n2.\n1 使用专用软件进行优化钢筋配 料，能合理确定进场钢筋\n的定尺长度，充分利用短钢筋，使剩余的钢筋头 最少。\n7.\n2.\n2 钢筋采 用工厂化加工并按需要直接配送及应用 钢筋网片、\n钢筋骨架，是建筑业实现工业化的一 项重要措施，能节约材料、\n节省能源、少占用地、提高效率，应积极 推广。\n7.\n2.\n3 采用先进 的钢筋连接方式，不仅质量可靠而且节 省材料 。\n7.\n2.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 52,
+        "page_end": 54,
+        "token_count": 632,
+        "char_count": 1265
+      }
+    },
+    {
+      "chunk_id": 53,
+      "text": "2 钢筋采 用工厂化加工并按需要直接配送及应用 钢筋网片、\n钢筋骨架，是建筑业实现工业化的一 项重要措施，能节约材料、\n节省能源、少占用地、提高效率，应积极 推广。\n3 采用先进 的钢筋连接方式，不仅质量可靠而且节 省材料 。\n4 进场钢筋的原材料和经加工的半成品，应标识清晰，便",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 52,
+        "page_end": 54,
+        "token_count": 70,
+        "char_count": 140
+      }
+    },
+    {
+      "chunk_id": 54,
+      "text": "于使用和辨认；现场存放场地应有排水、防潮、防锈、防泥污等\n措施。\n7.\n2 .\n7钢筋除锈、冷拉、调直、切断等加工过程中会产生 金属\n粉末和锈皮等废弃物，应及时 收集处理，防止污染土 地。\n7.\n2.\n8 钢筋绑扎安装过程中， 绑扎丝、电渣压力焊焊剂 容易撒\n落，应采取措施减少撒落，及时收集利用，减少材料浪费。\n7.\n2.\n9 — 笔箍为连续钢筋制作的 螺旋箍或多支箍。\nn 模 板工程\n7.\n2.\n10 制定模板及支撑体系方案时，应贯彻 “以钢代木”和应\n用新型材料 的原则， 尽量减少木材的使用，保护森林资源 。\n7.\n2.\n11 使用工业化 模板体系，机械化程度高、施工速度快，工\n厂化加工、减少现场作业和 场地占用，应积极 推广使用。\n7.\n2.\n12 施工现 场目前使用木或竹制胶合板作模板的较多，有的\n直接将胶合板、木方运到 作业面 进行锯切和模板拼装，既浪费材\n料又难以保证质量，还造成锯末、木屑污染环境。\n为提高模板周\n转率，提倡使用 工厂加工的钢框木、竹胶合模板；如在现场加工\n此类模板时，应设封闭加工棚，防止粉尘和噪声污染。\n7.\n2.\n13 模板加工和安装的精度，直接决定了混凝土构件的尺寸\n和表面质量。\n提高模板加工和安装的精度，可节省抹灰材料和人\n工，提高工程质量， 加快施工进度。\n7.\n2.\n14 传统的扣件式钢 管脚手架 ，安装和拆除过程中容 易丢失\n扣件且承载 能力受人为因素影响较大，因此提倡使用 承插式、碗\n扣式、盘扣式等管件合一的脚手架 材料作脚手架 和模板支撑。\n7.\n2.\n15 高层建筑、特别是超高层建筑，使用整体提升或分段悬\n挑等工具式外脚手架 随结构施工而上升，具有减少投入 、减少垂\n直运输、安全可靠 等优点，应优先采用。\n7.\n2.\n16 模板及脚手架 施工，应采取措施防止小型材料配件丢失\n或散落，节约材料和保证施工安全；对不慎散落的铁钉、铁丝 、\n扣件、螺栓等小型材料 配件应及时 回收利用。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 55,
+        "page_end": 55,
+        "token_count": 413,
+        "char_count": 826
+      }
+    },
+    {
+      "chunk_id": 55,
+      "text": "7.\n2.\n17 用作模板龙骨的残损短木料，可采用“叉接”接长技术\n接长使用 ，木、竹胶合板配料剩余的边角余 料可拼接使用，节约\n材料。\n7.\n2.\n19 模板拆除时，模板和支撑应采用适当的工具、按规定的\n程序进行，不应乱拆硬撬；并应随拆随运，防止交叉、叠压、碰\n撞等造成损坏。\n不慎损坏的应及时 修复；暂时不使用 的应采取保\n护措施。\nII 混凝土工程\n7.\n2.\n20 混凝土 中宜添加粉煤灰、磨细矿渣粉等工业废料和高效\n减水剂，以减少水泥用量，节约资源。\n当混凝土 中添加粉煤灰\n时，可利用 其60d、90d的龄期强度。\n7.\n2.\n21 混凝土采 用栗送和布料机布料浇筑、地下大体积混凝土\n采用溜槽或串筒浇筑不仅能保证混凝土 质量，还可加快施工、节\n省人工。\n7.\n2.\n22 滑动支座法是利用滑动支座减少约束，释放混凝土内力\n的施工 方法；跳仓法是将超长超宽混凝土 结构划分成 若干个区\n块，按照相隔区块与相邻区块两大部分， 依据一定 时间间 隔要\n求，对混凝土 进行分期施工的 方法；低温补仓法是在跳仓法的基\n础上，创造一种补仓低于跳仓混凝土 浇筑温度的施工 方法；综合\n治理法是全部或部分采用滑动支座法、跳仓法、低温补仓法及其\n他方法控制复杂混凝土 结构早期裂缝的施工 方法。\n7.\n2.\n23 混凝土 振捣是产生 较强噪声的作业 方式，应选用低噪声\n的振捣设备；采用传统振捣设备时，应采用作业层 围挡，以减少\n噪声污染。\n7.\n2.\n24 在常温施工时，浇筑完成的混凝土表面宜采用覆盖塑料\n薄膜，利用混凝土 内蒸发的水分自 养护。\n冬期施工或大体积混凝\n土应采用塑料薄膜加保温材料养护，以节约养护用水。\n当采用洒\n水或喷雾养护时，提倡使用 回收的基坑降水或收集的雨水等非传\n统水源。\n7. 2. 2 5清水混凝土 表面涂刷 保护剂可增加混凝土 的耐久性。\n7.2.26 每次浇筑混凝土 ，不可避免地会有 少量的剩余，应制成\n小型预制件，用于临时工程或在不影响工程质量 安全的提前下，\n用于门窗过梁、沟盖板、隔断墙中的预埋件砌块等，充分利用剩\n余材料；不得随意倒掉或当作建筑垃圾处理。\n7 .4钢结构工程\n7.4.2 钢结构组装采用高强度螺栓连接可减少现场焊接量；钢\n结构采用金属涂层等 方法进 行防腐处理可 减少使用期维护。\n7 .5其 他\n7.5.1 装配式混凝土 结构件，在安装时需要临时固定用的埋件\n或螺栓，与室内外装饰、装修 需要连接的预埋件，应在工厂加工\n时准确预留、预埋，防止事后剔凿破坏，造成不必要的 浪费。\n7. 5. 2 钢混组合结构中的钢结构构件与钢筋的连接方式（穿孔\n法、连接件法和混合法等）应在深化设计 时确定，并绘制加工\n图，示出预留孔洞、焊接套筒、连接板位置和大 小，在工厂加工\n完成， 不得现场临时切割或焊接，以防 止损坏钢构件。\n7. 5. 3 索膜结构的索和膜均应在工厂按照计算机模拟张拉后的\n尺寸下料，制作和 安装连接件，运至现场安装张拉。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 56,
+        "page_end": 57,
+        "token_count": 623,
+        "char_count": 1246
+      }
+    },
+    {
+      "chunk_id": 56,
+      "text": "8 装饰装修工程\n8.\n1 一 般 规定\n8.\n1.\n1 块材、板材、卷材类材料包括地 砖、石材、石膏板、壁\n纸、地毯以 及木质、金属、塑料类等材料。\n施工前应进行合理排\n版，减少切割和因此产生的 噪声及废料等。\n8.\n1.\n2 门窗、幕墙、块材、板材加工应充分利用工厂化加工的\n优势，减少现场加工而产生的 占地、耗能以及可能产生的 噪声和\n废水。\n8.\n1.\n4 建筑装饰装修成 品和半成品应根据其部位和 特点，采取\n相应的保护措施，避免损坏、污染或返工。\n8.\n1.\n8 民用建筑工程的 室内装修，所 采用的涂料、胶粘剂 、水\n性处理剂，其苯、甲苯和二甲 苯、游离甲醛、游离甲苯二异氰酸\n酯 （TDI)、挥发性有 机化合物 （VOC) 的含量应符合 《民用建\n筑工程室内环境污染控 制规范 》GB 50325的相关要求。\n8.\n1.\n9 I 类民用建筑工程是 指住宅、医院、老年人建 筑、幼儿\n园、学校教室等。\nII类民用建筑工程指办公楼、商场、旅店、文\n化娱乐场所、书店、 图书馆、博物馆、美术馆、展览 馆、体育\n馆、公共交通等候室等。\n表中污染物浓度限量，除 氡外均指室内\n测量值扣除同步测定的 室外上风向空气测量值（ 本底值）后的测\n量值。\n污染物浓度测量值的极限值判定，采用全数值比较法。\n8 .\n4吊 顶 工程\n8.\n4 .\n2温湿度 敏感材料是指变形、强度等受温度、湿度变 化影\n响较大的装饰 材料，如纸面石膏板、木工板等。\n使用温湿度敏感\n材料进 行大面 积吊顶施工时，应采取防止变形和裂缝的措施。\n8.\n4 .\n4可移动式操作平台可以减少脚手架搭 设工作量， 省材\n省工。\n8.5.4 涂料施工对基层含水率要求很高，应严格控制基层 含水\n率，以避免引起起鼓等质量 缺陷，提高耐久性。\n8 .5 隔墙及内墙面工程",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 58,
+        "page_end": 59,
+        "token_count": 382,
+        "char_count": 765
+      }
+    },
+    {
+      "chunk_id": 57,
+      "text": "9 保温和防水工程\n9.\n1 一 般 规定\n9.\n1.\n2 行业标准《建 筑防水涂 料中有害物质限量 》JC 1066对\n涂料类建筑防水材料的挥发性有 机化合物（VOC) 、苯、甲苯、\n乙苯、二甲苯、苯酚、蒽、萘、游离甲醛、游离甲苯二异氰酸酯\n(TDI) 、氨、可溶性重金属等有害物质含量的限 值均作了规定。\n9 .\n2保 温 工程\n9.\n2.\n1 结构自保温是指保温性能及承载能力同时满足设计标准\n要求， 不需要另外增加保温层的墙体；保温与装饰一体化是 指装\n饰层同 时兼做保温层的做法；保温板兼作模板是将保温板辅以特\n制骨架形成的模板，可使结构层和保温层连接更为可靠；全现浇\n混凝土 外墙与保温一体化是 指墙体钢筋绑扎完毕，混凝土浇筑之\n前将保温板置于外 模内侧，混凝土浇筑后保温层与墙体有机地结\n合在一起的 方法；管道保温一体化是 指在生产过程中 保温层与管\n道同时制作生产， 无需现场再进行保温层施工的 方法。\n9.\n2.\n6 玻璃棉、岩棉等纤维类保温材料施工时应做 好劳动保护，\n以防矿物纤维刺伤皮肤和眼睛或吸入肺部。\n9.\n2.\n7 本条规定了 泡沫塑料类保温层施工 应符合 的规定内容：\n2 由于喷涂硬泡聚氨酯施工受气候影响较大，若操作不慎\n会引起材料飞散，污染环境。\n故施工时应对作业面外 易受飞散物\n污染的部位， 采取遮挡措施。\n喷涂硬泡聚氨酯时气温过高或过低\n均会影响其发泡反应，尤其是气温过低时不易 发泡。\n1 0 机电安装工程\n10.1 一 般 规定\n10.1.3 工作平台、脚手架 、施工 配电箱、用水点、消防设施、\n施工通 道、临时房屋设施和 垂直运输设备等应综合利用 ，以免重\n复设置，浪费资源。\n10.1.6 低能耗的施工 机械包括采用变频控制的机电设备、变风\n量空调设备，通过认证的能效等级高的空调、制冷设备等。\n10.2 管 道 工程\n10.2.1 管道机械连接方式包括丝接、沟槽连接、卡压连接、法\n兰连接、承插连接等。\n10.4 电 气 工程\n10.4.2 节能型电线和灯具是指使用寿 命长、损耗率低、传导损\n耗小的新型节能产品。节能型电线包括节能型低蠕变导线、节能\n型增容导线和节能型扩容电线。节能型灯具包括卤钨灯、高低压\n钠灯、荧光高压汞灯、金属卤化物灯、高频无极灯、细管荧光\n灯、紧凑型荧光灯和LED灯等。\n10. 4 .7电气设备试运 行时间不 得低于规定 时间，但也不宜过\n长，达到规定时间即可。特殊情况需延长试运 行时间时 ，不应超\n过规定 时间的1.5倍。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 60,
+        "page_end": 61,
+        "token_count": 527,
+        "char_count": 1054
+      }
+    },
+    {
+      "chunk_id": 58,
+      "text": "1 1 拆 除工程\n11.1 一 般 规定\n11.1. 3 拆除工程相关信息的公 示是保证拆除工程作业 安全的手\n段，拆除前张贴告 示通知拆除工程附近的单位 及路过的人 群，提\n醒相关人 员注意安全。大型拆除工程可通过电台等告知人 们注意\n安全。\n11.1.5 本条规定了 拆除物处理 的原则，建 筑物拆除前应设置建\n筑拆除物的临时消纳处置场地，拆除施工完成后 应对临时处置场\n地进行清理。\n11.2 拆除施工准 备\n11.2.2 本条规定了 拆除工程的 两种类型。保护性拆除是指拆除\n过程有计划、 按合理顺序，使结构构件或配件不产生破坏的拆除\n方式。破坏性拆除是指拆除过程中， 对拆除物中的构件或配件不\n进行保护的拆除方式。\n11.3 拆 除施工\n11.3.5 本条规定了 对烟囱、水塔等高大建（构）筑物进行爆破\n拆除时应根据建 筑物的体量计 算倒塌时的触地振动力，采取相应\n的防振措施。\n11.4 拆除物的综合利用\n11.4.1 现行国家标准《工程施工 废弃 物再生利用 技术规范》\nGB/T 50743对工程施工 废弃物进行了明确的分类，规定了 再生\n利用方法 ；对于无法再生利用的剩余废弃物应做 无害化处理。\n统一书号：15112 • 23879\n^ W： 10. 0 0 ^",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GBT50905-2014 建筑工程绿色施工规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "e7aa1a370eb8fa4a69aadebbf035d4d0244ee436",
+        "page_start": 62,
+        "page_end": 63,
+        "token_count": 271,
+        "char_count": 542
+      }
+    }
+  ]
+}

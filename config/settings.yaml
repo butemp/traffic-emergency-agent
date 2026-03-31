@@ -1,0 +1,40 @@
+# 交通应急Agent配置文件
+
+# OpenAI配置
+openai:
+  # API密钥（建议通过环境变量设置：OPENAI_API_KEY）
+  api_key: "${OPENAI_API_KEY}"
+  # API基础URL（可选，默认使用OpenAI官方地址）
+  # 可替换为兼容OpenAI格式的其他API，如DeepSeek、Azure OpenAI等
+  base_url: "https://api.openai.com/v1"
+  # 使用的模型
+  model: "gpt-4o"
+  # 温度参数（0-1，越高越随机）
+  temperature: 0.7
+  # 最大生成token数
+  max_tokens: 2000
+
+# 数据路径配置
+data_paths:
+  # 法规/预案数据目录
+  regulations: "data/regulations"
+  # 历史案例数据目录
+  historical_cases: "data/historical_cases"
+  # 对话历史保存目录
+  conversations: "data/conversations"
+
+# 对话配置
+conversation:
+  # 保留的最大历史消息数量
+  max_history: 50
+  # 是否保存对话历史到文件
+  save_to_file: true
+  # 最大工具调用迭代次数
+  max_iterations: 5
+
+# 日志配置
+logging:
+  # 日志级别：DEBUG, INFO, WARNING, ERROR
+  level: "INFO"
+  # 日志文件路径
+  file: "agent.log"

@@ -1,0 +1,47 @@
+{
+  "doc_id": "d60b40f0409ddb64b44cb7186ab8c2ee3ad82f33",
+  "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJT204-2010 建筑工程企业管理基础数据标准.pdf",
+  "file_type": ".pdf",
+  "num_chunks": 3,
+  "chunks": [
+    {
+      "chunk_id": 0,
+      "text": "hQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJT204-2010 建筑工程企业管理基础数据标准.pdf",
+        "file_type": ".pdf",
+        "doc_id": "d60b40f0409ddb64b44cb7186ab8c2ee3ad82f33",
+        "page_start": 2,
+        "page_end": 80,
+        "token_count": 638,
+        "char_count": 1277
+      }
+    },
+    {
+      "chunk_id": 1,
+      "text": "com QM9N}\nhQÆRN«Q www.\nbzfxw.\ncom QM9N}\nhQÆRN«Q www.\nbzfxw.\ncom QM9N}\nhQÆRN«Q www.\nbzfxw.\ncom QM9N}\nhQÆRN«Q www.\nbzfxw.\ncom QM9N}\nhQÆRN«Q www.\nbzfxw.\ncom QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJT204-2010 建筑工程企业管理基础数据标准.pdf",
+        "file_type": ".pdf",
+        "doc_id": "d60b40f0409ddb64b44cb7186ab8c2ee3ad82f33",
+        "page_start": 2,
+        "page_end": 80,
+        "token_count": 130,
+        "char_count": 261
+      }
+    },
+    {
+      "chunk_id": 2,
+      "text": "hQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJT204-2010 建筑工程企业管理基础数据标准.pdf",
+        "file_type": ".pdf",
+        "doc_id": "d60b40f0409ddb64b44cb7186ab8c2ee3ad82f33",
+        "page_start": 82,
+        "page_end": 86,
+        "token_count": 44,
+        "char_count": 89
+      }
+    }
+  ]
+}

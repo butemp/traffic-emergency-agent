@@ -1,0 +1,21 @@
+{
+  "doc_id": "6f6fd238baae8cdcc6485ad2f22a7258aae57c23",
+  "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ196-2010 建筑施工塔式起重机安装、使用、拆卸安全技术规程.pdf",
+  "file_type": ".pdf",
+  "num_chunks": 1,
+  "chunks": [
+    {
+      "chunk_id": 0,
+      "text": "www.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ196-2010 建筑施工塔式起重机安装、使用、拆卸安全技术规程.pdf",
+        "file_type": ".pdf",
+        "doc_id": "6f6fd238baae8cdcc6485ad2f22a7258aae57c23",
+        "page_start": 4,
+        "page_end": 56,
+        "token_count": 69,
+        "char_count": 139
+      }
+    }
+  ]
+}

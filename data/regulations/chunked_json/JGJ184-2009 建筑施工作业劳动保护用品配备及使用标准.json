@@ -1,0 +1,21 @@
+{
+  "doc_id": "49f55d2f4e8b483a4eceb477af6cfc5432960c0c",
+  "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ184-2009 建筑施工作业劳动保护用品配备及使用标准.pdf",
+  "file_type": ".pdf",
+  "num_chunks": 1,
+  "chunks": [
+    {
+      "chunk_id": 0,
+      "text": "www.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ184-2009 建筑施工作业劳动保护用品配备及使用标准.pdf",
+        "file_type": ".pdf",
+        "doc_id": "49f55d2f4e8b483a4eceb477af6cfc5432960c0c",
+        "page_start": 10,
+        "page_end": 22,
+        "token_count": 90,
+        "char_count": 181
+      }
+    }
+  ]
+}

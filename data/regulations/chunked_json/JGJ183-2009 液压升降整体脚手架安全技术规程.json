@@ -1,0 +1,21 @@
+{
+  "doc_id": "df1c5c5e86f1c3eb516deb7b945cc7281b1bdfcb",
+  "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ183-2009 液压升降整体脚手架安全技术规程.pdf",
+  "file_type": ".pdf",
+  "num_chunks": 1,
+  "chunks": [
+    {
+      "chunk_id": 0,
+      "text": "www.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com\nwww.bzfxw.com",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ183-2009 液压升降整体脚手架安全技术规程.pdf",
+        "file_type": ".pdf",
+        "doc_id": "df1c5c5e86f1c3eb516deb7b945cc7281b1bdfcb",
+        "page_start": 4,
+        "page_end": 74,
+        "token_count": 195,
+        "char_count": 391
+      }
+    }
+  ]
+}

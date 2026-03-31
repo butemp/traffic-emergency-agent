@@ -1,0 +1,18 @@
+# 交通应急Agent - Web界面依赖
+
+# Chainlit - AI聊天界面框架
+chainlit>=1.0.0
+
+# 原有依赖
+openai>=1.0.0
+pydantic>=2.0.0
+pyyaml>=6.0
+python-dotenv>=1.0.0
+
+# RAG相关
+torch>=2.0.0
+transformers>=4.30.0
+modelscope>=1.9.0
+
+# 可选：更好的界面效果
+# chainlit[all]>=1.0.0

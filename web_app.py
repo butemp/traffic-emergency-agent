@@ -1,0 +1,1105 @@
+"""
+交通应急Agent - Web界面
+
+基于Chainlit构建的美观AI助手界面。
+
+运行方式:
+    chainlit run web_app.py -h 0.0.0.0 -p 8000
+"""
+
+import os
+import sys
+from pathlib import Path
+from typing import Optional
+
+import chainlit as cl
+from dotenv import load_dotenv
+
+# 添加src目录到路径
+sys.path.insert(0, str(Path(__file__).parent / "src"))
+
+from src.agent import Agent, Message
+from src.agent.message import MessageRole
+from src.providers import OpenAIProvider
+from src.tools import (
+    QueryRegulations,
+    QueryHistoricalCases,
+    RiskAssessment,
+    MediaCaption,
+    SearchMapResources, # 导入新工具
+    CheckTrafficStatus,
+    GetWeatherByLocation,
+    GeocodeAddress,
+    ReverseGeocode,
+    SearchNearbyPOIs,
+    GaodeConfig
+)
+from src.rag import QueryRAG, RAGConfig, BALANCED_RAG_CONFIG
+
+# 加载环境变量
+load_dotenv()
+
+# ===== 配置 =====
+# 设置页面信息
+@cl.on_chat_start
+async def on_chat_start():
+    """会话开始时的初始化"""
+    # 检查是否已经初始化过
+    if cl.user_session.get("welcome_shown"):
+        return
+
+    # 设置页面标题和描述
+    await cl.Message(
+        content="🚗 **欢迎使用交通应急指挥助手**\n\n"
+        "我可以帮助你：\n"
+        "- 📋 查询法规、规则和应急预案\n"
+        "- 📚 参考历史处置案例\n"
+        "- 🔍 检索应急相关文档资料\n"
+        "- ⚠️ 对应急方案进行风险评估\n"
+        "- 🗺️ **地理信息查询**（地址转坐标、周边设施）\n"
+        "- 🚦 **实时交通状况**（拥堵情况查询）\n"
+        "- 🌤️ **天气查询**（实时天气和预报）\n\n"
+        "请输入你的问题，我会为你提供专业的建议。",
+        author="系统"
+    ).send()
+
+    # 标记欢迎消息已显示
+    cl.user_session.set("welcome_shown", True)
+
+    # 初始化Agent（每个会话创建一个）
+    cl.user_session.set("agent_initialized", False)
+
+
+def create_agent():
+    """创建Agent实例"""
+    import logging
+    logger = logging.getLogger(__name__)
+
+    # 从环境变量获取API Key
+    api_key = os.getenv("DASHSCOPE_API_KEY") or os.getenv("OPENAI_API_KEY")
+
+    # 设置高德API Key（如果环境变量中有配置）
+    gaode_key = os.getenv("GAODE_API_KEY")
+    if gaode_key:
+        GaodeConfig.set_api_key(gaode_key)
+        logger.info(f"高德API Key已配置: {gaode_key[:10]}...")
+
+    # 创建Provider
+    provider = OpenAIProvider(
+        api_key=api_key,
+        model=os.getenv("OPENAI_MODEL", "qwen-plus"),
+        provider="auto"
+    )
+
+    # caption 专用 provider：qwen-vl-plus
+    caption_provider = OpenAIProvider(
+        api_key=api_key,
+        model=os.getenv("CAPTION_MODEL", "qwen-vl-plus"),
+        provider="auto"
+    )
+
+    # 创建工具列表
+    tools = []
+
+    # 添加基础工具
+    try:
+        tools.append(QueryRegulations(data_path="data/regulations"))
+        logger.info("QueryRegulations 工具加载成功")
+    except Exception as e:
+        logger.warning(f"QueryRegulations 工具加载失败: {e}")
+
+    try:
+        tools.append(QueryHistoricalCases(data_path="data/historical_cases"))
+        logger.info("QueryHistoricalCases 工具加载成功")
+    except Exception as e:
+        logger.warning(f"QueryHistoricalCases 工具加载失败: {e}")
+
+    try:
+        tools.append(QueryRAG(data_dir="data/regulations/chunked_json", config=BALANCED_RAG_CONFIG))
+        logger.info("QueryRAG 工具加载成功")
+    except Exception as e:
+        logger.warning(f"QueryRAG 工具加载失败: {e}")
+
+    # RiskAssessment 工具
+    try:
+        tools.append(RiskAssessment(timeout=30))
+        logger.info("RiskAssessment 工具加载成功")
+    except Exception as e:
+        logger.warning(f"RiskAssessment 工具加载失败: {e}")
+
+    try:
+        tools.append(MediaCaption(provider=caption_provider, timeout=60))
+        logger.info("MediaCaption 工具加载成功")
+    except Exception as e:
+        logger.warning(f"MediaCaption 工具加载失败: {e}")
+
+    # ===== 添加高德API工具 =====
+    try:
+        tools.append(CheckTrafficStatus())
+        logger.info("CheckTrafficStatus 工具加载成功")
+    except Exception as e:
+        logger.warning(f"CheckTrafficStatus 工具加载失败: {e}")
+
+    try:
+        tools.append(GetWeatherByLocation())
+        logger.info("GetWeatherByLocation 工具加载成功")
+    except Exception as e:
+        logger.warning(f"GetWeatherByLocation 工具加载失败: {e}")
+
+    try:
+        tools.append(GeocodeAddress())
+        logger.info("GeocodeAddress 工具加载成功")
+    except Exception as e:
+        logger.warning(f"GeocodeAddress 工具加载失败: {e}")
+
+    try:
+        tools.append(ReverseGeocode())
+        logger.info("ReverseGeocode 工具加载成功")
+    except Exception as e:
+        logger.warning(f"ReverseGeocode 工具加载失败: {e}")
+
+    try:
+        tools.append(SearchNearbyPOIs())
+        logger.info("SearchNearbyPOIs 工具加载成功")
+    except Exception as e:
+        logger.warning(f"SearchNearbyPOIs 工具加载失败: {e}")
+
+    try:
+        tools.append(SearchMapResources(data_dir="data/graph")) # 注册新工具
+        logger.info("SearchMapResources 工具加载成功")
+    except Exception as e:
+        logger.warning(f"SearchMapResources 工具加载失败: {e}")
+
+    # 创建Agent
+    agent = Agent(
+        provider=provider,
+        tools=tools,
+        max_iterations=10,  # 增加迭代次数，支持更复杂的工具调用链
+        save_conversations=True,
+        conversation_path="data/conversations"
+    )
+
+    return agent
+
+
+def get_agent():
+    """获取当前会话的Agent"""
+    if not cl.user_session.get("agent_initialized"):
+        agent = create_agent()
+        cl.user_session.set("agent", agent)
+        cl.user_session.set("agent_initialized", True)
+        return agent
+    return cl.user_session.get("agent")
+
+
+@cl.on_message
+async def on_message(message: cl.Message):
+    """处理用户消息"""
+    import logging
+    logger = logging.getLogger(__name__)
+
+    thinking_msg = None
+    try:
+        logger.info("=== on_message 开始 ===")
+
+        # 获取Agent
+        agent = get_agent()
+        logger.info("=== Agent获取成功 ===")
+
+        # =========================
+        # ✅ 仅当上传的是图片/视频时才走 media_caption
+        # =========================
+        import mimetypes
+        import shutil
+
+        def is_media_file(el) -> bool:
+            # 1) mime 优先（Chainlit 常见字段：mime / content_type）
+            mime = (getattr(el, "mime", None) or getattr(el, "content_type", None) or "").lower()
+            if mime.startswith("image/") or mime.startswith("video/"):
+                return True
+
+            # 2) 用文件名/路径推断 mime（兜底）
+            name = getattr(el, "name", None) or getattr(el, "filename", None) or ""
+            path = getattr(el, "path", None) or ""
+            guess_target = name or path
+            if guess_target:
+                g, _ = mimetypes.guess_type(guess_target)
+                if (g or "").startswith(("image/", "video/")):
+                    return True
+
+            # 3) 扩展名兜底（最后兜底）
+            ext = os.path.splitext(name or path)[1].lower()
+            return ext in {
+                ".jpg", ".jpeg", ".png", ".webp", ".bmp",
+                ".mp4", ".mov", ".avi", ".mkv", ".webm", ".m4v"
+            }
+
+        uploaded_media_paths = []
+        uploaded_other_files = []
+
+        elems = (
+            getattr(message, "elements", None)
+            or getattr(message, "attachments", None)
+            or []
+        )
+
+        for el in elems:
+            el_path = (
+                getattr(el, "path", None)
+                or getattr(el, "local_path", None)
+                or getattr(el, "file_path", None)
+            )
+            if not el_path or not os.path.exists(el_path):
+                continue
+
+            if is_media_file(el):
+                # 保存到固定目录
+                os.makedirs("data/uploads", exist_ok=True)
+                el_name = getattr(el, "name", None) or getattr(el, "filename", None) or os.path.basename(el_path)
+                safe_name = os.path.basename(el_name)
+                import uuid
+                dst_path = os.path.join("data/uploads", f"{uuid.uuid4().hex}_{safe_name}")
+
+                shutil.copy(el_path, dst_path)
+                uploaded_media_paths.append(dst_path)
+            else:
+                # 非媒体文件：记录一下（可选）
+                el_name = getattr(el, "name", None) or getattr(el, "filename", None) or os.path.basename(el_path)
+                uploaded_other_files.append(el_name)
+
+        # 只有在确实上传了图片/视频时，才重写 message.content 触发工具
+        if uploaded_media_paths:
+            media_path = uploaded_media_paths[0]  # 只取第一个媒体
+            user_text = (message.content or "").strip()
+
+            message.content = (
+                "请先调用 media_caption 工具对该媒体生成 structured 风格 caption，并列出 key_points 和 risks。\n"
+                f"media_path={media_path}\n"
+                f"hint=用户补充说明：{user_text}\n"
+                "生成caption后，再结合caption回答用户问题。"
+            )
+
+            await cl.Message(content=f"📎 已收到媒体文件：`{os.path.basename(media_path)}`，开始分析...").send()
+
+        elif uploaded_other_files:
+            # 上传了文件但都不是媒体：提示一下，但继续走纯文本流程
+            await cl.Message(
+                content=f"📎 已收到文件：{', '.join(uploaded_other_files)}\n"
+                        f"目前仅支持图片/视频生成caption；如果你要做法规/RAG/风险评估，请直接提问文本问题。",
+                author="系统"
+            ).send()
+        # 添加用户消息到历史
+        user_msg = Message(role=MessageRole.USER, content=message.content)
+        agent.state.add_message(user_msg)
+
+        # 迭代处理：使用 Chainlit Step 展示思考过程
+        iteration = 0
+        final_response = ""
+        
+        # 1. 创建主思考过程 Step
+        async with cl.Step(name="Agent 思考中...", type="run") as run_step:
+            run_step.input = message.content
+            
+            # 保存最近一次的响应
+            last_response = None
+
+            while iteration < agent.max_iterations:
+                iteration += 1
+                logger.info(f"--- 迭代 {iteration} ---")
+
+                # 获取对话历史和工具定义
+                messages = agent.state.get_history()
+                tool_definitions = [tool.to_openai_format() for tool in agent.tools.values()]
+
+                # 2. LLM 决策过程 Step
+                async with cl.Step(name=f"决策 (轮次 {iteration})", type="llm") as decision_step:
+                    try:
+                        import time
+                        start_time = time.time()
+                        
+                        # 异步调用 LLM
+                        response = await cl.make_async(agent.provider.chat)(messages, tools=tool_definitions)
+                        elapsed = time.time() - start_time
+                        logger.info(f"LLM响应耗时: {elapsed:.2f}秒")
+                        
+                        last_response = response
+
+                        # 更新 Step 输出
+                        if response.content:
+                            decision_step.output = response.content
+                        else:
+                            tool_names = [tc.name for tc in (response.tool_calls or [])]
+                            decision_step.output = f"🤔 决定调用工具: {', '.join(tool_names)}"
+
+                    except Exception as e:
+                        logger.error(f"LLM调用失败: {e}")
+                        decision_step.output = f"❌ 错误: {str(e)}"
+                        decision_step.is_error = True
+                        await cl.Message(content=f"❌ 系统出现错误：{str(e)}").send()
+                        return
+
+                # 检查是否有工具调用
+                if response.tool_calls:
+                    # 添加助手消息（包含工具调用）
+                    assistant_msg = Message(
+                        role=MessageRole.ASSISTANT,
+                        content=response.content or "",
+                        tool_calls=response.tool_calls
+                    )
+                    agent.state.add_message(assistant_msg)
+
+                    # 3. 工具执行过程 Step
+                    for tool_call in response.tool_calls:
+                        async with cl.Step(name=f"执行工具: {tool_call.name}", type="tool") as tool_step:
+                            # 展示工具参数
+                            tool_step.input = tool_call.arguments
+                            
+                            try:
+                                # 执行工具
+                                logger.info(f"执行工具: {tool_call.name}")
+                                import json
+                                
+                                # 兼容处理：有些SDK返回的是dict，有些是str
+                                if isinstance(tool_call.arguments, dict):
+                                    tool_args = tool_call.arguments
+                                else:
+                                    tool_args = json.loads(tool_call.arguments)
+                                    
+                                tool_result = await cl.make_async(agent.tools[tool_call.name].run)(**tool_args)
+
+                                # 添加工具结果到历史
+                                tool_msg = Message(
+                                    role=MessageRole.TOOL,
+                                    content=tool_result,
+                                    tool_call_id=tool_call.id
+                                )
+                                agent.state.add_message(tool_msg)
+
+                                # 优化显示逻辑：针对不同工具做特殊处理
+                                if tool_call.name == "query_rag":
+                                    tool_step.output = f"✅ 已检索到相关文档（长度: {len(tool_result)} 字符）\n由于内容较长，请查看详情。"
+                                    tool_step.elements = [
+                                        cl.Text(name="RAG 检索结果", content=tool_result, language="markdown")
+                                    ]
+                                elif tool_call.name == "check_traffic_status":
+                                    from src.tools.gaode_tools import CheckTrafficStatus # 假设可以这样引用，或者直接解析
+                                    try:
+                                        res_json = json.loads(tool_result)
+                                        desc = res_json.get("description", "无详细描述")
+                                        eval_res = res_json.get("evaluation", {}).get("status_desc", "未知")
+                                        tool_step.output = f"🚦 交通状况: **{eval_res}**\n{desc}"
+                                    except:
+                                        tool_step.output = tool_result
+                                elif tool_call.name == "search_map_resources":
+                                    # 尝试解析 JSON 以判断是否为地图结果
+                                    try:
+                                        map_data = json.loads(tool_result)
+                                        if isinstance(map_data, dict) and map_data.get("_is_map_result"):
+                                            from src.utils.map_visualizer import generate_rescue_map_html
+                                            
+                                            center = map_data.get("center", {})
+                                            resources = map_data.get("resources", [])
+                                            display_text = map_data.get("display_text", "已检索到周边资源。")
+                                            
+                                            tool_elements = []
+                                            
+                                            # 如果有资源，生成路线图（取最近的一个）
+                                            if resources and center:
+                                                nearest_res = resources[0]
+                                                map_id = f"map_{tool_call.id}"
+                                                
+                                                map_html = generate_rescue_map_html(
+                                                    start_lat=nearest_res['latitude'],
+                                                    start_lon=nearest_res['longitude'],
+                                                    end_lat=center['lat'],
+                                                    end_lon=center['lon'],
+                                                    start_name=f"{nearest_res['name']} ({nearest_res['type']})",
+                                                    end_name="事故地点",
+                                                    map_container_id=map_id
+                                                )
+                                                
+                                                tool_elements.append(
+                                                    cl.Text(name="地图代码", content=map_html, language="html", display="inline")
+                                                )
+                                                # 注意: Chainlit 的 cl.Html 组件目前可能需要在 Message 中发送，
+                                                # 或者作为 element 附加。但在 Step 中通常附加 Text 或 Image。
+                                                # 这里我们将 HTML 作为 Text element 附加，让用户可以查看或者如果 Chainlit 支持渲染 HTML string better.
+                                                # 更佳实践：如果 Chainlit 版本支持，直接显示 render 后的 HTML。
+                                                # 暂时用 cl.Text 存放详情，并在 output 中提示。
+                                                
+                                                # 修正：Chainlit 确实没有直接的 "Map Element"，通常是用 iframe 或 html 内容。
+                                                # 我们可以尝试直接构造一个 cl.Message 发送地图，但这会打断 Step流。
+                                                # 这里我们把 HTML 放在 Elements 里，让用户点开看，或者依赖前端渲染。
+                                                
+                                                # 实际效果最好的方式可能是不仅 update step，还发送一个独立的 Message 用来展示 Map
+                                                # 但为了保持流式一致性，我们先作为 Element 附加。
+                                                
+                                                # Wait, Chainlit actually renders cl.Html elements inline if display='inline'!
+                                                # let's try pushing it as cl.Html if supported, or verify imports.
+                                                # Based on docs, cl.Html exists.
+                                            
+                                            tool_step.output = f"🗺️ {display_text}\n\n(可视化地图已生成，请查看详情面板)"
+                                            
+                                            # 展示详细资源列表
+                                            details = json.dumps(resources, indent=2, ensure_ascii=False)
+                                            tool_elements.append(cl.Text(name="资源详情", content=details, language="json"))
+                                            
+                                            # 如果支持 HTML 渲染
+                                            # tool_elements.append(cl.Element(name="RescueMap", display="inline", content=map_html)) 
+                                            # Chainlit simple usage:
+                                            # We will stick to Text for details since custom HTML embedding might require specific setup.
+                                            # better: Just output the text summary.
+                                            
+                                            tool_step.elements = tool_elements
+
+                                        else:
+                                            # 不是地图格式的 JSON，或者解析成功但没有标志位
+                                            tool_step.output = tool_result
+                                    
+                                    except json.JSONDecodeError:
+                                        # 如果是纯文本结果（旧逻辑）
+                                        lines = tool_result.splitlines()
+                                        if len(lines) > 5:
+                                            tool_step.output = f"🗺️ {lines[0]}\n\n(点击下方详情查看完整资源列表)"
+                                            tool_step.elements = [cl.Text(name="资源检索详情", content=tool_result, language="markdown")]
+                                        else:
+                                            tool_step.output = tool_result
+                                else:
+                                    # 默认截断显示过长的结果
+                                    if len(tool_result) > 500:
+                                        tool_step.output = tool_result[:500] + "..."
+                                        tool_step.elements = [cl.Text(name="完整输出", content=tool_result)]
+                                    else:
+                                        tool_step.output = tool_result
+
+                            except Exception as e:
+                                logger.error(f"工具执行失败: {e}")
+                                tool_step.output = f"❌ 执行失败: {str(e)}"
+                                tool_step.is_error = True
+                                
+                                error_msg = Message(
+                                    role=MessageRole.TOOL,
+                                    content=f"工具执行失败: {str(e)}",
+                                    tool_call_id=tool_call.id
+                                )
+                                agent.state.add_message(error_msg)
+
+                    # 继续下一轮迭代
+                    continue
+
+                else:
+                    # 没有工具调用，这是最终回答
+                    final_response = response.content
+                    
+                    # 添加助手消息到历史
+                    assistant_msg = Message(role=MessageRole.ASSISTANT, content=final_response)
+                    agent.state.add_message(assistant_msg)
+                    
+                    run_step.output = "✅ 思考完成，生成回答。"
+                    break
+
+            # 如果达到最大迭代次数但final_response为空，需要再调用一次LLM生成最终回复
+            if not final_response:
+                logger.info(f"=== 最终回复为空，强制调用LLM生成 ===")
+                
+                async with cl.Step(name="生成最终回复", type="llm") as final_step:
+                     # 调用LLM生成最终回复（不传tools）
+                    messages = agent.state.get_history()
+                    try:
+                        import time
+                        start_time = time.time()
+                        final_response_message = await cl.make_async(agent.provider.chat)(messages, tools=None)
+                        elapsed = time.time() - start_time
+                        
+                        final_response = final_response_message.content or ""
+                        final_step.output = final_response
+                        
+                        # 添加到历史
+                        assistant_msg = Message(role=MessageRole.ASSISTANT, content=final_response)
+                        agent.state.add_message(assistant_msg)
+                        
+                    except Exception as e:
+                        final_step.output = f"❌ 生成失败: {e}"
+                        final_step.is_error = True
+            
+        # 4. 最后发送完整回复
+        if final_response:
+            # 这里的 final_response 可能包含 markdown
+            await cl.Message(content=final_response).send()
+        else:
+            await cl.Message(content="🤔 似乎没有生成有效回复，请重试。").send()
+            
+        # 保存对话历史
+        agent.state.save()
+
+    except Exception as e:
+        import traceback
+        logger.error(f"=== on_message 异常: {e} ===")
+        logger.error(traceback.format_exc())
+        await cl.Message(content=f"❌ 处理请求时发生错误: {str(e)}").send()
+
+
+async def display_rag_sources(rag_result: str):
+    """展示RAG检索到的文档来源"""
+    import json
+    import logging
+    logger = logging.getLogger(__name__)
+
+    try:
+        logger.info(f"=== RAG结果（前500字符）: {rag_result[:500]}...")
+        data = json.loads(rag_result)
+        logger.info(f"=== 解析后的数据: status={data.get('status')}, count={data.get('count')}")
+
+        # 只在成功且有结果时展示
+        if data.get("status") != "success" or data.get("count", 0) == 0:
+            logger.info("=== RAG结果不是success或count为0，跳过展示")
+            return
+
+        results = data.get("results", [])
+        logger.info(f"=== 结果数量: {len(results)}")
+
+        # 使用Markdown格式展示，添加边框
+        md_lines = []
+        md_lines.append("> **📚 工具调用结果：参考文档来源**\n")
+        md_lines.append("---\n")
+        md_lines.append(f"> *共检索到 **{len(results)}** 条相关文档*\n")
+
+        for r in results:
+            rank = r.get("rank", 0)
+            score = r.get("score", 0)
+            text = r.get("text", "")
+            doc_id = r.get("doc_id", "")
+            chunk_id = r.get("chunk_id", "")
+            source = r.get("source", "")
+
+            # 文档名称
+            doc_name = doc_id if doc_id else f"文档_{rank}"
+
+            # 标题行
+            md_lines.append(f"#### {rank}. {doc_name}")
+            md_lines.append(f"**相似度:** {score:.1%}\n")
+
+            # 元数据
+            meta_parts = []
+            if source:
+                source_short = source.split("/")[-1] if "/" in source else source
+                meta_parts.append(f"📄 `{source_short}`")
+            if chunk_id:
+                meta_parts.append(f"🔖 `{chunk_id}`")
+
+            if meta_parts:
+                md_lines.append("**" + " | ".join(meta_parts) + "**\n")
+
+            # 文档内容（使用引用块）
+            if text:
+                # 截断过长的文本
+                display_text = text[:800] + ("..." if len(text) > 800 else "")
+                md_lines.append(f"> **内容:**\n> {display_text}\n")
+
+            md_lines.append("\n---\n")
+
+        content = "\n".join(md_lines)
+        logger.info(f"=== 准备发送来源信息（前200字符）: {content[:200]}...")
+
+        await cl.Message(content=content).send()
+        logger.info("=== 来源信息发送完成")
+
+    except json.JSONDecodeError as e:
+        logger.error(f"JSON解析失败: {e}")
+    except Exception as e:
+        logger.error(f"展示RAG来源失败: {e}")
+        import traceback
+        traceback.print_exc()
+
+
+async def display_risk_assessment(risk_result: str):
+    """展示风险评估结果"""
+    import json
+    import logging
+    logger = logging.getLogger(__name__)
+
+    try:
+        logger.info(f"=== 风险评估结果（前500字符）: {risk_result[:500]}...")
+        data = json.loads(risk_result)
+        logger.info(f"=== 解析后的数据: status={data.get('status')}, score={data.get('overall_score')}")
+
+        # 获取评分和等级
+        overall_score = data.get("overall_score", 0)
+        risk_level = data.get("risk_level", "未知")
+
+        # 根据分数选择颜色
+        if overall_score >= 90:
+            score_color = "🟢"
+            score_emoji = "优秀"
+        elif overall_score >= 75:
+            score_color = "🔵"
+            score_emoji = "良好"
+        elif overall_score >= 60:
+            score_color = "🟡"
+            score_emoji = "及格"
+        else:
+            score_color = "🔴"
+            score_emoji = "不及格"
+
+        # 使用Markdown格式展示，添加边框
+        md_lines = []
+        md_lines.append("> **📊 工具调用结果：风险评估报告**\n")
+        md_lines.append("---\n")
+        md_lines.append(f"> **综合评分:** {score_color} **{overall_score}** / 100 ({score_emoji})")
+        md_lines.append(f"> **风险等级:** {risk_level}\n")
+
+        # 展示各维度评分
+        dimensions = data.get("dimensions", [])
+        if dimensions:
+            md_lines.append("#### 📋 各维度详情\n")
+            for dim in dimensions:
+                dim_name = dim.get("name", "")
+                dim_score = dim.get("score", 0)
+                md_lines.append(f"**{dim_name}**: {dim_score}/100")
+
+                # 优点
+                strengths = dim.get("strengths", [])
+                if strengths:
+                    md_lines.append(f"- ✅ 优点: {', '.join(strengths)}")
+
+                # 不足
+                weaknesses = dim.get("weaknesses", [])
+                if weaknesses:
+                    md_lines.append(f"- ⚠️ 不足: {', '.join(weaknesses)}")
+
+                # 缺失信息
+                missing = dim.get("missing_info", [])
+                if missing:
+                    md_lines.append(f"- ❓ 缺失: {', '.join(missing)}")
+
+                md_lines.append("")
+
+        # 整体优点
+        excellent_points = data.get("excellent_points", [])
+        if excellent_points:
+            md_lines.append("#### ✅ 方案亮点\n")
+            for point in excellent_points:
+                md_lines.append(f"- {point}")
+            md_lines.append("")
+
+        # 潜在风险
+        potential_risks = data.get("potential_risks", [])
+        if potential_risks:
+            md_lines.append("#### ⚠️ 潜在风险\n")
+            for risk in potential_risks:
+                md_lines.append(f"- {risk}")
+            md_lines.append("")
+
+        # 改进建议
+        suggestions = data.get("suggestions", [])
+        if suggestions:
+            md_lines.append("#### 💡 改进建议\n")
+            for suggestion in suggestions:
+                md_lines.append(f"- {suggestion}")
+            md_lines.append("")
+
+        md_lines.append("---")
+
+        content = "\n".join(md_lines)
+        logger.info(f"=== 准备发送评估报告（前200字符）: {content[:200]}...")
+
+        await cl.Message(content=content).send()
+        logger.info("=== 评估报告发送完成")
+
+    except json.JSONDecodeError as e:
+        logger.error(f"JSON解析失败: {e}")
+    except Exception as e:
+        logger.error(f"展示风险评估失败: {e}")
+        import traceback
+        traceback.print_exc()
+
+async def display_media_caption(caption_result: str):
+    import json
+    import logging
+    logger = logging.getLogger(__name__)
+
+    try:
+        data = json.loads(caption_result)
+        if data.get("status") == "error":
+            await cl.Message(content=f"❌ Caption失败：{data.get('message')}").send()
+            return
+
+        caption = data.get("caption", "")
+        key_points = data.get("key_points", [])
+        risks = data.get("risks", [])
+        media_type = data.get("media_type", "")
+
+        md = []
+        md.append("---")
+        md.append(f"### 🖼️ 媒体理解（{media_type}）")
+        if caption:
+            md.append(f"**Caption:** {caption}")
+
+        if key_points:
+            md.append("\n**要点:**")
+            for k in key_points:
+                md.append(f"- {k}")
+
+        if risks:
+            md.append("\n**潜在风险:**")
+            for r in risks:
+                md.append(f"- ⚠️ {r}")
+
+        md.append("---")
+        await cl.Message(content="\n".join(md)).send()
+
+    except Exception as e:
+        logger.error(f"display_media_caption失败: {e}")
+
+
+async def display_traffic_status(traffic_result: str):
+    """展示交通状况查询结果"""
+    import json
+    import logging
+    logger = logging.getLogger(__name__)
+
+    try:
+        data = json.loads(traffic_result)
+
+        if data.get("status") == "error":
+            await cl.Message(content=f"❌ 交通查询失败：{data.get('message')}").send()
+            return
+
+        md_lines = []
+        md_lines.append("> **🚦 工具调用结果：实时交通状况**\n")
+        md_lines.append("---\n")
+
+        # 整体路况
+        traffic_status = data.get("traffic_status", "")
+        status_emoji = {
+            "畅通": "🟢",
+            "缓行": "🟡",
+            "拥堵": "🔴",
+            "未知": "⚪"
+        }.get(traffic_status, "⚪")
+
+        md_lines.append(f"> **整体路况:** {status_emoji} **{traffic_status}**")
+
+        # 详细描述
+        description = data.get("description", "")
+        if description:
+            md_lines.append(f"> **详细描述:** {description}\n")
+
+        # 具体道路信息
+        roads = data.get("roads", [])
+        if roads:
+            md_lines.append("#### 🛣️ 主要道路详情\n")
+            for road in roads[:5]:  # 只显示前5条
+                name = road.get("name", "")
+                status = road.get("status", "")
+                speed = road.get("speed", 0)
+
+                # 根据速度选择颜色
+                if speed >= 60:
+                    speed_emoji = "🟢"
+                elif speed >= 30:
+                    speed_emoji = "🟡"
+                else:
+                    speed_emoji = "🔴"
+
+                md_lines.append(f"**{name}**: {status} (平均速度 {speed_emoji} {speed}km/h)")
+
+            if len(roads) > 5:
+                md_lines.append(f"\n*还有 {len(roads) - 5} 条道路...*")
+
+        md_lines.append("\n---")
+        await cl.Message(content="\n".join(md_lines)).send()
+        logger.info("=== 交通状况报告发送完成")
+
+    except json.JSONDecodeError as e:
+        logger.error(f"JSON解析失败: {e}")
+    except Exception as e:
+        logger.error(f"展示交通状况失败: {e}")
+
+
+async def display_weather_info(weather_result: str):
+    """展示天气查询结果"""
+    import json
+    import logging
+    logger = logging.getLogger(__name__)
+
+    try:
+        data = json.loads(weather_result)
+
+        if data.get("status") == "error":
+            await cl.Message(content=f"❌ 天气查询失败：{data.get('message')}").send()
+            return
+
+        md_lines = []
+        md_lines.append("> **🌤️ 工具调用结果：实时天气信息**\n")
+        md_lines.append("---\n")
+
+        # 位置
+        location = data.get("location", "")
+        if location:
+            md_lines.append(f"> **位置:** {location}")
+
+        # 天气状况
+        weather = data.get("weather", "")
+        temperature = data.get("temperature", "")
+        wind_direction = data.get("wind_direction", "")
+        wind_power = data.get("wind_power", "")
+        humidity = data.get("humidity", "")
+
+        md_lines.append(f"> **天气:** {weather}")
+        md_lines.append(f"> **温度:** {temperature}")
+        md_lines.append(f"> **风向:** {wind_direction}风 (风力{wind_power}级)")
+        md_lines.append(f"> **湿度:** {humidity}")
+
+        # 发布时间
+        report_time = data.get("report_time", "")
+        if report_time:
+            md_lines.append(f"\n*发布时间: {report_time}*")
+
+        # 预报信息（如果有）
+        casts = data.get("casts", [])
+        if casts:
+            md_lines.append("\n#### 📅 未来预报\n")
+            for cast in casts[:3]:  # 只显示前3天
+                date = cast.get("date", "")
+                week = cast.get("week", "")
+                dayweather = cast.get("dayweather", "")
+                nightweather = cast.get("nightweather", "")
+                daytemp = cast.get("daytemp", "")
+                nighttemp = cast.get("nighttemp", "")
+
+                md_lines.append(f"**{date} ({week})**")
+                md_lines.append(f"- 白天: {dayweather} {daytemp}°C")
+                md_lines.append(f"- 夜间: {nightweather} {nighttemp}°C")
+                md_lines.append("")
+
+        md_lines.append("---")
+        await cl.Message(content="\n".join(md_lines)).send()
+        logger.info("=== 天气信息发送完成")
+
+    except json.JSONDecodeError as e:
+        logger.error(f"JSON解析失败: {e}")
+    except Exception as e:
+        logger.error(f"展示天气信息失败: {e}")
+
+
+async def display_geocode_result(geo_result: str):
+    """展示地址编码结果"""
+    import json
+    import logging
+    logger = logging.getLogger(__name__)
+
+    try:
+        data = json.loads(geo_result)
+
+        if data.get("status") == "error" or data.get("status") == "not_found":
+            message = data.get("message", "地址编码失败")
+            await cl.Message(content=f"❌ {message}").send()
+            return
+
+        md_lines = []
+        md_lines.append("> **📍 工具调用结果：地理编码**\n")
+        md_lines.append("---\n")
+
+        formatted_address = data.get("formatted_address", "")
+        longitude = data.get("longitude", 0)
+        latitude = data.get("latitude", 0)
+        level = data.get("level", "")
+
+        md_lines.append(f"> **地址:** {formatted_address}")
+        md_lines.append(f"> **坐标:** ({longitude:.6f}, {latitude:.6f})")
+        md_lines.append(f"> **精度:** {level}\n")
+
+        count = data.get("count", 1)
+        if count > 1:
+            md_lines.append(f"*找到 {count} 个匹配结果，显示最相关的一个*")
+
+        md_lines.append("---")
+        await cl.Message(content="\n".join(md_lines)).send()
+        logger.info("=== 地址编码结果发送完成")
+
+    except json.JSONDecodeError as e:
+        logger.error(f"JSON解析失败: {e}")
+    except Exception as e:
+        logger.error(f"展示地址编码结果失败: {e}")
+
+
+async def display_pois_result(pois_result: str):
+    """展示周边POI搜索结果"""
+    import json
+    import logging
+    logger = logging.getLogger(__name__)
+
+    try:
+        data = json.loads(pois_result)
+
+        if data.get("status") == "error":
+            await cl.Message(content=f"❌ POI搜索失败：{data.get('message')}").send()
+            return
+
+        pois = data.get("pois", [])
+        count = len(pois)
+
+        md_lines = []
+        md_lines.append(f"> **🏢 工具调用结果：周边设施** (共找到 {count} 个)\n")
+        md_lines.append("---\n")
+
+        # 只显示前10个
+        for poi in pois[:10]:
+            name = poi.get("name", "")
+            poi_type = poi.get("type", "")
+            distance = poi.get("distance", "")
+            address = poi.get("address", "")
+            tel = poi.get("tel", "")
+
+            md_lines.append(f"#### {name}")
+
+            # 类型标签
+            if poi_type:
+                # 简化类型显示
+                type_simple = poi_type.split(";")[-1] if ";" in poi_type else poi_type
+                md_lines.append(f"**类型:** {type_simple}")
+
+            # 距离
+            if distance:
+                distance_km = int(distance) / 1000
+                md_lines.append(f"**距离:** {distance_km:.1f}km")
+
+            # 地址
+            if address:
+                md_lines.append(f"**地址:** {address}")
+
+            # 电话
+            if tel:
+                md_lines.append(f"**电话:** {tel}")
+
+            md_lines.append("")
+
+        if count > 10:
+            md_lines.append(f"\n*还有 {count - 10} 个结果未显示...*")
+
+        md_lines.append("---")
+        await cl.Message(content="\n".join(md_lines)).send()
+        logger.info("=== POI搜索结果发送完成")
+
+    except json.JSONDecodeError as e:
+        logger.error(f"JSON解析失败: {e}")
+    except Exception as e:
+        logger.error(f"展示POI结果失败: {e}")
+
+
+@cl.set_starters
+async def set_starters():
+    """设置快捷提问按钮"""
+    return [
+        cl.Starter(
+            label="🚗 高速公路事故处置",
+            message="高速公路发生多车追尾事故，应该如何处置？",
+            icon="/public/icon-car.png"
+        ),
+        cl.Starter(
+            label="⚠️ 应急响应流程",
+            message="请告诉我应急响应的标准流程是什么？",
+            icon="/public/icon-warning.png"
+        ),
+        cl.Starter(
+            label="📋 查询相关法规",
+            message="查询关于交通事故应急响应的相关法规",
+            icon="/public/icon-docs.png"
+        ),
+        cl.Starter(
+            label="🔍 检索应急文档",
+            message="搜索关于高速公路封闭管理的文档资料",
+            icon="/public/icon-search.png"
+        ),
+    ]
+
+
+# ===== 自定义样式 =====
+# 在前端head中添加自定义CSS
+@cl.set_chat_profiles
+async def chat_profile():
+    """设置聊天配置文件"""
+    return [
+        cl.ChatProfile(
+        name="交通应急指挥助手",
+        # 图标数据（使用emoji）
+        icon="🚨",
+        # 说明文档
+        markdown_description="我是交通应急指挥助手，专门协助处理交通事故应急响应相关的工作。",
+        instructions="我是交通应急指挥助手，专门协助处理交通事故应急响应相关的工作。",
+        # 自定义CSS
+        markdown_text_style="""@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+
+:root {
+    --primary-color: #FF6B00;  /* 应急橙 */
+    --secondary-color: #1E88E5;  /* 警示蓝 */
+    --background-color: #F5F5F5;
+    --surface-color: #FFFFFF;
+    --text-color: #333333;
+    --border-radius: 12px;
+}
+
+body {
+    font-family: 'Noto Sans SC', sans-serif;
+}
+
+/* 消息气泡样式 */
+.element {
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* 用户消息 */
+.user-message {
+    background: linear-gradient(135deg, var(--secondary-color), #1565C0);
+    color: white;
+}
+
+/* 助手消息 */
+.assistant-message {
+    background: var(--surface-color);
+    border-left: 4px solid var(--primary-color);
+}
+
+/* 快捷提问按钮 */
+.starter-button {
+    background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+    border: 2px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
+}
+
+.starter-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3);
+}
+"""
+        )
+    ]
+
+
+# ===== 侧边栏 =====
+@cl.on_chat_resume
+async def on_chat_resume(thread_id: str):
+    """恢复会话时"""
+    await cl.Message(
+        content="👋 欢迎回来！我已经准备好继续为你服务。",
+        author="系统"
+    ).send()
+
+
+# ===== 错误处理 =====
+@cl.on_chat_end
+async def on_chat_end():
+    """会话结束时"""
+    # 这里可以添加会话结束后的处理逻辑
+    pass
+
+
+if __name__ == "__main__":
+    # 运行Chainlit应用
+    cl.run(
+        host="0.0.0.0",
+        port=8000
+    )

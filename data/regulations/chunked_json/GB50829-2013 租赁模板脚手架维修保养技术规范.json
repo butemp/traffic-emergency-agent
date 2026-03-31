@@ -1,0 +1,21 @@
+{
+  "doc_id": "a8c716c9187f1411f8865c3165bed30f82fb9558",
+  "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50829-2013 租赁模板脚手架维修保养技术规范.pdf",
+  "file_type": ".pdf",
+  "num_chunks": 1,
+  "chunks": [
+    {
+      "chunk_id": 0,
+      "text": "hQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50829-2013 租赁模板脚手架维修保养技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "a8c716c9187f1411f8865c3165bed30f82fb9558",
+        "page_start": 8,
+        "page_end": 20,
+        "token_count": 104,
+        "char_count": 209
+      }
+    }
+  ]
+}

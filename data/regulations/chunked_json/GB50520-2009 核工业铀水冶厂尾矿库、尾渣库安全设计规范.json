@@ -1,0 +1,21 @@
+{
+  "doc_id": "bfa9f3ad9f7ba87bd640866d4b1a96afcea08f80",
+  "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50520-2009 核工业铀水冶厂尾矿库、尾渣库安全设计规范.pdf",
+  "file_type": ".pdf",
+  "num_chunks": 1,
+  "chunks": [
+    {
+      "chunk_id": 0,
+      "text": "hQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50520-2009 核工业铀水冶厂尾矿库、尾渣库安全设计规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "bfa9f3ad9f7ba87bd640866d4b1a96afcea08f80",
+        "page_start": 2,
+        "page_end": 20,
+        "token_count": 205,
+        "char_count": 411
+      }
+    }
+  ]
+}

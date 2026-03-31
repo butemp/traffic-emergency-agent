@@ -1,0 +1,931 @@
+{
+  "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+  "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+  "file_type": ".pdf",
+  "num_chunks": 71,
+  "chunks": [
+    {
+      "chunk_id": 0,
+      "text": "UDC\n中华人民共和国国家标准 G B\nP GB 50161—2009\n烟花爆竹工程设计安全规范\nSafety code for design of engineering of fireworks and firecracker\n2009 —11—11 发布 2 0 1 0 —07—01 实施\n中华人民共和国住房和城乡建设部\n联合发布\n中华人民共和国国家质量监督检验检疫总局\n中华人民共和国国家标准\n烟花爆竹工程设计安全规范\nSafety code for design of engineering of fireworks and firecracker\nGB 50161—2009\n主编部门：中华人民共和国国家安全生产监督管理总局\n批准部门：中华人民共和国住房和城乡建设部\n施行日期：2010 年 7 月1 日\n中国计划出版社\n2010 北京\n中华人民共和国住房和城乡建设部公告\n第 433 号\n关于发布国家标准《烟花爆竹工程\n设计安全规范》的公告\n现批准《烟花爆竹工程设计安全规范》为国家标准，编号为 GB50161—2009，自2010\n年 7 月 1 日起实施。其中，第3.1.2、3.1.3、3.2.1、3.2.2、4.2.2、4.2.3、4.3.2、4.3.3、4.4.1、\n4.4.2、5.1.1（3） 、5.1.3（1） 、5.2.2、5.2.3、5.2.4、5.2.5、5.2.6、5.2.7、5.2.8、5.2.9、5.2.10、\n5.3.2、5.3.3、5.3.4、5.3.5、5.3.6、5.4.2（1） 、5.4.4、5.4.6（1） 、6.0.4、6.0.5、6.0.7、6.0.8、\n6.0.9、6.0.10、7.1.2（1） 、8.1.1、8.2.1（1） 、8.2.2（1） 、8.2.3、8.2.6（5） 、8.3.5（1、3、4） 、\n8.4.1（1） 、8.5.3、11.2.2（3）\n、12.2.1（2、3、6） 、12.2.5、12.2.6、12.3.1（2、7） 、12.6.2、\n12.6.3 条 （款） 为强制性条文， 必须严格执行。 原《烟花爆竹工厂设计安全规范》GB50161-92\n同时废止。\n本规范由我部标准定额研究所组织中国计划出版社出版发行。\n中华人民共和国住房和城乡建设部\n二○○九年十一月十一日",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 1,
+        "page_end": 3,
+        "token_count": 492,
+        "char_count": 984
+      }
+    },
+    {
+      "chunk_id": 1,
+      "text": "前 言\n本规范是根据原建设部《关于印发〈2007 年工程建设标准规范制订、修订计划（第二\n批）〉的通知》 （建标[2007]126 号）的要求，由兵器工业安全技术研究所和国家安全生产\n宜春烟花爆竹检测检验中心会同有关单位，对原国家标准《烟花爆竹工厂设计安全规范》\nGB50161-92 进行修订而成。\n本规范在修订过程中，遵照《中华人民共和国安全生产法》和国家基本建设的有关政\n策，贯彻“安全第一，预防为主，综合治理”的方针，对湖南、江西、广西等烟花爆竹主产\n区 30 多个烟花爆竹生产、经营企业进行了调查研究。\n总结了我国烟花爆竹生产的实践经\n验，参考了有关国内标准和国外标准。\n在全国范围内广泛征求了有关行业协会、科研检测\n单位、大专院校、企业单位及行业主管部门的意见，最后经审查定稿。\n本规范共分 12 章和 1 个附录。\n主要内容包括工艺、总图、建筑、结构、消防、废水\n处理、采暖通风、电气等专业的安全必要规定。\n本次修订的主要技术内容有：增加了术语一章，调整了建筑物的危险等级，增加了工\n艺安全要求，调整了危险性建筑物的内外部最小允许距离，增加了结构防护要求，修订了\n电气危险场所的类别划分，补充了电气安全要求。\n本规范中以黑体字标志的条文为强制性条文，必须严格执行。\n本规范由住房和城乡建设部负责管理和对强制性条文的解释， 国家安全生产监督管理\n总局安全监督管理三司负责日常管理，兵器工业安全技术研究所负责具体技术内容的解\n释。\n本规范在执行过程中，如发现需要修改或补充之处，请将意见和有关资料寄送兵器工\n业安全技术研究所（地址：北京市55 号信箱，邮编：100053，传真：010-83111943），以\n供今后修订时参考。\n本规范主编单位、参编单位、主要起草人及主要审查人员：\n主 编 单 位：兵器工业安全技术研究所\n国家安全生产宜春烟花爆竹检测检验中心\n参 编 单 位：湖南烟花爆竹产品安全质量监督检测中心\n江西省李渡烟花集团有限公司\n熊猫烟花集团股份有限公司\n主 要起草 人：魏新熙 范军政 郑志良 李后生 王爱凤 陶少萍 陈 洁 侯国平\n尹君平 张幼平 白春光 管怀安 董文学 王建国 阎 翀 万 军 郭玲香\n罗建社 黄茶香\n主要审查人员：赵家玉 黄明章 刘幼贞 张兴林 韩国庆 杜元金 潘功配 李金明\n李增义 黄玉国 刘春文 肖湘杰 余建国 袁学群",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 4,
+        "page_end": 4,
+        "token_count": 493,
+        "char_count": 986
+      }
+    },
+    {
+      "chunk_id": 2,
+      "text": "目 次\n1 总 则.\n2 术 语.\n.\n.\n.\n.\n.\n2\n3 建筑物危险等级和计算药量.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n4\n3.\n1 建筑物危险等级.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n4\n3.\n2 计算药量.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 5,
+        "page_end": 5,
+        "token_count": 344,
+        "char_count": 688
+      }
+    },
+    {
+      "chunk_id": 3,
+      "text": "目 次\n1 总 则.\n2 术 语.\n3 建筑物危险等级和计算药量.\n1 建筑物危险等级.\n2 计算药量.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n7\n4 工程规划和外部最小允许距离.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n8\n4.\n1 工程规划.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 5,
+        "page_end": 5,
+        "token_count": 358,
+        "char_count": 716
+      }
+    },
+    {
+      "chunk_id": 4,
+      "text": "目 次\n1 总 则.\n2 术 语.\n3 建筑物危险等级和计算药量.\n1 建筑物危险等级.\n2 计算药量.\n4 工程规划和外部最小允许距离.\n1 工程规划.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n8\n4.\n2 危险品生产区外部最小允许距离.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n8\n4.\n3 危险品总仓库区外部最小允许距离.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n9\n4.\n4 燃放试验场和销毁场外部最小允许距离.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 5,
+        "page_end": 5,
+        "token_count": 380,
+        "char_count": 760
+      }
+    },
+    {
+      "chunk_id": 5,
+      "text": "目 次\n1 总 则.\n2 术 语.\n3 建筑物危险等级和计算药量.\n1 建筑物危险等级.\n2 计算药量.\n4 工程规划和外部最小允许距离.\n1 工程规划.\n2 危险品生产区外部最小允许距离.\n3 危险品总仓库区外部最小允许距离.\n4 燃放试验场和销毁场外部最小允许距离.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n12\n5 总平面布置和内部最小允许距离.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n12\n5.\n1 总平面布置.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 5,
+        "page_end": 5,
+        "token_count": 400,
+        "char_count": 801
+      }
+    },
+    {
+      "chunk_id": 6,
+      "text": ".\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n12\n5.\n2 危险品生产区内部最小允许距离.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n13\n5.\n3 危险品总仓库区内部最小允许距离.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n15\n5.\n4 防护屏障.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 5,
+        "page_end": 5,
+        "token_count": 340,
+        "char_count": 680
+      }
+    },
+    {
+      "chunk_id": 7,
+      "text": "2 危险品生产区内部最小允许距离.\n3 危险品总仓库区内部最小允许距离.\n4 防护屏障.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n17\n6 工艺与布置 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n18\n7 危险品储存和运输.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 5,
+        "page_end": 5,
+        "token_count": 353,
+        "char_count": 706
+      }
+    },
+    {
+      "chunk_id": 8,
+      "text": "2 危险品生产区内部最小允许距离.\n3 危险品总仓库区内部最小允许距离.\n4 防护屏障.\n6 工艺与布置 .\n7 危险品储存和运输.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n19\n7.\n1 危险品储存.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n19\n7.\n2 危险品运输.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 5,
+        "page_end": 5,
+        "token_count": 365,
+        "char_count": 730
+      }
+    },
+    {
+      "chunk_id": 9,
+      "text": "2 危险品生产区内部最小允许距离.\n3 危险品总仓库区内部最小允许距离.\n4 防护屏障.\n6 工艺与布置 .\n7 危险品储存和运输.\n1 危险品储存.\n2 危险品运输.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n19\n8 建筑结构.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n20\n8.\n1 一般规定.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 5,
+        "page_end": 5,
+        "token_count": 372,
+        "char_count": 745
+      }
+    },
+    {
+      "chunk_id": 10,
+      "text": "2 危险品生产区内部最小允许距离.\n3 危险品总仓库区内部最小允许距离.\n4 防护屏障.\n6 工艺与布置 .\n7 危险品储存和运输.\n1 危险品储存.\n2 危险品运输.\n8 建筑结构.\n1 一般规定.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n20\n8.\n2 危险品生产区危险性建筑物的结构选型和构造.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n20\n8.\n3 抗爆间室和抗爆屏院.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n21\n8.\n4 危险品生产区危险性建筑物的安全疏散.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 5,
+        "page_end": 5,
+        "token_count": 393,
+        "char_count": 786
+      }
+    },
+    {
+      "chunk_id": 11,
+      "text": "2 危险品生产区内部最小允许距离.\n3 危险品总仓库区内部最小允许距离.\n4 防护屏障.\n6 工艺与布置 .\n7 危险品储存和运输.\n1 危险品储存.\n2 危险品运输.\n8 建筑结构.\n1 一般规定.\n2 危险品生产区危险性建筑物的结构选型和构造.\n3 抗爆间室和抗爆屏院.\n4 危险品生产区危险性建筑物的安全疏散.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n21\n8.\n5 危险品生产区危险性建筑物的建筑构造.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n22\n8.\n6 危险品总仓库区危险品仓库的建筑结构.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n22\n8.\n7 通廊和隧道.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 5,
+        "page_end": 5,
+        "token_count": 420,
+        "char_count": 841
+      }
+    },
+    {
+      "chunk_id": 12,
+      "text": "9 消防.\n10 废水处理 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n25\n11 采暖通风与空气调节.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n26\n11.\n1 采暖.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 5,
+        "page_end": 5,
+        "token_count": 339,
+        "char_count": 679
+      }
+    },
+    {
+      "chunk_id": 13,
+      "text": "9 消防.\n10 废水处理 .\n11 采暖通风与空气调节.\n1 采暖.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n26\n11.\n2 通风和空气调节.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n26\n12 危险场所的电气.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 5,
+        "page_end": 5,
+        "token_count": 350,
+        "char_count": 700
+      }
+    },
+    {
+      "chunk_id": 14,
+      "text": "9 消防.\n10 废水处理 .\n11 采暖通风与空气调节.\n1 采暖.\n2 通风和空气调节.\n12 危险场所的电气.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n27\n12.\n1 危险场所类别的划分.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n27\n12.\n2 电气设备.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n30\n12.\n3 室内电气线路.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 5,
+        "page_end": 5,
+        "token_count": 366,
+        "char_count": 732
+      }
+    },
+    {
+      "chunk_id": 15,
+      "text": "9 消防.\n10 废水处理 .\n11 采暖通风与空气调节.\n1 采暖.\n2 通风和空气调节.\n12 危险场所的电气.\n1 危险场所类别的划分.\n2 电气设备.\n3 室内电气线路.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n30\n12.\n4 照明.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n31\n12.\n5 10KV及以下变（配）电所和厂房配电室.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 5,
+        "page_end": 5,
+        "token_count": 379,
+        "char_count": 758
+      }
+    },
+    {
+      "chunk_id": 16,
+      "text": "9 消防.\n10 废水处理 .\n11 采暖通风与空气调节.\n1 采暖.\n2 通风和空气调节.\n12 危险场所的电气.\n1 危险场所类别的划分.\n2 电气设备.\n3 室内电气线路.\n4 照明.\n5 10KV及以下变（配）电所和厂房配电室.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n32\n12.\n6 室外电气线路.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n32\n12.\n7 防雷与接地.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 5,
+        "page_end": 5,
+        "token_count": 391,
+        "char_count": 783
+      }
+    },
+    {
+      "chunk_id": 17,
+      "text": "9 消防.\n10 废水处理 .\n11 采暖通风与空气调节.\n1 采暖.\n2 通风和空气调节.\n12 危险场所的电气.\n1 危险场所类别的划分.\n2 电气设备.\n3 室内电气线路.\n4 照明.\n5 10KV及以下变（配）电所和厂房配电室.\n6 室外电气线路.\n7 防雷与接地.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n33\n12.\n8 防静电.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n33\n12.\n9 通讯.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 5,
+        "page_end": 5,
+        "token_count": 399,
+        "char_count": 798
+      }
+    },
+    {
+      "chunk_id": 18,
+      "text": "9 消防.\n10 废水处理 .\n11 采暖通风与空气调节.\n1 采暖.\n2 通风和空气调节.\n12 危险场所的电气.\n1 危险场所类别的划分.\n2 电气设备.\n3 室内电气线路.\n4 照明.\n5 10KV及以下变（配）电所和厂房配电室.\n6 室外电气线路.\n7 防雷与接地.\n8 防静电.\n9 通讯.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n33",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 5,
+        "page_end": 5,
+        "token_count": 97,
+        "char_count": 195
+      }
+    },
+    {
+      "chunk_id": 19,
+      "text": "12.\n10 视频监控系统.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n33\n12.\n11 火灾报警系统.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n33\n12.\n12 安全防范工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 6,
+        "page_end": 6,
+        "token_count": 336,
+        "char_count": 672
+      }
+    },
+    {
+      "chunk_id": 20,
+      "text": "10 视频监控系统.\n11 火灾报警系统.\n12 安全防范工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n33\n12.\n13 控制室.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n34\n附录A 防护屏障的防护范围.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 6,
+        "page_end": 6,
+        "token_count": 348,
+        "char_count": 697
+      }
+    },
+    {
+      "chunk_id": 21,
+      "text": "10 视频监控系统.\n11 火灾报警系统.\n12 安全防范工程.\n13 控制室.\n附录A 防护屏障的防护范围.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n35\n本规范用词说明 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n37\n引用标准名录 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 6,
+        "page_end": 6,
+        "token_count": 358,
+        "char_count": 716
+      }
+    },
+    {
+      "chunk_id": 22,
+      "text": "10 视频监控系统.\n11 火灾报警系统.\n12 安全防范工程.\n13 控制室.\n附录A 防护屏障的防护范围.\n本规范用词说明 .\n引用标准名录 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n38",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 6,
+        "page_end": 6,
+        "token_count": 89,
+        "char_count": 179
+      }
+    },
+    {
+      "chunk_id": 23,
+      "text": "Table of contents\n1 General rule.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n1\n2 Term .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n2\n3 Hazard classes of building and explosive quantity.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n4\n3.\n1 Hazard classes of building…………………………………………………………………………………….\n.\n.\n4\n3.\n2 Explosive quantity…………………… ……………………………………………………………… ……….\n.\n.\n7\n4 Engineering planning and exterior minimum separation distances.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n8\n4.\n1 Engineering planning……………………………………………………………………………………….\n.\n.\n8\n4.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 7,
+        "page_end": 7,
+        "token_count": 408,
+        "char_count": 817
+      }
+    },
+    {
+      "chunk_id": 24,
+      "text": "2 Exterior minimum separation distances in hazard particles production area……….\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n8\n4.\n3 Exterior minimum separation distances in general magazine area of hazardous particles………………….\n.\n.\n.\n.\n.\n8\n4.\n4 Exterior minimum separation distances in destruction ground and testing area…………….\n.\n…….\n.\n.\n……….\n13\n5 General plan layout and interior minimum separation distances.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n14\n5.\n1 General plan layout…………………………………………………………………………………………14\n5.\n2 Interior minimum separation distances in hazard production area…………………………………….\n.\n.\n….\n.\n14\n5.\n3 Interior minimum separation distances in general magazine area of hazardous particles…………………….\n15\n5.\n4 Protecting barrier…………………………………………………………………………………………….\n.\n.\n18\n6 Process and layout.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 7,
+        "page_end": 7,
+        "token_count": 494,
+        "char_count": 989
+      }
+    },
+    {
+      "chunk_id": 25,
+      "text": "4 Protecting barrier…………………………………………………………………………………………….\n6 Process and layout.\n19\n7 Storage and transportation of hazardous particles.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n20\n7.\n1 Storage of hazardous particles……………………………………………………………………………….\n.\n.\n20\n7.\n2 Transportation of hazardous particles…………………………………………………………………………20\n8 Building structure.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n21\n8.\n1 General……………………………………………………………………………………………………….\n.\n.\n21\n8.\n2 Structure selection and construction of hazard production area…………………….\n.\n.\n……………………….\n21\n8.\n3 Blast resistant chamber and blast resistant yard………………………………………….\n………………….\n.\n22\n8.\n4 Emergency evacuation of hazardous buildings in production area………….\n……………………………….\n22\n8.\n5 Structure of buildings in hazard production area…………………………….\n………………………………23\n8.\n6 Structure of buildings in general magazine area of hazardous particles…….\n……………………………….\n23\n8.\n7 Corridor and tunnel………………………………………………………………………………………….\n.\n24\n9 Fire fighting.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 7,
+        "page_end": 7,
+        "token_count": 563,
+        "char_count": 1126
+      }
+    },
+    {
+      "chunk_id": 26,
+      "text": "6 Structure of buildings in general magazine area of hazardous particles…….\n7 Corridor and tunnel………………………………………………………………………………………….\n9 Fire fighting.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n25\n10 Treatment of waste water.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n26\n11 Heating, ventilation and air conditioning.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n27\n11.\n1 Heating……………………………………………………………………………………………………….\n27\n11.\n2 Ventilation and air conditioning………………………………………………………………… …….\n…….\n.\n27\n12 Electrical installation in hazardous location.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n28\n12.\n1 Classification of hazardous location…………………………………………………………………………28\n12.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 7,
+        "page_end": 7,
+        "token_count": 470,
+        "char_count": 941
+      }
+    },
+    {
+      "chunk_id": 27,
+      "text": "2 Electrical equipment…………………………………………………………………………………………31\n12.\n3 Indoor electrical wiring………………………………………………………………………………………31\n12.\n4 Lighting system………………………………………………………………………………………………32\n12.\n5 10kv & under power distribution substations and power distribution room in production building….\n.\n.\n.\n.\n.\n.\n.\n.\n32",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 7,
+        "page_end": 7,
+        "token_count": 153,
+        "char_count": 306
+      }
+    },
+    {
+      "chunk_id": 28,
+      "text": "12.\n6 Outdoor electrical wiring…………………………………………………………………………………….\n33\n12.\n7 Lightning protection and earthing………………………………………………………………………….\n.\n.\n33\n12.\n8 Electrostatic prevention…………………………………………………………………………………….\n.\n.\n34\n12.\n9 Communication………………………………………………………………………………………………34\n12.\n10 Television monitoring system……………………………………………….\n…………………………….\n.\n34\n12.\n11 Fire alarm system………………………………………………………………………………………….\n.\n.\n34\n12.\n12 Security and protection system……………………………………………………….\n.\n……………………34\n12.\n13 Control chamber……………………………………………………………………………………………35\nAppendix A protection area of protecting barrier.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n36\nExplanations of the wording in this code.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n38\nList of quoted standards.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 8,
+        "page_end": 9,
+        "token_count": 484,
+        "char_count": 969
+      }
+    },
+    {
+      "chunk_id": 29,
+      "text": ".\n.\n39\n1 总 则\n1.0.1 为贯彻《中华人民共和国安全生产法》，坚持“安全第一、预防为主、综合治理”\n的方针，规范烟花爆竹工程的设计，预防和减少生产安全事故，保障人民群众生命和财产\n安全，促进烟花爆竹行业安全、持续、健康发展，制定本规范。\n1.0.2 本规范 适用于烟花爆竹生产项目和经营批发仓库的新建、改建和扩建工程设计；本\n规范不适用于经营零售烟花爆竹的储存，以及军用烟火的制造、运输和储存。\n1.0.3 本规范有关外部安全距离的规定也适用于在烟花爆竹生产企业和经营批发企业仓\n库周边进行居民点、企业、城镇、重要设施的规划建设。\n1.0.4 本规范规定了烟花爆竹生产项目和经营批发仓库工程设计的基本技术要求。 当本规\n范与国家法律法规的规定相抵触时，应按国家法律、行政法规的规定执行。\n1.0.5 烟花爆竹生产项目和经营批发仓库的工程设计除应执行本规范的规定外，尚应符\n合国家现行有关标准的规定。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 8,
+        "page_end": 9,
+        "token_count": 202,
+        "char_count": 405
+      }
+    },
+    {
+      "chunk_id": 30,
+      "text": "2 术 语\n2.\n0.\n1 烟花爆竹生产项目 fireworks and firecracker project\n指生产烟花、爆竹及生产用于烟花、爆竹产品的黑火药、烟火药、引火线、电点火头等的厂房、\n场所及配套的仓库。\n2.\n0.\n2 危险品 hazardous goodst\n指本规范范围内的烟火药、黑火药、引火线、氧化剂等，以及用以上物品制成的烟花、爆竹在制\n品、半成品、成品。\n2.\n0.\n3 在制品 work in -process\n指正在各生产阶段加工的产品。\n2.\n0.\n4 半成品 semi-finished product\n指在某些生产阶段上已完工，尚需进一步加工的产品。\n2.\n0.\n5 危险品生产厂房 production building of hazardous goods\n生产、制造、加工危险品的建筑物。\n2.\n0.\n6 中转库 transit store\n在生产过程中，在厂区内用于暂存药物、半成品、成品、引火线及有药部件的建( 构)筑物。\n2.\n0.\n7 危险品总仓库区 hazardous goods general store area\n指储存成品、化工原材料、药物（黑火药、烟火药、亮珠、药柱、药块） 、效果内筒、引火线的危\n险品仓库集中的区域。\n2.\n0.\n8 临时存药洞 temporary explosive storage cave\n指在危险性建筑物附近自然山体内镶嵌的临时存放药物的洞室。\n2.\n0.\n9 危险性建筑物 hazardous goods building\n指生产或储存危险品的建（构）筑物，包括危险品生产厂房、储存库房（仓库） 、晒场、临时存药\n洞等。\n2.\n0.\n10 计算药量 explosive quantity\n能形成同时爆炸或燃烧的危险品最大药量。\n2.\n0.\n11 摩擦类药剂 friction ignited powder\n含氯酸钾、硫化锑、雷酸银等药剂，经摩擦能产生引燃（爆）作用的药剂。\n2.\n0.\n12 笛音剂 whistling powder\n含高氯酸钾、苯甲酸氢钾、苯二甲酸氢钾等药剂，能产生哨音效果的药剂。\n2.\n0.\n13 爆炸音剂 powder with detonation sonud\n含高氯酸盐、硝酸盐、硫磺、硫化锑、铝粉等药剂，能产生爆炸音响效果的药剂。\n2.\n0.\n14 外部最小允许距离 external separation distance\n指危险性建筑物与外部各类目标之间，在规定的破坏标准下所允许的最小距离。\n它是按建筑物的\n危险等级和计算药量确定的。\n2.\n0.\n15 内部最小允许距离 internal separation distance\n指危险品厂房、库房与相邻建筑物之间，在规定的破坏标准下所允许的最小距离。\n它是按建筑物\n的危险等级和计算药量确定的。\n2.\n0.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 10,
+        "page_end": 10,
+        "token_count": 597,
+        "char_count": 1194
+      }
+    },
+    {
+      "chunk_id": 31,
+      "text": "它是按建筑物的\n危险等级和计算药量确定的。\n15 内部最小允许距离 internal separation distance\n指危险品厂房、库房与相邻建筑物之间，在规定的破坏标准下所允许的最小距离。\n它是按建筑物\n的危险等级和计算药量确定的。\n16 防护\n屏障 protecting barrier\n有天然屏障和人工屏障，其形式、强度均能按规定方式限制爆炸冲击波、碎片、火焰对附近建筑\n物及设施的影响。\n2.\n0.\n17 人均使用面积 useable floor area per capita\n厂房内有效使用面积按作业人员平均，每个作业人员所占有的面积。\n2.\n0.\n18 轻型泄压屋盖 light relief roof\n泄压部分（不包括檩条、梁、屋架）由轻质材料构成，当建筑物内部发生事故时，具有泄压效能，\n使建筑物主体结构尽可能不受到破坏的屋盖。\n轻型泄压部分的单位面积重量不应大于 0.\n8kN/m²。\n2.\n0.\n19 轻质易碎屋盖 light fragile roof\n由轻质易碎材料构成，当建筑物内部发生事故时，不仅具有泄压效能，且破碎成小块，减轻对外",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 10,
+        "page_end": 10,
+        "token_count": 242,
+        "char_count": 484
+      }
+    },
+    {
+      "chunk_id": 32,
+      "text": "部影响的屋盖。\n轻质易碎部分的单位面积重量不大于 1.\n5kN/m²。\n2.\n0.\n20 抗爆间室 blast resistant chamber\n具有承受本室内因发生爆炸而产生破坏作用的间室，对间室外的人员、设备以及危险品起到保护\n作用。\n可根据间室内生产或储存的危险品性质、恢复生产的要求，可承受一次或多次爆炸破坏作用的\n间室。\n2.\n0.\n21 抗爆屏院 blast resistant shield yard\n当抗爆间室内发生爆炸事故时，为阻止爆炸破片和减弱爆炸冲击波泄爆方向扩散而在抗爆间室轻\n型窗外设置的屏院。\n2.\n0.\n22 装甲防护装置 armor protective device\n装于特定场所或设于单个特定设备或操作岗位的装置，以防止装置外的人员、物资或设备受到可\n能发生的局部火灾或爆炸侵害的金属防护体。\n2.\n0.\n23 安全出口 emergency exit\n建筑物内的作业人员能直接疏散到室外安全地带的门或出口。\n2.\n0.\n24 生活辅助用室 auxiliary room\n指更衣室、盥洗室、浴室、洗衣房，休息室、厕所等。\n2.\n0.\n25 电气危险场所 electrical installation in hazardous locations\n爆炸或燃烧性物质出现或预期可能出现的数量达到足以要求对电气设备的结构、安装和使用采取\n预防措施的场所。\n2.\n0.\n26 可燃性粉尘环境 combustible dust atmosphere\n在大气环境条件下，粉尘或纤维状的可燃性物质与空气的混合物点燃后，燃烧传至全部未燃混合\n物的环境。\n2.\n0.\n27 爆炸性气体环境 explosive gas atmospheres\n在大气环境条件下，气体或蒸气可燃性物质与空气的混合物点燃后，燃烧传至全部未燃混合物的\n环境。\n2.\n0.\n28 直接接地 direct-earthing\n将金属设备或金属构件与接地系统直接用导体进行可靠连接。\n2.\n0.\n29 间接接地 indirect-earthing\n将人体、金属设备等通过防静电材料或防静电制品与接地系统进行可靠连接。\n2.\n0.\n30 防静电材料 anti-electrost atic material\n通过在聚合物内添加导电性物质（碳黑、金属粉等） 、抗静电剂等，以降低电阻率，增加电荷泄漏\n能力的材料统称为防静电材料。\n2.\n0.\n31 防静电制品 anti-electrostatic ware\n由防静电材料制成，具有固体形状，电阻值在 5×10\nΩ范围内的物品。\n2.\n0.\n32 静电非导体 static non-conductor\n体电阻率值大于或等于 1.\n0×10\nΩ m 的物体或表面电阻率大于或等于 1.\n0×10\nΩ的物体。\n2.\n0.\n33 允许最高表面温度 maximum permissible surface temperature\n为了避免粉尘点燃，允许电气设备在运行中达到的最高表面温度。\n2.\n0.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 11,
+        "page_end": 11,
+        "token_count": 631,
+        "char_count": 1263
+      }
+    },
+    {
+      "chunk_id": 33,
+      "text": "32 静电非导体 static non-conductor\n体电阻率值大于或等于 1.\nΩ m 的物体或表面电阻率大于或等于 1.\nΩ的物体。\n33 允许最高表面温度 maximum permissible surface temperature\n为了避免粉尘点燃，允许电气设备在运行中达到的最高表面温度。\n34 独立变电所 independent electrical substation\n变电所为独立的建筑物。\n2.\n0.\n35 防静电地面 anti-electrostatic floor\n能有效地泄漏或消散静电荷，防止静电荷积累的地面。\n2.\n0.\n36 静电泄漏电阻 electrostatically leakage resistance\n物体的被测点与大地之间的总电阻。\n2.\n0.\n37 防火墙 fire wall\n指能够截断火焰及火星传播且在一定时间内能起到隔绝温度传播的不燃烧体材料制成的实心砌\n体，耐火极限不小于 3h。\n该防火墙上不应开设门、窗和洞口。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 11,
+        "page_end": 11,
+        "token_count": 220,
+        "char_count": 440
+      }
+    },
+    {
+      "chunk_id": 34,
+      "text": "3 建筑物危险等级和计算药量\n3.1 建筑物危险等级\n3.1.1 危险性建筑物的危险等级，应按下列规定划分为 1.1、1.3 级：\n1 1.1 级建筑物为建筑物内的危险品在制造、储存、运输中具有整体爆炸危险或有迸射危险，其破\n坏效应将波及周围。根据破坏能力划分为 1.1-1、1.1-2 级。\n1.1-1 级建筑物为建筑物内的危险品发生爆炸事故时，其破坏能力相当于TNT 的厂房和仓库；\n1.1 -2 级建筑物为建筑物内的危险品发生爆炸事故时，其破坏能力相当于黑火药的厂房和仓库\n2 1.3 级建筑物为建筑物内的危险品在制造、储存、运输中具有燃烧危险。偶尔有较小爆炸或较小\n迸射危险，或两者兼有，但无整体爆炸危险，其破坏效应局限于本建筑物内，对周围建筑物影响较小。\n3.1.2 厂房的危险等级应由其中最危险的生产工序确定。仓库的危险等级应由其中所储存最危险的物\n品确定。\n3.1.3 危险品生产工序的危险等级分类应符合表 3.1.3 -1 的规定。危险品仓库的危险等级分类应符合表\n3.1.3-2 的规定。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 12,
+        "page_end": 12,
+        "token_count": 226,
+        "char_count": 453
+      }
+    },
+    {
+      "chunk_id": 35,
+      "text": "表 3.1.3-1 危\n险品生产工序的危险等级分类\n序号 危险品\n名 称\n危 险\n等 级\n生 产 工 序\n1.1-2 药物混合(硝酸钾与碳、硫球磨)，潮药装模(或潮药包片)，压药，拆模(撕片)，碎片、造\n粒，抛光，浆药，干燥，散热，筛选，计量包装 1 黑火药\n1.3 单料粉碎、筛选、干燥、称料，硫、碳二成分混合\n1.1-1 药物混合，造粒，筛选，制开球药，压药，浆药，干燥，散热，计量包装\n1.1-2 褙药柱(药块)，湿药调制，烟雾剂干燥、散热、计量包装 2 烟火药\n1.3 氧化剂、可燃物的粉碎与筛选，称料（单料）\n3 引火线 1.1-2 制引，浆引，漆引，干燥，散热，绕引，定型裁割，捆扎，切引，包装\n1.1-1 装药\n1.1-2 黑火药装药 4 爆竹类\n1.3 插引（含机械插引，手工插引和空筒插引），挤引，封口，点药，结鞭，封装，包装\n1.1-1 装药，筑(压)药，内筒封口(压纸片、装封口剂)\n装发射药，黑火药装（压）药，已装药部件钻孔，装单个裸药件，单筒药量＞25 g非裸\n药件组装，外筒封口(压纸片)\n组合烟花\n类、内筒\n型小礼花\n类\n1.3 蘸药，安引，组盆串引（空筒） ，单筒药量＜25g非裸药件组装，包装\n1.1-1 装球\n1.1-2 包药，组装(含安引、装发射药包、串球)，剖引（引线钻孔），球干燥，散热，包装 6 礼花弹类\n1.3 空壳安引，糊球\n1.1-2 装（筑）药\n7 吐珠类\n1.3 安引（空筒），组装，包装\n1.1-1 装药，筑（压）药\n1.1-2 黑火药装(筑、压)药，包药，装裸药效果件（含效果药包），单个药量≥30 g非裸药件\n组装 8\n升空类\n（含双响\n炮）\n1.3 安引，单个药量＜30g非裸药效果件组装(含安稳定杆)，包装\n1.1-1 装药、筑（压）药\n1.1-2 黑火药装、筑（压）药，已装药部件钻孔 9\n旋转类\n（旋转升\n空类）\n1.3 安引，组装（含引线、配件、旋转轴、架），包装\n1.1-2 装药、筑(压)药，已装药部件的钻孔\n喷花类和\n架子烟花\n1.3 安引，组装，包装",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 13,
+        "page_end": 13,
+        "token_count": 432,
+        "char_count": 864
+      }
+    },
+    {
+      "chunk_id": 36,
+      "text": "1.1-1 装药\n11 线香类\n1.3 粘药，干燥，散热，包装\n1.1-1 雷酸银药物配制，拌药砂，发令纸干燥\n1.1-2 机械蘸药 12 摩擦类\n1.3 包药砂，手工蘸药，分装，包装\n1.1-2 装药，筑（压）药\n13 烟雾类\n1.3 糊球，安引，球干燥，散热，组装，包装\n1.1-1 装药、筑(压)药\n1.1-2 已装药部件钻孔 14\n造型玩具\n类\n1.3 安引，组装，包装\n15 电点火头 1.3 蘸药，干燥（晾干），检测，包装\n注：表中未列品种、加工工序，其危险等级可依照本规范 3.1.1 条并对照本表确定。\n表 3.1.3-2 危险品仓库的危险等级分类\n贮 存 的 危 险 品 名 称 危 险 等 级\n烟火药（包括裸药效果件），开球药 1.1-1\n黑火药，引火线，未封口含药半成品，单个装药量在40g及以上已封口的烟花半成品及含爆炸音\n剂、笛音剂的半成品，已封口的 B 级爆竹半成品，A、B级成品（喷花类除外），单筒药量25g\n及以上的C级组合烟花类成品\n电点火头，单个装药量在40g以下已封口的烟花半成品（不含爆炸音剂、笛音剂），已封口的C\n级爆竹半成品，C、D级成品（其中，组合烟花类成品单筒药量在25g以下），喷花类成品\n注：表中 A、B、C、D 级为现行国家标准《烟花爆竹 安全与质量》GB 10631 规定的产品分级。\n3.1.4 氧化剂、可燃物及其他化工原材料的火灾危险性分类应符合现行国家标准《建筑设计防火规范》\nGB 50016 的有关规定。\n3.2 计算药量\n3.2.1 危险性建筑物的计算药量应为该建筑物内（含生产设备、运输设备和器具里）所存放的黑火药、\n烟火药、在制品、半成品、成品等能形成同时爆炸或燃烧的危险品最大药量。\n3.2.2 防护屏障内的危险品药量应计入该屏障内的危险性建筑物的计算药量。\n3.2.3 危险性建筑物中抗爆间室的危险品药量可不计入危险性建筑物的计算药量。\n3.2.4 危险性建筑物内采取了分隔防护措施，危险品相互间不会引起同时爆炸或燃烧的药量可分别计\n算，取其最大值为危险性建筑物的计算药量。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 14,
+        "page_end": 15,
+        "token_count": 437,
+        "char_count": 875
+      }
+    },
+    {
+      "chunk_id": 37,
+      "text": "4 工程规划和外部最小允许距离\n4.1 工程规划\n1 烟花爆竹生产项目和经营批发仓库的选址应符合城乡规划的要求，并应避开居民点、学校、工\n业区、旅游区、铁路和公路运输线、高压输电线等。\n4.1.2 烟花爆竹生产项目应根据所生产的产品种类、工艺特性、生产能力、危险程度进行分区规划，\n分别设置非危险品生产区、危险品生产区、危险品总仓库区、燃放试验场区和销毁场、行政区。\n4.1.3 烟花爆竹生产项目规划应符合下列要求：\n1 根据生产、生活、运输、管理和气象等因素确定各区相互位置。危险品生产区、危险品总仓库\n区宜设在有自然屏障或有利于安全的地带，燃放试验场和销毁场宜单独设在偏僻地带。\n2 非危险品生产区可靠近住宅区布置。\n3 无关人流和货流不应通过危险品生产区和危险品总仓库区。危险品货物运输不宜通过住宅区。\n4.1.4 当烟花爆竹生产项目建在山区时，应合理利用地形，将危险品生产区、危险品总仓库区、燃放\n试验场或销毁场区布置在有自然屏障的偏僻地带。不应将危险品生产区布置在山坡陡峭的狭窄沟谷中。\n4.1.5 烟花爆竹经营批发企业设置危险品仓库时， 应符合本规范第4.3 节危险品总仓库区外部最小允许\n距离和第 5.3 节危险品总仓库区内部最小允许距离的规定。\n4.2 危险品生产区外部最小允许距离\n4.2.1 危险品生产区内\n的危险性建筑物与其周围零散住户、村庄、公路、铁路、城镇和本企业总仓库\n区等外部最小允许距离，应分别按建筑物的危险等级和计算药量计算后取其最大值。 外部最小允许距离\n应自危险性建筑物的外墙算起，晒场自晒场边缘算起。\n4.2.2 危险品生产区内， 1.1 级建筑物的外部最小允许距离，不应小于表 4.2.2 的规定。\n表 4.2.2 危险品生产区 1.1 级建筑物、构筑物的外部最小允许距离(m)\n计 算 (k 药 量 g)\n项 目 ≤10 >10\n10户或50人以下零散住户， 50人以下的企业\n围墙，本企业独立的总仓库区建筑物边缘，无\n摘挂作业铁道中间站站界及建筑物边缘，\nllOkV架空输电线路\n50 60 65 70 80 110 120 140 170 190\n村庄边缘，学校， 职工人数在50人及以上的企\n业围墙， 有摘挂作业的铁路车站站界及建筑\n物边缘， 220kV以下的区域变电站围墙，220kV\n架空输电线路\n60 70 80 100 120 160 180 210 250 270\n城镇规划边缘， 220kV及以上的区域变电站围\n墙，220kV以上的架空输电线路 110 130 150 180 220 290 330 370 450 490\n铁路线、二级及以上公路路边、通航的河流航\n道边缘 35 40 50 60 70 95 110 120 150 160\n三级公路路边、35kV架空输电线路 35 35 40 50 60 80 90 110 130 140",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 16,
+        "page_end": 16,
+        "token_count": 601,
+        "char_count": 1203
+      }
+    },
+    {
+      "chunk_id": 38,
+      "text": "4.2.3 危险品生产区内， 1.3 级建筑物、构筑物的外部最小允许距离，不应小于表 4.2.3 的规定。\n表 4.2.3 危险品生产区 1.3 级建筑物、构筑物的外部最小允许距离(m)\n计 算 药 量 (kg)\n项 目 ≤100 >100\n10户或50人以下零散住户，50人以下的企\n业围墙， 本企业独立的总仓库区建筑物边\n缘，无摘挂作业铁路中间站站界及建筑物\n边缘，llOkV架空输电线路\n村庄边缘，学校，职工人数在50人及以上\n的企业围墙， 有摘挂作业的铁路车站站界\n及建筑物边缘，220kV以下的区域变电站围\n墙，220kV架空输电线路\n城镇规划边缘，220kV及以上的区域变电\n站围墙，220kV以上的架空输电线路 60 65 70 75 80 90\n铁路线、二级及以上公路路边、通航的河\n流航道边缘\n三级公路路边、35kV架空输电线路 35 35 35 35 35 35\n4.3 危险品总仓库区外部最小允许距离\n4.3.1 危险品总仓库区\n内的危险性建筑物与其周围零散住户、村庄、公路、铁路、城镇和本企业生产\n区等外部最小允许距离，应分别按建筑物的危险等级和计算药量计算后取其最大值。外部最小允许距\n离应自危险性建筑物的外墙算起。\n4.3.2 危险品总仓库区 1.1 级仓库的外部最小允许距离不应小于表 4.3.2 的规定。\n表 4.3.2 危险品总仓库区 1.1 级仓库的外部最小允许距离(m)\n计 算 药 量 (kg)\n项 目 ≤\n10户或50人以下零散住\n户，50人以下的企业围墙，\n本企业生产区建筑物边\n缘，无摘挂作业铁路中间\n站界及建筑物边缘， llOkV\n架空输电线路\n115 145 185 210 230 250 260 275 290 300 310\n村庄边缘， 学校， 职工人数\n在50人及以上的企业围\n墙，有摘挂作业的铁路车\n站站界及建 筑物边缘，\n220kV以下的区域变电站\n围墙， 220kV架空输电线路\n175 220 280 320 350 380 400 420 440 460 480\n城镇规划边缘，220kV及\n以上的区域变电站围墙，\n220kV以上的架空输电线\n路\n315 400 510 580 630 690 720 760 800 830 860\n铁路线、二级及以上公路\n路边、通航的河流航道边\n缘\n100 125 155 180 195 210 220 235 245 255 270\n三级公路路边、35kV架空\n输电线路 80 90 110 120 130 140 150 160 170 180 190\n4.3.3 危\n险品总仓库区 1.3 级仓库的外部最小允许距离不应小于表 4.3.3 的规定。\n表 4.3.3 危险品总仓库区 1.3 级仓库的外部最小允许距离(m)",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 17,
+        "page_end": 18,
+        "token_count": 583,
+        "char_count": 1166
+      }
+    },
+    {
+      "chunk_id": 39,
+      "text": "4.3.4 若将总仓库区和生产区相邻或相连时，两者之间距离按照各自外部最小允许距离要求计算，取\n大值。\n计 算 药 量 (kg) 项 目\nlO户或50人以下零散住户，50人以\n下的企业围墙，本企业生产区建筑\n物边缘，无摘挂作业铁路中间站站\n界及建筑物边缘，llOkV架空输电线\n路\n35 40 45 48 50 55 57 60 65 78 85\n村庄边缘， 学校， 职工人数在50人及\n以上的企业围墙，有摘挂作业的铁\n路车站站界及建筑物边缘， 220kV\n以下的区域变电站围墙，220kV架空\n输电线路\n40 65 75 80 85 90 95 100 105 110 140\n城镇规划边缘，220kV及以上的区\n域变电站围墙，220kV以上的架空\n输电线路\n70 110 120 130 140 150 160 170 180 190 250\n铁路线、二级及以上公路路边、通\n航的河流航道边缘 40 50 50 50 50 50 50 50 53 55 70\n三级公路路边、35kV架空输电线路 35 35 38 40 43 45 48 50 53 55 70",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 19,
+        "page_end": 19,
+        "token_count": 241,
+        "char_count": 482
+      }
+    },
+    {
+      "chunk_id": 40,
+      "text": "4.4 燃放试验场和销毁场外部最小允许距离\n4.4.1 燃放试验场的外部最小允许距离不应小于表 4.4.1 的规定。\n表 4.4.1 燃放试验场的外部最小允许距离(m)\n燃 放 试 验 场 类 别\n项 目 地面烟花 升空烟花 ≤4号礼花弹 ≥5号礼花弹\n<10号礼花弹\n≥10号礼花\n弹\n危险品生产区及危险品仓库、易燃\n易爆液体库 50 200 300 600 800\n居民住宅 30 100 150 300 400\n注：外部最小允许距离自燃放试验场边缘算起。\n4.4.2 烟花爆竹企业的危险品销毁场边缘距场外建筑物的外部最小允许距离不应小于 65m，一次烧毁\n药量不应超过 20kg。\n5 总平面布置和内部最小允许距离\n5.1 总平面布置\n5.\n1.\n1 危险品生产区的总平面布置应符合下列规定：\n1 同时生产烟花爆竹多个产品类别的企业，应根据生产工艺特性、产品种类分别建立生产线，并\n应做到分小区布置。\n2 生产线的厂（库）房的总平面布置应符合工艺流程及生产能力的要求，宜避免危险品的往返和\n交叉运输。\n3 危险性建筑物之间、危险性建筑物与其他建筑物之间的距离应符合内部最小允许距离的要求。\n4 同一危险等级的厂房和库房宜集中布置；计算药量大或危险性大的厂房和库房，宜布置在危险\n品生产区的边缘或其他有利于安全的地形处；粉尘污染比较大的厂房应布置在厂区的边缘。\n5 危险品生产厂房宜小型、分散。\n6 危险品生产厂房靠山布置时，距山脚不宜太近。\n当危险品生产厂房布置在山凹中时，应考虑人员\n的安全疏散和有害气体的扩散。\n5.\n1.\n2 危险品总仓库区的总平面布置应符合下列规定：\n1 应根据仓库的危险等级和计算药量结合地形布置。\n2 比较危险或计算药量较大的危险品仓库，不宜布置在库区出入口的附近。\n3 危险品运输道路不应在其他防护屏障内穿行通过。\n4 不同类别仓库应考虑分区布置，同一危险等级的仓库宜集中布置，计算药量大或危险性大的仓\n库宜布置在总仓库区的边缘或其他有利于安全的地形处。\n5.\n1.\n3 危险品生产区和危险品总仓库区的围墙设置应符合下列规定：\n1 危险品生产区和危险品总仓库区应设置高度不低于 2m 的围墙。\n2 围墙与危险性建筑物、构筑物之间的距离宜设为12m，且不应小于 5m。\n3 围墙应为密砌墙，特殊地形设置密砌围墙有困难时，局部地段可设置刺丝围墙。\n5.\n1.\n4 危险品生产区和危险品总仓库区的绿化，宜种植阔叶树。\n5.\n1.\n5 距离危险性建筑物、构筑物外墙四周 5m 内宜设置防火隔离带。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 20,
+        "page_end": 20,
+        "token_count": 531,
+        "char_count": 1062
+      }
+    },
+    {
+      "chunk_id": 41,
+      "text": "5.2 危险品生产区内部最小允许距离\n5.2.1 危险品生产区内\n各建筑物之间的内部最小允许距离，应分别按照各危险性建筑物的危险等级及\n其计算药量所确定的距离和本节各条所规定的距离，取其最大值。内部最小允许距离应自建筑物的外\n墙算起，晒场自晒场边缘算起。\n5.\n2.\n2 危险品生产区，1.\n1-1 级建筑物与邻近建筑物的内部最小允许距离，应符合表 5.\n2.\n2 的规定：\n表 5.\n2.\n2 危险品生产区 1.\n1-1 级建筑物与邻近建筑物的内部最小允许距离(m)\n计算药量\n(kg) 双有屏障 单有屏障 因屏障开口形成双方无屏障\n注： 当两座相邻厂房相对的外墙均为防火墙时，可采用括号内数字。\n5.\n2.\n3 危险品生产区1.\n1-2 级建筑物与邻近建筑物的内部最小允许距离， 应符合表5.\n2.\n2 中数字乘以0.\n8，\n但不得小于表中相应列的最小值。\n5.\n2.\n4 1.\n1 级建筑物有敞开面时，该敞开面方向的内部最小允许距离应按本规范表 5.\n2.\n2 的要求计算后\n再增加 20％。\n5.\n2.\n5 在一条山沟中，当 1.\n1 级建筑物镶嵌在山坡陡峻的山体中时，与其正前方建筑物的内部最小允\n许距离应按本规范第 5.\n2.\n2 条或 5.\n2.\n3 条的要求计算后再增加 50%\n5.\n2.\n6 危险品生产区内布置有迸射危险产品的生产线时，该生产线有迸射危险品的建筑物与其它生产线\n建筑物的内部最小允许距离，应分别按各自的危险等级和计算药量计算后再增加 50%。\n5.\n2.\n7 危险品生产区内 1.\n1 级建筑物与公用建筑物、构筑物的内部最小允许距离应符合下列规定：\n1 与锅炉房、独立变电所、水塔、高位水池（包括地上、地下或半地下）及消防蓄水池、有明火\n或散发火星的建筑物的内部最小允许距离，应按表5.\n2.\n2 的要求计算后再增加 50％，并不应小于50m。\n2 与厂区内办公室、食堂、汽车库的内部最小允许距离，应按表5.\n2.\n2 的要求计算后再增加 50％，\n并不应小于 65m。\n5.\n2.\n8 危险品生产区内 1.\n3 级建筑物与邻近建筑物的内部最小允许距离应符合表 5.\n2.\n8 的规定。\n表 5.2.8 危险品生产区内 1.3 级建筑物与邻近建筑物的内部最小允许距离(m)",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 21,
+        "page_end": 22,
+        "token_count": 477,
+        "char_count": 954
+      }
+    },
+    {
+      "chunk_id": 42,
+      "text": "2 与厂区内办公室、食堂、汽车库的内部最小允许距离，应按表5.\n2 的要求计算后再增加 50％，\n并不应小于 65m。\n8 危险品生产区内 1.\n3 级建筑物与邻近建筑物的内部最小允许距离应符合表 5.\n8 的规定。\n表 5.\n2.\n8 危险品生产区内 1.\n3 级建筑物与邻近建筑物的内部最小允许距离(m)\n计算药量\n(kg)\n内部最小允许距离\n6OO\n注：当两座相邻厂房的相对的外墙均为防火墙时，表中距离可乘以 0.8，但不得小于 12m。\n5.2.9 危险品生产区内 1.3 级建筑物与公用建筑物、构筑物的内部最小允许距离应符合下列规定：\n1 与锅炉房、有明火或散发火星的建筑物的内部最小允许距离不应小于 50m。\n2 与独立变电所、水塔、高位水池（包括地上、地下或半地下）及消防蓄水池的内部最小允许距\n离不应小于 35m；\n3 与厂区内办公室、食堂、汽车库的内部最小允许距离不应小于 50m。\n5.2.10 在山区建厂利用山体设置临时存药洞时，临时存药洞洞口相对位置不应布置建筑物，临时存药\n洞外壁与相邻建构筑物之间的内部最小允许距离应符合表 5.2.10 的规定。\n表 5.2.10 临时存药洞与邻近建筑物的内部最小允许距离(m)\n计算药量\n(kg)\n内部最小允许距离",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 21,
+        "page_end": 22,
+        "token_count": 269,
+        "char_count": 539
+      }
+    },
+    {
+      "chunk_id": 43,
+      "text": "5.3 危险品总仓库区内部最小允许距离\n5.3.1 危险品总仓库区内各建筑物之间的内部最小允许距离，应按各仓库的危险等级和计算药量分别\n计算后取其最大值。内部最小允许距离应自建筑物的外墙算起。\n5.3.2 危险品总仓库区内 1.1-1 级仓库与邻近危险品仓库的内部最小允许距离应符合表 5.3.2 的规定。\n表 5.3.2 危险品总仓库区内 1.1-1 级仓库与邻近危险品仓库的内部最小允许距离(m)\n计算药量\n(kg)\n单有屏障 双有屏障\n5.3.3 危险品总仓库区内 1.1-2 级仓库与邻近危险品仓库的内部最小允许距离应符合表 5.3.2 中规定的\n距离乘以 0.8，但不得小于表中相应列的最小值。\n5.3.4 危险品总仓库区内 1.3 级仓库与邻近危险品仓库的内部最小允许距离应符合表 5.3.4 的规定。\n表 5.3.4 危险品总仓库区内 1.3 级仓库与邻近危险品仓库的内部最小允许距离(m)\n计算药量\n(kg)\n内部最小允许距离\n5.3.5 危险品总仓库区 10kV 及以下变电所与危险品仓库的内部最小允许距离应符合下列规定：\n1 与 1.1-1 级、1.1-2 级仓库的内部最小允许距离应分别符合本规范第 5.3.2 条和第 5.3.3 条的规定，\n并不应小于 50m。\n2 与 1.3 级仓库的内部最小允许距离应符合表 5.3.4 的规定，并不应小于 25m。\n5.3.6 危险品总仓库区值班室宜结合地形布置在有自然屏障处，与危险品仓库的内部最小允许距离应\n符合下列规定：\n1 与 1.1-1 级仓库的内部最小允许距离应符合表 5.3.6-1 的规定。\n2 与 1.1-2 级仓库的内部最小允许距离按表 5.3.6-1 的要求乘以 0.8，但不得小于表中相应列的最小\n值。\n3 与 1.3 级仓库的内部最小允许距离应符合表 5.3.6-2 的规定。\n4 当值班室采取抗爆结构时，其与各级仓库的内部最小允许距离按设计确定。\n表 5.3.6-1 1.1-1 级仓库与库区值班室的内部最小允许距离(m)\n计算药量\n(kg) 值班室无防护屏障 值班室有防护屏障\n表 5.3.6-2 1.3 级仓库与库区值班室的内部最小允许距离(m)\n计算药量\n(kg) 内部最小允许距离",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 23,
+        "page_end": 24,
+        "token_count": 470,
+        "char_count": 940
+      }
+    },
+    {
+      "chunk_id": 44,
+      "text": "5.3.7 当危险品总仓库区设置无固定值班人员岗哨时，岗哨与危险品仓库的距离可不受本规范第 5.3.6\n条限制。\n5.3.8 当采用洞库或覆土库储存危险品时，洞库或覆土库应符合现行国家标准《地下及覆土火药炸药\n仓库设计安全规范》GB50154 中的有关规定。\n5.4 防护屏障\n5.\n4.\n1 防护屏障的形式\n应根据总平面布置、运输方式、地形条件、建筑物内计算药量等因素确定。\n防\n护屏障可采用防护土堤、钢筋混凝土防护屏障或夯土防护墙等形式。\n防护屏障的设置，应能对本建筑\n物及邻近建筑物起到防护作用。\n防护屏障的防护范围应按本规范附录 A 确定。\n5.\n4.\n2 危险品生产区和危险品总仓库区防护屏障的设置符合下列规定：\n1 1.\n1 级建筑物应设置防护屏障；\n2 1.\n1 级建筑物内计算药量小于100kg 时，可采用夯土防护墙。\n3 1.\n3 级建筑物可不设置防护屏障。\n5.\n4.\n3 防护屏障内坡脚与建筑物外墙之间的水平距离应符合下列规定：\n1 有运输或特殊要求的地段，其距离应按最小使用要求确定，但不应大于 9m，并适当增加防护屏\n障高度；\n2 无运输或特殊要求时，其距离不应大于 3m，且不宜小于 1.\n5m。\n5.\n4.\n4 防护屏障的高度不应低于防护屏障内危险性建筑物侧墙顶部与被保护建筑物屋檐或道路中心线\n上 3.\n7m 处之间连线的高度，并应符合本规范附录 A 的规定。\n5.\n4.\n5 防护屏障的设置应满足生产运输及安全疏散的要求，并应符合下列规定。\n1 当防护屏障采用防护土堤时，应设置运输通道或运输隧道。\n并应符合下列规定：\n1）运输通道和运输隧道应满足运输要求，并应使其防护土堤的无防护作用区为最小。\n汽车运输通\n道净宽度不宜大于 5m。\n汽车运输隧道净宽度宜为 3.\n5m，净高度不宜小于 3.\n0m。\n其结构应符合本规范\n第 8.\n7.\n2 条的规定。\n2）运输通道的防护土堤端部需设挡土墙时，其结构宜为钢筋混凝土结构。\n2 当在危险品生产厂房的防护土堤内设置安全疏散隧道时，应符合下列规定：\n1）安全疏散隧道应设置在危险品生产厂房安全出口附近。\n2）安全疏散隧道的平面形式宜将内端的一半与土堤垂直，外端的一半成35\no 角，宜按本规范附\n录 A 确定。\n3）安全疏散隧道的净高度不宜小于2.\n2m，净宽度宜为1.\n5m，其结构应符合本规范第8.\n7.\n2 条的\n规定。\n4）安全疏散隧道不得兼作运输用。\n3 当防护屏障采用其他形式时，生产运输和安全疏散要求由抗爆设计确定。\n5.\n4.\n6 防护土堤的构造应符合下列规定：\n1 防护土堤的顶宽不应小于 1.\n0m，底宽应根据不同土质材料确定，但不应小于防护土堤高度的 1.\n5\n倍。\n防护土堤的边坡应稳定。\n2 在取土困难地区可在防护土堤内坡脚处砌筑高度不大于 1.\n0m 的挡土墙，外坡脚处砌筑高度不大\n于 2.\n0m 的挡土墙；在特殊困难情况下，允许在防护土堤底部距建筑物地面标高 1.\n0m 范围内填筑块状\n材料。\n5.\n4.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 25,
+        "page_end": 25,
+        "token_count": 629,
+        "char_count": 1258
+      }
+    },
+    {
+      "chunk_id": 45,
+      "text": "0m，底宽应根据不同土质材料确定，但不应小于防护土堤高度的 1.\n倍。\n防护土堤的边坡应稳定。\n2 在取土困难地区可在防护土堤内坡脚处砌筑高度不大于 1.\n0m 的挡土墙，外坡脚处砌筑高度不大\n于 2.\n0m 的挡土墙；在特殊困难情况下，允许在防护土堤底部距建筑物地面标高 1.\n0m 范围内填筑块状\n材料。\n7 夯土防护墙的顶宽不应小于 0.\n7m，墙高不应大于 4.\n5m，边坡度宜为 1：0.\n2～1：0.\n25，应采用\n灰土为填料，地面至地面以上 0.\n5m 范围内墙体应采用砌体或石块砌护墙。\n5.\n4.\n8 钢筋混凝土防护屏障应根据防护屏障内危险性建筑物的计算药量由抗爆设计确定，并应满足抗\n爆炸空气冲击波及爆炸碎片的作用。\n当建筑物外墙为钢筋混凝土墙，且满足抗爆设计要求时，该外墙\n可作为防护屏障。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 25,
+        "page_end": 25,
+        "token_count": 178,
+        "char_count": 356
+      }
+    },
+    {
+      "chunk_id": 46,
+      "text": "6 工艺与布置\n6.\n0.\n1 烟花爆竹的生产工艺宜采用机械化、自动化、自动监控等可靠的先进技术。\n对有燃烧、爆炸危\n险的作业宜采取隔离操作，并应坚持减少厂房内存药量和作业人员的原则，做到小型、分散。\n6.\n0.\n2 烟花爆竹生产应按产品类型设置生产线，生产工序的设置应符合产品生产工艺流程要求，各危\n险性建筑物或各生产工序的生产能力应相互匹配。\n6.\n0.\n3 有燃烧、爆炸危险的作业场所使用的设备、仪器、工器具应满足使用环境的安全要求。\n6.\n0.\n4 有易燃易爆粉尘散落的工作场所应设置清洗设施，并应有充足的清洗用水。\n6.\n0.\n5 在危险品生产区内，危险品生产厂房允许最大存药量应符合现行国家标准《烟花爆竹劳动安全\n技术规程》GB 11652 的有关规定；危险品中转库最大存药量不应超过两天生产需要量，且单库不应超\n过本规范第 7.\n1.\n2 条的规定；临时存药间或临时存药洞的最大存药量不应超过单人半天的生产需要量，\n且不应超过 10kg。\n6.\n0.\n6 1.\n1 级、1.\n3 级厂房和库房（仓库）应为单层建筑，其平面宜为矩形。\n6.\n0.\n7 1.\n1 级厂房应单机单栋或单人单栋独立设置，当采取抗爆间室、隔离操作时可以联建。\n引火线制\n造厂房应单间单机布置，每栋厂房连建间数不超过 4 间。\n6.\n0.\n8 1.\n3 级厂房设置应符合下列规定：\n1 工作间联建时应采用密实砌体墙隔开，且联建间数不应超过 6 间，当厂房建筑耐火等级为三级\n时，联建间数不应超过 4 间。\n2 机械插引厂房工作间联建间数不应超过 4 间。\n且每个工作间应为单人、单机布置\n3 原料称量、氧化剂的粉碎和筛选、可燃物的粉碎和筛选，应独立设置厂房。\n6.\n0.\n9 不同危险等级的中转库应独立设置，且不得和生产厂房联建。\n6.\n0.\n10 有固定作业人员的非危险品生产厂房不得和危险品厂房联建。\n6.\n0.\n11 1.\n1 级厂房内不应设置除更衣室外的辅助用室，1.\n3 级厂房内可设置生产辅助用室（如工器具室\n等） 。\n6.\n0.\n12 危险品生产厂房内设置临时存药间或在厂房附近设置临时存药洞时，临时存药间与操作间应采\n用钢筋混凝土墙或不小于 370mm 的密实砌体墙隔开， 临时存药洞的设置应符合本规范第5.\n2.\n10 条和第\n8.\n1.\n6 条的规定。\n6.\n0.\n13 危险品生产厂房内的工艺布置应便于作业人员操作、维修以及发生事故时迅速疏散。\n6.\n0.\n14 对危险品进行直接加工的岗位宜设置防护装甲、防护板或采取人机隔离、远距离操作。\n对于作\n业人员与药物直接接触的混药、造粒、装药等工序应设置防护隔离罩、隔离板或其它个体防护装置。\n对有升空拼射危险的生产岗位宜设置防迸射措施。\n6.\n0.\n15 1.\n1 级厂房的人均使用面积不宜少于 9.\n0 m\n2，1.\n3 级厂房的人均使用面积不宜少于 4.\n5m2。\n6.\n0.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 26,
+        "page_end": 26,
+        "token_count": 608,
+        "char_count": 1217
+      }
+    },
+    {
+      "chunk_id": 47,
+      "text": "14 对危险品进行直接加工的岗位宜设置防护装甲、防护板或采取人机隔离、远距离操作。\n对于作\n业人员与药物直接接触的混药、造粒、装药等工序应设置防护隔离罩、隔离板或其它个体防护装置。\n对有升空拼射危险的生产岗位宜设置防迸射措施。\n1 级厂房的人均使用面积不宜少于 9.\n0 m\n3 级厂房的人均使用面积不宜少于 4.\n5m2。\n16 有升空迸射危险的生产厂房与相邻厂房的门、窗不宜正对设置。\n若正对设置时，在门、窗前不\n大于 3.\n0m 处应设置栏截装置，拦截装置的宽度应大于门窗宽 0.\n5m（每侧） ，高度应超出门窗高1.\n5m,\n高出的 1.\n5m 应斜向本建筑物，倾斜角度 30~45 度。\n6.\n0.\n17 烟花爆竹成品、有药半成品和药剂的干燥，宜采用热水、低压蒸汽或利用日光干燥，严禁采用\n明火烘干。\n干燥场所应符合下列规定：\n1 干燥厂房内应设置排湿装置、感温报警装置及通风凉药设施。\n2 热水、低压蒸汽干燥厂房内的温度应符合现行国家标准《烟花爆竹劳动安全技术规程》GB11652\n的有关规定。\n3 热风干燥厂房可对没有裸露药剂的成品、半成品及无药半成品进行干燥；当对药剂和带裸露药剂\n的半成品采用热风干燥时，应有防止药物产生扬尘的措施。\n烘干温度应符合现行国家标准《烟花爆竹\n劳动安全技术规程》GB11652 的有关规定。\n4 日光干燥应在专门的晒场进行，晒场场地要求平整。\n危险品晒场周围应设置防护堤，防护堤顶面\n应高出产品面 1m\n6.\n0.\n18 晒场宜设置凉药间或凉药厂房。\n当有可靠的防雨和防溅措施时，可不设凉药厂房。\n6.\n0.\n19 运输危险品的廊道应采用敞开式或半敞开式，不宜与危险品生产厂房直接相连。\n6.\n0.\n20 产品陈列室应陈列产品模型、不应陈列危险品。\n陈列实物时应单独建设陈列场所，并应满足本规\n范的有关条款规定。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 26,
+        "page_end": 26,
+        "token_count": 389,
+        "char_count": 779
+      }
+    },
+    {
+      "chunk_id": 48,
+      "text": "7 危险品储存和运输\n7.1 危险品储存\n7.1.1 危险品的储存应符合现行国家标准《烟花爆竹劳动安全技术规程》GB11652 有关储存的规定。\n7.1.2 库房（仓库）危险品的存药量和建设规模应符合下列规定：\n1 危险品生产区内，1.1 级中转库单库存药量不应超过 500kg，1.3 级中转库单库存药量不应超过\n1000kg。\n2 危险品总仓库区内，1.1 级成品仓库单库存药量不宜超过 10000kg，1.3 级成品仓库单库存药量\n不宜超过 20000kg；烟火药、黑火药、引火线仓库单库存药量不宜超过5000kg。\n3 危险品总仓库区内，1.1 级成品仓库单栋建筑面积不宜超过 500 ㎡，1.3 级成品仓库单栋建筑面\n积不宜超过 1000 ㎡，每个防火区面积不超过500 ㎡，烟火药、黑火药、引火线仓库单栋建筑面积不宜\n超过 100 ㎡。\n7.1.3 库房（仓库）内危险品的堆放应符合下列规定：\n1 危险品堆垛间应留有检查、清点、装运的通道。堆垛之间的距离不宜小于 0.7m，堆垛距内墙壁\n距离不宜少于 0.45m；搬运通道的宽度不宜小于 l.5m。\n2 烟火药、黑火药堆垛的高度不应超过 1.0m；半成品与未成箱成品堆垛的高度不应超过1.5m；成\n箱成品堆垛的高度不应超过 2.5m。\n7.2 危险品运输\n7.2.1 危险品的运输宜\n采用符合安全要求并带有防火罩的汽车运输；厂内运输可采用符合安全要求的\n手推车运输，厂房之间的运输也可采用人工提送的方式。不宜采用三轮车运输，严禁用畜力车、翻斗\n车和各种挂车运输。\n7.2.2 危险品生产区运输危险品的主干道中心线与各级危险性建筑物的距离应符合下列规定：\n1 距 1.1 级建筑物不宜小于 20m，有防护屏障时可不小于 12m。\n2 距 1.3 级建筑物不宜小于 12m；距实墙面可不小于 6m。\n3 运输裸露危险品的道路中心线距有明火或散发火星的建构筑物不应小于 35m。\n7.2.3 危险品总仓库区运输危险品的主干道中心线与各级危险性建筑物的距离不应小于 10m。\n7.2.4 危险品生产区和危险品总仓库区内汽车运输危险品的主干道纵坡不宜大于 6％； 手推车运输危险\n品的道路纵坡不宜大于 2％。\n7.2.5 机动车不应直接进入 1.1 级和1.3 级建筑物内， 装卸作业宜在各级危险性建筑物门前不小于2.5m\n以外处进行。\n7.2.6 人工提送危险品时，宜设专用人行道，道路纵坡不宜大于 8％，路面应平整，且不应设有台阶。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 27,
+        "page_end": 27,
+        "token_count": 522,
+        "char_count": 1044
+      }
+    },
+    {
+      "chunk_id": 49,
+      "text": "8 建筑结构\n8.1 一般规定\n8.\n1.\n1 各级危险性建筑物的耐火等级和化学原料仓库的耐火等级除本规范第 8.\n1.\n2 条规定者外， 均不应\n低于现行国家标准《建筑设计防火规范》GB50016 中二级耐火等级的规定；\n8.\n1.\n2 建筑面积小于 20m2 的 1.\n1 级建筑物或建筑面积不超过 300m2 的 1.\n3 级建筑物的耐火等级可为三\n级。\n8.\n1.\n3 危险性建筑物应有适当的净空，室内梁或板中的最低净空高度不宜小于 2.\n8m，并应满足正常的\n采光和通风要求。\n8.\n1.\n4 危险品生产区内宜设有供 1.\n1 级、1.\n3 级建筑物内操作人员使用的洗涤、淋浴、更衣、卫生间等\n辅助用室和办公用室。\n危险品总仓库区内除设置门卫值班室外，不宜设置其它辅助用室。\n8.\n1.\n5 危险品生产区的办公用室和辅助用室宜独立设置或布置在非危险性建筑物内。\n当危险品生产厂\n房附设办公用室和生活辅助用室时，应符合下列规定：\n1 1.\n1 级厂房可附设更衣室；\n2 1.\n3 级厂房除可附设更衣室外，还可附设其他生活辅助用室和车间办公用室。\n但应布置在厂房较\n安全的一端，并采用防火墙与生产工作间隔开。\n车间办公用室和生活辅助用室应为单层建筑，其门窗不宜面向相邻厂房危险性工作间的泄爆面。\n8.\n1.\n6 在危险品生产区内，当在两个危险性建筑物之间设置临时存药洞时，应符合下列规定：\n1 临时存药洞应镶嵌在天然山体内。\n存药洞门应离山体前坡脚不小于800mm。\n2 临时存药洞的净空尺寸宽不大于800mm，高不大于1000mm，存药洞净深不大于600mm，存药\n洞底宜高出存药洞外人行地面 600mm。\n3 临时存药洞前面宜设置平开木门。\n4 临时存药洞墙体可采用不小于240mm 的密实砌体或钢筋混凝土墙体。\n5 临时存药洞上部覆土厚度不应小于500mm，两侧墙顶覆土宽度不应小于 1500mm。\n6 临时存药洞内应用水泥砂浆抹面，四周有土处应采取防水及隔潮措施。\n药洞上部应有良好的排\n水措施。\n8.\n1.\n7 距离本厂围墙小于 12m 的危险性建筑物，危险性建筑物面向围墙方向的外墙宜为实体墙；如设\n有门、窗或洞口，应采取防火措施。\n8.2 危险品生产区危险性建筑物的结构选型和构造\n1.\n1 级建筑物的结构形式应符合下列规定：\n1 除本规范第 8.\n2.\n1 条第 2 款规定以外的 1.\n1 级建筑物，均应采用现浇钢筋混凝土框架结构。\n2 当符合下列条件之一者，可采用钢筋混凝土柱、梁承重结构或砌体承重结构：\n1）建筑面积小于20m2，且操作人员不超过 2 人的厂房。\n2）远距离控制而室内无人操作的厂房。\n8.\n2.\n2 1.\n3 级建筑物的结构形式应符合下列规定：\n1 除本规范第 8.\n2.\n2 条第 2 款规定以外的 1.\n3 级建筑物，均应采用现浇钢筋混凝土框架结构。\n2 当符合下列条件之一者，可采用钢筋混凝土柱、梁承重结构或砌体承重结构：\n1） 同时满足跨度不大于7.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 28,
+        "page_end": 28,
+        "token_count": 626,
+        "char_count": 1252
+      }
+    },
+    {
+      "chunk_id": 50,
+      "text": "2）远距离控制而室内无人操作的厂房。\n3 级建筑物的结构形式应符合下列规定：\n1 除本规范第 8.\n2 条第 2 款规定以外的 1.\n3 级建筑物，均应采用现浇钢筋混凝土框架结构。\n2 当符合下列条件之一者，可采用钢筋混凝土柱、梁承重结构或砌体承重结构：\n1） 同时满足跨度不大于7.\n5m、 长度不大于30m、 室内净高不大于4m， 且横隔墙间距不大于15m\n的厂房。\n2）横隔墙较密且间距不大于6m 的厂房。\n8.\n2.\n3 采用砌体承重结构的 1.\n1 级、1.\n3 级建筑物不得采用独立砖柱承重。\n危险性建筑物的砌体厚度不\n应小于 240mm，并不得采用空斗墙和毛石墙。\n8.\n2.\n4 1.\n1 级、1.\n3 级厂房屋盖宜采用现浇钢筋混凝土屋盖，并与框架连成整体；也可采用轻质泄压屋\n盖。\n当采用钢筋混凝土柱、梁或砌体承重结构时，宜采用轻质泄压屋盖，当采用轻质泄压屋盖（如彩\n色复合压型钢板等）时，宜采取防止成片或整块屋盖飞出伤人的措施。\n1.\n1\n-2 级黑火药生产厂房宜采用\n轻质易碎屋盖或轻质泄压屋盖。\n当1.\n3 级厂房屋盖采用现浇钢筋混凝土屋盖时，宜设置能较好泄压的门\n窗等。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 28,
+        "page_end": 28,
+        "token_count": 249,
+        "char_count": 498
+      }
+    },
+    {
+      "chunk_id": 51,
+      "text": "8.2.5 有易燃、易爆粉尘的厂房，应采用外形平整、不易积尘的结构构件和构造。\n8.2.6 1.1 级、1.3 级厂房结构构造应符合下列规定：\n1 在梁底标高处，沿外墙和内横墙设置现浇钢筋混凝土闭合圈梁；\n2 梁与墙或柱应锚固可靠，梁与圈梁应连成整体；\n3 围护砌体和钢筋混凝土柱之间应加强联结，纵横砌体之间也应加强联结；\n4 门窗洞口应采用钢筋混凝土过梁，过梁的支承长度不应小于 250mm。当门洞口大于2700mm 时\n宜设置钢筋混凝土门框架或门樘；\n5 砌体承重结构的外墙四角及单元内外墙交接处应设构造柱。\n8.3 抗爆间室和抗爆屏院\n抗爆间室墙厚及屋盖应根据设计药量计算后确定。并应符合下列规定：\n1 当设计药量大于 1kg 时， 抗爆间室的墙及屋盖应采用现浇钢筋混凝土结构，墙厚不宜小于 300mm。\n2 当设计药量不大于 1kg 时，抗爆间室的墙及屋盖宜采用现浇钢筋混凝土结构，墙厚不应小于\n200mm。\n3 当设计药量不大于 1kg 时，抗爆间室的墙及屋盖可采用钢板或组合钢板结构。\n8.3.2 抗爆间室的墙（不包括轻型窗所在墙）和屋盖计算应符合下列规定：\n1 在设计药量爆炸空气冲击波和破片的局部作用下，不应产生震塌、飞散和穿透。\n2 在设计药量爆炸空气冲击波的整体作用下，允许产生一定的残余变形。按使用要求，抗爆间室\n的墙和屋盖按弹性或弹塑性理论设计。\n8.3.3 抗爆间室朝室外的一面应设置轻型窗。窗台的高度不应高于室内地面 0.4m。\n8.3.4 在抗爆间室轻型窗的外面应设置现浇钢筋混凝土抗爆屏院，并应符合下列规定：\n1 抗爆屏院的平面形式和最小进深应符合表 8.3.4 的规定。\n表 8.3.4 抗爆屏院平面形式和最小进深（m）\n设计药量（kg） 小于 3 等于大于 3 并\n小于 15\n等于大于 15 并\n小于 30\n等于大于 30 并小\n于 50\n平面形式\n最小进深（m） 3 4 5 6\n2 抗爆屏院的高度不应低于抗爆间室的檐口高度。当抗爆屏院的进深超过 4m 时，抗爆屏院中墙高\n度应增高，增加的高度不应小于进深超过量的 1/2，抗爆屏院边墙由抗爆间室的檐口高度逐渐增加至屏\n院中墙高度。\n3 当采用平面形式为“ ”的抗爆屏院时，在轻型窗处宜设置进出抗爆屏院的出入口。\n8.3.5 危险品生产厂房中，采用抗爆间室时应符合下列规定：\n1 抗\n爆间室之间或抗爆间室与相邻工作间之间不应设地沟相通。\n2 输送有燃烧爆炸危险物料的管道，在未设隔火隔爆措施的条件下，不应通过或进出抗爆间室。\n3 当输送没有燃烧爆炸危险物料的管道必须通过或进出抗爆间室时，应在穿墙处采取密封措施。\n4 抗爆间室的门、操作口、观察孔和传递窗的结构应能满足抗爆及不传爆的要求。\n5 抗爆间室门的开启应与室内设备动力系统的启停进行联锁。\n6 抗爆间室的墙应高出厂房相邻屋面不少于 0.5m。\n8.3.6 当危险品仓库均采用抗爆间室时，可不设置抗爆屏院，结构可按不殉爆设计。\n8.4 危险品生产区危险性建筑物的安全疏散",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 29,
+        "page_end": 29,
+        "token_count": 629,
+        "char_count": 1258
+      }
+    },
+    {
+      "chunk_id": 52,
+      "text": "4 抗爆间室的门、操作口、观察孔和传递窗的结构应能满足抗爆及不传爆的要求。\n5 抗爆间室门的开启应与室内设备动力系统的启停进行联锁。\n6 抗爆间室的墙应高出厂房相邻屋面不少于 0.\n5m。\n8.\n3.\n6 当危险品仓库均采用抗爆间室时，可不设置抗爆屏院，结构可按不殉爆设计。\n8.\n4 危险品生产区危险性建筑物的安全疏散\n危险品生产厂房安全出口的设置应符合下列规定:\n1 1.1 级、1.3 级厂房每一危险性工作间的建筑面积大于 18m\n时，安全出口的数目不应少于 2 个。\n2 1.1 级、1.3 级厂房每一危险性工作间的建筑面积小于 18m\n，且同一时间内的作业人员不超过 3",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 29,
+        "page_end": 29,
+        "token_count": 145,
+        "char_count": 290
+      }
+    },
+    {
+      "chunk_id": 53,
+      "text": "人时，可设 1 个安全出口，但必须设置安全窗。当建筑面积小于 9m\n，且同一时间内的作业人员不超\n过 2 人时，也可设1 个安全出口。\n3 安全出口应布置在建筑物室外有安全通道的一侧。\n4 须穿过另一危险性工作间才能到达室外的出口，不应作为本工作间的安全出口。\n5 防护屏障内的危险性厂房的安全出口，应布置在防护屏障的开口方向或安全疏散隧道的附近。\n8.4.2 1.1 级、1.3 级厂房外墙上宜设置安全窗。安全窗可作为安全出口，但不得计入安全出口的数目。\n8.4.3 1.1 级、1.3 级厂房每一危险工作间内由最远工作点至外部出口的距离，应符合下列规定：\n1 1.1 级厂房不应超过5m。\n2 1.3 级厂房不应超过8m。\n8.4.4 厂房内的主通道宽度不应小于 1.2m；每排操作岗位间的通道宽度和工作间内的通道宽度不应小\n于 1.0m。\n8.4.5 疏散门的设置应符合下列规定：\n1 应为向外开启的平开门，室内不得装插销。\n2 当设置门斗时，应采用外门斗，门的开启方向应与疏散方向一致。\n3 危险性工作间的外门口不应设置台阶，应做成防滑坡道。\n8.5 危险品生产区危险性建筑物的建筑构造\n1.\n1 级、1.\n3 级厂房的门应采用向外开启的平开门，外门宽度不应小于1.\n2m。\n危险性工作间的门\n不应与其他房间的门直对设置；内门宽度不应小于 1.\n0m。\n内、外门均不得设置门槛。\n外门口不应设置\n影响疏散的明沟和管线等。\n8.\n5.\n2 危险品生产区内建筑物的门窗玻璃宜采用防止碎玻璃伤人的措施。\n8.\n5.\n3 黑火药和烟火药生产厂房应采用木门窗。\n门窗的小五金应采用在相互碰撞或摩擦时不产生火花\n的材料。\n8.\n5.\n4 安全窗应符合下列规定：\n1 窗洞口的宽度不应小于 1.\n0m；\n2 窗扇的高度不应小于 1.\n5m；\n3 窗台的高度不应高出室内地面 0.\n5m；\n4 窗扇应向外平开，不得设置中挺；\n5 窗扇不宜设插销，应利于快速开启；\n6 双层安全窗的窗扇，应能同时向外开启。\n8.\n5.\n5 危险性工作间的地面应符合现行国家标准《建筑地面设计规范》GB50037 的有关要求，并应符\n合下列规定：\n1 对火花能引起危险品燃烧、爆炸的工作间，应采用不发生火花的地面；\n2 当工作间内的危险品对撞击、摩擦特别敏感时，应采用不发生火花的柔性地面；\n3 当工作间内的危险品对静电作用特别敏感时，应采用不发生火花的防静电地面。\n8.\n5.\n6 有易燃易爆粉尘的工作间不宜设置吊顶，当设置吊顶时，应符合下列规定：\n1 吊顶上不应有孔洞；\n2 墙体应砌至屋面板或梁的底部。\n8.\n5.\n7 危险性工作间的内墙应抹灰。\n有易燃易爆粉尘的工作间，其地面、内墙面、顶棚面应平整、光\n滑，不得有裂缝，所有凹角宜抹成圆弧。\n易燃易爆粉尘较少的工作间内墙面应刷 1.\n5～2.\n0m 高油漆墙\n裙；经常冲洗的工作间，其顶棚及内墙面应刷油漆，油漆颜色与危险品颜色应有所区别。\n收集冲洗废\n水的排水沟，其内壁宜平整、光滑，所有凹角宜抹成圆弧，不得有裂缝。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 30,
+        "page_end": 30,
+        "token_count": 636,
+        "char_count": 1273
+      }
+    },
+    {
+      "chunk_id": 54,
+      "text": "有易燃易爆粉尘的工作间，其地面、内墙面、顶棚面应平整、光\n滑，不得有裂缝，所有凹角宜抹成圆弧。\n易燃易爆粉尘较少的工作间内墙面应刷 1.\n0m 高油漆墙\n裙；经常冲洗的工作间，其顶棚及内墙面应刷油漆，油漆颜色与危险品颜色应有所区别。\n收集冲洗废\n水的排水沟，其内壁宜平整、光滑，所有凹角宜抹成圆弧，不得有裂缝。\n排水沟的坡度不宜小于 1％。\n8.6 危险品总仓库区危险品仓库的建筑结构\n危险品仓库应根据当地气候和存放物品的要求，采取防潮、隔热、通风、防小动物等措施。\n8.6.2 危险品仓库宜采用现浇钢筋混凝土框架结构，也可采用钢筋混凝土柱、梁承重结构或砌体承重\n结构。屋盖宜采用现浇钢筋混凝土屋盖，也可采用轻质泄压或轻质易碎屋盖。1.3 级仓库屋盖当采用现\n浇钢筋混凝土屋盖时，宜多设置门和高窗或采用轻型转护结构等。\n8.6.3 危险品仓库安全出口的设置应符合下列规定：\n1 当仓库（或储存隔间）的建筑面积大于100 m\n2（或长度大于18m）时，安全出口不应少于 2 个。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 30,
+        "page_end": 30,
+        "token_count": 219,
+        "char_count": 438
+      }
+    },
+    {
+      "chunk_id": 55,
+      "text": "2 当仓库（或储存隔间）的建筑面积小于100m2，且长度小于18m 时，可设 1 个安全出口。\n3 仓库内任一点至安全出口的距离不应大于 15m。\n8.6.4 危险品仓库门的设计应符合下列规定：\n1 仓库的门应向外平开，门洞的宽度不宜小于 1.5m，不得设门槛。\n2 当仓库设计门斗时，应采用外门斗，且内、外两层门均应向外开启。\n3 总仓库的门宜为双层，内层门为通风用门，通风用 门应有防小动物进入的措施。外层门为防火\n门，两层门均应向外开启。\n8.6.5 危险品总仓库的窗宜设可开启的高窗，并应配置铁栅和金属网。在勒脚处宜设置可开关的活动\n百叶窗或带活动防护板的固定百叶窗。窗应有防小动物进入的措施。\n8.6.6 危险品仓库的地面应符合本规范第 8.5.5 条的规定。当危险品已装箱并不在库内开箱时，可采用\n一般地面。\n8.7 通廊和隧道\n1 危险品运输通廊设计应符合下列规定：\n1 通廊的承重及围护结构宜采用不燃烧体。\n2 通廊宜采用钢筋混凝土柱或符合防火要求的钢柱承重。\n3 运输中有可能撒落药粉的通廊，其地面面层应与连接的危险性建筑物地面面层相一致。\n8.7.2 防护屏障的隧道应采用钢筋混凝土结构。运输中有可能撒落药粉的隧道地面，应采用不发生火\n花地面，且不应设置台阶。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 31,
+        "page_end": 31,
+        "token_count": 270,
+        "char_count": 540
+      }
+    },
+    {
+      "chunk_id": 56,
+      "text": "9 消防\n9.\n0.\n1 烟花爆竹生产项目和经验批发仓库必须设置消防给水设施。\n消防给水可采用消火栓、手抬机动\n消防泵等不同形式的给水系统。\n9.\n0.\n2 消防给水的水源必须充足可靠。\n当利用天然水源时，在枯水期应有可靠的取水设施；当水源来\n自市政给水管网而厂区内无消防蓄水设施时，消防给水管网应设计成环状，并有两条输水干管接自市\n政给水管网；当采用自备水源井时，应设置消防蓄水设施。\n9.\n0.\n3 当厂区内设置蓄水池或有天然河、湖、池塘可利用时，应设有固定式消防泵或手抬机动消防泵。\n消防泵宜设有备用泵。\n9.\n0.\n4 危险品生产厂房和中转库的室外消防用水量，应按现行国家标准《建筑设计防火规范》GB50016\n中甲类建筑物的规定执行。\n当单个建筑物的体积均不超过300m\n3 时， 室外消防用水量可按10L／s 计算，\n消防延续时间可按 2h 计算。\n9.\n0.\n5 1.\n3 级厂房宜设室内消火栓系统，室内消火栓系统的设置应符合现行国家标准《建筑设计防火规\n范》GB50016 中对甲类建筑物的规定。\n9.\n0.\n6 易发生燃烧事故的工作间宜设置雨淋灭火系统，并应符合下列规定：\n1 存药量大于 1kg 且为单人作业的工作间内，宜在工作台上方设置手动控制的雨淋灭火系统或翻\n斗水箱等相应灭火设施。\n翻斗水箱容积应根据工作台面积，按 16L/㎡计算确定。\n2 作业人员少于 6 人，建筑面积大于9 m2 且小于 60 m2 的工作间内，宜设置手动控制的雨淋灭火\n系统，消防延续时间按 30min 计算。\n3 雨淋灭火系统的喷水强度不宜低于 16L/min·㎡，最不利点的喷头压力不宜低于 0.\n05MPa。\n9.\n0.\n7 对产品或原料与水接触能引起燃烧、爆炸或助长火势蔓延的厂房，不应设置以水为灭火剂的消\n防设施，应根据产品和原料的特性选择灭火剂和消防设施。\n9.\n0.\n8 危险品总仓库区根据当地消防供水条件，可设消防蓄水池、高位水池、室外消火栓或利用天然\n河、塘。\n室外消防用水量应按现行国家标准《建筑设计防火规范》GB50016 中甲类仓库的规定执行，\n消防延续时间按 3h 计算。\n供消防车或手抬机动消防泵取水的消防蓄水池的保护半径不应大于150m。\n9.\n0.\n9 消防储备水应有平时不被动用的措施。\n使用后的补给恢复时间不宜超过 48h。\n9.\n0.\n10 烟花爆竹生产项目和经营批发仓库宜按现行国家标准《建筑灭火器配置设计规范》GB50140 的\n有关规定配置灭火器。\n10 废水处理",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 32,
+        "page_end": 33,
+        "token_count": 527,
+        "char_count": 1055
+      }
+    },
+    {
+      "chunk_id": 57,
+      "text": "供消防车或手抬机动消防泵取水的消防蓄水池的保护半径不应大于150m。\n9 消防储备水应有平时不被动用的措施。\n使用后的补给恢复时间不宜超过 48h。\n10 烟花爆竹生产项目和经营批发仓库宜按现行国家标准《建筑灭火器配置设计规范》GB50140 的\n有关规定配置灭火器。\n10 废水处理\n10.0.1 烟花爆竹生产项目的废水排放设计，应遵循清污分流、少排或不排出废水的原则。有害废水应\n采取必要的治理措施，并应达到国家现行有关排放标准的规定后排放。\n10.0.2 有易燃易爆粉尘散落的工作间宜用水冲洗，并应设置排水沟。排水沟的设计应符合国家现行有\n关标准的规定。\n10.0.3 含药废水宜用管道集中收集。集中收集的含药废水宜先经污水池沉淀或过滤，再集中处理排\n放，沉淀及过滤的沉渣应定期挖出销毁。污水沉淀或过滤池的设计应符合国家现行有关标准的规定。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 32,
+        "page_end": 33,
+        "token_count": 186,
+        "char_count": 373
+      }
+    },
+    {
+      "chunk_id": 58,
+      "text": "11 采暖通风与空气调节\n11.1 采暖\n11.1.1 当危险性建筑物需采暖时，宜采用散热器采暖，严禁用火炉或其他明火采暖，并应符合下列规\n定：\n1 黑火药生产的 1.1-2 级厂房、烟火药生产的 1.1-1 级厂房及其他危险品生产中呈干燥松散和裸露\n状态的厂房，采暖热媒应采用不高于 90℃的热水。\n2 黑火药制品和烟火药制品加工的生产厂房，采暖热媒宜采用不高于 110℃的热水或压力不大于\n0.05MPa 的低压蒸汽。\n11.1.2 危险性建筑物散热器采暖系统的设计应符合下列规定：\n1 散发燃烧爆炸危险性粉尘的厂房，散热器应采用光面管或其它易于擦洗的散热器，不应采用带\n肋片的或柱型散热器。散热器和采暖管道外表面油漆颜色应与燃烧爆炸危险性粉尘的颜色应有所区别。\n2 散热器外表面距墙内表面不应小于 60mm，距地面不宜小于 l00mm，散热器不应设在壁龛内。\n3 抗爆间室的散热器不应设在轻型面。采暖干管不应穿过抗爆间室的墙，抗爆间室内散热器支管\n上的阀门应设在操作走廊内。\n4 采暖管道不应设在地沟内。当必须设在过门地沟内时，应对地沟采取密闭措施。\n5 蒸汽或高温水管道的入口装置和换热装置不应设在危险工作间内。\n11.1.3 当危险性建筑物采用热风采暖时，送风温度宜大于 35℃并小于 70℃。热风采暖系统的设置应\n符合本规范 11.2 节中的有关规定。\n11.2 通风 和空气调节\n.\n2.\n1 在危险品生产厂房内，对散发燃烧爆炸危险性粉尘或气体的设备和操作岗位宜设局部排风，并\n宜分别设置。\n11.\n2.\n2 危险品生产厂房的通风和空气调节系统设计应符合下列规定：\n1 散发燃烧爆炸危险性粉尘或气体厂房的通风和空气调节系统应采用直流式，其送风机的出口应\n装止回阀。\n2 散发燃烧爆炸危险性粉尘或气体的厂房内，通风和 空气调节系统风管上的调节阀应采用防爆\n型。\n3 黑火药生产厂房内不得设计机械通风。\n11.\n2.\n3 空气中含有燃烧爆炸危险性粉尘或气体的厂房中，机械排风系统的设计应符合下列要求：\n1 排除燃烧爆炸危险性粉尘或气体的风机及电机应采用防爆型，且电机和风机应直联。\n2 含有燃烧爆炸危险性粉尘的空气应经过除尘处理后再排入大气，除尘处理宜采用湿法方式。\n当\n粉尘与水接触能引起爆炸或燃烧时，不应采用湿法除尘。\n除尘装置应置于排风系统的负压段上，且排\n风机应采用防爆型。\n3 水平风管内的风速应按燃烧爆炸危险性粉尘不在风管内沉积的原则确定。\n水平风管应设有不小\n于 1％的坡度。\n4 排风管道不宜穿过与本排风系统无关的房间。\n11.\n2.\n4 危险品生产厂房的通风和空气调节机室应单独设置，不应与危险性工作间相通，且应设置单独\n的外门。\n11.\n2.\n5 各抗爆间室之间、抗爆间室与其他工作间及操作走廊之间不应有风管、风口相连通。\n11.\n2.\n6 散发燃烧爆炸危险性粉尘厂房内的通风、空气调节系统的风管不宜暗设。\n11.\n2.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 34,
+        "page_end": 34,
+        "token_count": 612,
+        "char_count": 1225
+      }
+    },
+    {
+      "chunk_id": 59,
+      "text": "水平风管应设有不小\n于 1％的坡度。\n4 排风管道不宜穿过与本排风系统无关的房间。\n4 危险品生产厂房的通风和空气调节机室应单独设置，不应与危险性工作间相通，且应设置单独\n的外门。\n5 各抗爆间室之间、抗爆间室与其他工作间及操作走廊之间不应有风管、风口相连通。\n6 散发燃烧爆炸危险性粉尘厂房内的通风、空气调节系统的风管不宜暗设。\n7 危险性建筑物中，送、排风管道宜采用圆形截面风管，风管上应设置检查孔，并架空敷设；风\n管应采用不燃烧材料制作，且风管和设备的保温材料也应采用不燃烧材料。\n风管涂漆颜色与燃烧爆炸\n危险性粉尘的颜色易于分辨。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 34,
+        "page_end": 34,
+        "token_count": 134,
+        "char_count": 269
+      }
+    },
+    {
+      "chunk_id": 60,
+      "text": "12 危险场所的电气\n12.1 危险场所类别的划分\n12.1.1 危险场所分为F0、F1、F2 三类，并应符合下列规定：\n1 F0 类：经常或长期存在能形成爆炸危险的黑火药、烟火药及其粉尘的危险场所。\n2 F1 类：在正常运行时可能形成爆炸危险的黑火药、烟火药及其粉尘的危险场所。\n3 F2 类：在正常运行时能形成火灾危险，而爆炸危险性极小的危险品及粉尘的危险场所。\n4 各类危险场所均以工作间（或建筑物）为单位。\n5 生产、加工、研制危险品的工作间（或建筑物）危险场所分类和防雷类别应符合表12.1.1-1 的\n规定。储存危险品的场所、中转库和仓库危险场所分类和防雷类别应符合表 12.1.1-2 规定。\n表 12.\n1.\n1-1 生产、加工、研制危险品的工作间（或建筑物）危险场所分类和防雷类别\n序号 危险品\n名 称\n工作间（或建筑物）名称 危险场所\n分类 防雷类别\n药物混合(硝酸钾与碳、硫球磨)，潮药装模(或潮药包片)，压药，拆模(撕片)，\n碎片、造粒，抛光，浆药，干燥，散热，筛选，计量包装 F0 一\n1 黑火药\n单料粉碎、筛选、干燥、称料、硫、碳二成分混合 F2 二\n药物混合，造粒，筛选，制开球药，压药，浆药，干燥，散热，计量包装。\n褙药柱（药块） ，湿药调制，烟雾剂干燥、散热、包装 F0 一\n2 烟火药\n氧化剂、可燃物的粉碎与筛选、称料（单料） F2 二\n3 引火线 制引，浆引，漆引，干燥，散热，绕引，定型裁割，捆扎，切引，包装 F1 一\n装药 F0 一\n插引（含机械插引，手工插引和空筒插引），挤引，封口，点药，结鞭 F1 二 4 爆竹类\n包装 F2 二\n装药，筑(压)药，内筒封口(压纸片、装封口剂) F0 一\n已装药部件钻孔，装单个裸药件，单发药量≥25g非裸药件组装 ，外筒封口\n(压纸片) F1 一 5\n组合烟花\n类、内筒型\n小礼花类\n蘸药，安引，组盆串引（空筒） ，单筒药量＜25g非裸药件组装，包装 F2 二\n装球，包药 F0 一\n组装(含安引、装发射药包、串球)，剖引（引线钻孔），球干燥，散热，包\n装 F1 一\n6 礼花弹类\n空壳安引，糊球 F2 二\n装（筑）药 F0 一\n7 吐珠类\n安引（空筒），组装，包装 F2 二\n装药，筑（压）药 F0 一\n包药，装裸药效果件（含效果药包），单个药量≥30g非裸药件组装 F1 一 8\n升空类\n（含双响\n炮）\n安引，单个药量＜30g非裸药效果件组装(含安稳定杆)，包装 F2 二\n装药、筑（压）药 F0 一\n已装药部件钻孔 F1 一 9\n旋转类\n（旋转升\n空类）\n安引，组装（含引线、配件、旋转轴、架），包装 F2 二\n装药、筑(压)药 F0 一\n已装药部件的钻孔 F1 一 10 喷花类和\n架子烟花\n安引，组装，包装 F2 二\n11 线香类 装药 F0 一",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 35,
+        "page_end": 36,
+        "token_count": 584,
+        "char_count": 1169
+      }
+    },
+    {
+      "chunk_id": 61,
+      "text": "干燥，散热 F1 二\n粘药，包装 F2 二\n雷酸银药物配制，拌药砂，发令纸干燥 F0 一\n机械蘸药 F1 一 12 摩擦类\n包药砂，手工蘸药，分装，包装 F2 二\n装药，筑（压）药 F0 一\n球干燥，散热 F1 二 13 烟雾类\n糊球，安引，组装，包装 F2 二\n装药、筑(压)药 F0 一\n已装药部件钻孔 F1 一 14\n造型玩具\n类\n安引，组装，包装 F2 二\n15 电点火头 蘸药，干燥（晾干），检测，包装 F2 二\n注：1 表中装药、筑(压)药包括烟火药、黑火药的装药、筑(压)药。\n2 当表 3.1.3-1 生产工序危险等级分类为 1.1 级建筑物同时满足总存药量小于 10kg、单人操作、建筑面积小于\n12m2 时，其防雷类别可划为二类。\n3 表中未列品种、加工工序，其危险场所分类和防雷类别划分可参照本表确定。\n表 12.1.1－2 储存危险品的场所、中转库和仓库危险场所的分类和防雷类别\n场所（或建筑物）名 称 危险场所分类 防雷类别\n烟火药（包括裸药效果件），开球药，黑火药，引火线，未封口含药半成品，单\n个装药量在40g及以上已封口的烟花半成品及含爆炸音剂、笛音剂的半成品，已\n封口的B级爆竹半成品，A、B级成品（喷花类除外），单筒药量大于25g及以上的\nC级组合烟花类成品\nF0 一\n电点火头， 单个装药量在40g以下已封口的烟花半成品 （不含爆炸音剂、 笛音剂） ，\n已封口的C级爆竹半成品，C、D级成品（其中，组合烟花类成品单筒药量在25g以\n下），喷花类成品\nF1 二\n12.1.2 当危险场所既存在黑火药、烟火药，又存在易燃液体时，危险场所类别的划分除应符合本规范\n的规定外，还应符合现行国家标准《爆炸和火灾危险环境电力装置设计规范》GB 50058 中有关爆竹性\n气体环境危险区域划分的规定。\n12.1.3 危险场所与相毗邻场所采取不燃烧体密实墙隔开且隔墙上设有相通的门，当门经常处于关闭状\n态（除有人出入外）时，与危险场所相毗邻的场所类别可按表12.1.3 确定；当门经常处于敞开状态时，\n与危险场所相毗邻的场所类别应与危险场所类别相同。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 37,
+        "page_end": 37,
+        "token_count": 443,
+        "char_count": 886
+      }
+    },
+    {
+      "chunk_id": 62,
+      "text": "表 12.1.3 与危险场所相毗邻的场所类别\n危险场所类别 用一道有门的密实墙隔开的工作间危险场所\n类别\n用二道有门的密实墙通过走廊隔开的工作间危险\n场所类别\nF0 F1\nF1 F2\nF2 非危险场所\n非危险场所\n注：1 本条不适用于配电室（电机室、控制室、仪表室等） 。\n2 密实墙应为不燃烧体的实体墙，墙上除门外无其它孔洞。\n12.1.4 排风室的危险场所类别应按下列规定分类：\n1 为 F0 类危险场所（黑火药除外）服务的排风室划为F1 类危险场所。\n2 为 F1 类、F2 类危险场所服务的排风室与所服务的危险场所类别相同。\n3 为各类危险场所服务的排风室， 当采用湿式净化装置时， 可划为F2 类危险场所 （黑火药除外） 。\n12.1.5 为危险场所服务的送风室，当通往危险场所的送风管能阻止危险物质回到送风室时，该送风室\n危险场所类别可划为非危险场所。\n12.1.6 运输危险品的敞开式或半敞开式通廊，其危险场所类别应划为F2 类，防雷类别宜为二类。\n12.1.7 雷雨天存放危险品的晒场宜设置防直击雷装置，避雷装置保护范围的滚球半径可取60m。\n12.2 电气 设备\n1 危险场所电气设备应符合下列规定：\n1 正常运行和操作时，可能产生电火花或高温的电气设备应安装在无危险或危险性较小的场所。\n2 危险场所采用的防爆电气设备必须是按照现行国家标准生产的合格产品。\n3 危险场所电气设备允许最高表面温度为 T4(135℃)。\n4 危险场所采用的接线盒、挠性连接等选型，应与该场所电气设备防爆等级相一致。\n5 危险场所电动机的电气设计应符合现行国家标准《通用用电设备配电设计规范》GB50055 中第\n二章电动机的规定。\n6 生产时严禁工作人员入内的工作间，其用电设备的控制按扭应安装在工作间外，并应将用电设\n备的启停与门连锁，门关闭后用电设备才能启动。\n7 危险场所不宜设置接插装置。\n当确需设置时，应选择相应防爆型插座与插销带连锁保护装置，\n并满足断电后插销才能插入或拔出的要求。\n8 危险场所不应使用无线遥控设备等。\n12.\n2.\n2 危险场所采用非防爆电气设备隔墙传动时，应符合下列规定：\n1 安装电气设备的工作间应采用不燃烧体密实墙与危险场所隔开，隔墙上不应设门、窗、洞口。\n2 传动轴通过隔墙处的孔洞必须采用填料函封堵或有同等效果的密封措施。\n3 安装电气设备工作间的门应设在外墙上或通向非危险场所，且门应向室外或非危险场所开启。\n12.\n2.\n3 F0 类危险场所不应安装电气设备。\n当确有必要时，可设置检测仪表（黑火药除外） ，检测仪表\n选型应符合本规范第 12.\n2.\n5 条的规定。\n12.\n2.\n4 F0 类危险场所电气照明应采用可燃性粉尘环境21 区用电气设备DIP21，外壳防护等级为IP65\n级的灯具，安装在固定窗外照明或采用能够满足有关规范安全要求的壁龛灯。\n门灯及安装在外墙外侧的开关、控制按钮、控制箱等，选型应与灯具防爆级别相同的产品。\n12.\n2.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 38,
+        "page_end": 38,
+        "token_count": 623,
+        "char_count": 1247
+      }
+    },
+    {
+      "chunk_id": 63,
+      "text": "5 条的规定。\n4 F0 类危险场所电气照明应采用可燃性粉尘环境21 区用电气设备DIP21，外壳防护等级为IP65\n级的灯具，安装在固定窗外照明或采用能够满足有关规范安全要求的壁龛灯。\n门灯及安装在外墙外侧的开关、控制按钮、控制箱等，选型应与灯具防爆级别相同的产品。\n5 F1 类危险场所电气设备的选型应符合下列规定：\n1 电气设备应采用可燃性粉尘环境电气设备 21 区 DIP21、IP65，爆炸性气体环境用电气设备Ⅱ\n类 B 级隔爆型、本质安全型（IP54），灯具及控制按钮可采用增安型。\n2 门灯及安装在外墙外侧的开关应采用可燃性粉尘环境用电气设备不低于 22 区 DIP22、IP54。\n12.\n2.\n6 F\n2 类危险场所电气设备、门灯及安装在外墙外侧的开关应采用可燃性粉尘环境用电气设备 22\n区 DIP22、IP54。\n12.3 室内电气线路",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 38,
+        "page_end": 38,
+        "token_count": 189,
+        "char_count": 379
+      }
+    },
+    {
+      "chunk_id": 64,
+      "text": "12.\n3.\n1 危险场所电气线路应符合下列规定：\n1 危险性建筑物低压配电线路的保护应符合现行国家标准《低压配电设计规范》GB50054 的有关\n规定。\n2 电气线路严禁采用绝缘电线明敷或穿塑料管敷设。\n3 电气线路应采用铜芯阻燃绝缘电线或铜芯阻燃电缆。\n4 电气线路的电线和电缆的额定电压不得低于 450V/750V。\n保护线的额定电压应与相线相同,并应\n在同一钢管或护套内敷设。\n电话线路电线的额定电压应不低于 300V/500V。\n5 插座回路应设置额定动作电流不大于30mA、瞬时切断电路的剩余电流保护器。\n6 检测仪表线路可采用线芯截面不小于 1.\n0mm2 铜芯聚氯乙烯护套内钢带铠装控制电缆；也可采\n用线芯截面不小于 1.\n5mm2 铜芯阻燃绝缘电线穿镀锌焊接钢管敷设。\n7 危险场所电气线路绝缘电线或电缆线芯的材质和最小截面应符合表 12.\n3.\n1 的规定。\n表 12.\n3.\n1 危险场所电气线路电线或电缆线芯的材质和最小截面\n绝缘电线或电缆线芯最小截面(mm2) 危险场所类\n别 电力 照明 控制按钮\nF0 — — 铜芯1.\n5\nF1 铜芯2.\n5 铜芯2.\n5 铜芯1.\n5\nF2 铜芯1.\n5 铜芯1.\n5 铜芯1.\n5\n8 保护线(PE 线)截面的确定应符合现行国家标准的有关规定.\n。\n12.\n3.\n2 当危险场所电气线路采用穿钢管敷设时，应符合下列规定：\n1 穿电线的钢管应采用公称口径不小于 15mm 的镀锌焊接钢管，钢管间应采用螺纹连接，且连接\n螺纹不应少于 6 扣。\n在有剧烈振动的场所应设防松装置。\n2 电气线路与防爆电气设备连接处必须作隔离密封。\n3 电气线路宜采用明敷。\n12.\n3.\n3 危险场所电气线路采用电缆敷设时应符合下列规定：\n1 电缆明敷时，应采用金属铠装电缆。\n2 电缆沿桥架敷设时, 宜采用绝缘护套电缆；桥架应采用金属槽式结构。\n3 电缆不宜敷设在电缆沟内。\n当必须敷设在电缆沟内时，应设置防止水及危险物质进入沟内的措\n施，电缆沟在过墙处应设隔板，并对孔洞严密封堵。\n4 电力电缆不应有分支或中间接头。\n照明线路的分支接头应设在接线盒内。\n5 在有机械损伤可能的部位应穿钢管保护。\n12.\n3.\n4 F0 类危险场所电气线路应符合下列规定：\n1 危险场所不应敷设电力和照明线路。\n可敷设本工作间的控制按钮及检测仪表线路。\n灯具安装在\n固定窗外的电气线路应采用线芯截面不小于 2.\n5mm\n2 的铜芯绝缘电线穿镀锌焊接钢管敷设， 亦可采用线\n芯截面不小于 2.\n5mm2 的铜芯金属铠装电缆明敷。\n2 当采用穿钢管敷设时，接线盒的选型应与防爆电气设备的等级相一致。\n当采用铠装电缆时，与\n设备连接处应采用铠装电缆密封接头。\n3 控制按钮线路线芯截面选择应符合本规范表 12.\n3.\n1 的规定。\n12.\n3.\n5 F1 类危险场所电气线路应符合下列规定：\n1 电线或电缆线芯截面选择应符合本规范表12.\n3.\n1 的规定。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 39,
+        "page_end": 39,
+        "token_count": 620,
+        "char_count": 1241
+      }
+    },
+    {
+      "chunk_id": 65,
+      "text": "5mm2 的铜芯金属铠装电缆明敷。\n2 当采用穿钢管敷设时，接线盒的选型应与防爆电气设备的等级相一致。\n当采用铠装电缆时，与\n设备连接处应采用铠装电缆密封接头。\n3 控制按钮线路线芯截面选择应符合本规范表 12.\n1 的规定。\n5 F1 类危险场所电气线路应符合下列规定：\n1 电线或电缆线芯截面选择应符合本规范表12.\n1 的规定。\n2 引至 1kV 以下的单台鼠笼型感应电动机的供电回路， 电线或电缆线芯截面长期允许载流量不应\n小于电动机额定电流的 1.\n25 倍。\n3 移动电缆应采用线芯截面不小于 2.\n5mm\n的重型橡套电缆。\n12.\n3.\n6 F2 类危险场所电气线路应符合下列规定：\n1 电气线路采用的绝缘电线或电缆的线芯截面选择应符合本规范表 12.\n3.\n1 的规定。\n2 引至 1kV 以下的单台鼠笼型感应电动机供电回路， 绝缘电线或电缆线芯截面长期允许的载流量\n不应小于电动机的额定电流。\n当电动机经常接近满载运行时，线芯的载流量应留有适当裕量。\n3 移动电缆应采用线芯截面不小于 1.\n5mm2 的中型橡套电缆。\n12.4 照明\n烟花爆竹生产厂房主要工作间的照度标准宜为 200lx，且主要生产的工作间出入口应设置应急",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 39,
+        "page_end": 39,
+        "token_count": 260,
+        "char_count": 521
+      }
+    },
+    {
+      "chunk_id": 66,
+      "text": "照明，其照度值应不低于该场所正常照明照度值的 10％，应急时间宜为 30min 。\n12.4.2 烟花爆竹生产的辅助厂房、库房的照度标准宜分别为100lx、50lx。\n12.5 10kV 及以下变（配）电所\n和厂房配电室\n12.5.1 烟花爆竹企业的供电设计应符合现行国家标准《供配电系统设计规范》GB 50052 中有关三级\n负荷的规定。\n12.5.2 烟花爆竹生产过程中因突然中断供电有可能导致燃爆事故发生的用电设备，以及企业设置的视\n频监控系统、安全防范系统均应设置应急电源。消防系统宜设置应急电源。\n12.5.3 危险品生产区 10kV 及以下变电所应为独立变电所。危险品总仓库区 10kV 及以下变电所宜为\n独立变电所。\n12.5.4 变电所设计除执行本规范外， 尚应符合现行国家标准 《10kV及以下变电所设计规范》GB 50053\n的有关规定。\n12.5.5 变压器低压侧中心点接地电阻不应大于 4Ω。\n12.5.6 厂房配电室、电机间、控制室可附建于各类危险性建筑物内，但应符合下列规定：\n1 与危险场所相毗邻的隔墙应为不燃烧体密实墙，且不应设门、窗与危险场所相通。\n2 门、窗应设在建筑物的外墙上，且门应向外开启。\n3 与配电室、电机间、控制室无关的管线不应通过配电室、电机间、控制室。\n4 设在黑火药生产厂房内的配电室、电机间、控制室除应满足上述要求外，配电室、电机间、控\n制室的门、窗与黑火药生产工作间的门、窗之间的距离不宜小于 3m。\n12.6 室外 电气线路\n1 引入危险性建筑物的 1kV 以下低压线路的敷设应符合下列规定;\n1 从配电端到受电端宜全长采用金属铠装电缆埋地敷设，在入户端应将电缆的金属外皮、钢管接\n到防雷电感应的接地装置上。\n2 当全线采用电缆埋地有困难时，可采用钢筋混凝土杆和铁横担的架空线，并应使用一段金属铠\n装电缆或护套电缆穿钢管直接埋地引入，其埋地长度应符合下式的要求，但不应小于 15m。\nL ≥2 \n式中：\nL——金属铠装电缆或护套电缆穿钢管埋于地中的长度(m)；\n ——埋电缆处的土壤电阻率(Ω.\nm)\n3 在电缆与架空线换接处尚应装设避雷器。\n避雷器、电缆金属外皮、钢管和绝缘子的铁脚、金属\n器具等应连在一起接地，其冲击接地电阻不应大于 10Ω。\n12.\n6.\n2 引入黑火药生产工房的 1kV 以下低压线路，从配电端到受电端应全长采用铜芯金属铠装电缆\n埋地敷设。\n12.\n6.\n3 与烟花爆竹企业无关的电气线路和通信线路严禁穿越、跨越危险品生产区和危险品总仓库区。\n当在危险品生产区或危险品总仓库区围墙外敷设时，10kv 及以下电力架空线路和通信架空线路与危险\n性建筑物外墙的水平距离不应小于 35m。\n12.\n6.\n4 危险品生产区和危险品总仓库区 l0kV 及以下的高压线路宜采用埋地敷设。\n当采用架空敷设时，\n其轴线与危险性建筑物的距离，应符合下列规定：\n1 距 1.\n1 级厂房外墙不应小于35m，距 1.\n1 级仓库外墙不应小于50m。\n2 距 1.\n3 级建筑物外墙不应小于电杆高度的1.\n5 倍。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 40,
+        "page_end": 40,
+        "token_count": 644,
+        "char_count": 1288
+      }
+    },
+    {
+      "chunk_id": 67,
+      "text": "4 危险品生产区和危险品总仓库区 l0kV 及以下的高压线路宜采用埋地敷设。\n当采用架空敷设时，\n其轴线与危险性建筑物的距离，应符合下列规定：\n1 距 1.\n1 级厂房外墙不应小于35m，距 1.\n1 级仓库外墙不应小于50m。\n2 距 1.\n3 级建筑物外墙不应小于电杆高度的1.\n5 倍。\n12.\n6.\n5 当危险品生产区和危险品总仓库区架空敷设 1kV 以下的电气线路和通信线路时，其轴线与 1.\n1\n级、1.\n3 级建筑物外墙的距离不应小于电杆高度的 1.\n5 倍；与生产烟火药和干法生产黑火药建筑物外墙\n的距离不应小于 35m。\n12.\n6.\n6 危险品生产区和危险品总仓库区不应设置无线通信塔。\n当无线通信塔设置在危险品生产区和危\n险品总仓库区围墙外时，无线通信塔与围墙的距离应不小于 100\nm。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 40,
+        "page_end": 40,
+        "token_count": 177,
+        "char_count": 355
+      }
+    },
+    {
+      "chunk_id": 68,
+      "text": "12.7 防雷与接地\n12.\n7.\n1 危险性建筑物应采取防雷措施。\n防雷设计应符合现行国家标准 《建筑物防雷设计规范》GB 50057\n的有关规定。\n危险性建筑物防雷类别应符合本规范表 12.\n1.\n1-1 和 12.\n.\n1.\n1-2 的规定。\n12.\n7.\n2 变电所引至危险性建筑物的低压供电系统宜采用 TN-C-S 接地形式，从建筑物内总配电箱开始\n引出的配电线路和分支线路必须采用 TN-S 系统。\n12.\n7.\n3 危险性建筑物内电气设备的工作接地、保护接地、防雷电感应等接地、防静电接地、信息系统\n接地等应共用接地装置，接地电阻值应取其中最小值。\n12.\n7.\n4 危险性建筑物内穿电线的钢管、电缆的金属外皮、除输送危险物质外的金属管道、建筑物钢筋\n等设施均应等电位联结。\n12.\n7.\n5 危险性建筑物总配电箱内应设置电涌保护器。\n12.\n7.\n6 当危险场所设有多台需要接地的设备且位置分散时 ，工作间内应设置构成闭合回路的接地干\n线。\n接地体宜沿建筑物墙外埋地敷设，并应构成闭合回路，且每隔 18～24m 室内与室外连接一次，每\n个建筑物的连接不应少于两处。\n12.\n7.\n7 架空敷设的金属管道应在进出建筑物处与防雷电感应的接地装置相连接。\n距离建筑物 100m 内\n的金属管道应每隔 25m 左右接地一次，其冲击接地电阻不应大于20Ω。\n埋地或地沟内敷设的金属管道\n在进出建筑物处亦应与防雷电感应的接地装置相连。\n12.\n7.\n8 平行敷设的金属管道，当其净距小于 100mm 时，应每隔 25m 左右用金属线跨接一次；当交叉净\n距小于 100mm 时，其交叉处亦应跨接。\n12.8 防静 电\n1 危险场所中可导电的金属设备、金属管道、金属支架及金属导体均应进行直接静电接地。\n12.8.2 静电接地系统应与电气设备的保护接地共用同一接地装置。\n12.8.3 危险场所中不能或不宜直接接地的金属设备、装置等，应通过防静电材料间接接地。\n12.8.4 当危险场所采用防静电地面及工作台面时，其静电泄漏电阻值应控制在 0.05 MΩ～1.0MΩ。\n12.8.5 危险场所需要采用空气增湿方法泄漏静电时，其室内空气相对湿度宜为 60%。黑火药生产的危\n险场所空气相对湿度应为 65%。当工艺有特殊要求时可按工艺要求确定。\n12.8.6 危险场所不应使用静电非导体材料制作的工装器具时，应对其进行导静电处理，使其静电泄漏\n电阻值符合要求。\n12.8.7 黑火药、烟火药生产危险场所入口处的外墙外侧应设置人体综合电阻监测仪和人体静电指示及\n释放仪，在其附近宜设置备用接地端子。\n12.9 通讯\n危险品生产区和危险品总仓库区应设置畅通的固定电话。\n12.9.2 危险场所电话设备选型及线路的技术要求应符合本规范的有关规定。\n12.10 视频监控系统",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 41,
+        "page_end": 41,
+        "token_count": 590,
+        "char_count": 1181
+      }
+    },
+    {
+      "chunk_id": 69,
+      "text": "12.\n8.\n7 黑火药、烟火药生产危险场所入口处的外墙外侧应设置人体综合电阻监测仪和人体静电指示及\n释放仪，在其附近宜设置备用接地端子。\n12.\n9 通讯\n危险品生产区和危险品总仓库区应设置畅通的固定电话。\n12.\n9.\n2 危险场所电话设备选型及线路的技术要求应符合本规范的有关规定。\n12.\n10 视频监控系统\n10.1 危险品生产场所和危险品总仓库区宜设置视频监控系统，系统的构成应符合相关规范的规定。\n12.10.2 危险场所视频监控设计，电气设备选型、线路技术要求及敷设方式等均应符合本规范的规定。\n12.11 火灾报警系统\n1.1 危险品生产区和危险品总仓库区可设置火灾自动报警系统。\n12.11.2 危险场所火灾自动报警设计，电气设备选型、线路技术要求及敷设方式、防雷接地均应符合\n本规范的规定。\n12.11.3 当危险品生产区和危险品总仓库区不设置火灾自动报警系统时，可采用畅通的电话系统兼作\n火灾报警装置。\n12.12 安全防范工程\n12.1 烟花爆竹总仓库区及库房的安全防范措施应采用“人防、物防、技防”相结合的方式。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 41,
+        "page_end": 41,
+        "token_count": 235,
+        "char_count": 470
+      }
+    },
+    {
+      "chunk_id": 70,
+      "text": "12.12.2 烟花爆竹的危险品仓库及库区宜设置安全防范系统。\n12.13 控制室\n13.1 烟花爆竹生产项目和经验批发仓库的消防控制室、安全防范系统监控中心及自动控制室宜设\n置在单独建筑物内，亦可附建在非危险性建筑物内。\n12.13.2 1.1 级建筑物内不应附建有人值班的控制室。1.3 级建筑物内可附建控制室，但应符合本规范\n第 12.5.6 条的规定。\n12.13.3 当 1.1 建筑物需要设置有人值班的控制室时， 应将控制室嵌入防护土堤外侧或布置在防护土堤\n外符合安全要求的位置。\n附录A 防护屏障的防护范围\nA.0.1 防护屏障的防护范围见下图。\nA.0.2 “一字防护土挡墙”防护屏障的防护要求见下图。\n“一字防护土挡墙”防护屏障的防护要求\n本规范用词说明\n1 为便于在执行本规范条文时区别对待，对要求严格程度不同的用词说明如下：\n1 ) 表示很严格，非这样做不可的：\n正面词采用“必须” ，反面词采用“严禁” ；\n2 ) 表示严格，在正常情况下均应这样做的：\n正面词采用“应” ，反面词采用“不应”或“不得” ；\n3 ) 对表示允许稍有选择，在条件许可时首先应这样做的：\n正面词采用“宜” ，反面词采用“不宜” ；\n4）表示有选择，在一定条件下可以这样做的，采用“可” 。\n2 条文中指明应按其他有关标准执行的写法为 “应符合……的规定”或“应按……执行” 。\n本规范引用标准名录\n《烟花爆竹 安全与质量》GB10631-2004\n《烟花爆竹 劳动安全技术规程》GB11652-1989\n《建筑设计防火规范》GB50016-2006\n《建筑地面设计规范》GB50037-1996\n《供配电系统设计规范》GB50052-1995\n《10kV 及以下变电所设计规范》GB 50053-1994\n《低压配电设计规范》GB50054-1995\n《通用用电设备配电设计规范》GB50055-1993\n《建筑物防雷设计规范》GB 50057-1994\n《爆炸和火灾危险环境电力装置设计规范》GB 50058-1992\n《建筑灭火器配置设计规范》GB50140-2005\n《地下及覆土火药炸药仓库设计安全规范》GB50154-2009",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50161-2009 烟花爆竹工程设计安全规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "c5c7be1260b16811e94284db8426358c36406b24",
+        "page_start": 42,
+        "page_end": 46,
+        "token_count": 459,
+        "char_count": 919
+      }
+    }
+  ]
+}

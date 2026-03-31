@@ -1,0 +1,11 @@
+# RAG模型下载依赖 - 使用ModelScope
+
+# ModelScope (阿里达摩院模型社区，国内下载速度快)
+modelscope>=1.9.0
+
+# 必要的依赖
+torch>=2.0.0
+transformers>=4.30.0
+
+# 可选：sentence-transformers用于加载模型
+# sentence-transformers>=2.2.0

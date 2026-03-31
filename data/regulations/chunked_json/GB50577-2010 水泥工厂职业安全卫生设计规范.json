@@ -1,0 +1,21 @@
+{
+  "doc_id": "93df71eabd47be80d628685813d981d363fda265",
+  "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50577-2010 水泥工厂职业安全卫生设计规范.pdf",
+  "file_type": ".pdf",
+  "num_chunks": 1,
+  "chunks": [
+    {
+      "chunk_id": 0,
+      "text": "hQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50577-2010 水泥工厂职业安全卫生设计规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "93df71eabd47be80d628685813d981d363fda265",
+        "page_start": 2,
+        "page_end": 50,
+        "token_count": 458,
+        "char_count": 917
+      }
+    }
+  ]
+}

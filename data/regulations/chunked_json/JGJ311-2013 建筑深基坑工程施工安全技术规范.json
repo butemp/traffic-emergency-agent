@@ -1,0 +1,1347 @@
+{
+  "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+  "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+  "file_type": ".pdf",
+  "num_chunks": 103,
+  "chunks": [
+    {
+      "chunk_id": 0,
+      "text": "UDC\n中华人民共和国行业标准\nJGJ 311-2013\np 备案号 J 1650 -2013\n建筑深基坑工程施工安全技术规范\nTechnical code for construction safety of\ndeep building foundation excavations\n2013-10-09 发布 2014-04-01 实施\n中华人民共和国住房和城乡建设部 发布\n中华人民共和国行业标准\n建筑深基坑工程施工安全技术规范\nTechnical code for construction safety of\ndeep building foundation excavations\nJGJ 311 -2013\n批准部门：中华人民共和国住房和城乡建设部\n施行日期：2 0 1 4 年 4 月 1 日\n中国建筑工业出版社\n2013 北京\n中华人民共和国行业标准\n建筑深基坑工程施工安全技术规范\nTechnical code for construction safety of\ndeep building foundation excavations\nJGJ 311 - 2013 .\n关\n中国建筑工业出版社 出版、发行（ 北京西郊百万庄）\n各地新华书店、建筑书店经销\n北京红光制版公司制版\n化学工业出版社印刷厂印刷\n开本：850X1168 毫 米1 / 3 2印张：3 % 字数：9 5千字\n2014 年2 月第一版 2014 年2 月第一次印刷\n定价：18. 0 0元\n统一书号：15112 • 23825\n版权所有翻印必究\n如有印装质量问题，可寄本社退换\n( 邮政编码100037)\n本社网址：http ： //www. cabp. com. cn\n网上书店：http ： //www. china-building, com. cn\n中华人民共和国住房和城乡建设部\n公 告\n第 174号\n住房城乡建设部关于发布行业标准\n《建筑深基坑工程施工安全技术规范》的公告\n现批准《 建筑深基坑工程施工安全技术规范》为行业标准，\n编号为JGJ 311 - 2013,自2014年4月1日起实施。其中，第\n5. 4. 5条为强制性条文，必须严格执行。\n本规范由我部标准定额研究所组织中国建筑工业出版社出版\n发行。\n中华人民共和国住房和城乡建设部\n2013年10月9日",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 1,
+        "page_end": 4,
+        "token_count": 492,
+        "char_count": 984
+      }
+    },
+    {
+      "chunk_id": 1,
+      "text": "前 g\n根据住房和城乡建设部《 关于印发〈2011年工程建设标准\n规范制订、修订计划〉的通知》建标 [2011] 17号的要求，规\n范编制组经过充分调査研究，认真总结实践经验，参考有关国际\n标准和国外先进标准，并在广泛征求意见的基础上，编制了本\n规范。\n本规范的主要技术内容是：1 总则；2 术语；3 基本规\n定；4 施工环境调查；5 施工安全专项方案；6 支护结构施\n工；7 地下水与地表水控制；8 土石方开挖；9 特殊性土基\n坑工程；1 0检査与监测；1 1基坑安全使用与维护。\n本规范中以黑体字标志的条文为强制性条文，必须严格\n执行。\n本规范由住房和城乡建设部负责管理，由上海星宇建设集团\n有限公司负责具体技术内容的解释。执行过程中如有意见或建\n议，请寄送上海星宇建设集团有限公司（ 地址：上海市闸北区康\n宁路901号，邮政编码:200443)。\n本规范主编单位：上海星宇建设集团有限公司\n郑州大学\n本规范参编单位：上海市基础工程有限公司\n陕西省建设工程质量安全监督总站\n中国建筑西南勘察设计研究院有限\n公司\n中冶北方工程技术有限公司\n浙江省建筑设计研究院\n同济大学\n上海市建工设计研究院有限公司\n上海市建设安全协会\n舜元建设集团有限公司\n广州市恒盛建设工程有限公司\n重庆市设计院\n上海广大基础工程有限公司\n广大建设集团有限公司\n浙江暨阳建设集团有限公司\n王自力 周同和 徐建标 郭院成\n张成金 宋建学 马宏良 李耀良\n康景文 刘兴旺 朱沈阳 胡群芳\n栗新 严训 贾国瑜 邓小华\n李迥 黄欢仁 许建民 邓迎芳\n顾辉军 吴国明 李星 张哲彬\n钱力航 应惠清 汪道金 潘延平\n滕延京 刘小敏 武威 袁内镇\n郑刚 朱幕 唐 建华 崔江余\n杨纯仪 杨杰",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 5,
+        "page_end": 6,
+        "token_count": 362,
+        "char_count": 725
+      }
+    },
+    {
+      "chunk_id": 2,
+      "text": "次\n1 总则 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n1\n2 术语 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n2\n3 基本规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n4\n4 施工环境调查 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n7\n4.\n1 一般规定.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n7\n4.\n2 现场勘查及环境调查要求.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 7,
+        "page_end": 7,
+        "token_count": 341,
+        "char_count": 682
+      }
+    },
+    {
+      "chunk_id": 3,
+      "text": "次\n1 总则 .\n2 术语 .\n3 基本规定 .\n4 施工环境调查 .\n1 一般规定.\n2 现场勘查及环境调查要求.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n7\n4.\n3 现场勘查与环境调查报告.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n8\n5 施工安全专项方案.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n10\n5.\n1 一般规定.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n10\n5.\n2 安全专项方案编制.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n10\n5 .\n3危险源分析.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 7,
+        "page_end": 7,
+        "token_count": 373,
+        "char_count": 747
+      }
+    },
+    {
+      "chunk_id": 4,
+      "text": "次\n1 总则 .\n2 术语 .\n3 基本规定 .\n4 施工环境调查 .\n1 一般规定.\n2 现场勘查及环境调查要求.\n3 现场勘查与环境调查报告.\n5 施工安全专项方案.\n1 一般规定.\n2 安全专项方案编制.\n3危险源分析.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n11\n5 .\n4应急预案 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n12\n5.\n5 应急响应 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n13\n5 .\n6安全技术交底.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n15\n6 支护结构施工.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 7,
+        "page_end": 7,
+        "token_count": 395,
+        "char_count": 790
+      }
+    },
+    {
+      "chunk_id": 5,
+      "text": "次\n1 总则 .\n2 术语 .\n3 基本规定 .\n4 施工环境调查 .\n1 一般规定.\n2 现场勘查及环境调查要求.\n3 现场勘查与环境调查报告.\n5 施工安全专项方案.\n1 一般规定.\n2 安全专项方案编制.\n3危险源分析.\n4应急预案 .\n5 应急响应 .\n6安全技术交底.\n6 支护结构施工.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n16\n6.\n1 一般规定.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n16\n6.\n2 土钉墙支护.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n17\n6.\n3 重力式水泥土墙.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n18\n6.\n4地下连续墙.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 7,
+        "page_end": 7,
+        "token_count": 413,
+        "char_count": 827
+      }
+    },
+    {
+      "chunk_id": 6,
+      "text": ".\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n19\n6.\n5 灌注桩排桩围护墙.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n21\n6 .\n6板桩围护墙.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n22\n6 .\n7型钢水泥土搅拌墙.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n23\n6 .\n8 沉井 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 7,
+        "page_end": 7,
+        "token_count": 339,
+        "char_count": 678
+      }
+    },
+    {
+      "chunk_id": 7,
+      "text": "5 灌注桩排桩围护墙.\n6板桩围护墙.\n7型钢水泥土搅拌墙.\n8 沉井 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n25\n6 .\n9 内支撑.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n25\n6.\n10 土层锚杆.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n28",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 7,
+        "page_end": 7,
+        "token_count": 293,
+        "char_count": 587
+      }
+    },
+    {
+      "chunk_id": 8,
+      "text": "6.\n11 逆作法.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n29\n6.\n12 坑内土体加固 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n31\n7 地下水与地表水控制.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n32\n7.\n1 一 般规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n32\n7 - 2排水与降水.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 8,
+        "page_end": 8,
+        "token_count": 342,
+        "char_count": 685
+      }
+    },
+    {
+      "chunk_id": 9,
+      "text": "11 逆作法.\n12 坑内土体加固 .\n7 地下水与地表水控制.\n1 一 般规定 .\n7 - 2排水与降水.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n33\n7 .\n3截水帷幕 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n35\n7.\n4 回灌 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n37\n7 .\n5环境影响预测与预防.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 8,
+        "page_end": 8,
+        "token_count": 362,
+        "char_count": 725
+      }
+    },
+    {
+      "chunk_id": 10,
+      "text": "11 逆作法.\n12 坑内土体加固 .\n7 地下水与地表水控制.\n1 一 般规定 .\n7 - 2排水与降水.\n3截水帷幕 .\n4 回灌 .\n5环境影响预测与预防.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n38\n8 土石方开挖.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n40\n8.\n1 一般规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n40\n8 .\n2无内支撑的基坑开挖.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n41\n8 .\n3有内支撑的基坑开挖.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n42\n8.\n4 土石方开挖与爆破.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 8,
+        "page_end": 8,
+        "token_count": 385,
+        "char_count": 770
+      }
+    },
+    {
+      "chunk_id": 11,
+      "text": "11 逆作法.\n12 坑内土体加固 .\n7 地下水与地表水控制.\n1 一 般规定 .\n7 - 2排水与降水.\n3截水帷幕 .\n4 回灌 .\n5环境影响预测与预防.\n8 土石方开挖.\n1 一般规定 .\n2无内支撑的基坑开挖.\n3有内支撑的基坑开挖.\n4 土石方开挖与爆破.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n43\n9 特殊性土基坑工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n45\n9.\n1 .\n一 般规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n45\n9 .\n2膨胀岩七基坑工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n45\n9 .\n3受冻融影响的基坑工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n47\n9.\n4软土基坑工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 8,
+        "page_end": 8,
+        "token_count": 412,
+        "char_count": 825
+      }
+    },
+    {
+      "chunk_id": 12,
+      "text": ".\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n47\n10 检查与监测.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n49\n10.\n1 一 般规定.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n49\n10.\n2 检查.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n50\n10.\n3 施工监测.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 8,
+        "page_end": 8,
+        "token_count": 337,
+        "char_count": 674
+      }
+    },
+    {
+      "chunk_id": 13,
+      "text": "10 检查与监测.\n1 一 般规定.\n2 检查.\n3 施工监测.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n53\n1 1基坑安全使用与维护.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n55\n11.\n1 一般规定.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n55\n11.\n2 使用安全.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n55\n11.\n3 维护安全.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 8,
+        "page_end": 8,
+        "token_count": 355,
+        "char_count": 710
+      }
+    },
+    {
+      "chunk_id": 14,
+      "text": "10 检查与监测.\n1 一 般规定.\n2 检查.\n3 施工监测.\n1 1基坑安全使用与维护.\n1 一般规定.\n2 使用安全.\n3 维护安全.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n56\n本规范用词说明.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n58\n引用标准名录.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n59\n附：条文说明.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n61",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 8,
+        "page_end": 8,
+        "token_count": 209,
+        "char_count": 419
+      }
+    },
+    {
+      "chunk_id": 15,
+      "text": "Contents\n1 General Provisions .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n1\n2 Terms .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n2\n3 Basic Requirements .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n4\n4 Investigation of Construction Surroundings .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n7\n4.\n1 G eneral Requirements .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n7\n4.\n2 R equirement of Field Exploration and Survey .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n7\n4.\n3 R eport of Field Exploration and Survey .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n8\n5 Special Programs of Construction Safety .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n10\n5.\n1 G eneral Requirements .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n10\n5.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 9,
+        "page_end": 9,
+        "token_count": 398,
+        "char_count": 797
+      }
+    },
+    {
+      "chunk_id": 16,
+      "text": "2 P reparation of Special Programs for Construction Safety .\n.\n.\n.\n10\n5.\n3 H azard Analysis .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n11\n5.\n4 Contingency Plan .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n12\n5.\n5 E mergency Response .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n13\n5.\n6 S afety Technical Disclosure .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n15\n6 Retaining Structure Construction .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n16\n6.\n1 G eneral Requirements .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n16\n6.\n2 S oil Nailing Wall .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n17\n6.\n3 G ravity Cement-soil Wall .\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 9,
+        "page_end": 9,
+        "token_count": 403,
+        "char_count": 806
+      }
+    },
+    {
+      "chunk_id": 17,
+      "text": ".\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n18\n6.\n4 Diaphragm Wall .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n19\n6.\n5 C ontiguous Bored Pile Wall .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n21\n6.\n6 Sheet Pile Retaining Wall .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n22\n6.\n7 Soil Mixing Wall .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n23\n6.\n8 O pen Caissons .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n25\n6.\n9 S truts .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n25\n6.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 9,
+        "page_end": 9,
+        "token_count": 366,
+        "char_count": 732
+      }
+    },
+    {
+      "chunk_id": 18,
+      "text": "4 Diaphragm Wall .\n5 C ontiguous Bored Pile Wall .\n6 Sheet Pile Retaining Wall .\n7 Soil Mixing Wall .\n8 O pen Caissons .\n9 S truts .\n10 S oil Anchors.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n28",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 9,
+        "page_end": 9,
+        "token_count": 119,
+        "char_count": 239
+      }
+    },
+    {
+      "chunk_id": 19,
+      "text": "6.\n11 Top-down Method .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n29\n6.\n12 S oil Improvement .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n31\n7 Groundwater and Surface Water Control .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n32\n7.\n1 G eneral Requirements .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n32\n7.\n2 D rainage and Pumping .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n33\n7.\n3 C urtain for Cutting off Drains .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n35\n7.\n4 R echarge .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n37\n7.\n5 E nvironmental Impact Prediction and Prevention .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n38\n8 Earthwork Excavation .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 10,
+        "page_end": 10,
+        "token_count": 400,
+        "char_count": 801
+      }
+    },
+    {
+      "chunk_id": 20,
+      "text": ".\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n40\n8.\n1 G eneral Requirements .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n40\n8.\n2 Excavation Without Internal Strut .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n41\n8.\n3 E xcavation with Internal Struts .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n42\n8.\n4 Rock Excavation and Blasting .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n43\n9 Foundation Excavations With Adverse Soil .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n45\n9.\n1 G eneral Requirements .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n45\n9.\n2 E xpansive Soil Foundation Excavations .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n45\n9.\n3 F oundation Excavations With Freezing and Thawing Effect • • • 47\n9.\n4 Soft Soil Foundation Excavations .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 10,
+        "page_end": 10,
+        "token_count": 423,
+        "char_count": 846
+      }
+    },
+    {
+      "chunk_id": 21,
+      "text": ".\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n47\n10 Inspection and Monitoring .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n49\n10.\n1 G eneral Requirements .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n49\n10.\n2 R outine Inspection .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n50\n10.\n3 C onstruction Monitoring .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n53\n11 Safe Service and Maintenance .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n55\n11.\n1 G eneral Requirements .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n55\n11.\n2 S ervice Safety .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n55\n11.\n3 M aintenance Safety .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 10,
+        "page_end": 10,
+        "token_count": 387,
+        "char_count": 775
+      }
+    },
+    {
+      "chunk_id": 22,
+      "text": ".\n.\n.\n.\n56\nExplanation of Wording in This Code.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n58\nList of Quoted Standards .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n59\nAddition ： Explanation of Provisions .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n61",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 10,
+        "page_end": 10,
+        "token_count": 125,
+        "char_count": 250
+      }
+    },
+    {
+      "chunk_id": 23,
+      "text": "1.0.1 为在建筑深基坑工程的施工、使用与维护中保障基坑工\n程安全，做到技术先进、保护环境，制定本规范。\n1.0.2 本规范适用于开挖深度大于或等于5m 的建筑深基坑工\n程的施工、安全使用与维护管理。\n1.0.3 建筑深基坑工程的施工、安全使用与维护，除应符合本\n规范外，尚应符合国家现行有关标准的规定。\n2 术 语\n2.\n0.\n1 建筑深基坑 deep building foundation excavation\n为进行建（ 构）筑物地下部分施工及地下设施、设备埋设，\n由地面向下开挖，深度大于或等于5m 的空间。\n2.\n0.\n2 棊坑工程施工安全等级 construction safety rank of ex­\ncavation\n根据工程地基基础设计等级，结合基坑本体安全、工程粧基\n与地基施工安全、基坑侧壁土层与荷载条件、环境安全等因素综\n合确定的基坑工程安全标准。\n是基坑施工安全技术与管理的基本\n依据。\n2.\n0.\n3 动态设计法 information based design\n根据施工反馈的岩土条件和现场监测资料，对地质结论、设\n计参数及设计方案进行验证，并在设计条件有较大变化时，及时\n补充、修改原设计的设计方法。\n2.\n0.\n4 信息施工法 information based construction\n根据施工现场的地质情况和监测资料，对地质结论、设计参\n数进行验证，对施工安全性进行判断并及时调整施工方案的施工\n方法。\n2.\n0.\n5 安全预警 safety alerting\n在基坑工程施工中，通过状态监测，对可能引发安全事故的\n征兆所采取的预先警示及事前控制，采取时机提示的技术措施。\n2.\n0.\n6 应急预案 contingency plan\n对基坑工程施工过程中可能发生的事故或灾害，为迅速、有\n序、有效地开展应急与救援行动、降低事故损失而预先制定的全\n面、具体的措施方案。\n2.\n0.\n7 风险评估 risk assessment",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 11,
+        "page_end": 12,
+        "token_count": 418,
+        "char_count": 836
+      }
+    },
+    {
+      "chunk_id": 24,
+      "text": "对深基坑安全风险发生的可能性及其损害进行辨识、分析与\n评价的技术活动。\n2.\n0.\n8 流土 soil flow\n在渗流作用下，土体处于浮动或流动状态的现象。\n对黏土表\n现为较大土块的浮动，对无黏性土呈砂粒跳动和砂沸。\n2.\n0.\n9 管涌 sand boiling\n在渗流作用下，土体中的细颗粒在粗颗粒形成的孔隙中流失\n的现象。\n2.\n0.\n10 盆式开挖 bermed excavation\n基坑侧壁内侧预留土，挖除基坑其余土体后形成类似盆状的\n基坑，待支撑形成后再开挖基坑侧壁内侧预留土方的基坑开挖\n方式。\n2.\n0.\n11 岛式开挖 island-style excavation\n先开挖基坑周边土方，最后挖去中心土墩的开挖方式。\n施工\n中可以利用中心土墩作为临时结构的支点。\n2.\n0.\n12 膨胀岩土 swelling soil and rock\n在地质作用下形成的一种主要由亲水性强的黏土矿物组成的\n多裂隙并具有显著膨胀性的地质体。\n又叫胀缩土，是一种特\n殊土。\n2.\n0.\n13 施工检查 construction inspection\n基坑工程施工过程中，对原材料质量、施工机械、施工工\n艺、施工参数等进行的控制工作。\n2.\n0.\n14 施工监测 construction monitoring\n基坑工程施工过程中，对基坑及周边环境实施的量测、监\n视、巡查、预警等工作。\n2.\n0.\n15 特殊性土基坑工程 foundation excavation in adverse soil\n膨胀岩土中的基坑工程、受冻融影响的基坑工程及髙灵敏度\n软土中的基坑工程等的统称。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 13,
+        "page_end": 13,
+        "token_count": 345,
+        "char_count": 691
+      }
+    },
+    {
+      "chunk_id": 25,
+      "text": "3 基本规定\n3.\n0.\n1 建筑深基坑工程施工应根据深基坑工程地质条件、水文\n地质条件、周边环境保护要求、支护结构类型及使用年限、施工\n季节等因素，注重地区经验、因地制宜、精心组织，确保安全。\n建筑深基坑工程施工安全等级划分应根据现行国家标准《 建\n筑地基基础设计规范》GB 50007 规定的地基基础设计等级，结\n合基坑本体安全、工程桩基与地基施工安全、基坑侧壁土层与荷\n载条件、环境安全等因素按表3.\n0.\n1确定。\n表3.\n0.\n1 建筑深基坑工程施工安全等级\n施工安全等级 划分条 件\n一级\n1 复杂地质条件及软土地区的二层及二层以上地下室的基坑\n工程；\n2 开挖深度大于15m 的基坑工程；\n3 基坑支护结构与主体结构相结合的基坑工程；\n4 设计使用年限超过2 年的基坑工程；\n5 侧壁为填土或软土，场地因开挖施工可能引起工程桩基发生\nf頃斜、地基隆起变形等改变桩基、地铁隧道运营性能的工程；\n6 基坑侧壁受水浸透可能性大或基坑工程降水深度大于6m 或\n降水对周边环境有较大影响的工程；\n7 地基施工对基坑侧壁土体状态及地基产生挤土效应较严重的\n工程；\n8 在基坑影响范围内存在较大交通荷载，或大于35kPa 短期作\n用荷载的基坑工程；\n9 基坑周边环境条件复杂、对支护结构变形控制要求严格的\n工程；\n1 0 采用型钢水泥土墙支护方式、需要拔除型钢对基坑安全可\n能产生较大影响的基坑工程；\n1 1 采用逆作法上下同步施工的基坑工程；\n1 2 需要进行爆破施工的基坑工程\n二级 除一级以外的其他基坑工程",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 14,
+        "page_end": 14,
+        "token_count": 328,
+        "char_count": 656
+      }
+    },
+    {
+      "chunk_id": 26,
+      "text": "3.\n0.\n2基坑工程施工前应具备下列资料：\n1 基坑环境调查报告。\n明确基坑周边市政管线现状及渗漏\n情况，邻近建（ 构）筑物基础形式、埋深、结构类型、使用状\n况；相邻区域内正在施工和使用的基坑工程情况；相邻建筑工程\n打桩振动及重载车辆通行情况等。\n2 基坑支护及降水设计施工图。\n对施工安全等级为一级的\n基坑工程，明确基坑变形控制设计指标，明确基坑变形、周围保\n护建筑、相关管线变形报警值。\n3 基坑工程施工组织设计。\n开挖 影响范围内的塔吊荷载、\n临建荷载、临时边坡稳定性等纳人设计验算范围，施工安全等级\n为一级的基坑工程应编制施工安全专项方案。\n4 基坑安全监测方案。\n3.\n0.\n3 基坑工程设计施工图必须按有关规定通过专家评审，基\n坑工程施工组织设计必须按有关规定通过专家论证；对施工安全\n等级为一级的基坑工程，应进行基坑安全监测方案的专家评审。\n3.\n0.\n4当基坑施工过程中发现地质情况或环境条件与原地质报\n告、环境调查报告不相符合，或环境条件发生变化时，应暂停施\n工，及时会同相关设计、勘察单位经过补充勘察、设计验算或设\n计修改后方可恢复施工。\n对涉及方案选型等重大设计修改的基坑\n工程，应重新组织评审和论证。\n3.\n0.\n5 在支护结构未达到设计强度前进行基坑开挖时，严禁在\n设计预计的滑（破）裂面范围内堆载；临时土石方的堆放应进行\n包括自身稳定性、邻近建筑物地基承载力、变形、稳定性和基坑\n稳定性验算。\n3.\n0.\n6 膨胀土、冻胀土、高灵敏土等场地深基坑工程的施工安\n全应符合本规范第9章的规定，湿陷性黄土基坑工程应符合现行\n行业标准《湿陷性黄土地区建筑基坑工程安全技术规程 》JGJ\n167的规定。\n3.\n0.\n7 基坑工程应实施信息施工法，并应符合下列规定：\n1 施工准备阶段应根据设计要求和相关规范要求建立基坑\n安全监测系统。\n2 土方开挖、降水施工前，监测设备与元器件应安装、调\n试完成。\n3 高压旋喷注浆帷幕、三轴搅拌帷幕、土钉、锚杆等注浆\n类施工时，应通过对孔隙水压力、深层土体位移等监测与分析，\n评估水下施工对基坑周边环境影响，必要时应调整施工速度、工\n艺或工法。\n4 对同时进行土方开挖、降水、支护结构、截水帷幕、工\n程桩等施工的基坑工程，应根据现场施工和运行的具体情况，通\n过试验与实测，区分不同危险源对基坑周边环境造成的影响，并\n应采取相应的控制措施。\n5 应对变形控制指标按实施阶段性和工况节点进行控制目\n标分解；当阶段性控制目标或工况节点控制目标超标时，应立即\n采取措施在下一阶段或工况节点时实现累加控制目标。\n6 应建立基坑安全巡查制度，及时反馈，并应有专业技术\n人员参与。\n3.0.8 对特殊条件下的施工安全等级为一级、超过设计使用年\n限的基坑工程应进行基坑安全评估。基坑安全评估原则应能确保\n不影响周边建（ 构）筑物及设施等的正常使用、不破坏景观、不\n造成环境污染。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 15,
+        "page_end": 16,
+        "token_count": 604,
+        "char_count": 1209
+      }
+    },
+    {
+      "chunk_id": 27,
+      "text": "4 施工环境调查\n4.1 — 般规定\n4. 1.1 基坑工程现场勘查与环境调查应在已有勘察报告和基坑\n设计文件的基础上，根据工程条件及采用的施工方法、工艺，初\n步判定需补充查明的地下埋藏物及周边环境.条件。\n4.1. 2 现场勘査与环境调查前应取得下列资料：\n1 工程勘察报告和基坑工程设计文件。\n2 附有坐标的基坑及周边既有建（ 构）筑物的总平面布\n置图。\n3 基坑及周边地下管线、人防工程及其他地下构筑物、障\n碍物分布图。\n4 拟建建（ 构）筑物室内地坪标高、场地自然地面标高、\n坑底设计标高及其变化情况；结构类型、荷载情况、基础埋深和\n地基基础形式、.地下结构平面布置图及基坑平面尺寸。\n5 工程所在地常用的施工方法和同类工程的施工资料、监\n测资料等。\n4.1.3 现场勘查与环境调査结果应及时反馈设计和监理单位。\n4.2 现场勘査及环境调査要求\n4. 2.1 基坑现场勘查和环境调查应符合下列规定：\n1 勘査与调查范围应超过基坑开挖边线之外，且不得小于\n基坑深度的2倍。\n2 应查明既有建（ 构）筑物的高度、结构类型、基础形式、\n尺寸、埋深、地基处理和建成时间、沉降变形、损坏和维修等\n情况。\n3 应查明各类地下管线的类型、材质、分布、重要性、使\n用情况、对施工振动和变形的承受能力，地面和地下贮水、输水\n等用水设施的渗漏情况及其对基坑工程的影响程度。\n4 应査明存在的旧建（ 构）物基础、人防工程、其他洞穴、\n地裂缝、河流水渠、人工填土、边坡、不良工程地质等的空间分\n布特征及其对基坑工程的影响。\n5 应査明道路及运行车辆载重情况。\n6 应查明地表水的汇集和排泄情况。\n7 当邻近场地进行抽降地下水施工时，应査明降深、影响\n范围和可能的停抽时间，以及对基坑侧壁土性指标的影响。\n8 当邻近场地有振动荷载时，应査明其影响范围和程度。\n9 应査明邻近基坑与地下工程的支护方法、开挖和使用对\n本基坑工程安全的影响。\n4.\n2.\n2 对施工安全等级为一级、分布有地下管网的基坑工程，\n宜采用物探为主、坑探为辅的勘查方法；对安全等级为二级的基\n坑工程，可采用坑探方法。\n4.\n2.\n3 勘查孔和探井使用结束后，应及时回填，回填质量应满\n足相关规定。\n4.\n2.\n4基坑工程勘查与环境调查中的安全防护应按现行国家标\n准 《岩土工程勘察安全规范》GB 50585 的有关规定执行。\n4.\n3 现场勘査与环樟调查报告\n4.\n3.\n1 现场勘査与环境调査报告应包括下列主要内容：\n1 勘査与环境调查的目的、调查方法。\n2 基坑轮廓线与周围既有建（ 构）筑物荷载、基础类型、\n埋深、地基处理深度等。\n3 相关地下管线的分布现状、渗漏等情况。\n4 周边道路的分布及车辆通行情况。\n5 雨水汇流与排泄条件。\n6 实验方法、检测方法及结论和建议。\n4.\n3.\n2 现场勘査与环境调查报告应包括下列文件：",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 17,
+        "page_end": 18,
+        "token_count": 596,
+        "char_count": 1193
+      }
+    },
+    {
+      "chunk_id": 28,
+      "text": "1 基坑周边环境条件图。\n2 勘查点平面位置图。\n3 拟采用的支护结构、降水方案设计相关文件。\n4 基坑平面尺寸及深度，主体结构基础类型及平面布置图。\n5 实验和检测文件。\n4. 3. 3现场勘查与环境调查报告应明确引用场地原有岩土工程\n勘察报告的内容、核查变化情况，对设计文件、施工组织设计的\n修改意见和建议，以及基坑工程施工和使用过程中的重要事项。\n5 施工安全专项方案\n5.1 — 般规定\n5.1.1 应根据施工、使用与维护过程的危险源分析结果编制基\n坑工程施工安全专项方案。\n5.1. 2 基坑工程施工安全专项方案应符合下列规定：\n1 应针对危险源及其特征制定具体安全技术措施。\n2 应按消除、隔离、减弱危险源的顺序选择基坑工程安全\n技术措施。\n3 对重大危险源应论证安全技术方案的可靠性和可行性。\n4 应根据工程施工特点，提出安全技术方案实施过程中的\n控制原则、明确重点监控部位和监控指标要求。\n5 应包括基坑安全使用与维护全过程。\n6 设计和施工发生变更或调整时，施工安全专项方案应进\n行相应的调整和补充。\n5.1.3 应根据施工图设计文件、危险源识别结果、周边环境与\n地质条件、施工工艺设备、施工经验等进行安全分析，选择相应\n的安全控制、监测预警、应急处理技术，制定应急预案并确定应\n急响应措施。\n5.1.4 施工安全专项方案应通过专家论证。\n5.2 安全专项方案编制\n5. 2.1基坑工程施工安全专项方案应与基坑工程施工组织设计\n同步编制。\n5. 2.2 基坑工程施工安全专项方案应包括下列主要内容：\n1 工程概况，包含基坑所处位置、基坑规模、基坑安全等\n级及现场勘査及环境调查结果、支护结构形式及相应附图。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 19,
+        "page_end": 20,
+        "token_count": 356,
+        "char_count": 712
+      }
+    },
+    {
+      "chunk_id": 29,
+      "text": "2 工程地质与水文地质条件，包含对基坑工程施工安全的\n不利因素分析。\n3 危险源分析，包含基坑工程本体安全、周边环境安全、\n施工设备及人员生命财产安全的危险源分析。\n4 各施工阶段与危险源控制相对应的安全技术措施，包含\n围护结构施工、支撑系统施工及拆除、土方开挖、降水等施工阶\n段危险源控制措施；各阶段施工用电、消防、防台风、防汛等安\n全技术措施。\n5 信息施工法实施细则，包含对施工监测成果信息的发布、\n分析，决策与指挥系统。\n6 安全控制技术措施、处理预案。\n7 安全管理措施，包含安全管理组织及人员教育培训等\n措施。\n8 对突发事件的应急响应机制，包含信息报告、先期处理、\n应急启动和应急终止。\n5.3 危险源分析\n5. 3.1 危险源分析应根据基坑工程周边环境条件和控制要求、\n工程地质条件、支护设计与施工方案、地下水与地表水控制方\n案、施工能力与管理水平、工程经验等进行，并应根据危险程度\n和发生的频率，识别为重大危险源和一般危险源。\n5. 3. 2符合下列特征之一的必须列为重大危险源：\n1 开挖施工对邻近建（ 构）筑物、设施必然造成安全影响\n或有特殊保护要求的。\n2 达到设计使用年限拟继续使用的。\n3 改变现行设计方案，进行加深、扩大及改变使用条件的。\n4 邻近的工程建设，包括打桩、基坑开挖降水施工影响基\n坑支护安全的。\n5 邻水的基坑。\n5. 3.3下列情况应列为一般危险源：\n1 存在影响基坑工程安全性、适用性的材料低劣、质量缺\n陷、构件损伤或其他不利状态。\n2 支护结构、工程粧施工产生的振动、剪切等可能产生流\n土、土体液化、渗流破坏。\n3 截水帷幕可能发生严重渗漏。\n4 交通主干道位于基坑开挖影响范围内，或基坑周围建筑\n物管线、市政管线可能产生渗漏、管沟存水，或存在渗漏变形敏\n感性强的排水管等可能发生的水作用产生的危险源。\n5 雨期施工，土钉墙、浅层设置的预应力锚杆可能失效或\n承载力严重下降。\n6 侧壁为杂填土或特殊性岩土。\n7 基坑开挖可能产生过大隆起。\n8 基坑侧壁存在振动荷爾。\n9 内支撑因各种原因失效或发生连续破坏。\n1 0对支护结构可能产生横向冲击荷载。\n1 1台风、暴雨或强降雨降水致使施工用电中断，基坑降排\n水系统失效。\n12 土钉、铺杆蠕变产生过大变形及地面裂缝。\n5.3.4 危险源分析应采用动态分析方法，并应在施工安全专项\n方案中及时对危险源进行更新和补充。\n5.4 应急预案\n5. 4.1 应通过组织演练检验和评价应急预案的适用性和可操\n作性。\n5.4.2 基坑工程发生险情时，应采取下列应急措施：\n1 基坑变形超过报警值时，应调整分层、分段土方开挖等\n施工方案，并宜采取坑内回填反压后增加临时支撑、锚杆等。\n2 周围地表或建筑物变形速率急剧加大，基坑有失稳趋势\n时，宜采取卸载、局部或全部回填反压，待稳定后再进行加固\n处理。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 21,
+        "page_end": 22,
+        "token_count": 595,
+        "char_count": 1191
+      }
+    },
+    {
+      "chunk_id": 30,
+      "text": "3 坑底隆起变形过大时，应采取坑内加载反压、调整分区、\n分步开挖、及时浇筑快硬混凝土垫层等措施。\n4 坑外地下水位下降速率过快引起周边建筑物与地下管线\n沉降速率超过警戒值，应调整抽水速度减缓地下水位下降速度或\n采用回灌措施。\n5 围护结构渗水、流土，可采用坑内引流、封堵或坑外快\n速注浆的方式进行堵漏；情况严重时应立即回填，再进行处理。\n6 开挖底面出现流砂、管涌时，应立即停止挖土施工，根\n据情况采取回填、降水法丨•洋低水头差、设置反滤层封堵流土点等\n方式进行处理。\n5.\n4.\n3 基坑工程施工引起邻近建筑物开裂及倾斜事故时，应根\n据具体情况采取下列处置措施：\n1 立即停止基坑开挖，回填反压。\n2 增设锚杆或支撑。\n3 采取回灌、降水等措施调整降深。\n4 在建筑物基础周围采用注浆加固土体。\n5 制订建筑物的纠偏方案并组织实施。\n6 情况紧急时应及时疏散人员。\n5.\n4.\n4 基坑工程引起邻近地下管线破裂，应采取下列应急措施:\n1 立即关闭危险管道阀门，采取措施防止产生火灾、爆炸、\n冲刷、渗流破坏等安全事故。\n2 停止基坑开挖，回填反压、基坑侧壁卸载。\n3 及时加固、修复或更换破裂管线。\n5.\n4.\n5 基坑工程变形监测数据超过报警值，或出现基坑、周边\n建 （ 构）筑、管线失稳破坏征兆时，应立即停止施工作业，撤离\n人员，待险情排除后方可恢复施工。\n5.\n5 应急响应 _\n5.\n5.\n1 应急响应应根据应急预案采取抢险准备、信息报告、应\n急启动和应急终止四个程序统一执行。\n5.\n5.\n2 应急响应前的抢险准备，应包括下列内容：\n1 应急响应需要的人员、设备、物资准备。\n2 增加基坑变形监测手段与频次的措施。\n3 储备截水堵漏的必要器材。\n4 清理应急通道。\n5.\n5.\n3 当基坑工程发生险情时，应立即启动应急响应，并向上\n级和有关部门报告以下信息：\n1 险情发生的时间、地点。\n2 险情的基本情况及抢救措施。\n3 险情的伤亡及抢救情况。\n5.\n5.\n4 基坑工程施工与使用中，应针对下列情况启动安全应急\n响应：\n1 基坑支护结构水平位移或周围建（ 构）筑物、周边道路\n(地面）出现裂缝、沉降、地下管线不均勻沉降或支护结构构件\n内力等指标超过限值时。\n2 建筑物裂缝超过限值或土体分层竖向位移或地表裂缝宽\n度突然超过报警值时。\n3 施工过程出现大量涌水、涌砂时。\n4 基坑底部隆起变形超过报警值时。\n5 基坑施工过程遭遇大雨或暴雨天气，出现大量积水时。\n6 基坑降水设备发生突发性停电或设备损坏造成地下水位\n升高时。\n7 基坑施工过程因各种原因导致人身伤亡事故出现时。\n8 遭受自然灾害、事故或其他突发事件影响的基坑。\n9 其他有特殊情况可能影响安全的基坑。\n5.\n5.\n5应急终止应满足下列要求：\n1 引起事故的危险源已经消除或险情得到有效控制。\n2 应急救援行动已完全转化为社会公共救援。\n3 局面已无法控制和挽救，场内相关人员已全部撤离。\n4 应急总指挥根据事故的发展状态认为终止的。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 23,
+        "page_end": 24,
+        "token_count": 627,
+        "char_count": 1254
+      }
+    },
+    {
+      "chunk_id": 31,
+      "text": "5 事故已经在上级主管部门结案。\n5.5.6 应急终止后，应针对事故发生及抢险救援经过、事故原\n因分析、事故造成的后果、应急预案效果及评估情况提出书面报\n告，并应按有关程序上报。\n5.6 安全技术交底\n5. 6.1施工前应进行技术交底，并应作好交底记录。\n5. 6.2施工过程中各工序开工前，施工技术管理人员必须向所\n有参加作业的人员进行施工组织与安全技术交底，如实告知危险\n源、防范措施、应急预案，形成文件并签署。\n5. 6.3 安全技术交底应包括下列内容：\n1 现场勘查与环境调查报告；.\n2 施工组织设计；\n3 主要施工技术、关键部位施工工艺工法、参数；\n4 各阶段危险源分析结果与安全技术措施；\n5 应急预案及应急响应等。\n6 支护结构施工\n6.\n1 一般规定\n6.\n1.\n1 基坑工程施工前应根据设计文件，结合现场条件和周边\n环境保护要求、气候等情况，编制支护结构施工方案。\n临水基坑\n施工方案应根据波浪、潮位等对施工的影响进行编制，并应符合\n防汛主管部门的相关规定。\n6.\n1.\n2 基坑支护结构施工应与降水、开挖相互协调，各工况和\n工序应符合设计要求。\n6.\n1.\n3 基坑支护结构施工与拆除不应影响主体结构、邻近地下\n设施与周围建（ 构）筑物等的正常使用，必要时应采取减少不利\n影响的措施。\n6.\n1.\n4 支护结构施工前应进行试验性施工，并应评估施工工艺\n和各项参数对基坑及周边环境的影响程度；应根据试验结果调整\n参数、工法或反馈修改设计方案。\n6.\n1.\n5 支护结构施工和开挖过程中，应对支护结构自身、巳施\n工的主体结构和邻近道路、市政管线、地下设施、周围建（ 构）\n筑物等进行施工监测，施工单位应采用信息施工法配合设计单位\n采用动态设计法，及时调整施工方法及预防风险措施，并可通过\n采用设置隔离粧、加固既有建筑地基基础、反压与配合降水纠偏\n等技术措施，控制邻近建（ 构）筑物产生过大的不均匀沉降。\n6.\n1.\n6 施工现场道路布置、材料堆放、车辆行走路线等应符合\n设计荷载控制要求；当设置施工桟桥时，应按设计文件编制施工\n栈桥的施工、使用及保护方案。\n6.\n1.\n7 当遇有可能产生相互影响的邻近工程进行粧基施工、基\n坑开挖、边坡工程、盾构顶进、爆破等施工作业时，应确定相互\n间合理的施工顺序和方法，必要时应采取措施减少相互影响。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 25,
+        "page_end": 26,
+        "token_count": 488,
+        "char_count": 977
+      }
+    },
+    {
+      "chunk_id": 32,
+      "text": "6.\n1.\n8 遇有雷雨、6级以上大风等恶劣天气时，应暂停施工，\n并应对现场的人员、设备、材料等采取相应的保护措施。\n6.\n2 土钉墙支护\n6.\n2.\n1 土钉墙支护施工应配合土石方开挖和降水工程施工等进\n行，并应符合下列规定：\n1 分层开挖厚度应与土钉竖向间距协调同步，逐层开挖并\n施工土钉，严禁超挖。\n2 开挖后应及时封闭临空面，完成土钉墙支护；在易产生\n局部失稳的土层中，土钉上下排距较大时，宜将开挖分为二层并\n应控制开挖分层厚度，及时喷射混凝土底层。\n3 上一层土钉墙施工完成后，应按设计要求或间隔不小于\n48h 后开挖下一层土方。\n4 施工期间坡顶应按超载值设计要求控制施工荷载。\n5 严禁土方开挖设备碰撞上部已施工土钉，严禁振动源振\n动土钉侧壁。\n6 对环境调查结果显示基坑侧壁地下管线存在渗漏或存在\n地表水补给的工程，应反馈修改设计，提高土钉墙设计安全度，\n必要时应调整支护结构方案。\n6.\n2.\n2 土钉施工应符合下列规定：\n1 干作业法施工时，应先降低地下水位，严禁在地下水位\n以下成孔施工。\n2 当成孔过程中遇有障碍物或成孔困难需调整孔位及土钉\n长度时，应对土钉承载力及支护结构安全度进行复核计算，根据\n复核计算结果调整设计。\n3 对灵敏度较高的粉土、粉质黏土及可能产生液化的土体，\n严禁采用振动法施工土钉。\n4 设有水泥土截水帷幕的土钉支护结构，土钉成孔过程中\n应采取措施防止土体流失。\n5 土钉应采用孔底注浆施工，严禁采用孔口重力式注浆。\n对空隙较大的土层，应采用较小的水灰比，并应采取二次注浆\n方法。\n6 膨胀土土钉注浆材料宜采用水泥砂浆，并应采用水泥浆\n二次注浆技术。\n6.\n2.\n3喷射混凝土施工应符合下列规定• •\n1 作业人员应佩戴防尘口罩、防护眼镜等防护用具，并应\n避免直接接触液体速凝剂，接触后应立即用清水冲洗；非施工人\n员不得进人喷射混凝土的作业区，施工中喷嘴前严禁站人。\n2 喷射混凝土施工中应检查输料管、接头的情况，当有磨\n损、击穿或松脱时应及时处理。\n3 喷射混凝土作业中如发生输料管路堵塞或爆裂时，必须\n依次停止投料、送水和供风。\n6.\n2.\n4冬期在没有可靠保温措施条件时不得施工土钉墙。\n6.\n2.\n5 施工过程中应对产生的地面裂缝进行观测和分析，及时\n反馈设计，并应采取相应措施控制裂缝的发展。\n6.\n3 重力式水泥土墙\n6.\n3.\n1 重力式水泥土墙应通过试验性施工，并应通过调整搅拌\n桩机的提升（ 下沉）速度、喷浆量以及喷浆、喷气压力等施工参\n数，减小对周边环境的影响。\n施工完成后应检测墙体连续性及\n.\n强度。\n6.\n3.\n2 水泥土搅拌桩机运行过程中，其下部严禁站立非工作人\n员；桩机移动过程中非工作人员不得在其周围活动，移动路线上\n不应有障碍物。\n6.\n3.\n3 重力式水泥土墙施工遇有河塘、洼地时，应抽水和清淤，\n并应采用素土回填夯实。\n在暗浜区域水泥土搅拌桩应适当提高水\n泥掺量。\n6.\n3.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 27,
+        "page_end": 28,
+        "token_count": 615,
+        "char_count": 1230
+      }
+    },
+    {
+      "chunk_id": 33,
+      "text": "施工完成后应检测墙体连续性及\n强度。\n2 水泥土搅拌桩机运行过程中，其下部严禁站立非工作人\n员；桩机移动过程中非工作人员不得在其周围活动，移动路线上\n不应有障碍物。\n3 重力式水泥土墙施工遇有河塘、洼地时，应抽水和清淤，\n并应采用素土回填夯实。\n在暗浜区域水泥土搅拌桩应适当提高水\n泥掺量。\n4 钢管、钢筋或竹筋的插入应在水泥土搅拌桩成桩后及时\n完成，插入位置和深度应符合设计要求。\n6.\n3.\n5 施工时因故停浆，应在恢复喷浆前，将搅拌机头提升或",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 27,
+        "page_end": 28,
+        "token_count": 112,
+        "char_count": 224
+      }
+    },
+    {
+      "chunk_id": 34,
+      "text": "下沉0.\n5m 后喷浆搅拌施工。\n6.\n3.\n6 水泥土搅拌桩搭接施工的间隔时间不宜大于2 4 h ;当超\n过24h 时，搭接施工时应放慢搅拌速度。\n若无法搭接或搭接不\n良，应作冷缝记录，在搭接处采取补救措施。\n6.\n4 地下连续墙\n6.\n4.\n1地下连续墙成槽施工应符合下列规定：\n1 地下连续墙成槽前应设置钢筋混凝土导墙及施工道路。\n导墙养护期间，重型机械设备不应在导墙附近作业或停留。\n2 地下连续墙成槽前应进行槽壁稳定性验算。\n3 对位于暗河区、扰动土区、浅部砂性土中的槽段或邻近\n建筑物保护要求较高时，宜在连续墙施工前对槽壁进行加固。\n4 地下连续墙单元槽段成槽施工宜采用跳幅间隔的施工\n顺序。\n5 在保护设施不齐全、监管人不到位的情况下，严禁人员\n下槽、孔内清理障碍物。\n6.\n4.\n2地下连续墙成槽泥浆制备应符合下列规定：\n1 护壁泥浆使用前应根据材料和地质条件进行试配，并进\n行室内性能试验，泥浆配合比宜按现场试验确定。\n2 泥浆的供应及处理系统应满足泥浆使用量的要求，槽内\n泥浆面不应低于导墙面0.\n3 m , 同时槽内泥浆面应高于地下水位\n0.\n5m 以上。\n6.\n4.\n3槽段接头施工应符合下列规定：\n1 成槽结束后应对相邻槽段的混凝土端面进行清刷，刷至\n底部，清除接头处的泥沙，确保单元槽段接头部位的抗渗性能。\n2 槽段接头应满足混凝土浇筑压力对其强度和刚度的要求，\n安放时，应紧贴槽段垂直缓慢沉放至槽底。\n遇到阻碍时，槽段接\n头应在清除障碍后人槽。\n3 周边环境保护要求高时，宜在地下连续墙接头处增加防\n水措施。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 29,
+        "page_end": 29,
+        "token_count": 334,
+        "char_count": 669
+      }
+    },
+    {
+      "chunk_id": 35,
+      "text": "6.\n4.\n4地下连续墙钢筋笼吊装应符合下列规定：\n1 吊装所选用的吊车应满足吊装高度及起重量的要求，主\n吊和副吊应根据计算确定。\n钢筋笼吊点布置应根据吊装工艺通过\n计算确定，并应进行整体起吊安全验算，按计算结果配置吊具、\n吊点加固钢筋、吊筋等。\n2 吊装前必须对钢筋笼进行全面检查，防止有剩余的钢筋\n断头、焊接接头等遗留在钢筋笼上。\n3 采用双机抬吊作业时，应统一指挥，动作应配合协调，\n载荷应分配合理。\n4 起重机械起吊钢筋笼时应先稍离地面试吊，确认钢筋笼\n已挂牢，钢筋笼刚度、焊接强度等满足要求时，再继续起吊。\n5 起重机械在吊钢筋笼行走时，载荷不得超过允许起重量\n的70% ，钢筋笼离地不得大于500mm ，并应栓好拉绳，缓慢\n行驶。\n6.\n4.\n5预制墙段的堆放和运输应符合下列规定：\n1 预制墙段应达到设计强度100 %后方可运输及吊放。\n2 堆放场地应平整、坚实、排水通畅。\n垫块宜放置在吊点\n处，底层垫块面积应满足墙段自重对地基荷载的有效扩散。\n预制\n墙段叠放层数不宜超过3层，上下层垫块应放置在同一直线上。\n3 运输叠放层数不宜超过2层。\n墙段装车后应采用紧绳器\n与车板固定，钢丝绳与墙段阳角接触处应有护角措施。\n异形截面\n墙段运输时应有可靠的支撑措施。\n6.\n4.\n6预制墙段的安放应符合下列规定：\n1 预制墙段应验收合格，待槽段完成并验槽合格后方可安\n放人槽段内。\n2 安放顺序为先转角槽段后直线槽段，安放闭合位置宜设\n置在直线槽段上。\n3 相邻槽段应连续成槽，幅间接头宜采用现浇接头。\n4 吊放时应在导墙上安装导向架；起吊吊点应按设计要求\n或经计算确定，起吊过程中所产生的内力应满足设计要求；起吊",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 30,
+        "page_end": 30,
+        "token_count": 355,
+        "char_count": 710
+      }
+    },
+    {
+      "chunk_id": 36,
+      "text": "回直过程中应防止预制墙段根部拖行或着力过大。\n6 .\n4 .\n7起重机械及吊装机具进场前应进行检验，施工前应进行\n调试，施工中应定期检验和维护。\n6 .\n4 .\n8成槽机、履带吊应在平坦坚实的路面上作业、行走和停\n放。\n外露传动系统应有防护罩，转盘方向轴应设有安全警告牌。\n成槽机、起重机工作时，回转半径内不应有障碍物，吊臂下严禁\n站人。\n6 .\n5 灌注桩排桩围护墙\n6 .\n5.\n1 干作业挖孔桩施工可采用人工或机械洛阳铲等施工方案。\n当采用人工挖孔方法时应符合工程所在地关于人工挖孔桩安全规\n定，并应采取下列措_:\n1 孔内必须设置应急软爬梯供人员上下，不得使用麻绳和\n尼龙绳吊挂或脚踏井壁凸缘上下；使用的电葫芦、吊笼等应安全\n可靠，并应配有自动卡紧保险装置；电葫芦宜采用按钮式开关，\n使用前必须检验其安全起吊能力。\n2 每日开工前必须检测井下的有毒有害气体，并应有相应\n的安全防范措施；当桩孔开挖深度超过10m 时，应有专门向井\n下送风的装备，风量不宜少于25L/S。\n3 孔口周边必须设置护栏，护栏高度不应小于0.\n8m。\n4 施工过程中孔中无作业和作业完毕后，应及时在孔口加\n盖盖板；\n5 挖出的土石方应及时运离孔口，不得堆放在孔口周边lm\n范围内，机动车辆的通行不得对井壁的安全造成影响。\n6 施工现场的一切电源、电路的安装和拆除必须符合现行\n行业标准《 施工现场临时用电安全技术规范》JGJ 46的规定。\n6.\n5 .\n2 钻机施工应符合下列规定：\n1 作业前应对钻机进行检査，各部件验收合格后方能使用。\n2 钻头和钻杆连接螺纹应良好，钻头焊接应牢固，不得有\n裂纹。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 31,
+        "page_end": 31,
+        "token_count": 345,
+        "char_count": 691
+      }
+    },
+    {
+      "chunk_id": 37,
+      "text": "3 钻机钻架基础应夯实、整平，地基承载力应满足，作业\n范围内地下应无管线及其他地下障碍物，作业现场与架空输电线\n路的安全距离应符合规定。\n4 钻进中，应随时观察钻机的运转情况，当发生异响、吊\n索具破损、漏气、漏渣以及其他不正常情况时，应立即停机检\n査，排除故障后，方可继续施工。\n5 当桩孔净间距过小或采用多台钻机同时施工时，相邻桩\n应间隔施工，当无特别措施时完成浇筑混凝土的桩与邻桩间距不\n应小于4倍粧径，或间隔施工时间宜大于36h。\n6 泥浆护壁成孔时发生斜孔、塌孔或沿护筒周围冒浆以及\n地面沉陷等情况应停止钻进，，采取措施处理后方可继续施工。\n7 当采用空气吸泥时，i 喷浆口应遮挡，并应固定管端。\n6.\n5.\n3 冲击成孔施工前以及过程中应检查钢丝绳、卡扣及转向\n装置，冲击施工时应控制钢丝绳放松量。\n6.\n5.\n4 当非均匀配筋的钢筋笼吊放安装时，应有方向辨别措施\n确保钢筋笼的安放方向与设计方向一致。\n6.\n5.\n5 混凝土浇筑完毕后，应及时在桩孔位置回填土方或加盖\n盖板。\n6.\n5.\n6 遇有湿陷性土层、地下水位较低、既有建筑物距离基坑\n较近时，不宜采用泥浆护壁的工艺施工灌注桩。\n当需采用泥浆护\n壁工艺时，应采用优质低失水量泥浆、控制孔内水位等措施减少\n和避免对相邻建（ 构）筑物产生影响。\n6.\n5.\n7 基坑土方开挖过程中，宜采用喷射混凝土等方法对灌注\n排桩的桩间土体进行加固，防止土体掉落对人员、机具造成\n损害。\n6 .\n6 板粧围护墙\n6.\n6.\n1 钢板桩堆放场地应平整坚实，组合钢板桩堆高不宜超过\n3 层。\n板粧施工作业区内应无高压线路，作业区应有明显标志或\n围栏。\n桩锤在施打过程中，监视距离不宜小于5m。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 32,
+        "page_end": 32,
+        "token_count": 359,
+        "char_count": 719
+      }
+    },
+    {
+      "chunk_id": 38,
+      "text": "6.\n6.\n2 粧机设备组装时，应对各紧固件进行检查，在紧固件未\n拧紧前不得进行配重安装。\n组装完毕后，应对整机进行试运转，\n确认各传动机构、齿轮箱、防护罩等良好，各部件连接牢靠。\n6.\n6.\n3 粧机作业应符合下列规定：\n1 严禁吊桩、吊锤、回转或行走等动作同时进行。\n2 当打桩机带锤行走时，应将桩锤放至最低位。\n打桩机在\n吊有桩和锤的情况下，操作人员不得离开岗位。\n3 当采用振动粧锤作业时，悬挂振动粧锤的起重机，其吊\n钩上必须有防松脱的保护装置，振动桩锤悬挂钢架的耳环上应加\n装保险钢丝绳。\n4 插桩过程中，应及时校正粧的垂直度。\n后续桩与先打桩\n间的钢板桩锁扣使用前应进行套锁检查。\n当粧人土 3m 以上时，\n严禁用打桩机行走或回转动作来纠正桩的垂直度。\n5 当停机时间较长时，应将桩锤落下垫好。\n6 检修时不得悬吊桩锤。\n7 作业后应将打桩机停放在坚实平整的地面上，将桩锤落\n下垫实，并应切断动力电源。\n6.\n6.\n4 当板桩围护墙基坑有邻近建（ 构）筑物及地下管线时，\n应采用静力压桩法施工，并应根据环境状况控制压桩施工速率。\n当静力压桩作业时，应有统一指挥，压桩人员和吊装人员应密切\n联系，相互配合。\n6.\n6.\n5板粧围护施工过程中，应加强周边地下水位以及孔隙水\n压力的监测。\n6.\n7 型钢水泥土撞拌墙\n6.\n7.\n1施工现场应先进行场地平整，清除搅拌桩施工区域的表\n层硬物和地下障碍物。\n现场道路的承载能力应满足桩机和起重机\n平稳行走的要求。\n6.\n7.\n2 对于硬质土层成桩困难时，应调整施工速度或采取先行\n钻孔跳打方式。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 33,
+        "page_end": 33,
+        "token_count": 336,
+        "char_count": 673
+      }
+    },
+    {
+      "chunk_id": 39,
+      "text": "6.\n7.\n3 对环境保护要求高的基坑工程，宜选择挤土量小的搅拌\n机头，并应通过试成粧及其监测结果调整施工参数。\n6.\n7.\n4 型钢堆放场地应平整坚实、场地无积水，地基承载力应\n满足堆放要求。\n6.\n7.\n5 型钢吊装过程中，型钢不得拖地；起重机械回转半径内\n不应有障碍物，吊臂下严禁站人。\n6.\n7.\n6 型钢的插入应符合下列规定：\n1 型钢宜依靠自重插入，当自重插入有困难时可采取辅助\n措施。\n严禁采用多次重复起吊型钢并松钩下落的插入方法。\n2 前后插入的型钢应可靠连接。\n3 当采用振动锤插人时，应通过环境监测检验其适用性。\n6.\n7.\n7 型钢的拔除与回收应符合下列规定：\n1 型钢拔除应采取跳拔方式，并宜采用液压千斤顶配以吊\n车进行，拔除前水泥土搅拌墙与主体结构地下室外墙之间的空隙\n必须回填密实，拔出时应对周边环境进行监测，拔出后应对型钢\n留下的空隙进行注浆填充。\n2 当基坑内外水头不平衡时，不宜拔除型钢；如拔除型钢，\n应采取相应的截水措施。\n3 周边环境条件复杂、环境保护要求高、拔除对环境影响\n较大时，型钢不应回收。\n4 回收型钢施工，应编制包括浆液配比、注浆工艺、拔除\n顺序等内容的施工安全方案。\n6.\n7.\n8采用渠式切割水泥土连续墙技术施工型钢水泥土搅拌墙\n应符合下列规定：\n1 成墙施工时，应保持不小于2.\nOm/h的搅拌推进速度。\n2 成墙施工结束后，切割箱应及时进入挖掘养生作业区或\n.\n拔出。\n3 施工过程中，必须配置备用发电机组，保障连续作业。\n4 应控制切割箱的拔出速度，拔出切割箱过程中，浆液注\n入量应与拔出切割箱的体积相等，混合泥浆液面不得下降。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 34,
+        "page_end": 34,
+        "token_count": 347,
+        "char_count": 694
+      }
+    },
+    {
+      "chunk_id": 40,
+      "text": "5 水泥土未达到设计强度前，沟槽两侧应设置防护栏杆及\n警示标志。\n6.\n8 J/L 井\n6.\n8.\n1 基坑周边存在既有建（ 构）筑物、管线或环境保护要求\n严格时，不宜采用沉井施工工法。\n6.\n8.\n2 沉井的制作与施工应符合下列规定：\n1 搭设外排脚手架应与模板脱开。\n2 刃脚混凝土达到设计强度，方可进行后续施工。\n3 沉井挖土下沉应分层、均匀、对称进行，并应根据现场\n施工情况采取止沉或助沉措施，沉井下沉应平稳。\n下沉过程中应\n采取信息施工法及时纠偏。\n4 沉井不排水下沉时，井内水位不得低于井外水位；流动\n性土层开挖时，应保持井内水位高出井外水位不少于1m。\n5 沉井施工中挖出的土方宜外运。\n当现场条件许可在附近\n堆放时，堆放地距井壁边的距离不应小于沉井下沉深度的2倍，\n且不应影响现场的交通、排水及后续施工。\n6.\n8.\n3 当作业人员从常压环境进人高压环境或从高压环境回到\n常压环境时，均应符合相关程序与规定。\n6.\n9 内 支撑\n6.\n9.\n1 支撑系统的施工与拆除，应按先撑后挖、先托后拆的顺\n序，拆除顺序应与支护结构的设计工况相一致，并应结合现场支\n护结构内力与变形的监测结果进行。\n6.\n9.\n2 支撑体系上不应堆放材料或运行施工机械；当需利用支\n撑结构兼做施工平台或栈桥时，应进行专门设计。\n6.\n9.\n3 基坑开挖过程中应对基坑开挖形成的立柱进行监测，并\n应根据监测数据调整施工方案。\n6.\n9.\n4 支撑底模应具有一定的强度、刚度和稳定性，混凝土垫\n层不得用作底模。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 35,
+        "page_end": 35,
+        "token_count": 323,
+        "char_count": 647
+      }
+    },
+    {
+      "chunk_id": 41,
+      "text": "6.\n9.\n5 钢支撑吊装就位时，吊车及钢支撑下方严禁人员人内，\n现场应做好防下坠措施。\n钢支撑吊装过程中应缓慢移动，操作人\n员应监视周围环境，避免钢支撑刮碰坑壁、冠梁、上部钢支撑\n等。\n起吊钢支撑应先进行试吊，检查起重机的稳定性、制动的可\n靠性、钢支撑的平衡性、绑扎的牢固性，确认无误后，方可起\n吊。\n当起重机出现倾覆迹象时，应快速使钢支撑落回基座。\n6.\n9.\n6钢支撑预应力施加应符合下列规定：\n1 支撑安装完毕后，应及时检查各节点的连接状况，经确\n认符合要求后方可均匀、对称、分级施加预压力。\n2 预应力施加过程中应检査支撑连接节点，必要时应对支\n撑节点进行加固；预应力施加完毕、额定压力稳定后应锁定。\n3 钢支撑使用过程应定期进行预应力监测，必要时应对预\n应力损失进行补偿；在周边环境保护要求较高时，宜采用钢支撑\n预应力自动补偿系统。\n6.\n9.\n7立柱及立柱桩施工应符合下列规定：\n1 立柱桩施工前应对其单粧承载力进行验算，竖向荷载应\n按最不利工况取值，立柱在基坑开挖阶段应计入支撑与立柱的自\n重、支撑构件上的施工荷载等。\n2 立柱与支撑可采用铰接连接。\n在节点处应根据承受的荷\n载大小，通过计算设置抗剪钢筋或钢牛腿等抗剪措施。\n立柱穿过\n主体结构底板以及支撑结构穿越主体结构地下室外墙的部位应采\n取止水构造措施。\n3 钢立柱周边的桩孔应采用砂石均匀回填密实。\n6.\n9.\n8支撑拆除施工应符合下列规定：\n1 拆除支撑施工前，必须对施工作业人员进行安全技术交\n底，施工中应加强安全检査。\n2 拆撑作业施工范围严禁非操作人员人内，切割焊和吊运\n过程中工作区严禁人内，拆除的零部件严禁随意抛落。\n当钢筋混\n凝土支撑采用爆破拆除施工时，现场应划定危险区域，并应设置\n警戒线和相关的安全标志，警戒范围内不得有人员逗留，并应派",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 36,
+        "page_end": 36,
+        "token_count": 382,
+        "char_count": 764
+      }
+    },
+    {
+      "chunk_id": 42,
+      "text": "专人监管。\n3 支撑拆除时应设置安全可靠的防护措施和作业空间，当\n需利用永久结构底板或楼板作为支撑拆除平台时，应采取有效的\n加固及保护措施，并应征得主体结构设计单位同意。\n4 换撑工况应满足设计工况要求，支撑应在梁板柱结构及\n换撑结构达到设计要求的强度后对称拆除。\n5 支撑拆除施工过程中应加强对支撑轴力和支护结构位移\n的监测，变化较大时，应加密监测，并应及时统计、分析上报，\n必要时应停止施工加强支撑。\n6 桟桥拆除施工过程中，栈桥上严禁堆载，并应限制施工\n机械超载，合理制定拆除的顺序，应根据支护结构变形情况调整\n拆除长度，确保栈桥剩余部分结构的稳定性。\n7 钢支撑可采用人工拆除和机械拆除。\n钢支撑拆除时应避\n免瞬间预加应力释放过大而导致支护结构局部变形、开裂，并应\n采用分步卸载钢支撑预应力的方法对其进行拆除。\n6.\n9.\n9爆破拆除施工应符合下列规定：\n1 钢筋混凝土支撑爆破应根据周围环境作业条件、爆破规\n模，应按现行国家标准《爆破安全规程》GB 6722分级，采取相\n应的安全技术措施。\n2 爆破拆除钢筋混凝土支撑应进行安全评估，并应经当地\n有关部门审核批准后实施。\n3 应根据支撑结构特点制定爆破拆除顺序，爆破孔宜在钢\n筋混凝土支撑施工时预留。\n4 支撑与围护结构或主体结构相连的区域应先行切断，在\n爆破支撑顶面和底部应加设防护层。\n6.\n9.\n10 当采用人工拆除作业时，作业人员应站在稳定的结构或\n脚手架上操作，支撑构件应采取有效的防下坠控制措施，对切断\n两端的支撑拆除的构件应有安全的放置场所。\n6.\n9.\n11 机械拆除施工应符合下列规定：\n1 应按施工组织设计选定的机械设备及吊装方案进行施工，",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 37,
+        "page_end": 37,
+        "token_count": 355,
+        "char_count": 710
+      }
+    },
+    {
+      "chunk_id": 43,
+      "text": "严禁超载作业或任意扩大拆除范围。\n2 作业中机械不得同时回转、行走。\n3 对尺寸或自重较大的构件或材料，必须采用起重机具及\n时下放。\n4 拆卸下来的各种材料应及时清理，分类堆放在指定场所。\n5 供机械设备使用和堆放拆卸下来的各种材料的场地地基\n承载力应满足要求。\n6.\n1 0 土层 锚杆\n6.\n10.\n1 当锚杆穿过的地层附近有地下管线或地下构筑物时，应\n查明其位置、尺寸、走向、类型、使用状况等情况后，方可进行\n锚杆施工。\n6.\n10.\n2 锚杆施工前宜通过试验性施工，确定锚杆设计参数和施\n工工艺的合理性，并应评估对环境的影响。\n6.\n10.\n3 锚孔钻进作业时，应保持钻机及作业平台稳定可靠，除\n钻机操作人员还应有不少于1人协助作业。\n高处作业时，作业平\n台应设置封闭防护设施，作业人员应佩戴防护用品。\n注浆施工时\n相关操作人员必须佩戴防护眼镜。\n6.\n10.\n4 锚杆钻机应安设安全可靠的反力装置。\n在有地下承压水\n地层钻进时，孔口必须设置可靠的防喷装置，当发生漏水、涌砂\n时，应及时封闭孔口。\n6.\n10.\n5 注浆管路连接应牢固可靠，保证畅通，防止塞泵、塞\n管。\n注浆施工过程中，应在现场加强巡视，对注浆管路应采取保\n护措施。\n6.\n10.\n6 锚杆注浆时注浆罐内应保持一定数量的浆料防止罐体放\n空、伤人。\n处理管路堵塞前，应消除灌内压力。\n6.\n10.\n7 预应力锚杆张拉施工应符合下列规定：\n1 预应力锚杆张拉作业前应检査高压油泵与千斤顶之间的\n连接件，连接件必须完好、紧固。\n张拉设备应可靠，作业前必须\n在张拉端设置有效的防护措施。\n2 锚杆钢筋或钢绞线应连接牢固，严禁在张拉时发生脱扣\n现象。\n3 张拉过程中，孔口前方严禁站人，操作人员应站在千斤\n顶侧面操作。\n4 张拉施工时，其下方严禁进行其他操作；严禁采用敲击\n方法调整施力装置，不得在锚杆端部悬挂重物或碰撞锚具。\n6.\n10.\n8 锚杆试验时，计量仪表连接必须牢固可靠，前方和下方\n严禁站人。\n6.\n10.\n9 锚杆锁定应控制相邻锚杆张拉锁定引起的预应力损失，\n当锚杆出现锚头松弛、脱落、锚具失效等情况时，应及时进行修\n复并对其进行再次张拉锁定。\n6.\n10.\n10 当锚杆承载力检测结果不满足设计要求时，应将检测\n结果提交设计复核，并提出补救措施。\n6.\n1 1 逆 作 法\n6.\n11.\n1 逆作法施工应采取安全控制措施，应根据柱网轴线、环\n境及施工方案要求设置通风口及地下通风、换气、照明和用电\n设备。\n6.\n11.\n2 逆作法通风排气应符合下列规定：\n1 在浇筑地下室各层楼板时，挖土行进路线应预先留设通\n风口，随地下挖土工作面的推进，通风口露出部位应及时安装通\n风及排气设施。\n地下室空气成分应符合国家有关安全卫生标准。\n.\n2 在楼板结构水平构件上留设的临时施工洞口位置宜上下\n对齐，应满足施工及自然通风等要求。\n3 风机表面应保持清洁，进出风口不得有杂物，应定期清\n除风机及管道内的灰尘等杂物。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 38,
+        "page_end": 39,
+        "token_count": 621,
+        "char_count": 1243
+      }
+    },
+    {
+      "chunk_id": 44,
+      "text": "地下室空气成分应符合国家有关安全卫生标准。\n2 在楼板结构水平构件上留设的临时施工洞口位置宜上下\n对齐，应满足施工及自然通风等要求。\n3 风机表面应保持清洁，进出风口不得有杂物，应定期清\n除风机及管道内的灰尘等杂物。\n4 风管应敷设牢固、平顺，接头应严密、不漏风，且不应\n妨碍运输、影响挖土及结构施工，并 应配有专人负责检查、\n养护。\n5 地下室施工时应采用送风作业，采用鼓风法从地面向地",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 38,
+        "page_end": 39,
+        "token_count": 97,
+        "char_count": 194
+      }
+    },
+    {
+      "chunk_id": 45,
+      "text": "下送风到工作面，鼓风功率不应小于lkW/1000m 3。\n6.\n11.\n3 逆作法照明及电力设施应符合下列规定：\n1 当逆作法施工中自然采光不满足施工要求时，应编制照\n明用电专项方案。\n2 地下室应根据施工方案及相关规范要求装置足够的照明\n设备及电力插座。\n3 逆作法地下室施工应设一般照明、局部照明和混合照明。\n在一个工作场所内，不得仅设局部照明。\n6.\n11.\n4 逆作法施工应符合下列规定：\n1 闲置取土口、楼梯孔洞及交通要道应搭设防护措施，且\n宜采取有效的防雨措施。\n2 施工时应保护施工洞口结构的插筋、接驳器等预埋件。\n3 宜采用专门的大型自动提土设备垂直运输土石方，当运\n输轨道设置在主体结构上时，应对结构承载力进行验算，并应征\n得设计单位同意。\n4 当逆作梁板混凝土强度达到设计强度等级的90%及以\n上，并经设计单位许可后，方可进行下层土石方的开挖，必要时\n应加入早强剂或提高混凝土强度等级。\n5 主体结构施工未完成前，临时柱承载力应经计算确定。\n6 梁板下土方开挖应在混凝土的强度达到设计要求后进行，\n土方开挖过程中不得破坏主体结构及围护结构。\n挖出的土方应及\n时运走，严禁堆放在楼板上及基坑周边。\n6.\n11.\n5 施工栈桥的设置应符合下列规定：\n1 施工栈桥及立柱桩应根据基坑周边环境条件、基坑形状、\n支撑布置、施工方法等进行专项设计，立柱桩的设计间距应满足\n坑内小型挖土机械的移动和操作的安全要求。\n2 专项设计应提交设计单位进行复核。\n3 使用中应按设计要求控制施工荷载。\n6.\n11.\n6 地下水平结构施工模板、支架应符合下列规定：\n1 主体结构水平构件宜采用木模或钢模，模板支撑地基承",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 40,
+        "page_end": 40,
+        "token_count": 353,
+        "char_count": 706
+      }
+    },
+    {
+      "chunk_id": 46,
+      "text": "载力与变形应满足设计要求。\n2 模板体系承载力、刚度和稳定性，应能可靠承受浇筑混\n凝土的重量、侧压力及施工荷载。\n6.\n11.\n7 逆作法上下同步施工的工程必须采用信息施工法，并应\n对竖向支承桩、柱、转换梁等关键部位的内力和变形提出有针对\n性的施工监测方案、报警机制和应急预案。\n6.\n1 2 坑内土体加固\n6.\n12.\n1 当安全等级为一级的基坑工程进行坑内土体加固时，应\n先进行基坑围护施工，再进行坑内土体加固施工。\n6.\n12.\n2 降水加固可适用于砂土、粉性土，降水加固不得对周边\n环境产生影响。\n降水期间应对坑内、坑外地下水位及邻近建筑\n物、地下管线进行监测。\n6.\n12.\n3 当采用水泥土搅拌粧进行土体加固时，在加固深度范围\n以上的土层被扰动区应采用低掺量水泥回掺处理。\n6.\n12.\n4 高压喷射注浆法进行坑内土体加固施工应符合下列\n规定：\n1 施工前应对现场环境和地下埋设物的位置情况进行调查，\n确定高压喷射注浆的施工工艺并选择合理的机具。\n2 可根据情况在水泥浆液中加入速凝剂、悬浮剂等，掺和\n料与外加剂的种类及掺量应通过试验确定。\n3 应采用分区、分段、间隔施工，相邻两桩施工间隔时间\n不应小于48h，先后施工的两桩间距应为4m〜6m。\n4 可采用复喷施工技术措施保障加固效果，复喷施工应先\n喷一遍清水再喷一遍或两遍水泥浆。\n5 当采用三重管或多重管施工工艺时，应对孔隙水压力进\n行监测，并应根据监测结果调整施工参数、施工位 置和施工\n速度。\n7 地下水与地表水控制\n7.1 —般规定\n7.1.1 地下水和地表水控制应根据设计文件、基坑开挖场地工\n程地质、水文地质条件及基坑周边环境条件编制施工组织设计或\n施工方案。\n7.1.2 降排水施工方案应包含各种泵的扬程、功率，排水管路\n尺寸、材料、路线，水箱位置、尺寸，电力配置等。降排水系统\n应保证水流排入市政管网或排水渠道，应采取措施防止抽排出的\n水倒灌流人基坑。\n7.1.3 当采用设计的降水方法不满足设计要求时，或基坑内坡\n道或通道等无法按降水设计方案实施时，应反馈设计单位调整设\n计，制定补救措施。\n7.1.4 当基坑内出现临时局部深挖时，可采取集水明排、盲沟\n等技术措施，并应与整体降水系统有效结合。\n7.1.5 抽水应采取措施控制出水含砂量。含砂量控制，应满足\n'设计要求，并应满足有关规范要求。\n7.1.6 当支护结构或地基处理施工时，应采取措施防止打桩、\n注浆等施工行为造成管井、点井的失效。\n7.1.7 当坑底下部的承压水影响到基坑安全时，应采取坑底土\n体加固或降低承压水头等治理措施。\n7.1.8 应进行中长期天气预报资料收集，编制晴雨表，根据夭\n气预报实时调整施工进度。降雨前应对已开挖未进行支护的侧壁\n采用覆盖措施，并应配备设备及时排除基坑内积水。\n7.1.9 当因地下水或地表水控制原因引起基坑周边建（ 构）筑\n物或地下管线产生超限沉降时/应查找原因并采取有效控制\n措施。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 41,
+        "page_end": 42,
+        "token_count": 616,
+        "char_count": 1233
+      }
+    },
+    {
+      "chunk_id": 47,
+      "text": "7-1-1 0基坑降水期间应根据施工组织设计配备发电机组，并应\n进行相应的供电切换演练。\n7.\n1.\n11 井点的拔除或封井方案应满足设计要求，并应在施工组\n织设计中体现。\n7.\n1.\n12 在粉性土及砂土中施工水泥土截水帷幕，宜采用适合的\n添加剂，降低截水帷幕渗透系数，并应对帷幕渗透系数进行检\n验，当检验结果不满足设计要求时，应进行设计复核。\n7.\n1.\n1 3截水帷幕与灌注桩间不应存在间隙，当环境保护设计\n要求较高时，应在灌注桩与截水帷幕之间采取注 浆加固等\n措施。\n7.\n1.\n1 4所有运行系统的电力电缆的拆接必须由专业人员负责，\n井管、水泵的安装应采用起重设备。\n7.\n2 排水与降水\n7.\n2.\n1 排水沟和集水井宜布置于地下结构外侧，距坡脚不宜小\n于0.\n5m。\n单级放坡基坑的降水井宜设置在坡顶，多级放坡基坑\n的降水井宜设置于坡顶、放坡平台。\n7.\n2.\n2 排水沟、集水井设计应符合下列规定：\n1 排水沟深度、宽度、坡度应根据基坑涌水量计算确定，\n排水沟底宽不宜小于300mm 。\n2 集水井大小和数量应根据基坑涌水量和渗漏水量、积水\n水量确定，且直径（ 或宽度）不宜小于0.\n6m，底面应比排水沟\n沟底深0.\n5m，间距不宜大于30m。\n集水井壁应有防护结构，并\n应设置碎石滤水层、泵端纱网。\n3 当基坑开挖深度超过地下水位后，排水沟与集水井的深\n度应随开挖深度加深，并应及时将集水井中的水排出基坑。\n7.\n2.\n3 排水沟或集水井的排水量计算应满足下式要求：\nV^sl.\n5Q (7.\n2.\n3)\n式中：V— —排水量（mVd);\nQ一一基坑涌水量（m3/d)，按降水设计计算或根据工程",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 43,
+        "page_end": 43,
+        "token_count": 353,
+        "char_count": 706
+      }
+    },
+    {
+      "chunk_id": 48,
+      "text": "经验确定。\n7.\n2.\n4 当降水管井采用钻、冲孔法施工时，应符合下列规定：\n1 应采取措施防止机具突然倾倒或钻具下落造成人员伤亡\n或设备损坏。\n2 施工前先査明井位附近地下构筑物及地下电缆、水、煤\n气管道的情况，并应采取相应防护措施。\n3 钻机转动部分应有安全防护装置。\n4 在架空输电线附近施工，应按安全操作规程的有关规定\n进行，钻架与高压线之间应有可靠的安全距离。\n5 夜间施工应有足够的照明设备，对钻机操作台、传动及\n转盘等危险部位和主要通道不应留有黑影。\n7.\n2.\n5 降水系统运行应符合下列规定：\n1 降水系统应进行试运行，试运行之前应测定各井口和地\n面标高、静止水位，检查抽水设备、抽水与排水系统；试运行抽\n水控制时间为Id,并应检查出水质量和出水量。\n2 轻型井点降水系统运行应符合下列规定：\n1)总管与真空泵接好后应开动真空泵开始试抽水，检查\n泵的工作状态；\n.\n2 )真空泵的真空度应达到O.\nOSMPa 及以上；\n3)正式抽水宜在预抽水15d后进行；\n4)应及时作好降水记录。\n3 管井降水抽水运行应符合下列规定：\n1)正式抽水宜在预抽水3d后进行；\n2)坑内降水井宜在基坑开挖20d前开始运行；\n3)应加盖保护深井井口；车辆行驶道路上的降水井，应\n加盖市政承重井盖，排水通道宜采用暗沟或暗管。\n4 真空降水管井抽水运行应符合下列规定：\n1)井点使用时抽水应连续，不得停泵，并应配备能自动\n切换的电源；\n2) 当降水过程中出现长时间抽浑水或出现清后又浑情况\n时，应立即检查纠正；\n3)应采取措施防止漏气，真空度应控制在一0.\n03MPa 〜\n-0.\n06MPa ；-真空度达不到要求时，应检查管道漏\n气情况并及时修复；\n4)当井点管淤塞太多，严重影响降水效果时，应逐个用\n高压水反复冲洗井点管或拔出重新埋设；\n5)应根据工程经验和运行条件、泵的质量情况等配备一\n定数量的备用射流栗；对使用的射流栗应迸行日常保\n养与检查，发现不正常应及时更换。\n7.\n2.\n6 降水运行阶段应有专人值班，应对降排水系统进行定\n期或不定期巡察，防止停电或其他因素影响降排水系统正常\n运行。\n7.\n2.\n7 降水井随基坑开挖深度需切除时，对继续运行的降水井\n应去除井管四周地面下lm 的滤料层，并应采用黏土封井后再\n运行。\n7.\n3 截水帷幕\n7.\n3.\n1 水泥土截水帷幕施工应符合下列规定：\n1 应保证施工桩径，并确保相邻桩搭接要求，当采用高压\n喷射注浆法作为局部截水帷幕时，应采用复喷工艺，喷浆下沉或\n提升速度不应大于100mm/min 。\n2 应采取措施减少二重管、三重管高压喷射注浆施工对基\n坑周围建筑物及管线沉降变形的影响，必要时应调整帷幕桩墙\n设计。\n7.\n3.\n2 注浆法帷幕施工应符合下列规定：\n1 注浆帷幕施工前应进行现场注浆试验，试验孔的布置应\n选取具代表性的地段，并应在土层中采用钻孔取芯结合注水试验\n检验截水防渗效果。\n2 注浆管上拔时宜采用拔管机。\n3 当土层存在动水或土层较软弱时，可采用双液注浆法来",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 44,
+        "page_end": 45,
+        "token_count": 633,
+        "char_count": 1266
+      }
+    },
+    {
+      "chunk_id": 49,
+      "text": "控制浆液的渗流范围，两种浆液混合后在管内的时间应小于浆液\n的凝固时间。\n7.\n3.\n3 三轴水泥土搅拌桩截水帷幕施工应符合下列规定：\n1 应采用套接孔法施工，相邻粧的搭接时间间隔不宜大\n于 24h。\n.\n2 当帷幕墙前设置混凝土排桩时，宜先施工截水帷幕，后\n施工灌注排桩。\n3 当采用多排三轴水泥土搅拌桩内套挡土粧墙方案时，应\n控制三轴搅拌桩施工对基坑周边环境的影响。\n7.\n3.\n4 钢板桩截水帷幕施工应符合下列规定：\n1 应评估钢板桩施工对周围环境的影响。\n2 在拔除钢板桩前应先用振动锤振动钢板桩，拔除后的桩\n孔应采用注浆回填。\n3 钢板桩打人与拔除时应对周边环境进行监测。\n7.\n3.\n5 兼作截水帷幕的钻孔咬合桩施工应符合下列规定：\n1 宜采用软切割全套管钻机施工。\n2 砂土中的全套管钻孔咬合粧施工，应根据产生管涌的不\n同情况，采取相应的克服砂土管涌的技术措施，并应随时观察孔\n内地下水和穿越砂层的动态，按少取土多压进的原则操作，确保\n套管超前。\n3 套管底口应始终保持超前于开挖面2.\n5m 以上；当遇套\n管底无法超前时，可向套管内注水来平衡第一序列桩混凝土的压\n力，阻止管涌发生。\n7.\n3.\n6 冻结法截水帷幕施工应符合下列规定：\n1 冻结孔施工应具备可靠稳定的电源和预备电源。\n2 冻结管接头强度应满足拔管和冻结壁变形作用要求，冻\n结管下入地层后应进行试压。\n3 冻结站安装应进行管路密封性试验，并应采取措施保证\n冻结站的冷却效率；正式运转后不得无故停止或减少供冷。\n4 施工过程应采取措施减小成孔引起土层沉降，及时监测\n倾斜。\n5 开挖前应对冻结壁的形成进行检测分析，并对冻结运转\n参数进行评估；检验合格以及施工准备工作就绪后应进行试开挖\n判定，具备开挖条件后可进行正式开挖。\n6 开挖过程应维持地层的温度稳定，并应对冻结壁进行位\n移和温度监测。\n7 冻结壁解冻过程中应对土层和周边环境进行连续监测，\n必要时应对地层采取补偿注浆等措施；冻结壁全部融化后应继续\n监测直到沉降达到控制要求。\n8 冻结工作结束后，应对遗留在地层中的冻结管进行填充\n和封孔，并应保留记录。\n9 冻结站拆除时应回收盐水，不得随意排放。\n7. 3.7 截水帷幕质量控制和保护应符合下列规定：\n1 截水帷幕深度应满足设计要求。\n2 截水帷幕的平面位置、垂直度偏差应符合设计要求。\n3 截水帷幕水泥掺入量和粧体质量应满足设计要求。\n4 帷幕的养护龄期应满足设计要求。\n5 支护结构变形量应满足设计要求。\n6 严禁土方开挖和运输破坏截水帷幕。\n7.3.8 截水措施失效时，可采用下列处理措施：\n1 设置导流水管。\n2 采用遇水膨胀材料或压密注浆、聚氨酯注浆等方法\n堵漏。\n3 快硬早强混凝土浇筑护墙。\n4 在基坑外壁增设高压旋喷或水泥土搅拌桩截水帷幕。\n5 增设坑内降水和排水设施。\n7.4 回 灌\n7.4.1 宜根据场地地质条件和降深控制要求，按表7. 4.1选择\n回灌方法。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 46,
+        "page_end": 47,
+        "token_count": 616,
+        "char_count": 1233
+      }
+    },
+    {
+      "chunk_id": 50,
+      "text": "表7.\n4.\n1 地下水回灌方法\n同灌方法、\n土质类别\n渗透系数\n( m /d )\n回灌方式\n管井\n填土、粉土、砂土、\n碎石土、裂隙基岩\n0 .\n1 〜20.\n0 异层回灌\n砂井 砂土、碎石土 — 异层回灌\n砂沟 砂 土、碎石土 — 同层回灌\n大口井 填土、粉土、砂土、碎石土 — 异层回灌\n渗坑 砂土、碎石土 — 同层回灌\n7.\n4 .\n2 应根据降水布置、出水量、现场条件建立回灌系统，回\n灌点应布置在被保护建筑与降水井之间，并应通过现场试验确定\n回灌量和回灌工艺。\n7 .\n4 .\n3回灌注水量应保持稳定，在C： 水箱进出口处应设置滤网，\n回灌水的水头高度可根据回灌水量进行调整，严禁超灌引起湿陷\n事故。\n7 .\n4 .\n4回灌砂井中的砂宜选用不均匀系数为3〜5的纯净中粗\n砂，含泥量不宜大于3% ，灌砂量不少于井孔体积的95% 。\n7 .\n4 .\n5回灌水水质不得低于原地下水水质标准，回灌不应造成\n区域性地下水质污染。\n7 .\n4 .\n6回灌管路产生堵塞时，应根据产生堵塞的原因，采取连\n续反冲洗方法、间歇停泵反冲洗与压力灌水相结合的方法进行\n处理。\n7 .\n5 环境影响预测与预防\n7.\n5.\n1 降水引起的基坑周边环境影响预测宜包括下列内容：\n1 地面沉降、塌陷。\n2 建 （ 构）筑物、地下管线开裂、位移、沉降、变形。\n3 产生流砂、流土、管渗、潜蚀等。\n7.\n5 .\n2 可根据调査或实测资料、工程经验预测和判断降水对基\n坑周边环境影响；可根据建筑物结构形式、荷载大小、地基条件\n采用现行国家标准《 建筑地基基础设计规范》GB 50007规定的\n分层总和法，或采用单向固结法按下式估算降水引起的建筑物或\n地面沉降量：\nS = 如 (7.\n5.\n2)\n式中：S— —降水引起的建筑物基础或地面的沉降量（m);\n0W— —沉降计算经验系数，应根据地区工程经验取值；无\n经验时，对软土地层，宜取化= 1.\n0〜1.\n2，对一般\n地层可取0.\n6〜1.\n0，对当量模量大于lOMPa 的土\n层、复合土层可取 0.\n4〜0.\n6，对密实砂层可取\n— —降水引起的地面下第i 土层中点处的有效应力增量\n(kPa)；对黏性土，应取降水结束时土的有效应力\n增量；\nA/;,.\n---第i 层土的厚度（m)；\nE fi— —按实际应力段确定的第i 层土的压缩模量（kPa);\n对采用地基处理的复合土层应按现行行业标准《 建\n筑地基处理技术规范》JGJ 79规定的方法取值。\n7.\n5.\n3 减少基坑降水对周边环境影响的措施应符合下列规定：\n1 应检测帷幕截水效果，对渗漏点进行处理。\n2 滤水管外宜包两层60目井底布，外填砾料应保证设计厚\n度和质量，抽水含砂量应符合有关规范要求。\n3 应通过调整降水井数量、间距或水泵设置深度，控制降\n水影响范围，在保证地下水位降深达到要求时减少抽水量。\n4 应限定单井出水流量，防止地下水流速过快带动细砂涌\n人井内，造成地基土渗流破坏。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 48,
+        "page_end": 49,
+        "token_count": 618,
+        "char_count": 1236
+      }
+    },
+    {
+      "chunk_id": 51,
+      "text": "2 滤水管外宜包两层60目井底布，外填砾料应保证设计厚\n度和质量，抽水含砂量应符合有关规范要求。\n3 应通过调整降水井数量、间距或水泵设置深度，控制降\n水影响范围，在保证地下水位降深达到要求时减少抽水量。\n4 应限定单井出水流量，防止地下水流速过快带动细砂涌\n人井内，造成地基土渗流破坏。\n5 开始降水时水泵启动，应根据与保护对象的距离按先远\n后近的原则间隔进行；结束降水时关闭水泵，应按先近后远的顺\n序原则间隔进行。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 48,
+        "page_end": 49,
+        "token_count": 104,
+        "char_count": 209
+      }
+    },
+    {
+      "chunk_id": 52,
+      "text": "8 土石方开挖\n8.\n1 —般规定\n8.\n1.\n1 土石方开挖前应对围护结构和降水效果进行检查，满足\n设计要求后方可开挖，开挖中应对临时开挖侧壁的稳定性进行\n验算。\n8.\n1.\n2 基坑开挖除应满足设计工况要求按分层、分段、限时、\n限高和均衡、对称开挖的方法进行外，尚应符合下列规定：\n1 当挖土机械、运输车辆等直接进入基坑进行施工作业时，\n应采取措施保证坡道稳定，坡道坡度不应大于1 : 7，坡道宽度\n应满足行车要求。\n2 基坑周边、放坡平台的施工荷载应按设计要求进行控制。\n3 基坑开挖的土方不应在邻近建筑及基坑周边影响范围内\n堆放，当需堆放时应进行'承载力和相关稳定性验算。\n4 邻近基坑边的局部深坑宜在大面积垫层完成后开挖。\n5 挖土机械不得碰撞工程桩、围护墙、支撑、立柱和立柱\n粧、降水井管、监测点等。\n6 当基坑开挖深度范围内有地下水时，应采取有效的降水与\n排水措施，地下水宜在每层土方开挖面以下800mm〜1000mm。\n8.\n1.\n3 基坑开挖过程中，当基坑周边相邻工程进行桩基、基坑\n支护、土方开挖、爆破等施工作业时，应根据相互之间的施工影\n响，采取可靠的安全技术措施。\n8.\n1.\n4 基坑开挖应采用信息施工法，根据基坑周边环境等监测\n数据，及时调整开挖的施工顺序和施工方法。\n8.\n1.\n5 在土石方开挖施工过程中，当发现有毒有害液体、气体、\n固体时，应立即停止作业，进行现场保护，并应报有关部门处理\n后方可继续施工。\n8.\n1.\n6 土石方爆破应符合现行行业标准《 建筑施工土石方工程\n安全技术规范》JGJ 180的规定。\n8 .\n2 无内支撑的基坑开挖\n8.\n2.\n1 放坡开挖的基坑，边坡表面护坡应符合下列规定：\n1 坡面可采用钢丝网水泥砂浆或现浇钢筋混凝土覆盖，现\n浇混凝土可采用钢板网喷射混凝土，护坡面层的厚度不应小于\n50mm 、混凝土强度等级不宜低于C20，配筋应根据计算确定，\n混凝土面层应采用短土钉固定。\n2 护坡面层宜扩展至坡顶和坡脚一定的距离，坡顶可与施\n工道路相连，坡脚可与垫层相连。\n3 护坡坡面应设置泄水孔，间距应根据设计确定。\n当无设\n计要求时，可采用1.\n5m〜3.\n0m。\n4 当进行分级放坡开挖时，在上一级基坑坡面处理完成之\n前，严禁下一级基坑坡面土方开挖。\n8.\n2.\n2 放坡开挖基坑的坡顶和坡脚应设置截水明沟、集水井。\n8.\n2.\n3 采用土钉或复合土钉墙支护的基坑开挖施工应符合下列\n规定：\n1 截水帷幕、微型桩的强度和龄期应达到设计要求后方可\n进行土方开挖。\n2 基坑开挖应与土钉施工分层交替进行，并应缩短无支护\n暴露时间。\n3 面积较大的基坑可采用岛式开挖方式，应先挖除距基坑\n边8m〜10m 的土方，再挖除基坑中部的土方。\n4 采用分层分段方舞进行土方开挖，每层土方开挖的底标\n高应低于相应土钉位置，距离宜为200mm 〜500mm ,每层分段\n长度不应大于30m。\n5 应在土钉承载力或龄期达到设计要求后开挖下一层土方。\n8.\n2.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 50,
+        "page_end": 51,
+        "token_count": 626,
+        "char_count": 1253
+      }
+    },
+    {
+      "chunk_id": 53,
+      "text": "3 面积较大的基坑可采用岛式开挖方式，应先挖除距基坑\n边8m〜10m 的土方，再挖除基坑中部的土方。\n4 采用分层分段方舞进行土方开挖，每层土方开挖的底标\n高应低于相应土钉位置，距离宜为200mm 〜500mm ,每层分段\n长度不应大于30m。\n5 应在土钉承载力或龄期达到设计要求后开挖下一层土方。\n4 采用锚杆支护的基坑开挖施工应符合下列规定：\n1 面层或排桩、微型桩、截水帷幕的强度和龄期应达到设",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 50,
+        "page_end": 51,
+        "token_count": 100,
+        "char_count": 201
+      }
+    },
+    {
+      "chunk_id": 54,
+      "text": "计要求后方可进行土方开挖。\n2 基坑开挖应与锚杆施工分层交替进行，并应缩短无支护\n暴露时间。\n3 锚杆承载力、龄期达到设计要求后方可进行下一层土方\n开挖。\n4 预应力锚杆应经试验检测合格后方可进行下一层土方开\n挖，并应对预应力进行监测。\n_\n8 .\n2 .\n5采用水泥土重力式围护墙的基坑开挖施工应符合下列\n规定：\n1 水泥土重力式围护墙的强度、龄期应达到设计要求后方\n可进行土方开挖。\n2 面积较大的基坑宜采用盆式开挖方式，盆边留土平台宽\n度不宜小于8m。\n3 土方开挖至坑底后应及时浇筑垫层，围护墙无垫层暴露\n长度不宜大于25m。\n8 .\n3 有内支撑的基坑开挖\n8 .\n3 .\n1基坑开挖应按先撑后挖、限时、对称、分层、分区等的\n开挖的方法确定开挖顺序，严禁超挖，应减小基坑无支撑暴露开\n挖时间和空间。\n混凝土支撑应在达到设计要求的强度后。\n进行下\n层土方开挖；钢支撑应在质量验收并按设计要求施加预应力后。\n进行下层土方开挖。\n8 .\n3 .\n2挖土机械不应停留在水平支撑上方进行挖土作业，当在\n支撑上部行走时，应在支撑上方回填不少于300mm 厚的土层，\n并应采取铺设路基箱等措施。\n8 .\n3.\n3 立柱桩周边300mm 土层及塔吊基础下钢格构柱周边\n300mm 土层应采用人工挖除，格构柱内土方宜采用人工清除。\n8 .\n3 .\n4采用逆作法、盖挖法进行暗挖施工应符合下列规定：\n1 基坑土方开挖和结构工程施工的方法和顺序应满足设计\n工况要求。\n2 基坑土方分层、分段、分块开挖后，应按施工方案的要\n求限时完成水平支护结构施工。\n3 当狭长形基坑暗挖时，宜采用分层分段开挖方法，分段\n长度不宜大于25m。\n4 面积较大的基坑应采用盆式开挖方式，盆式开挖的取土\n口位置与基坑边的距离不宜小于8m。\n5 基坑暗挖作业应根据结构预留洞口的位置、间距、大小\n增设强制通风设施。\n6 基坑暗挖作业应设置足够的照明设施，照明设施应根据\n挖土过程配置。\n7 逆作法施工，梁板底模应采用模板支撑系统，模板支撑\n下的地基承载力应满足要求。\n, 8.\n4 土石方开挖与爆破\n8 .\n4 .\n1 岛式土方开挖应符合下列规定：\n1 边部土方的开挖范围应根据支撑布置形式、围护墙变形\n控制等因素确定。\n边部土方应采用分段开挖的方法，应减小围护\n墙无支撑或无垫层暴露时间。\n2 中部岛状土体的各级放坡和总放坡应验算稳定性。\n3 中部岛状土体的开挖应均衡对称进行。\n8 .\n4.\n2 盆式土方开挖应符合下列规定：\n1 中部土方的开挖范围应根据支撑形式、围护墙变形控制、\n坑边土体加固等因素确定；中部有支撑时应先完成中部支撑，再\n开挖盆边土方。\n2 盆边开挖形成的临时放坡应进行稳定性验算。\n3 盆边土体应分块对称开挖，分块大小应根据支撑平面布\n置确定，应限时完成支撑。\n4 软土地基盆式开挖的坡面可采取降水、支护、土体加固\n等措施。\n8 .\n4 .\n3狭长形基坑的土方开挖应符合下列规定：",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 52,
+        "page_end": 53,
+        "token_count": 617,
+        "char_count": 1234
+      }
+    },
+    {
+      "chunk_id": 55,
+      "text": "1 采用钢支撑的狭长形基坑可采用纵向斜面分层分段开挖\n的方法，斜面应设置多级放坡；各阶段形成的放坡和纵向总坡的\n稳定性应满足现行行业标准《建筑基坑支护技术规程》 120\n的规定。\n2 每层每段开挖和支撑形成的时间应符合设计要求。\n3 分层分段开挖至坑底时，应限时施工垫层。\n8. 4. 4 冻胀土基坑采用爆破法开挖时应符合下列规定：\n1 当冻土爆破开挖深度大于1.0m 时，应采取分层开挖，\n分层厚度可根据钻爆机具性能及人员操作难度确定。\n2 为缩短基坑暴露时间，对浅小基坑，应根据施工机械、\n人员、钻爆机具的配置情况，采取一次全断面开挖，并及时进行\n基础施工；对深大基坑，应采取分段开挖、分段进行基础施工。\n8.4.5 土石方开挖爆破工程应由具有相应爆破资质和安全生产\n许可证的企业承担。爆破'作业人员应取得有关部门颁发的资格证\n书，并应持证上岗。爆破工程作业现场应由具有相应资格的技术\n人员负责指导施工。\n8. 4. 6 爆破参数应根据工程类比法或通过现场试炮确定。\n8.4.7 当采用爆破法施工时，应采取合理的爆破施工工艺以减\n小对周边环境的影响。当坡体顶部边缘有建筑物或岩体抗拉强度\n较低时，坡体的上部宜采用锚杆支护控制岩体开挖后的卸荷裂\n隙。有锚杆支护的爆破开挖，应采取防止锚杆应力松弛措施。\n9 特殊性土基坑工程\n9.\n1 一般规定\n9.\n1.\n1 特殊性土深基坑工程施工应根据气候条件、地基的胀缩\n等级、场地的工程地质及水文地质条件以及支护结构类型，结合\n工程经验和施工条件，因地制宜采取安全技术措施。\n9.\n1.\n2 土方开挖前，应完成地表水系导引措施，并应按设计要\n求完成基坑四周坡顶防渗层、截流沟施工；使用过程中，应对排\n水和防护措施进行定期检查和记录，排水应通畅，施工期间各类\n地表水不得进入工作面。\n9.\n1.\n3 形成的开挖面符合设计要求后，应立即进行后续施工作\n业，并应采取措施避免开挖面长时间暴露。\n边开挖、边支护施工\n的膨胀土、冻胀土基坑工程，应对设计开挖面进行及时保护。\n气\n温降到0°C前，应对有可能冻裂的浅表水管采取保温措施。\n9.\n1.\n4 特殊性土深基坑工程应按信息施工法要求进行设计、施\n工和监测。\n除采用仪器设备进行监测外，还应采用人工巡视重点\n检查膨胀土胀缩、冻胀土冻胀、软土侧壁挤出和地表裂缝、异常\n变形、渗漏等情况。\n9.\n1.\n5 湿陷性黄土基坑工程，除符合本规范外，尚应符合现行\n行业标准《湿陷性黄土地区建筑基坑工程安全技术规程 》JGJ\n167 的相关规定。\n9.\n2 膨胀岩土基坑工程\n9.\n2.\n1 膨胀岩土基坑工程施工阶段应根据现场情况的变化进行\n稳定性验算。\n稳定验算应根据岩土含水量变化和膨胀岩土的胀缩\n力对土的抗剪强度指标进行折减；有软弱夹层及层状膨胀岩土，\n应按最不利的滑动面验算稳定性；存在胀缩裂缝和地裂缝时，应",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 54,
+        "page_end": 55,
+        "token_count": 596,
+        "char_count": 1193
+      }
+    },
+    {
+      "chunk_id": 56,
+      "text": "进行沿裂缝滑动的稳定性验算。\n9 .\n2 .\n2膨胀土中维护结构施工宜选择干作业方法，支护锚杆注\n浆材料宜先采用水泥砂浆，后采用水泥浆二次注浆技术。\n9 .\n2 .\n3当施工过程中发现实际揭露的膨胀土分布情况、土体膨\n胀特性与勘察结果存在较大差别，或遇雨淋、泡水、失水干裂等\n情况时，应及时反馈设计，并应采取处理措施。\n9.\n2 .\n4 膨胀土基坑开挖应符合下列规定：\n1 土方开挖应按从上到下分层分段依次进行，开挖应与坡\n面防护分级跟进作业，本级边坡开挖完成后，应及时进行边坡防\n护处理，在上一级边坡处理完成之前，严禁下一级边坡开挖。\n2 开挖过程中，必须采取有效防护措施减少大气环境对侧\n壁土体含水量的影响。\n3 应分层、分段开挖，分段长度不应大于30m。\n4 土方开挖应按设计开挖轮廓线预留保护层，保护层厚度\n应根据不同基坑段的地质条件确定，弱膨胀土预留保护层厚度不\n应小于300mm ，中强膨胀土预留保护层厚度不应小于500mm;\n中强膨胀土基坑底部坡脚处宜预留土墩。\n9 .\n2 .\n5基坑侧壁和底面的防护应符合下列规定：\n1 完成保护层开挖后，应立即采取防雨淋、防土体蒸发失\n水的临时防护措施。\n2 侧壁临时防护可采用防雨布覆盖，坑底防护宜选择迅速\n施工垫层等方式。\n9.\n2 .\n6 开挖施工过程中的地质编录与施工记录应符合下列规定：\n1 开挖过程中，应对开挖揭露的地层情况、岩性、地下水、\n膨胀性等情况进行记录，发现与勘察报告差异较大时，应及时通\n知监理、勘察及设计人员，研究处置措施。\n2 按设计要求开挖到设计轮廓后，应对开挖面进行地质\n编录。\n3 当开挖过程中基坑发生局部变形超限或坍塌时，应对变\n形体或坍塌体进行专项记录。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 56,
+        "page_end": 56,
+        "token_count": 361,
+        "char_count": 722
+      }
+    },
+    {
+      "chunk_id": 57,
+      "text": "9.\n2.\n7 膨胀土基坑工程地表水处理应符合下列规定：\n1 开挖前，应根据现场地形及汇水条件、基坑四周地面水\n系情况，按设计要求做好地表水导引及坡顶截排水方案。\n2 坡顶应设置硬化防渗层，保护范围应延伸到坡顶纵截水\n沟外侧，坡顶不得有积水。\n3 坡顶截水沟应进行铺砌及防渗漏处理，截水沟应结合地\n形条件分段布置向坑外排放的排水通道，排水通道之间应排水\n通畅。\n4 在分级开挖过程中，应采取措施减少地表水和地下水对\n开挖施工的影响。\n9.\n3 受冻融影响的基坑工程\n9.\n3.\n1 可能发生冻胀的基坑宜采用内支撑或逆作法施工。\n9.\n3.\n2 可能发生冻胀的基坑工程，应对冻胀力进行设计验算。\n9.\n3.\n3 对基坑侧壁为冻胀土、强冻胀土、特强冻胀土的基坑工\n程，应采用保温措施。\n冬期施工时宜搭设暖棚；冬期不施工的，\n可采取覆盖保温或局部搭设暖棚。\n9.\n3.\n4 可能发生冻胀的基坑使用锚拉支护时，应增大锚杆截面\n面积，提高杆材抗拉能力，防止锚杆出现断裂破坏。\n9.\n3.\n5 对相邻建（ 构）筑物有保护要求和支护结构有严格变形\n要求的工程，在冻土融化阶段，应加强土体沉降、结构变形和锚\n杆拉力的监测。\n当锚杆产生应力松弛、拉力下降时，应重新张拉\n至设计要求。\n9.\n3.\n6 冰和冻土融化时，应防止渗漏水形成的冰柱、冰溜和冻\n土掉落伤人。\n9.\n3.\n7 受冻融影响的基坑，应及时回填。\n9.\n4 软土基坑工程\n9.\n4.\n1 对高灵敏度软土基坑，施工和使用过程中，应采取措施\n减少临近交通道路或其他扰动源对土的扰动。\n9.4.2 基坑开挖时应对软土的触变性和流动性采取措施，当采\n用排桩保护时，必须进行桩间土的保护，防止软土侧向挤出。当\n周边有建（ 构）筑物时，宜设置截水帷幕保护桩间土。\n9.4.3 软土基坑围护结构施工，应采取合适的施工方法，减少\n对软土的扰动，控制地层位移对周边环境的影响。\n9.4.4 紧邻建（ 构）筑物的软土基坑开挖前宜进行土体加固，\n并应进行加固效果检测，达到设计要求后方可开挖。\n9. 4. 5 在基坑内进行工程粧施工应符合下列规定：\n1 桩顶上部应预留一定厚度的土层，严禁在临近基坑底部\n形成空孔，必要时对被动区或坑脚土体进行预加固。\n2 应减少对基坑底部土体的扰动。\n3 应缩短临近基坑侧壁工程桩混凝土的凝固时间。\n4 应采用分区隔排、_间隔施工，减少对土的集中扰动。\n5 应控制钻进和施工速度，防止剪切液化的发生。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 57,
+        "page_end": 58,
+        "token_count": 514,
+        "char_count": 1029
+      }
+    },
+    {
+      "chunk_id": 58,
+      "text": "1 0 检查与监测\n10.1 — 般规定\n10.1.1 基坑工程施工应对原材料质量、施工机械、施工工艺、\n施工参数等进行检查。\n10.1.2 基坑土方开挖前，应复核设计条件，对巳经施工的围护\n结构质量进行检查，检査合格后方可进行土方开挖。\n10.1.3 基坑土方开挖及地下结构施工过程中，每个工序施工结\n束后，应对该工序的施工质量进行检查；检查发现的质量问题应\n进行整改，整改合格后方可进人下道施工工序。\n10.1. 4 施工现场平面、竖向布置应与支护设计要求一致，布置\n的变更应经设计认可。\n10.1.5 基坑施工过程除应按现行国家标准《 建筑基坑工程监测\n技术规范》GB 50497的规定进行专业监测外，施工方应同时编\n制包括下列内容的施工监测方案并实施：\n1 工程概况。\n2 监测依据和项目。\n3 监测人员配备。\n4 监测方法、精度和主要仪器设备。\n5 测点布置与保护。\n6 监测频率、监测报警值。\n7 异常情况下的处理措施。\n8 数据处理和信息反馈。\n10.1.6 应根据环境调查结果，分析评估基坑周边环境的变形敏\n感度，宜根据基坑支护设计单位提出的各个施工阶段变形设计值\n和报警值，在基坑工程施工前对周边敏感的建筑物及管线设施采\n取加固措施。\n10.\n1.\n7 施工过程中，应根据第三方专业监测和施工监测结果，\n及时分析评估基坑的安全状况，对可能危及基坑安全的质量问\n题，应采取补救措施。\n10.\n1.\n8 监测标志应稳固、明显，位置应避开障碍物，便于观\n测；对监测点应有专人负责保护，监测过程应有工作人员的安全\n保护措施。\n10.\n1.\n9 当遇到连续降雨等不利天气状况时，监测工作不得中\n断；并应同时采取措施确保监测工作的安全。\n10.\n2 检 査\n10.\n2.\n1 基坑工程施工质量检查应包括下列内容：\n1 原材料表观质量。\n2 围护结构施工质暈。\n3 现场施工场地布置。\n4 •土方开挖及地下结构施工工况。\n5 降水、排水质量。\n：\n6 回填土质量。\n7 其他需要检查质量的内容。\n10.\n2.\n2 围护结构施工质量检查应包括施工过程中原材料质量检\n查和施工过程检査、施工完成后的检查；施工过程应主要检查施\n工机械的性能、施工工艺及施工参数的合理性，施工完成后的质\n量检查应按相关技术标准及设计要求进行，主要内容及方法应符\n合表10.\n2.\n2的规定。\n表10.\n2.\n2围护结构质量检查的主要内容及方法\n质量项目与\n基坑安全等级\n检查内容 检查方法\n支\n护\n结\n构 级\n排桩\n混凝土强度、桩位偏差、粧\n长、粧身完整性\n1.\n混凝土或水泥土强度\n可检查取芯报告；\n2.\n排粧完整性可查桩身\n低应变动测报告；\n型钢水泥土\n搅拌墙\n桩位偏差、桩长、水泥土强\n度、型钢长度及焊接质量",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 59,
+        "page_end": 60,
+        "token_count": 573,
+        "char_count": 1147
+      }
+    },
+    {
+      "chunk_id": 59,
+      "text": "续表10.\n2.\n2\n质量项目与\n基坑安全等级\n检查内容 检查方 法\n级\n级\n级\n一 I 级\n级\n级\n地下连续墙 墙深、混凝土强度、墙身完\n整性、接头渗水\n锚杆\n锚杆抗拔力、平面及竖向位\n置、锚杆与腰梁连接节点、腰\n梁与后靠结构之间的结合程度\n土钉墙\n放坡坡度、土钉抗拔力、土\n钉平面及竖向位置、土钉与喷\n射混凝土面层连接节点\n排桩 混凝土强度、桩身完整性\n型钢水泥\n土搅拌墙\n水泥土强度、型钢长度及焊\n接质量\n地下连续墙 混凝土强度、接头渗水\n锚杆\n锚杆抗拔力、平面及竖向位\n置、锚杆与腰梁连接节点、腰\n梁与后靠结构之间的结合程度\n土钉墙\n放坡坡度、土钉抗拔力、土\n钉平面及竖向位置、土钉与喷\n射混凝土面层连接节点\n水泥搅拌墙\n高压旋喷\n搅拌墙\n桩长、成桩状况、渗透性能\n咬合桩墙 粧长、桩径、粧间搭接量\n水泥搅拌墙\n高压旋喷\n搅拌墙\n成桩状况、渗透性能\n咬合桩墙 桩间搭接量\n压密注浆\n顶标高、底标高、水泥土\n强度\n水泥土粧\n压密注浆\n顶标高、水泥土强度\n3.\n地下连续墙墙身完整\n性可通过预埋声测管检查；\n4.\n锚杆和土钉的抗拔力\n查现场抗拔试验报告，锚\n杆与腰梁的连接节点可采\n用目测结合人工扭力扳手；\n5 .\n几何参数，如桩径、\n桩距等用直尺量；\n6 .\n标高由水准仪测量，\n桩长可通过取芯检查；\n7 .\n坡度、中间平台宽度\n用直尺量测；\n8.\n其余可根据具体情况\n确定\n支护结构\n截水帷幕\n地基加固\n续表10. 2. 2\n质量项目与\n基坑安全等级\n检查内容 检查方法\n支\n撑\n级\n和\ni\n混凝土支撑 混凝土强度、截面尺寸、平\n直度等\n钢支撑 支撑与腰梁连接节点、腰梁\n与后靠结构之间的密合程度等\n竖向立柱 平面位置、顶标高、垂直\n度等\n10.2.3 安全等级为一级的基坑工程设置封闭的截水帷幕时，开\n挖前应通过坑内预降水措施检査帷幕截水效果。\n10.2.4 施工现场平面、.竖向布置检查应包括下列内容：\n1 出土坡道、出土口位置。\n2 堆载位置及堆载大小。\n3 重车行驶区域。\n4 大型施工机械停靠点。\n5 塔吊位置。\n10. 2. 5 土方开挖及支护结构施工工况检査应包括下列内容：\n1 各工况的基坑开挖深度。\n2 坑内各部位土方高差及过渡段坡率。\n3 内支撑、土钉、锚杆等的施工及养护时间。\n4 土方开挖的竖向分层及平面分块。\n5 拆撑之前的换撑措施。\n10.2.6 混凝土内支撑在混凝土浇筑前，应对支架、模板等进行\n检查。\n10. 2. 7 降排水系统质量检査应包括下列内容：\n1 地表排水沟、集水井、地面硬化情况。\n2 坑内外井点位置。\n3 降水系统运行状况。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 61,
+        "page_end": 62,
+        "token_count": 545,
+        "char_count": 1090
+      }
+    },
+    {
+      "chunk_id": 60,
+      "text": "4 坑内临时排水措施。\n5 外排通道的可靠性。\n10.2.8 基坑回填后应检查回填土密实度。\n1 0 . 3施工监测\n1 0 .3 .1施工监测应采用仪器监测与巡视相结合的方法。用于监\n测的仪器应按测量仪器有关要求定期标定。\n10.3.2 基坑施工和使用中应采取多种方式进行安全监测，对有\n特殊要求或安全等级为一级的基坑工程，应根据基坑现场施工作\n业计划制定基坑施工安全监测应急预案。\n1 0 . 3 . 3施工监测应包括下列主要内容：\n1 基坑周边地面沉降。\n2 周边重要建筑沉降。\n3 周边建筑物、地面裂缝。\n4 支护结构裂缝。\n5 坑内外地下水位。\n6 地下管线渗漏情况。\n7 安全等级为一级的基坑工程施工监测尚应包含下列主要\n内容：\n1)围护墙或临时开挖边坡面顶部水平位移；\n2)围护墙或临时开挖边坡面顶部竖向位移；\n3 ) 坑底隆起；\n4)支护结构与丰体结构相结合时，主体结构的相关监测。\n10.3.4 基坑工程施工过程中每天应有专人进行巡视检查，巡视\n检査应符合下列规定：\n1 支护结构，应包含下列内容：\n1)冠梁、腰梁、支撑裂缝及开展情况；\n2)围护墙、支撑、立柱变形情况；\n3 ) 截水帷幕开裂、渗漏情况；\n4 ) 墙后土体裂缝、沉陷或滑移情况；\n5)基坑涌土、流砂、管涌情况。\n2 施工工况，应包含下列内容：\n1) 土质条件与勘察报告的一致性情况；\n2)基坑开挖分段长度、分层厚度、临时边坡、支锚设置\n与设计要求的符合情况；\n3)场地地表水、地下水排放状况，基坑降水、回灌设施\n的运转情况；\n4)基坑周边超载与设计要求的符合情况。\n3 周边环境，应包含下列内容：\n1)周边管道破损、渗漏情况；\n2)周边建筑开裂、裂缝发展情况；\n3)周边道路开裂、沉陷情况；\n4)邻近基坑及建筑的施工状况；\n5)周边公众反映。\n4 监测设施，应包含下列内容：\n1)基准点、监测点完好状况；\n2)监测元件的完好和保护情况；\n3)影响观测工作的障碍物情况。\n10.3.5 巡视检查宜以目视为主，可辅以锤、钎、量尺、放大镜\n等工具以及摄像、摄影等手段进行，并应作好巡视记录。如发现\n- 异常情况和危险情况，应对照仪器监测数据进行综合分析。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 63,
+        "page_end": 64,
+        "token_count": 458,
+        "char_count": 916
+      }
+    },
+    {
+      "chunk_id": 61,
+      "text": "1 1 基坑安全使用与维护\n11.1 _ 般规定\n11.1.1 基坑开挖完毕后，应组织验收，经验收合格并进行安全\n使用与维护技术交底后，方可使用。基坑使用与维护过程中应按\n施工安全专项方案要求落实安全措施。\n11.1.2 基坑使用与维护中进行工 序移交时，应办理移交签字\n手续。\n11.1.3 应进行基坑安全使用与维护技术培训，定期开展应急处\n置演练。\n11.1.4 基坑使用中应针对暴雨、冰雹、台风等灾害天气，及时\n对基坑安全进行现场检查。\n11.1.5 主体结构施工过程中，不应损坏基坑支护结构。当需改\n变支护结构工作状态时，应经设计单位复核。\n11.2 使用安全\n11.2.1 基坑工程应按设计要求进行地面硬化，并在周边设置防\n水围挡和防护栏杆。对膨胀性土及冻土的坡面和坡顶3m 以内应\n采取防水及防冻措施。\n11.2.2 基坑周边使用荷载不应超过设计限值。\n11.2.3 在基坑周边破裂面以内不宜建造临时设施；必须建造时\n应经设计复核，并应采取保护措施。\n11.2.4 雨期施工时，应有防洪、防暴雨措施及排水备用材料和\n设备。\n11.2.5 基坑临边、临空位置及周边危险部位，应设置明显的安\n全警示标识，并应安装可靠围挡和防护。\n11.2.6 基坑内应设置作业人员上下坡道或爬梯，数量不应少于\n2个。\n作业位置的安全通道应畅通。\n11.\n2.\n7 基坑使用过程中施工栈桥的设置应符合下列规定：\n1 施工栈桥及立柱桩应根据基坑周边环境条件、基坑形状、\n支撑布置、施工方法等进行专项设计，立柱桩的设计间距应满足\n坑内小型挖土机械的移动和操作时的安全要求。\n2 专项设计应提交设计单位进行复核。\n3 使用中应按设计要求控制施工荷载。\n11.\n2.\n8 当基坑周边地面产生裂缝时，应采取灌浆措施封闭裂\n缝。\n对于膨胀土基坑工程，应分析裂缝产生原因，及时反馈设计\n处理。\n11.\n2.\n9 基坑使用中支撑的拆除应满足本规范第6章的规定。\n11.\n3 维护安全\n11.\n3.\n1 使用单位应有专人对基坑安全进行定期巡査，雨期应增\n加巡查次数，并应作好记录；发现异常情况应立即报告建设、设\n计、监理等单位。\n11.\n3.\n2 基坑工程使用与维护期间，对基坑影响范围内可能出现\n的交通荷载或大于35kPa的振动荷载，应评估其对基坑工程安\n全的影响。\n11.\n3.\n3 降水系统维护应符合下列规定：\n1 定时巡视降排水系统的运行情况，及时发现和处理系统\n运行的故障和隐患。\n2 应采取措施保护降水系统，严禁损害降水井。\n3 在更换水栗时应先量测井深，确定水泵埋置深度。\n4 备用发电机应处于准备发动状态，并宜安装自动切换系\n统，当发生停电时，应及时切换电源，缩短停止抽水时间。\n5 发现喷水、涌砂，应立即查明原因，采取措施及时处理。\n6 冬期降水应采取防冻措施。\n113.\n4 降水井点的拔除或封井除应满足设计要求外，应在基础\n及已施工部分结构的自重大于水浮力、已进行基坑回填的条件下",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 65,
+        "page_end": 66,
+        "token_count": 618,
+        "char_count": 1237
+      }
+    },
+    {
+      "chunk_id": 62,
+      "text": "进行，所留孔洞应用砂或土填塞，并可根据要求采用填砂注浆或\n混凝土封填；对地基有隔水要求时，地面下2m 可用黏土填塞\n密实。\n11.3.5 基坑围护结构出现损伤时，应编制加固修复方案并及时\n组织实施。\n11.3.6 基坑使用与维护期间，遇有相邻基坑开挖施工时，应做\n好协调工作，防止相邻基坑开挖造成的安全损害。\n11.3.7 邻近建（ 构）筑物、市政管线出现渗漏损伤时，应立即\n采取措施，阻止渗漏并应进行加固修复，排除危险源。\n11. 3. 8 对预计超过设计使用年限的基坑工程应提前进行安全评\n估和设计复核，当设计复核不满足安全指标要求时，应及时进行\n加固处理。\n11.3.9 基坑应及时按设计要求进行回填，当回填质量可能影响\n坑外建筑物或管线沉降、裂缝等发展变化时，应采用砂、砂石料\n回填并注浆处理，必要时可采用低强度等级混凝土回填密实。\n本规范用词说明\n1 为便于在执行本规范条文时区别对待，对要求严格程度\n不同的用词说明如下：\n1)表示很严格，非这样做不可的：\n正面词采用“必须”，反面词采用“严禁”；\n2)表示严格，在正常情况下均应这样做的：\n正面词采用“应”，反面词采用“不应”或 “不得”；\n3)表示允许稍有选择，在条件许可时首先应这样做的：\n正面词采用“宜”，反面词采用“不宜”；\n4)表示有选择，在一定条 件下可以这么做的，采用\n“可”。\n2 规范中指明应按其他有关标准、规范执行时的写法为：\n“应符合……的规定”或 “应按……执行”。\n引用标准名录\n1 《 建筑地基基础设计规范》GB 50007\n2 《 建筑基坑工程监测技术规范》GB 50497\n3 《岩土工程勘察安全规范》GB 50585\n4 《爆破安全规程》GB 6722\n5 《 施工现场临时用电安全技术规范》JGJ 46\n6 《建筑地基处理技术规范》JGJ 79\n7 《 建筑基坑支护技术规程》JGJ 120\n8 《湿陷性黄土地区建筑基坑工程安全技术规程》JGJ 167\n9 《 建筑施工土石方工程安全技术规范》JGJ 180\n中华人民共和国行业标准\n建筑深基坑工程施工安全技术规范\nJGJ 311 - 2013\n条文说明\n制订说明\n《 建筑深基坑工程施工安全技术规范》JGJ 311-2013 经住房\n和城乡建设部2013年10月9日以第174号公告批准、发布。\n本规范编制过程中，编制组进行了大量的调査研究，总结了\n我国工程建设建筑深基坑工程施工、使用与维护安全方面的实践\n经验，同时参考了国外建筑深基坑工程施工安全技术的先进技术\n法规、技术标准、工程实践经验和科研成果。\n为便于广大设计、施工、科研和学校等单位有关人员在使用\n本规范时能正确理解和执行条文规定，《建筑深基坑工程施工安\n全技术规范》编制组按章、节、条顺序编制了本规范的条文说\n明，对条文规定的目的、依据以及执行中需注意的有关事项进行\n了说明，还着重对强制性条文的强制性理由做了解释。但是，本\n条文说明不具备与规范正文同等的法律效力，仅供使用者作为理\n解和把握规范规定的参考。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 67,
+        "page_end": 71,
+        "token_count": 631,
+        "char_count": 1262
+      }
+    },
+    {
+      "chunk_id": 63,
+      "text": "次\n個 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n65\n基本规定.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n66\n施工环境调查.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n69\n1 一般规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n69\n2 现场勘查及环境调查要求.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n69\n3 现场勘查与环境调查报告.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n70\n施工安全专项方案.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n71\n1 一般规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 72,
+        "page_end": 72,
+        "token_count": 348,
+        "char_count": 696
+      }
+    },
+    {
+      "chunk_id": 64,
+      "text": "次\n個 .\n基本规定.\n施工环境调查.\n1 一般规定 .\n2 现场勘查及环境调查要求.\n3 现场勘查与环境调查报告.\n施工安全专项方案.\n1 一般规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n71\n2 安全专项方案编制.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n71\n3 危险源分析.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n71\n4 应急预案 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n71\n6 安全技术交底.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n72\n支护结构施工.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n73\n1 一般规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n73\n2 土钉墙支护.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 72,
+        "page_end": 72,
+        "token_count": 384,
+        "char_count": 768
+      }
+    },
+    {
+      "chunk_id": 65,
+      "text": "次\n個 .\n基本规定.\n施工环境调查.\n1 一般规定 .\n2 现场勘查及环境调查要求.\n3 现场勘查与环境调查报告.\n施工安全专项方案.\n1 一般规定 .\n2 安全专项方案编制.\n3 危险源分析.\n4 应急预案 .\n6 安全技术交底.\n支护结构施工.\n1 一般规定 .\n2 土钉墙支护.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n75\n3 重力式水泥土墙.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n76\n4 地下连续墙.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n76\n5 灌注桩排桩围护墙.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n78\n6 板桩围护墙.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n78\n7 型钢水泥土搅拌墙.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n79\n8 财 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n80\n9 内支撑.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 72,
+        "page_end": 72,
+        "token_count": 417,
+        "char_count": 834
+      }
+    },
+    {
+      "chunk_id": 66,
+      "text": ".\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n80\n10 土层锚杆.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n82\n1 1逆作法.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n83\n1 2坑内土体加固.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n84",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 72,
+        "page_end": 72,
+        "token_count": 183,
+        "char_count": 367
+      }
+    },
+    {
+      "chunk_id": 67,
+      "text": "7 地下水与地表水控制.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n85\n7.\n1 一 般规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n85\n7.\n2 排水与降水.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n85\n7.\n5 环境影响预测与预防.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n85\n8 土石方开挖.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n86\n8.\n1 一般规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n86\n8.\n2 无内支撑的基坑开挖.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n87\n8.\n3 有内支撑的基坑开挖.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 73,
+        "page_end": 73,
+        "token_count": 354,
+        "char_count": 709
+      }
+    },
+    {
+      "chunk_id": 68,
+      "text": "7 地下水与地表水控制.\n1 一 般规定 .\n2 排水与降水.\n5 环境影响预测与预防.\n8 土石方开挖.\n1 一般规定 .\n2 无内支撑的基坑开挖.\n3 有内支撑的基坑开挖.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n88\n8.\n4 土石方开挖与爆破.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n90\n9 特殊性土基坑工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n92\n9.\n1 一 般规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n92\n9.\n2 膨胀岩土基坑工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n92\n9.\n3 受冻融影响的基坑工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n93\n9.\n4 软土基坑工程.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n93\n10 检査与监测 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n94\n10.\n1 一般规定.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 73,
+        "page_end": 73,
+        "token_count": 401,
+        "char_count": 802
+      }
+    },
+    {
+      "chunk_id": 69,
+      "text": ".\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n94\n10.\n2 检查.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n96\n10.\n3 施工监测.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n98\n1 1基坑安全使用与维护.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n100\n11.\n1 一般规定 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n100\n11.\n2 使用安全 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n101\n11.\n3 维护安全 .\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n102",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 73,
+        "page_end": 73,
+        "token_count": 327,
+        "char_count": 655
+      }
+    },
+    {
+      "chunk_id": 70,
+      "text": "1 总 则\n1.\n0.\n1 随着城市化进程的逐步推进、城市建设快速发展，地下\n空间资源利用越来越受到重视，各类建筑物的地下部分所占空间\n越来越大，埋置深度越来越深，深度20m 左右的基坑已属常见，\n国内基坑最大深度已超过40m。\n基坑工程向更大、更深、条件更\n加复杂的方向发展，带来了更多的基坑工程安全与周边环境保护\n问题。\n基坑工程的安全技术至关重要，极需规范。\n位于中心城区的大部分深基坑工程，基坑周边地面建（ 构）\n筑物较多，常存在历史保护建筑或老式居民住宅，基坑周边地下\n市政设施、管线密布，有的基坑紧邻地铁、隧道。\n基坑周边环境\n安全与基坑工程安全具有同等重要性。\n为保证深基坑及周边环境\n安全，要求对涉及深基坑工程的现场勘查与环境调查、施工组织\n设计、现场施工、安全监测、周边保护环境、基坑的使用与维护\n等各个方面的安全技术作出规定，以适应当前建筑深基坑工程施\n工安全的需要。\n1.\n0.\n2 根据目前的习惯划分，本规范适用范围为基坑深度为大\n于或等于5m 的基坑，对基坑深度虽不足5m 但水文地质条件或\n周边环境复杂、可能发生安全事故的基坑工程可参照执行。\n1.\n0.\n3 本规范涵盖了膨胀土、可冻胀土、高灵敏度土等基坑工\n程，在执行中除应符合现行国家标准《建筑地基基础设计规范》\nGB 50007、《建筑地基基础工程施工质量验收规范》GB 50202、\n《 建筑基坑工程监测技术规范》GB 50497、现行行业标准《建筑\n基坑支护技术规程》JGJ 120外，应与其他国家现行标准，如\n《湿陷性黄土地区建筑基坑工程安全技术规程 》JGJ 167等协调\n使用。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 74,
+        "page_end": 74,
+        "token_count": 343,
+        "char_count": 686
+      }
+    },
+    {
+      "chunk_id": 71,
+      "text": "3 基本规定\n中国幅员辽阔，建筑工程基坑涉及的地质、水文条件差别较\n大，在深基坑工程的现场勘査、施工、安全监测、周边环境保护\n时应根据深基坑工程的安全等级和环境保护等级，相似工程施工\n安全技术、地方经验等，选择合适的支护、地下水控制、土石方\n开挖施工工艺与安全技术，使用与维护等的安全技术措施，确保\n深基坑工程和周边环境安全。\n深基坑工程是复杂、变化的系统工程，需要依赖信息化施工\n和工程经验，因此深基坑工程的现场勘查、施工组织设计、现场\n施工、安全监测、周边保护环境应当充分重视以往的经验，做到\n施工方案合理，技术措施周密，检测和监测手段齐全，切实保障\n深基坑工程安全。\n3.\n0.\n1 建筑深基坑工程安全等级的划分涉及基坑变形控制指标\n要求、基坑监测方案评审要求、基坑工程安全风险分析与评估要\n求等，本规范充分考虑了现行国家标准《建筑地基基础设计规\n范》GB 50007、《建筑地基基础工程施工 质量验收规范》GB\n50202, 现行行业标准《建筑基坑支护技术规程 》JGJ 120等规\n范中有关 “地基基础设计等级”、“支护结构安全等级”、“基坑变\n形控制等级”等划分原则和定义，考虑基坑施工安全的特点、重\n要性、安全技术要求等，将基坑安全等级划分为一级、二级两个\n等级。\n3.\n0.\n2 本条理由如下：\n1 建设单位应组织或委托相关单位进行基坑环境调查，查\n明基坑工程涉及的市政管线现状、特别是渗漏情况，邻近建筑物\n基础形式、埋深、结构类型、使用后的沉降、裂缝等状况及相邻\n区域内正在施工和使用的基坑工程情况等，以便设计单位和施工",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 75,
+        "page_end": 75,
+        "token_count": 334,
+        "char_count": 669
+      }
+    },
+    {
+      "chunk_id": 72,
+      "text": "单位在设计文件、施工组织设计中制定合理有效的安全措施。\n环\n境调査质量事关基坑工程设计和施工安全。\n2 明确了不同安全等级的基坑工程，在施工过程中对变形\n进行控制的指标要求。\n对基坑工程保证不出现正常使用极限状\n态、承载能力极限状态意义重大。\n需要强调的是这一规定显然与\n基坑工程的设计相关联。\n施工安全等级为二级的基坑工程可按现\n行国家标准《建筑地基基础工程施工质量验收规范》GB 50202\n相应的规定要求执行。\n3 施工安全专项方案是指在对施工过程及基坑工程使用与\n维护过程中可能出现的危险源进行分析、识别的基础上，制定相\n应的应急预案、应急响应、技术交底。\n施工安全专项方案的编\n制、演练等是确保基坑工程施工安全的主要文件。\n4 基坑工程安全监测对于基坑工程安全的重要性众所周知，\n是信息施工法的保证。\n3.\n0.\n3 根据各省市建设行政主管部门的有关规定或要求，组织\n专家评审或专家论证。\n充分发挥行业专家的作用，组织设计评审\n和施工方案审查在全国普遍得到落实以来，明显减少了基坑工程\n事故，应得到严格执行。\n3.\n0.\n5 基坑开挖时，存在支护结构未达到设计强度进行开挖的\n现象，比如土钉、复合土钉支护结构，一般允许支护锚杆体强度\n达到80%以上可以进行下一步开挖，工程实践表明，此时进行\n堆载，对支护结构承载力增长及变形均不利。\n为确保支护结构承\n载力及控制支护结构变形，在支护结构达到设计强度前，严禁在\n设计预计的滑裂面范围内堆载。\n上海莲花河畔倒楼事件的教训表明，除按设计要求控制基坑\n滑裂面范围内堆载外，对需要进行临时土石方堆放的工程，必须\n进行包括自身稳定性、邻近建筑物地基稳定性、基坑稳定性的整\n体验算，稳定安全系数满足相关规范要求后才能确保基坑工程的\n安全。\n3.\n0.\n6 膨胀土、湿陷性黄土、盐渍土、可能发生冻胀的土、高\n灵敏度土等场地深基坑工程的施工各有特点并有其地域性和季节\n性，其施工安全与水作用条件密不可分，应根据本规范第9章规\n定的要求进行。对湿陷性黄土、盐渍土基坑工程，国家现行标准\n有规定的从其规定，无规定的可以参照本规范执行。\n3.0.7 信息施工是保证基坑工程施工安全的重要技术手段，但\n在实际工程中，由于基坑工程的监理、监测、施工单位水平参差\n不齐，建立与设计单位的反馈机制较为困难，基坑工程施工过程\n中如果不能真正实现信息施工，基坑工程施工安全 很难得到\n保证。\n变形控制指标分解应根据基坑工程使用、运行时间、软土流\n变、地下管线渗漏、雨季、超载状况等条件进行。\n本条给出了进行信息施工的一些基本要求，希望通过广大工\n程技术人员和科技工作者的积极实践，逐步形成基坑工程信息施\n工的技术和管理体制。\n3. 0. 8 本条明确对特殊条件下的基坑安全等级为一级的基坑工\n程进行风险评估作出规定。这里的“特殊条件”指基坑环境有需\n保护的文物、与生命线工程密切相关、需保护的建筑物、构筑\n物，重要的交通枢纽设施、指挥系统所在建筑，涉及重大人民生\n命财产安全的建筑物、构筑物等。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 76,
+        "page_end": 77,
+        "token_count": 629,
+        "char_count": 1259
+      }
+    },
+    {
+      "chunk_id": 73,
+      "text": "4 施工环境调查\n4.\n1 一般规定\n4.\n1.\n1 本条规定了现场勘查和环境调查与原有工程勘察、设计\n文件的关系。\n基坑工程应进行专门勘察，但现状是，基坑工程勘\n察工作往往针对性不强，许多工程甚至没有进行专门勘察而直接\n参考建筑工程的勘察报告进行设计。\n对于地质及环境条件复杂的\n基坑很难满足设计与安全施工的需要，安全隐患也很大，环境调\n查和有针对性的施工勘察是对基坑工程勘察工作的补充完善。\n此外，基坑工程设计阶段的工程勘察文件往往不重视浅部及\n建筑周边地质条件的岩土参数变化，特别是周边建（ 构）筑物及\n地下管网的荷载与分布，上部施工时的平面布置与动荷载等，而\n这些内容正是基坑工程施工前所需掌握的，特别是当场地存在\n挖、填方或地下水等水文地质条件及其发生变化时基坑岩土条件\n随之发生变化的情况。\n因此，在基坑工程施工前进行环境调査，\n发现已有勘察资料不能满足基坑工程设计和施工的要求时，应及\n时通知业主专门进行基坑工程的补充勘察。\n4.\n1.\n2 本条规定了在进行基坑工程勘查与环境调查之前应取得\n或应搜集的一些与基坑有关的基本资料及工作内容。\n4.\n2 现场勘查及环境调査要求\n4.\n2.\n1 基坑周围环境调查的对象主要指会对基坑工程产生影响\n或受基坑工程影响的周围建（ 构）筑物、道路、地下管线、贮输\n水设施及相关活动等，以及上部结构施工时的荷载堆放（ 建材和\n塔吊等）、运输车辆的道路，这涉及原有基坑设计时荷载计算的\n变化情况，这对基坑的安全运营至关重要。\n4.\n2.\n2 本条规定了对于不同安全等级基坑的勘查手段。\n由于归\n属于不同部门管理的地下管网（ 通信、电力、市政、军用等）造\n成各种地下管网分布的复杂性，业主单位也难以查清，近年来，\n由于基坑施工造成的各种管网损坏屡见不鲜，所以在此强调了勘\n查手段。\n4. 2.3 为防止地表水沿勘探孔下渗，规定勘探工作结束后，应\n及时回填夯实。\n4.3 现场勘查与环境调査报告\n4. 3.1 本条规定了现场勘查和环境调査报告应包括的主要内容。\n4.3.2 相对于一般岩土工程勘察报告所附图表而言，周边环境\n条件图应包括下列内容。\n1 勘查点（也可使用原勘察报告的勘探点）平面位置图。\n2 基坑周围巳有建（ 构）筑物、管线、道路的分布情况。\n3 基础边线、基坑开挖线、用地红线。\n4 沿基坑开挖边线的地质剖面、必要时应绘制的垂直基坑\n边线的剖面图。\n4. 3. 3 现场勘查与环境调査报告应在原勘察报告和设计文件的\n的基础上，对设计方案和施工需要的岩土参数，周边条件给出明\n确的结论，还需说明岩土参数取值或变化的依据，施工过程中对\n周边建（ 构）筑物采取的安全措施建议。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 78,
+        "page_end": 79,
+        "token_count": 557,
+        "char_count": 1114
+      }
+    },
+    {
+      "chunk_id": 74,
+      "text": "5 施工安全专项方案\n5.1 一般规定\n5. 1. 4 根据各省市建设行政主管部门的有关规定或要求组织专\n家论证；无规定的，由总承包单位技术负责人组织不少于3名以\n上的专家进行论证。\n5.2 安全专项方案编制\n5. 2. 2 施工各阶段安全技术措施还应包括基坑施工各阶段的大\n型施工机械的安全技术。\n5. 3 危险源分析\n5.3.2 特殊保护要求指：对临近地铁、历史保护建筑、危房、\n交通主干道、基坑边塔吊、给水管线、煤气管线等重要管线采取\n的安全保护要求。\n5.4 应急预案\n5.4.2 险情一般是指：变形较大，超过报警值且采取相关措施\n后情况没有大的改善；周边建（ 构）筑物变形持续发展或已影响\n正常使用。\n开挖底面出现流砂、管涌时，应立即停止基坑挖土，当判断\n为承压水突涌时应立即回填并采取降压措施；判断为坑内外水位\n高差大引起时，可根据环境条件采取截断坑内外水力联系、坑周\n降水法降低水头差、设置反滤层封堵流土点等方式进行处理。\n坑底突涌时应查明突涌原因，对因勘察孔、监测孔封孔不当\n引起的单点突涌，宜采用坑内围堵平衡水位后，施工降水井降低\n水位，再进行快速注浆处理；对于不明原因的坑底突涌，应结合\n坑外水位孔的水位监测数据分析；对围护结构或帷幕渗漏引起的\n坑底突涌，应采用坑内回填平衡、坑底加固、坑外快速注浆或冻\n结方法进行处理。\n基坑变形超过报警值时应调整分层、分段土方开挖等施工方\n案，或采取加大预留土墩，坑内堆砂袋、回填土、增设锚杆、支\n撑、坑外卸载、注浆加固、托换等措施。\n5. 4.5 本条为强制性条文，基坑工程坍塌事故会产生重大生命\n财产损失，应避免人员伤亡。基坑工程坍塌事故一般具有明显征\n兆，如支护结构局部破坏产生的异常声响、位移的快速变化、水\n土的大量涌出等。当预测到基坑坍塌、建筑物倒塌事故的发生不\n可逆转时，应立即撤离现场施工人员及临近建筑物内的所有\n人员。\n5.6 安全技术交底\n5. 6.1 交底包括设计交底、施工各阶段安全交底。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 80,
+        "page_end": 81,
+        "token_count": 416,
+        "char_count": 833
+      }
+    },
+    {
+      "chunk_id": 75,
+      "text": "6 支护结构施工\n6.\n1 _般规定\n6.\n1.\n1 基坑工程施工前应学习和研究设计文件，充分了解设计\n意图；并根据设计文件、现场条件、周边环境、气候条件等编制\n施工组织设计或施工方案，以达到保证基坑工程、地下结构安全\n施工和减少对基坑周边环境影响的目的。\n由于基坑工程的施工具有一定的风险性和不可预见性，编制\n施工组织设计或施工方案中应有针对性的应急预案，并建立相应\n的应急响应机制，配置足够的应急材料、机械、人力等资源。\n江、河、湖、海等堤坝附近基坑工程应加强对堤坝的保护。\n直接临水基坑工程一般需要修筑临时性围堰，创造干作业条件。\n筑岛施工时施工平台应注意潮汐影响，施工平台应高出最高潮水\n位或最高水位。\n6.\n1.\n2 根据工程实践，基坑支护结构变形与施工工况有很大关\n系。\n应根据工程场地实际和设计要求，确定合理的施工方案，明\n确支护结构施工与土方开挖、降水、地下结构施工各工序间的合\n理作业时间与工序控制，关键是在实际施工中严格按照施工方案\n组织施工，这对于保证基坑工程安全、减小基坑支护结构变形和\n环境影响意义重大。\n6.\n1.\n3 支护结构在施工和拆除阶段对已施工的桩基、邻近建筑\n物、道路管线、地下设施等有不同影响。\n支护结构施工时应根据\n环境条件要求，采取合理的措施，如采用挤土效应较小的三轴水\n泥土搅拌桩隔水、地下连续墙施工时加强槽壁稳定性监测或采取\n槽壁加固、调整槽段宽度、选用优质泥浆，不允许进行混凝土支\n撑爆破的区域可采用钢支撑等。\n此外，在基坑工程与保护对象之间设置隔断屏障，对需保护",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 82,
+        "page_end": 82,
+        "token_count": 328,
+        "char_count": 657
+      }
+    },
+    {
+      "chunk_id": 76,
+      "text": "的管线应采取架空保护，邻近建筑物预先进行基础加固、托换等\n措施也可以有效减少基坑工程对环境的不利影响。\n6.\n1.\n4 支护结构施工与场地的地质条件密切相关，具有一定的\n不可预见性。\n应进行试验性施工，可及时发现施工中可能存在的\n危险源及问题，并能获得相关的施工参数，对之后的正式施工进\n行指导。\n避免支护结构正式施工时发生类似事故，确保工程顺利\n进行。\n根据工程情况，对于环境保护要求较高的工程或地质条件\n较复杂的情况下，不应在原位进行试成槽；对于要求较低的工程\n可进行原位试成槽。\n6.\n1.\n5 基坑工程施工必须采取信息施工法，对支护结构自身、\n已经完成的桩基、地下结构以及基坑影响范围内的建（ 构）筑\n物、地下管线、道路的沉降、位移等进行监测，并根据监测信息\n及时调整施工方案、施工工序或工艺。\n随着近年来基坑工程规模日益扩大，基坑工程对周边环境影\n响不容忽视。\n一般情况下，若基坑开挖深度超过相邻建（ 构）筑\n物的基础底标高，或在原有桩基、地下管线附近进行开挖，或邻\n近有地铁、高架及老建筑、保护建筑等的，除进行监测外，还应\n采取针对性的环境保护措施。\n基坑监测测点不仅设置在基坑区域之外，往往在基坑内和支\n护结构上也设置了一些水位、变形等观测点。\n这些测点容易受到\n土方开挖、周边重车行走等因素的影响，必须制定切实可行的措\n施予以保护，这是基坑工程信息施工法的基础和前提。\n6.\n1.\n6 紧邻围护墙的地面超载和施工荷载对支护结构影响很大，\n往往引起围护墙变形的增大，其荷载大小应严格按照设计文件的\n要求予以控制。\n重型设备行走区域应与设计协商先行采取加固处\n理或按实际荷载大小、位置进行相关区域支护结构设计。\n地面超\n载包括坑外的临时施工堆载如零星的建筑材料、小型施工器材\n等，设计中通常按不大于20kN/m2考虑。\n施工荷载指在基坑开\n挖期间，作用在坑边或围护墙附近荷载较大且时间较长或频繁出\n现的荷载，如挖土机、土方车等。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 83,
+        "page_end": 83,
+        "token_count": 410,
+        "char_count": 820
+      }
+    },
+    {
+      "chunk_id": 77,
+      "text": "当基坑开挖深度深且设置多道支撑或基坑周边无施工场地和\n施工通道时，可考虑设置施工栈桥或施工平台供车辆行走与材料\n堆放。\n施工栈桥可与基坑支撑、立柱体系结合设置，也可独立\n设置。\n6.\n1.\n7 基坑工程邻近正在进行桩基施工（ 主要指具有明显挤土\n效应的锤击式或压人式桩基施工）、基坑开挖、边坡开挖、盾构\n顶进时，相邻工程应通过调整施工流程，协调好各自的施工进度\n等，避免有害影响的产生。\n6.\n2 土钉墙支护\n6.\n2.\n1 土钉施工与其他工序，如降水、土方开挖相互交叉。\n各\n工序之间应密切协调、合理安排，不仅能提高施工效率，更能确\n保工程安全。\n土钉墙施工应按顺序分层开挖，在完成上层作业面的土钉与\n喷射混凝土以前，不得进行下一层的开挖。\n开挖深度和作业顺序\n应保证裸露边坡能在规定的时间内保持自立。\n当用机械进行土方\n作业时，严禁边壁超挖或造成边壁土体松动。\n基坑的边壁宜采用\n小型机具或人工伊锹进行切削清坡，以保证坡面平整。\n6.\n2.\n2 土钉施工中，存在一定的不可预见性，如成孔过程中遇\n有障碍物或成孔困难，此时可以经过调整孔位及土钉长度等工艺\n参数确保顺利施工，但必须对土钉承载力以及整个支护结构进行\n重新验算复核，确保支护结构的施工安全。\n在可塑性的黏性土、含水量适中的粉土和砂土中进行土钉施\n工可采用洛阳铲人工成孔；在砂层中，慎用洛阳铲人工成孔，防\n止土钉角度为0°或向上丨明斜。\n在灵敏度较高的粉土、粉质黏土及可能产生液化的土体中进\n行土钉施工时，若采用振动法施工土钉，基坑侧壁土体可能发生\n液化现象，对支护结构产生破坏。\n在砂性较重的土体中进行土钉\n支护施工时，可能发生流土、流砂现象，应做好应急预案，采取\n相应的有效措施。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 84,
+        "page_end": 84,
+        "token_count": 361,
+        "char_count": 723
+      }
+    },
+    {
+      "chunk_id": 78,
+      "text": "采取二次注浆方法能更好地保证土钉的承载力。\n6.\n2.\n3 喷射混凝土施工中易产生大量的水泥粉尘，除采用综合\n防尘措施外，应佩戴个体防护用品，减少粉尘对人体健康的影\n响。\n喷射作业中，喷头极易伤人，未经培训人员不得进入施工\n范围。\n喷射混凝土施工中发生堵管，极易发生安全事故，应经常检\n查维护，做到事半功倍，消除潜在危险源。\n喷射作业中，处理堵\n管是一项涉及安全的大事，绝不能草率行事。\n在处理堵管时应采\n取敲击法疏通。\n6.\n3 重力式水泥土墙\n6.\n3.\n3 施工中，当遇有河塘、池塘及洼地需回填时，往往就近\n挖土回填。\n如果回填土土性较差，可以掺人8% 〜10%水泥，并\n分层压实。\n6.\n4 地下连续墙\n6.\n4.\n1 地下连续墙成槽施工应符合下列要求：\n1 导墙是保证地下连续墙轴线位置及成槽质量的关键。\n导\n墙周边应限载，防止导墙位移或开裂。\n2 槽壁稳定性不满足要求时，宜采取槽壁土加固、降水、\n改善泥浆性能、限制周边荷载、选择合适的导墙等措施，确保槽\n壁稳定。\n3 在暗河区或松散杂填土层中，可事先加固导墙两侧土体，\n并将导墙底加深至原状土中。\n加固方法宜采用三轴水泥土搅\n拌粧。\n4 地下连续墙成槽阶段对周围土体扰动大，采取跳幅间隔\n施工不仅能减少对周边环境的影响，还能有效保证槽壁稳定性。\n6.\n4.\n2 地下连续墙成槽泥浆制备应符合下列要求：\n1 护壁泥浆试配、室内性能试验、现场试验是为了保证护\n壁泥浆满足特定条件下的工程施工需要。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 85,
+        "page_end": 85,
+        "token_count": 314,
+        "char_count": 628
+      }
+    },
+    {
+      "chunk_id": 79,
+      "text": "2 泥浆质量和泥浆液面高低对槽壁稳定有很大的影响。\n泥\n浆液面愈高所需的泥浆相对密度愈小。\n地下连续墙施工时保持槽\n壁的稳定性防止槽壁塌方是十分重要的问题。\n如发生塌方，不仅\n可能造成挖槽机倾覆，对邻近的建筑物和地下管线也会造成\n破坏。\n6.\n4.\n3 由于地下连续墙采用泥浆护壁成槽，接头混凝土面上必\n然附着有一定厚度的泥皮，如不清除，浇筑混凝土时在槽段接头\n面上会形成一层夹泥带，基坑开挖后，在水压作用下可能从这些\n地方渗漏水及冒砂。\n为了消除这种隐患，保证地下连续墙的防渗\n性能，施工时必须采用有效的方法进行清刷混凝土壁面，接头处\n必须刷洗干净，不留泥砂和污物。\n6.\n4.\n4 地下连续墙钢筋笼吊装应符合下列要求：\n1 吊具、吊点加固钢筋及确定钢筋笼吊放标高的吊筋，应\n进行起吊重量分析，通过乘以一定的安全系数进行强度验算以确\n定选用规格，确保钢筋笼起吊施工的安全性。\n成槽完成后吊放钢\n筋笼前，应实测当时导墙顶标高，计入卡住吊筋的搁置型钢横梁\n高度，根据设计标高换算出钢筋笼吊筋的长度，以保证结构和施\n工所需要的预埋件、插筋、保护铁块位置准确，方便后续施工。\n2 钢筋笼吊装前清除钢筋笼上剩余的钢筋断头、焊接接头\n等遗留物，防止起吊时发生高空坠物伤人的事故。\n3 起重机荷载越大，安全系数越小，越要认真对待。\n因此\n当起吊荷载接近满负荷时，要经过试吊检查无误后再起吊，这是\n预防事故的必要措施。\n起吊荷载接近满负荷时，其安全系数相应\n降低，操作中稍有疏忽，就会发生超载，需要慢速操作，以保证\n安全。\n6.\n4.\n6 本条是对预制墙段安放顺序的规定，并对预制墙段安放\n闭合位置进行了规定。\n1 由于墙缝接头桩混凝土施工可能造成预制墙段底端走动，\n除应采取措施防止走动外，对实际可能产生的走动和预制墙段位\n置变化，在闭合幅安放前进行实测，并作相应的调整，保证闭合",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 86,
+        "page_end": 86,
+        "token_count": 392,
+        "char_count": 784
+      }
+    },
+    {
+      "chunk_id": 80,
+      "text": "幅顺畅安放。\n2 预制地下连续墙直线幅是施工采用一幅接一幅的连续成\n槽施工顺序。\n3 幅间接头采用现浇混凝土接头，易于保证工程质量。\n4 预制墙段一般处于平面外位置起吊，而平面外墙段相对\n比较长细，故应对起吊过程墙段垮中弯矩进行计算，并校核起吊\n产生的内力和挠度产生的裂缝是否满足设计要求，若不能满足，\n应对吊装采取相应的加强措施；预制墙段由水平状回直时，起重\n机提升时，其起重吊钩应沿其回直方向移动（ 或行走、或起拔\n杆），避免根部拖行或着力。\n6.\n5 灌注桩排粧围护墙\n6.\n5.\n2 保证钻孔机械各部件合格、运转正常以及钻孔机架水平\n稳定，这是保证钻机工作性能和钻孔质量的重要条件。\n钻架立起\n后及施工过程中，要随时检查并调整钻机垂直度。\n为了防止在混凝土凝固前，邻桩施工对其造成扰动，故采用\n隔桩跳打的方法，若无法调整桩位时，应停顿36h 以后方可在邻\n桩侧进行施工。\n6.\n5.\n5 混凝土浇注完毕后，应及时在桩孔位置回填土方或加盖\n盖板，避免施工人员误掉人孔内的危险。\n6.\n5.\n6 遇有湿陷性土层，地下水位较低，既有建筑物距离基坑\n较近时，可采用干作业成孔工艺进行灌注桩施工。\n6 .\n6 板粧围护墙\n6.\n6.\n1 鉴于打桩作业中可能发生断桩、倒桩等事故，本条规定\n了操作人员和桩锤中心的安全距离。\n6.\n6.\n2 打粧机械是依靠振动，以减少桩和土间摩擦阻力而进行\n沉拔桩的机械，为了保证安全作业，需执行本条规定。\n6.\n6.\n3 如吊粧、吊锤、回转、行走四种动作同时进行，一方面\n起吊载荷增加，另一方面回转和行走使机械晃动，稳定性降低，",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 87,
+        "page_end": 87,
+        "token_count": 339,
+        "char_count": 679
+      }
+    },
+    {
+      "chunk_id": 81,
+      "text": "容易发生事故。\n同时机械的动力性能也难以承受四种动作的负\n荷，而操作人员也难以正确无误操作四种动作。\n为了防止钢丝绳受振后松脱造成伤害，故应采取加装保险钢\n丝的双重保险措施。\n当桩入土已有一定深度时，再用外力来纠正\n桩的倾斜度，不仅难以纠正，反而会使桩折断。\n6.\n6.\n4 由于振动沉粧和锤击沉桩施工引起的振动和挤土，不利\n于周边环境的保护，因此，作本条规定。\n6.\n6.\n5 板桩围护的防渗水能力较弱，应加强对周边地下水位以\n及超孔隙水压力的监测，才能确保支护结构施工安全。\n6.\n7 型钢水泥土搅拌墙\n6.\n7.\n1 施工现场应先进行场地平整，清除搅拌桩施工区域的表\n层硬物和地下障碍物。\n现场道路的承载能力应满足桩机和起重机\n平稳行走的要求。\n6.\n7.\n2 适用于N 值30以上的硬质土层，在水泥土搅拌粧施工\n时，用装备有大功率减速机的钻孔机，先进行施工钻孔，局部松\n散硬土层；然后再用二轴搅拌机械施工完成水泥土揽拌桩，以减\n少对地层和环境的扰动。\n6.\n7.\n3 螺旋式和螺旋叶片式搅拌桩机头在施工过程中能通过螺\n旋效应排土，因此挤土量较小。\n与双轴水泥土搅拌桩和高压旋喷\n粧相比，三轴水泥土搅拌桩施工过程中的挤土效应相对较小，对\n周边环境影响较小。\n6.\n7.\n6 型钢的插人要求：\n1 如水灰比控制适当，依靠自重型钢一般都能顺利插人。\n但在砂性较重的土层，搅拌桩底部易堆积较厚的砂土，宜采用在\n导向机械协助下将型钢插人到位。\n应避免自由落体式下插，这种\n方式不仅难以保证型钢的正确位置，还容易发生安全事故。\n2 定位型钢设置应牢固，搅拌桩位置和型钢插入位置应标\n心 伯 o\n3 当采用振动锤下落工艺时，不应影响周边环境。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 88,
+        "page_end": 88,
+        "token_count": 359,
+        "char_count": 718
+      }
+    },
+    {
+      "chunk_id": 82,
+      "text": "6.\n7.\n7 型钢回收过程中，不论采取何种方式减少对周边环境的\n影响，影响还是存在的。\n因此，对周边环境保护要求髙以及特殊\n地质条件等工程，应不拔型钢。\n6.\n7.\n8 型钢水泥土搅拌墙还可采用等厚度水泥土搅拌墙施工工\n艺 （TR D工法）进行施工，其最大作业深度可达60m，可以适\n用于iV值在100击以内的地层，还可以在粒径小于100mm 的卵\n砾石层和极软基岩中施工。\n成墙品质好，水泥土搅拌均勻，强度\n提高，离散性小。\n等厚度水泥土搅拌墙的施工工艺包括：切割箱\n自行打人挖掘工序、水泥土搅拌墙建筑工序和切割箱拔除分解工\n序，应防止切割箱抱死事故的发生。\n等厚度水泥土搅拌墙施工，基坑转角处或结束施工拔出切割\n箱时，应及时补充回灌固化液。\n在条件许可的情况下，宜配置大\n吨位吊车，优先在墙体外拔出切割箱。\n6.\n8 沉 井\n6.\n8.\n1 沉井施工会对周边的土质造成变形影响，当周边变形控\n制较严时，不宜采用沉井。\n6.\n8.\n2 外排脚手架搭设时，不应使用沉井井壁制作时的模板，\n外排脚手架与模板应脱开，避免由于沉井下沉而引起脚手架倾\n斜，造成不必要的事故。\n刃脚混凝土达到设计强度100%, 方可进行后续施工。\n为了\n沉井能在土中顺利下沉，可采用触变泥浆套、空气幕、高压射\n水、压重下沉、抽水下沉、井壁外侧挖土下沉等措施配合施工。\n6.\n9 内 支撑\n6.\n9.\n1 应根据设计要求，制定支撑的施工与拆除顺序，基坑开\n挖过程中应按照先撑后挖的顺序施工。\n当情况允许，为土方开挖\n方便，局部可适当采用先挖后撑，但应编制相关的专项方案和应\n急预案。\n6.\n9.\n2 当必须利用支撑构件兼做施工平台或桟桥时，需要进行",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 89,
+        "page_end": 89,
+        "token_count": 355,
+        "char_count": 711
+      }
+    },
+    {
+      "chunk_id": 83,
+      "text": "专门的设计，应满足施工平台或找桥结构的强度和变形要求，确\n保安全施工。\n未经专门设计的支撑上不允许堆放施工材料和运行\n施工机械。\n6.\n9.\n3 基坑回弹是开挖土方以后发生的弹性变形，一部分是由\n于开挖后的卸载引起的回弹量；另一部分是基坑周围土体在自重\n作用下使坑底土向上隆起。\n基坑的回弹是不可避免的，但较大的\n回弹变形会引起立柱桩上浮，施工单位在土方开挖过程中应加强\n监测，合理安排土方开挖顺序，优化施工工艺，以减小基坑回弹\n的影响。\n6.\n9.\n4 土方开挖时，应清除支撑底模，避免底模附着在支撑底\n部。\n若采用混凝土垫层作底模，为了方便清除，应在支撑与混凝\n土垫层底模之间设置隔离措施，必须在支撑以下土方开挖时及时\n清理干净，否则附着的底模在基坑后续施工过程中一旦脱落，可\n能造成人员伤亡事故。\n6.\n9.\n5 吊装钢支撑时，施工人员应站立于吊车作业范围外，避\n免不必要的伤害。\n吊钩上必须有防松脱的保护装置。\n6.\n9.\n6 钢支撑的预应力施加要求：\n1 应根据支撑平面布置、支撑安装精度、设计预应力值、\n土方开挖流程、周边环境保护要求等合理确定钢支撑预应力施加\n的流程。\n2 由于设计与现场施工可能存在偏差，在分级施加预应力\n时，应随时检查支撑节点和基坑监测数据，并通过与支撑轴力数\n据的分析比较，判断设计与现场工况的相符性，并应采取合理的\n加固措施。\n3 支撑杆件预应力施加后以及基坑开挖过程中，会产生一\n定的预应力损失，为保证预应力达到设计要求，当预应力损失达\n到一定程度后，应及时进行补充、复加预应力。\n6.\n9.\n7 立柱桩桩孔直径应大于立柱截面尺寸，立柱周围与土体\n之间存在较大空隙，其悬臂高度（跨度）将大于设计计算跨度，\n为保证立柱在各种工况条件下的稳定，立柱周边空隙应采用砂石",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 90,
+        "page_end": 90,
+        "token_count": 375,
+        "char_count": 751
+      }
+    },
+    {
+      "chunk_id": 84,
+      "text": "等材料均勻对称回填密实。\n6.\n9.\n8 支撑拆除施工应符合下列规定：\n1 支撑拆除前应设置可靠的换撑，且换撑及永久结构应达\n到设计要求的强度。\n2 若基坑面积较大，混凝土支撑拆除除满足设计工况要求\n外，尚应根据地下结构分区施工的先后顺序确定分区拆除的顺\n序。\n在现场场地狭小条件下拆除基坑第一道支撑时，若地下室顶\n板尚未施工，该阶段的施工平面布置可能极为困难，故应结合实\n际情况，选择合理的分区拆除流程，以满足平面布置要求。\n3 支撑拆除过程是利用已衬砌结构换撑的过程，拆除时要\n特别注意保证轴力的安全卸载，避免应力突变对围护结构产生负\n面影响。\n钢支撑施工安装时由于施加了预应力，在拆除过程中，\n应采用千斤顶支顶并适当加力顶紧，然后切开活络头钢管、补焊\n板的焊缝，千斤顶逐步卸载，停置一段时间后继续卸载，直至结\n束，防止预应力释放过大，对支护结构造成不利影响。\n4 支撑拆除应信息化施工，根据监测数据指导施工，把对\n周边环境的影响减至最小。\n6.\n9.\n9 钢筋混凝土支撑爆破拆除应满足设计工况要求，爆破孔\n可以采用钻孔的方式形成，但钻孔费时费工，且对环境保护不\n利。\n宜在混凝土支撑浇筑时预设爆破孔，用于后续爆破拆除\n施工。\n为了对永久结构进行保护，减小对周边环境的影响，钢筋混\n凝土支撑爆破拆除时，应先切断支撑与围檩的连接，然后进行分\n区爆破拆除支撑和围檩，并应在支撑顶面和底部设置保护层，防\n止支撑爆破时混凝土碎块飞溅及坠落。\n6.\n1 0 土层 锚杆\n6.\n10.\n2 当锚杆施工经验不足，或采用新型锚杆的情况下，在锚\n杆施工前应进行锚杆的基本试验。\n锚杆基本试验是锚杆性能的全\n面试验，目的是确定锚杆的极限承载力和锚杆参数的合理性，为",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 91,
+        "page_end": 91,
+        "token_count": 362,
+        "char_count": 724
+      }
+    },
+    {
+      "chunk_id": 85,
+      "text": "锚杆设计、施工提供依据。\n6.\n10.\n5 锚杆施工过程中应在现场加强巡视，及时发现安全隐\n患，例如注浆软管破裂、接头断开等现象，导致浆液飞溅和软管\n甩出伤人，做好前期预防工作，避免不必要的事故发生。\n6.\n10.\n7、6.\n10.\n8 锚杆施工及检验过程中，严禁任何人员在锚杆\n的轴线方向上站立。\n6.\n10.\n9 工程实测表明，锚杆张拉锁定后一般预应力损失较大，\n造成预应力损失的主要因素有土体蠕变、锚头及连接的变形、相\n邻锚杆的影响等。\n锚杆锁定时预应力损失约为10%〜15% 。\n6.\n1 1逆 作 法\n6.\n11.\n1 地下工程逆作法施工多在相对封闭的空间内作业，特别\n在大量机械进行土方开挖施工的情况下，地下空气污染相对严\n重，在自然通风难以满足要求的情况下，需要通过人工通风排气\n来保证作业环境满足施工要求。\n逆作法工程废气的来源有施工机械排出的废气、施工人员的\n呼吸换气、有机土壤与淤泥质土壤释放的沼气、焊接或热切割作\n业产生不利人体健康的烟气，以及其他施工作业产生的粉尘、煤\n烟和废气等。\n6.\n11.\n2 由于逆作法施工工艺，施工人员及机械设备必须在水平\n结构楼板下进行土方开挖，为保障施工人员的健康必须采用鼓风\n法，从地面向地下送风。\n6.\n11.\n3 根据《 施工现场临时用电安全技术规范》JGJ 46要求，\n无自然采光的地下室大空间施工场所，应编制专项照明用电\n方案。\n逆作法地下室自然采光条件差，结构复杂。\n尤其是节点构造\n部位，需加强局部照明设施，但在一个工作场地内，局部照明难\n以满足施工及安全要求，必须和一般照明混合配制。\n6.\n11.\n4 由于结构水平构件是永久构件，为保证施工质量，结构\n水平构件底模不宜采用混凝土垫层作为底模的方式进行施工，宜",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 92,
+        "page_end": 92,
+        "token_count": 370,
+        "char_count": 741
+      }
+    },
+    {
+      "chunk_id": 86,
+      "text": "采用木模、钢模等支模方式进行施工。\n采用木模或钢模进行施工\n一般需要设置支撑系统，不论采用何种支撑方式，支撑底部的地\n基均应满足承载力和变形要求。\n6.\n11.\n7 逆作法上下同步施工过程中临时构件的施工误差和缺陷\n不可避免，而施工阶段出现的动静荷载变化、温度效应、支承桩\n沉降、基坑变形均在不同程度上存在不确定性，单纯的计算分析\n肯定是不够的。\n所以，上下同步施工过程中应有针对性的施工监\n测方案，以便设计和施工管理人员及时掌握施工情况，从而更好\n地指导施工。\n6.\n12 坑内土体加固\n6.\n12.\n1 若坑内土体加固紧贴围护墙，宜先进行围护墙施工，后\n进行坑内土体加固。\n采用这种施工顺序，有利于围护墙垂直度控\n制。\n若坑内土体与围护墙保持有一定的距离，则先后施工顺序可\n不受限制。\n但从周边环境保护的角度出发，先施工围护墙，后施\n工坑内土体加固，则对周边环境保护有利，故作此规定。\n6.\n12.\n3 当采用水泥土搅拌桩进行土体加固时，加固有效范围往\n往位于基坑坑底附近区域，而搅拌桩施工从地面开始搅拌至加固\n范围的底部，导致加固范围以上的土体因搅拌也被扰动，因此宜\n对加固范围以上部分土体进行 低掺量加固（掺量约为8% 〜\n10% ),这对控制基坑变形是有利的。\n6.\n12.\n4 高压喷射注浆施工受孔位周边环境和地下障碍物的影\n响，孔位可根据现场实际情况进行确定。\n应根据实际需要，确定\n水泥浆液中掺合料和外加剂的种类和掺量。\n髙压喷射注浆施工可\n以在地面进行，也可在基坑开挖一定深度后入坑进行施工。\n因此\n需要考虑加固施工期间对基坑周边环境的影响。\n7 地下水与地表水控制\n7.1 _ 般规定\n7.1.1 地下水和地表水控制与基坑支护结构设计文件、施工组\n织设计、地下结构设计和施工密切相关，地下水和地表水控制的\n施工组织设计应与开挖施工密切配合，并应在施工或运行过程中\n根据现场状态及时进行调整。\n7.1.5 出水含砂量是降水引起环境变化的主要因素之一，在满\n足设计要求的前提下，应严格监控含砂量。\n7.1.6 由于降水井临近地基注浆将可能严重影响井管的出水效\n果，因此需控制注浆点位置以及与管井抽水的运行的交叉间，\n避免注浆堵塞井管。\n7.1.13 工程实践表明，截水帷幕与灌注桩间存在间隙时往往产\n生较大的环境变形，当环境保护设计要求较高时，在灌注粧与截\n水帷幕之间应采取注浆加固等措施，可以减少环境变形。\n7.2 排水与降水\n7. 2. 5 系统安装前应对泵体和控制系统作一次全面细致的检查；\n检查的内容包括检验电动机的旋转方向、各部位连接螺栓是否拧\n紧，润滑油是否充足、电缆接头的封口是否松动、电缆线有无破\n损等情况，然后试转Id左右，如无问题，方可投人使用。安装\n完毕应进行试抽水，满足要求后方可投人正常运行。\n7.5 环境影响预测与预防\n7.5.2 降水引起的建筑物或地面沉降量的计算方法较多，如数\n值方法等，最好能采取多种方法相互验证，并应按最不利情况编\n制对应预防措施。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 93,
+        "page_end": 94,
+        "token_count": 625,
+        "char_count": 1250
+      }
+    },
+    {
+      "chunk_id": 87,
+      "text": "8 土石方开挖\n8.\n1 —般规定\n8.\n1.\n2 大量工程实践证明，合理确定每个开挖空间的大小、开\n挖空间相对的位置关系、开挖空间的先后顺序，严格控制每个开\n挖步骤的时间，减少无支撑暴露时间，是控制基坑变形和保护周\n边环境的有效手段。\n深基坑土石方开挖在深度范围内进行合理分\n层，在平面上进行合理分块，并确定各分块开挖的先后顺序，可\n充分利用未开挖部分土体的抵抗能力，有效控制土体位移，以达\n到减缓基坑变形、保护周边环境的目的。\n基坑对称开挖一般指根\n据基坑挖土分块情况，采用对称、间隔开挖的一种方式；基坑限\n时开挖一般指根据基坑挖土分块情况，对无支撑暴露时间采取控\n制的一种方式；基坑平衡开挖是指根据开挖面积和开挖深度等情\n况，保持均衡开挖的一种方式。\n本条说明基坑开挖应符合的\n要求。\n1 当机械设备需直接进人基坑进行施工作业时，其入坑坡\n道除了考虑其本身的稳定性外，还应考虑机械设备的外形尺寸及\n爬坡能力。\n根据目前常用施工机械所具备的爬坡能力，坡道坡度\n一般不应大于1 : 7;对于特殊的机械，应根据机械爬坡性能满\n足合适的坡道坡度。\n2 基坑周边及放坡平台的施工荷载将直接关系到基坑施工\n安全，合理控制相应的施工荷载，是保证基坑施工安全的关键。\n若现场存在不可避免的超过设计规定的荷载，则应根据实际情况\n重新进行计算并根据计算结果采取加固措施。\n3 基坑开挖的土方应及时外运，若需在场地内进行部分堆\n土时，应经设计单位同意，并应采取相应的安全技术措施，合理\n确定堆土范围和高度，以免对基坑和周边环境产生不利影响。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 95,
+        "page_end": 95,
+        "token_count": 331,
+        "char_count": 662
+      }
+    },
+    {
+      "chunk_id": 88,
+      "text": "4 基坑内的局部深坑可综合考虑各种因素确定开挖方法。\n一般软土地基，深度超过1.\n5m、距离围护墙或边坡坡脚不超过\n3m 的局部深坑宜采用大面积垫层施工完成后，再开挖的方式。\n开挖较浅且地质条件较好的局部深坑可随大面积土方同步开挖。\n5 为避免机械挖土造成工程桩位移和损伤，在工程粧区域\n挖土应设专人进行监护，挖土机械应避让工程桩，工程桩周边土\n体应采用人工挖除的方法。\n6 对基坑开挖深度范围内的地下水进行降水与排水措施，\n是为了保证基坑内土体疏干，提高土体的抗剪强度以及便于挖土\n施工。\n若基坑土方采用分层开挖施工时，需在每层土方开挖的深\n度范围内将地下水降至每层土方开挖面以下800mm 〜1000mm 。\n8.\n1.\n4 基坑开挖阶段的信息化施工既是检验设计与施工合理性，\n也是动态指导设计与施工的有效方法。\n通过信息化施工技术的运\n用，及时了解基坑开挖期间的各种变化，及时比较勘察、设计所\n预期的状态与监测结果的差别，对设计成果和施工方案进行评\n价，预期可能出现的险情，对围护结构设计和施工方案进行针对\n性的调整，将险情抑制在萌芽状态，以确保基坑施工安全。\n8.\n2 无内支撑的基坑开挖\n8.\n2.\n1 对于土质条件较差，雨水较多，且放坡开挖的基坑边坡\n留置时间较长时，均应采取护坡的措施。\n护坡可根据工程实际，\n选用合适的方式。\n护坡在使用过程中若出现裂缝或破损现象，应\n及时加以修补，以防止雨水和地面渗水而影响基坑的稳定性。\n8.\n2.\n3 土层描杆支护、板式外拉锚支护的基坑开挖与复合土钉\n墙支护的基坑开挖方法相类似，其土石方开挖方法可参照执行^\n1 截水帷幕一般采用水泥土搅拌桩，由于受力和抗渗要求\n的特殊性，本款强调水泥土搅拌桩采用强度和龄期双控的原则。\n2 土钉或复合土钉墙支护的基坑土石方开挖应按照设计的\n要求进行，必须和土钉支护施工相协调，采用交替施工方法进行\n流水作业，缩短施工工期。\n每层每段开挖后应在规定的时间内完",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 96,
+        "page_end": 96,
+        "token_count": 411,
+        "char_count": 823
+      }
+    },
+    {
+      "chunk_id": 89,
+      "text": "成支护。\n钻孔和注浆应根据不同土层确定不同的完成时间，一般\n情况下，应在土石方开挖后24h内完成土钉安设及注浆、面层混\n凝土喷射；若土质较差，宜在12h内完成土钉安设及注浆、面层\n混凝土喷射。\n3 土钉或复合土钉墙支护的基坑由于先行完成基坑周边部\n分土方，基坑中部即形成了中心岛状土体，可按照中心岛式开挖\n的要求进行施工；基坑周边土石方开挖宽度控制在8m〜10m，\n主要是考虑土钉横向施工作业面的要求。\n4 土钉或复合土钉墙支护的基坑开挖分层厚度应与土钉竖\n向间距一致，分层底标高应低于相应土钉位置一定距离，主要是\n考虑土钉竖向施工作业面的要求，对于淤泥质土要求分层底标高\n应低于相应土钉位置不大于200mm ，对于土质较好的土层可放\n宽至500mm 。\n分段长度的控制是为了保证基坑安全，一般情况\n下挖土的速度要比钻孔及注浆的速度快，若钻孔和注浆跟不上挖\n土的进度，则临空面暴露时间可能过长，不利于基坑的稳定。\n5 考虑到土钉支护结构应达到设计规定的强度，需要一定\n的养护时间，在土钉注浆完成后，应至少间隔48h后方可开挖下\n一层土方。\n8 .\n2 .\n4预应力锚杆的应力应进行试验，并对预应力进行长期\n监测。\n8 .\n3 有内支撑的基坑开挖\n8 .\n3 .\n1对一些软土地区基坑开挖及支撑施工过程中，选定科学\n合理的施工参数，对基坑的稳定和变形控制、周边环境保护均会\n产生重要的影响。\n施工参数主要是根据基坑规模、几何尺寸、支\n撑形式、开挖方式、地质条件和周边环境要求等确定，包括分层\n开挖层数、每层开挖深度、每层土体无支撑暴露的时间、每层土\n体无支撑暴露的平面尺寸及高度等。\n实践证明，每一个开挖步骤\n过程中，围护墙体暴露时间和空间越小，则控制基坑变形的效果\n越好，因此加快开挖和支撑速度的施工工艺，是提高软土地区基",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 97,
+        "page_end": 97,
+        "token_count": 380,
+        "char_count": 761
+      }
+    },
+    {
+      "chunk_id": 90,
+      "text": "坑工程技术经济效果的重要环节。\n先撑后挖、限时支撑、分层开\n挖、严禁超挖就是基于上述理论经过长时间工程实践总结得\n出的。\n8.\n3.\n2 挖土机械和运输车辆着直接在支撑上行走或作业，而支\n撑设计在未考虑相应的竖向荷载时，则支撑可能会下沉、变形，\n甚至断裂等情况，这种情况对基坑和周边环境的安全会造成严重\n后果。\n土方开挖过程中挖土机械和运输车辆应尽量避让支撑，若\n无法避让，一般情况下可采取在支撑上部覆土并铺设路基箱的方\n法，使荷载均匀传递至支撑下方土体。\n8.\n3.\n4 逆作法是指利用先施工完成的地下连续墙等作为基坑施\n工时的围护体系，利用地下结构各层梁、板、柱等作为围护结构\n的支撑体系，地下结构由地面向下逐层施工，直至基础底板施工\n完成。\n盖挖法是先用地下连续墙、钻孔桩等形式作围护结构，然\n后施工钢筋混凝土盖板或临时型钢盖板，在盖板、围护墙、立柱\n桩保护下进行土石方开挖和结构施工。\n1 由于逆作法和盖挖法的施工涉及永久水平和竖向结构与\n支护体系相结合，故施工期间的水平和垂直位移、受力情况等应\n满足主体结构和支护结构的设计要求。\n2 面积较大的基坑宜采用盆式开挖，盆式开挖由于在基坑\n周边形成盆边土体，对基坑及结构安全较为有利。\n盆边宽度应按\n照设计要求或通过计算确定。\n盆边土体除了其自身稳定外，还应\n考虑其上部水平结构施工产生的荷载。\n盆边区域土石方的开挖涉\n及基坑和结构安全，若周边环境复杂，宜采取对称、限时开挖的\n方式，必要时，可设置临时斜撑以保证围护结构的稳定。\n3 由于暗挖是在相对封闭的环境下进行挖土作业，暗挖区\n域受挖土机械尾气和地下有害气体影响，空气质量较差，一般情\n况下预留孔洞不能满足自然通风要求，故应设置专用的通风系\n统，采用强制通风的方式，以满足暗挖施工的安全要求。\n应按挖\n土行进路线预先留设通风口，随着地下挖土工作面的推进，当露\n出通风口后即应及时安装大功率涡流风机，并启动风机向地下施",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 98,
+        "page_end": 98,
+        "token_count": 407,
+        "char_count": 814
+      }
+    },
+    {
+      "chunk_id": 91,
+      "text": "工操作面送风，送清新空气向各风口流人，经地下施工作业面再\n从取土孔中流出，形成空气流通循环，保证施工作业面的安全。\n通风管道可采用塑料波纹软管，软管固定在结构楼板和钢立柱\n上，并随挖土过程加设至各作业点，在作业点设风机进行送风,\n在出口处设风机进行抽风。\n4 暗挖封闭作业区域光线较差，照明系统的及时设置对土\n石方开挖的安全施工 非常重要，照明系统应随挖土过程及时\n设置。\n5 由于逆作法施工的梁板结构支撑在临时开挖面的土体上，\n因此对于梁板结构的模板须有可靠的支撑系统，应对地基土采用\n垫层处理，支撑系统下方的地基承载力应满足支撑强度要求。\n8.\n4 土石方开挖与爆破\n8.\n4.\n1 中心岛式开挖可在较短时间内完成基坑周边土方开挖及\n支撑施工，这种开挖方式对基坑变形控制较为有利。\n而基坑中部\n大面积无支撑空间的土石方开挖较为方便，可在支撑系统养护阶\n段进行开挖。\n中心岛式开挖适用于支撑系统沿基坑周边布置且中部留有较\n大空间的基坑。\n边桁架与角撑相结合的支撑体系、圆环形桁架支\n撑体系、圆形围檩体系的基坑采用中心岛式土石方开挖较为典\n型。\n土钉支护、土层锚杆支护的基坑也可采用中心岛式土石方开\n挖方式。\n中心岛式开挖宜适用于明挖法施工工程。\n1 边部土方的开挖范围不应影响该区域整个支撑系统的形\n成，在满足该区域支撑系统施工的条件下，边部土方开挖宽度应\n尽可能减小，以加快挖土速度，使边坡支撑尽早形成，减小围护\n墙无支撑或无垫层暴露时间。\n2 若挖土机械需要在二级放坡的放坡平台上作业，坡体稳\n定性验算还应考虑机械作业时的附加荷载因素；土石方运输、挖\n土机械等在中部岛状土体顶部进行作业时，中部岛状土体稳定也\n应考虑施工机械的荷载影响。\n8.4.2 盆式开挖由于保留基坑周边的土方，减小了基坑围护暴\n露的时间，对控制围护墙的变形和减小周边环境的影响较为有\n利，而基坑中部的土方可在支撑系统养护阶段进行开挖。盆式开\n挖一般适用于基坑周边环境保护要求较高或支撑较为密集的大面\n积基坑。盆式土石方开挖适用于明挖法或暗挖法施工工程。\n1 对于传统顺作法施工且中部采用对撑的基坑，盆边土体\n的开挖应结合支撑系统的平面布置，先行开挖与对撑相对应的盆\n边分块土体，尽快形成对撑。对于逆作法施工的基坑，盆边土体\n应根据分区大小，可采用分小块先后开挖的方法，尽量减小围护\n墙暴露时间。对于利用中部主体结构作为竖向斜撑支点的基坑，\n应在竖向斜撑形成后再开挖盆边土体。\n2 若挖土机械需要在二级放坡的放坡平台上作业，坡体稳\n定性验算还应考虑机械作业时的附加荷载因素。\n8.4.7 当坡体顶部的房屋位于卸荷裂隙范围内时，房屋会随之\n出现裂缝，将影响房屋的正常使用，对基坑安全不利，应采取预\n防或加固措施。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 99,
+        "page_end": 100,
+        "token_count": 571,
+        "char_count": 1143
+      }
+    },
+    {
+      "chunk_id": 92,
+      "text": "9 特殊性土基坑工程\n9.1 一般规定\n9.1.1〜9.1. 5 特殊性土基坑工程的关键是保证施工过程中基坑\n侧壁土体含水率不发生变化或少变化，降排水工程变得非常重要\n和关键。本章讨论的特殊性土包括膨胀土、冻胀土、高灵敏度软\n土等，其中湿陷性黄土场地上的基坑工程，除符合本规程外，尚\n应符合现行行业标准《湿陷性黄土地区建筑基坑工程安全技术规\n程》JGJ 167的相关规定。\n9.2 膨胀岩土基坑工程\n9. 2.1 膨胀岩土基坑的稳定性不仅受到侧壁几何参数和土体土\n性指标的影响，更受到环境雨水人渗人量的影响，特别当存在胀\n缩裂缝和地裂缝时，可能产生沿裂缝的破坏。此外雨水会优先沿\n已有裂缝渗入，增加了稳定性破坏的可能，因此需要验算沿裂缝\n破坏的稳定性。\n9.2.2 工程经验表明，在膨胀土中开挖基坑时，膨胀土会因浸\n水或失水产生胀缩裂缝，对基坑稳定性产生严重影响。因此，基\n坑开挖支护施工的每一环节都必须采取有效防护措施减少大气环\n境或各种水源对膨胀土含水量的影响，严禁长期暴露开挖面，以\n减少场地土胀缩性质的工程危害。\n9. 2.3 可以采取的处理措施包括：\n1 当膨胀土分布区域界线发生变化时，应根据实际情况进\n行调整。\n2 当膨胀土等级发生变化时，应调整方案，并调整相应保\n护措施。\n3 当地层中存在连通性较好的缓倾坡角软弱结构面或裂隙\n面时，应分析开挖期间可能的失稳区域和滑坡规模，并根据分析\n结果研究处理方案。\n4 当开挖过程中揭露局部区域膨胀性发生变化时，应针对\n局部区域制定处理方案。\n9.\n3 受冻融影响的基坑工程\n9.\n3.\n1〜9.\n3.\n3 对可能发生冻胀的基坑，宜采用保温措施和遮阳\n设施。\n当无保温防冻措施时，除正常设计计算外，应单独按冻胀\n力进行设计验算（按冻胀力计算时可不计土侧压力）。\n冻胀力的\n大小可根据土质、含水量、•水位、水的补给、温度、冻结时间、\n约束条件等结合地区经验确定。\n9.\n4 软土基坑工程\n9.\n4 .\n1 当需要在高灵敏度软土中开挖基坑时，振动控制是基坑\n安全最主要的环节，位于交通干道的基坑工程，对振动源控制比\n较困难，因此，应对土的强度指标进行折减、采用对土层扰动较\n小的施工工艺和工法，并主要以控制施工速度、孔隙水压力来减\n少对土体强度的影响。\n9.\n4.\n3 、9.\n4 .\n4 软土中的基坑工程，开挖前应在勘察和实地调查\n的基础上确定土体加固项目、方法和要求，并宜采用地下连续墙\n等空间刚度较大的围护结构，以控制由围护结构施工所引起的地\n层位移对周边环境产生的影响。\n主要的加固项目包括：地下连续墙墙底注浆加固，主动土压\n力区土体稳定加固，被动区加固，桩间土加固，基坑挡墙转角处\n外侧因斜撑作用而形成的大抗力被动区的土体加固，以及为槽壁\n稳定而在槽壁两侧进行的土体加固等；主要土体加固方法可采用\n水泥搅拌粧、旋喷注浆、注浆、振冲碎石桩等。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 101,
+        "page_end": 102,
+        "token_count": 600,
+        "char_count": 1201
+      }
+    },
+    {
+      "chunk_id": 93,
+      "text": "1 0 检查与监测\n10.\n1 一般规定\n10.\n1.\n1 大量基坑工程事故的发生均与围护结构的施工质量有直\n接的关系，围护结构施工过程中对原材料质量、施工机械、施工\n工艺、施工参数等进行检查，可以从源头上保证围护结构的质量\n与安全，意义重大。\n工程检査中常见的问题有：\n1 原材料质量不过关。\n如采用过期失效的水泥，SMW 工\n法中重复利用的型钢性能指标不满足设计要求，混凝土没有掺加\n规定的外加剂或掺外加剂不当等。\n2 施工机械不满足地质条件要求。\n如在厚度较大、强度较\n高的粉性土层施工三轴水泥土搅拌桩时，选用的机械动力及钻杆\n性能不足，致使施工困难、搅拌不均匀，截水效果难以保证。\n3 施工工艺不合理。\n如在粉土地基中施工大口径深井时，\n采用水冲法的简易成孔方法，导致孔壁坍塌、井径及成井质量不\n满足设计要求。\n4 施工参数控制不当。\n在环境条件比较恶劣的条件下，不\n注意控制围护体的施工顺序和速度，极易造成环境灾害。\n曾有工\n程因为地下连续墙成槽速度过快而致使周边浅基础建筑物严重下\n沉、开裂而成为危房的案例。\n10.\n1.\n2 土方开挖前应复核的设计条件主要包括：\n1 土方开挖前必须完成的围护措施是否全部到位，包括围\n护桩、地基加固、基坑降水、支撑或锚杆以及土钉等。\n2 围护结构的强度及养护时间是否满足要求。\n3 监测点是否已经布置，基准点是否已经设立。\n10.\n1.\n3 基坑土方开挖过程中，一些围护结构的质量问题逐步显\n现出来，如降水不到位，围护粧露筋、混凝土强度不足、桩位偏",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 103,
+        "page_end": 103,
+        "token_count": 324,
+        "char_count": 648
+      }
+    },
+    {
+      "chunk_id": 94,
+      "text": "差等• ’对土钉墙支护结构而言，土钉抗拔力不满足要求、喷射混\n凝土面层与侧壁土体脱开等，对这些问题应制定整改方案，并经\n设计复核和认可后实施，验收合格后才能进入下一道工序。\n10.\n1.\n4 基坑围护设计过程中，一般情况下施工单位尚未确定，\n因此，对基坑周边的平面、竖向布置设计和超载取值只能根据规\n范或工程经验。\n施工单位进场后，根据项目的场地及基坑特点，\n在下列方面需要设计单位进一步确认：\n1 基坑周边局部范围，如钢筋或其他材料堆场，其堆载超\n过设计要求。\n2 出土后坑边重车行驶区域，除超载外，还需施加长期、\n反复的动载作用。\n3 —些施工临时设施，如办公、宿舍楼等，紧邻基坑，其\n变形控制较原^ 计更为严格。\n4 施工塔机设置在基坑边，设计时应计入与围护结构的相\n互作用。\n5 场地紧张或地下室开挖较深时，第一道平面支撑系统常\n常兼作施工桟桥，应另进行计算分析。\n10.\n1.\n5 第三方专业监测的内容及要求均应按设计图纸及相关规\n范执行。\n施工单位应对工程的重点及难点、整体施工部署、主要\n危险源等，开展一些更具有针对性和灵活性的施工监测。\n施工监\n测发现异常情况后，第三方专业监测单位进行进一步深入监测和\n分析，以供相关各方及时正确地掌控基坑及周边环境的安全\n状况。\n10.\n1.\n6 对以变形控制为主的基坑工程，应合理控制基坑施工过\n程各工况的变形，提出阶段性的变形控制指标，使最终累计变形\n满足要求。\n不少工程因为忽视过程变形控制，在挖土至坑底之前\n就出现累计变形报警的情况，接下来的施工步履维艰，甚至对周\n边环境产生严重影响。\n对周边环境复杂、变形控制要求高的基坑，应采取预先加固\n措施以利于有效实现环境保护目标。\n如对基坑主动区及被动区的",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 104,
+        "page_end": 104,
+        "token_count": 365,
+        "char_count": 730
+      }
+    },
+    {
+      "chunk_id": 95,
+      "text": "地基土体进行加固，减少基坑开挖时的土体变形；对保护对象本\n身进行加固，提高其变形适应能力，从而可以放宽变形控制指\n标；或通过对保护对象的地基进行加固，减少其因开挖而产生的\n沉降或倾斜。\n10.\n1.\n7 及时结合基坑施工状况对监测数据进行分析，总结基坑\n施工中存在的问题，评估基坑围护的安全度，动态调整设计方\n案，信息化施工，保证基坑及周边环境的安全。\n不少工程由于不\n重视监测工作对基坑施工的指导意义，盲目凭经验施工，最终造\n成工程事故的发生。\n10.\n1.\n8 监测工作应自始至终连续、稳定，数据不能中断；监测\n点如被破坏应及时修复。\n对内支撑（包括钢筋混凝土内支撑和钢\n支撑）的轴力进行监测时，自坑外地面或坑内上下通道进人监测\n点的通道应有防护措施.\n，并在监测点位置应具有足够的操作空\n间。\n一些项目曾发生过人员在没有防护的支撑表面测试而坠落的\n情况。\n10.\n1.\n9 连续降雨时，基坑主动区土体的含水量加大，坑内积水\n也会导致被动区土体的强度降低，基坑的安全度明显降低；因\n此，应加强监测工作，及时掌握基坑的安全状态，确保基坑安\n全。\n在降雨条件下，特别是雨量较大、强度较高时，监测人员的\n行走和工作范围应有安全防护措施，避免雨天路滑，人员坠落。\n10.\n2 检 査\n10.\n2.\n1 原材料主要包括水泥、砂浆、混凝土、钢筋、钢绞线、\n型钢、混凝土外加剂等，各种材料的质量应满足相应的规范和设\n计要求。\n通过目测对原材料的表观质量进行检査，可以发现材料\n质量问题，如水泥受潮、型钢扭曲、钢筋锈蚀等，发现问题后，\n应采取必要的检测手段验证原材料质量是否满足要求。\n10.\n2.\n2 施工过程的检査可在源头把握工程质量，避免事后救补\n的复杂性。\n对照设计条件，对已完成的围护体系施工质量进行检\n查，对发现的问题应及时整改，消除开挖过程由于围护结构质量",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 105,
+        "page_end": 105,
+        "token_count": 389,
+        "char_count": 779
+      }
+    },
+    {
+      "chunk_id": 96,
+      "text": "问题而产生的安全隐患。\n在实际工程中，检查过程曾发现个别工\n程施工中存在偷工减料现象，围护粧长度或钢筋笼长度、钢筋数\n量严重不满足设计要求。\n通过预先提出的检查要求，也可以监督\n施工单位严格按照设计要求施工。\n施工单位根据规范要求编制基坑安全施工专项方案，其中一\n项重要的内容是施工机具、施工工艺及施工参数的确定。\n在进行\n施工方案专家论证时，专家结合类似工程经验及当地的施工特\n点，根据基坑的规模、围护结构的深度、地质条件等因素，应对\n施工机具、施工工艺及施工参数的合理性进行论证，提出建议；\n对没有经验或重要的工程，应通过试验性施工确定施工机具、施\n工工艺及施工参数，这利于工程质量的控制。\n我国地域辽阔，各地地质条件差异较大，表10.\n2 .\n2包含目\n前工程中常见的围护结构所涉及的内容及方法，具体应用时应根\n据工程特点、实际采用的围护形式，提出针对性的检査要点。\n10.\n2.\n3 基坑截水帷幕如存在质量问题，开挖过程中容易出现渗\n水、流砂现象，进而影响周边环境的安全。\n特别是在坑内外水头\n差大、土体透水性能强的情况下，尽管积极采取坑内封堵、坑外\n处理等措施，仍可能导致较大的环境灾害，这方面的工程教训\n很多。\n帷幕施工完成后，通过坑内预降水措施可以检査帷幕截水效\n果，如坑内外水头没有异常变化，说明帷幕起到隔渗作用；如坑\n外某范围水位异常下降，说明坑内外存在较大的水力联系，帷幕\n存在缺陷，应预先处理。\n10.\n2.\n4 通过施工场地布置的检查，对现场施工条件是否符合设\n计要求进行判断，发现问题应及时整改，消除安全隐患。\n出土口\n及重车行驶区域的超载大、荷载动力效应强；塔机基础在工作状\n态和非工作状态均增加了围护体系的侧向作用，且围护结构的变\n形也影响到塔机的安全使用。\n这些问题均应由围护设计统一考\n虑，施工单位不能随便改变场地布置，确需改变应经设计复核、\n处理后实施。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 106,
+        "page_end": 106,
+        "token_count": 397,
+        "char_count": 795
+      }
+    },
+    {
+      "chunk_id": 97,
+      "text": "10.\n2.\n5 土方开挖及地下结构施工过程主要检查实际进行的施工\n工况是否与设计要求一致，实际工程中由于超挖、支撑设置不及\n时、支撑或锚索未达到强度即进行下一阶段开挖等引发的工程事\n故屡见不鲜。\n每一工况违规施工引起相应工况变形超标、安全度\n降低的程度可能不十分严重，但所有工况的结果累计起来将可能\n导致基坑变形失控、安全度降低明显，最终在某个中间工况出现\n基坑坍塌、建筑物开裂等严重后果，因此应加强过程控制。\n10.\n2.\n6 在软土地基上施X混凝土支撑时，如底模或侧面模板没\n有有效固定，支撑梁的平直度较难保证。\n由于混凝土支撑一般为\n临时构件，一些施工单位重视不够，支撑梁容易出现施工缺陷，\n从而影响支撑体系的整体受力性能。\n因此，在浇筑混凝土之前应\n加强模板系统的检查。\n10.\n2.\n7 地下水及地表水的正确处理是基坑工程成败的关键。\n坑\n外地坪硬化，使地表水流向排水沟及集水井，有组织排出，避免\n流入基坑和坑外土体内；轻型井点和真空深井的成孔孔径、滤层\n做法、真空度等均是检査的内容，其正确施工直接影响降水效\n率。\n地下水抽出后的外排通道应保持畅通，并经常检查，防止堵\n塞。\n坑内应有有效的临时排水措施，减少坑内的积水时间，避免\n软化土体。\n10.\n2.\n8 地下结构施工完成后，在支护结构与地下室外墙之间需\n要采取回填措施，对放坡或土钉支护结构而言，回填量比较大。\n不少工程在投入使用后，因为回填土的不密实而出现地面下陷、\n管道断裂事故。\n此外。\n基坑回填有时还影响到基坑周边环境的变\n形，因此回填土的质量控制非常重要，应加强回填过程的检查。\n检查的内容主要包括回填土的种类、密实度、分层厚度等。\n10.\n3 施工监测\n10.\n3.\n3 施工监测的内容充分考虑了施工单位可能提供的技术力\n量、监测对施工安全的指导意义等因素，施工监测为第三方专业\n监测的补充，其手段简单、易于操作、灵活性强。\n围护墙顶部的侧向及竖向位移的监测除用经纬仪和水准仪\n外，对围护墙平面原始状态为直线段，也可通过在围护墙顶部相\n邻两角点之间弹直线的方法来反映开挖过程中各部位的相对变位\n情况。\n围护墙、混凝土支撑或地面的裂缝可通过设置石膏饼的方法\n了解裂缝的发展状态。\n当利用主体结构作为支护体系的一部分时，应加强主体结构\n关键部位的变形和裂缝观测。\n10. 3.4 巡查工作应具有连a贯性，由专人负责。巡查任务应落实\n到人，开挖前应就本工程的a环境特征、围护形式、重大危险源、\n施工工况等进行详细的交底，明确巡查的重点；开挖过程中，通\n过巡查了解基坑及周边环境的状况，重要部位持续跟踪，前后对\n比分析发展状况，应定期汇报巡查成果，有异常情况应及时通知\n有关各方，研究对策，及时处置。",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 107,
+        "page_end": 108,
+        "token_count": 568,
+        "char_count": 1137
+      }
+    },
+    {
+      "chunk_id": 98,
+      "text": "1 1 基坑安全使用与维护\n11.\n1 — 般规定\n基坑工程具有以下特征：\n其一是临时性工程，安全储备相对较小，周边环境往往较为\n复杂，一旦出现事故，处理十分困难，造成的经济损失和社会影\n响十分严重。\n其二是基坑工程施工及使用周期相对较长，从开挖到完成地\n面以下的全部隐蔽工程，常需经历多次降雨，周边堆载、振动、\n施工失当、监测与维护失控等许多不利条件，其安全度的随机性\n变化较为复杂，事故的发生往往具有突发性。\n长期以来，人们对基坑工程施工质量较为重视，对施工方\n法、工艺不当引发的环境变形问题也愈加重视，但对使用阶段的\n安全问题重视不够，许多基坑工程事故出现在使用阶段。\n因此，\n应特别重视使用期间基坑工程的安全和维护工作。\n11.\n1.\n1 在基坑工程投入使用前，应按规定程序对各个施工阶段\n进行分步验收，判断基坑工程安全质量合格后才能投入使用。\n应\n重视基坑工程的验收交接及基坑工程使用过程中的安全管理，明\n确工程责任主体和安全管理职责，避免发生事故后互相推诿扯皮\n的现象。\n基坑工程分包单位对承建的项目进行检验时，总包单位应参\n加，检验合格后，分包单位应将工程的有关资料报总包单位，建\n设单位组织单位工程验收时，分包单位应参加验收。\n11.\n1.\n2 基坑工程施工单位在将工程移交下一道作业工序的接收\n单位时，应同时将相关的水文地质、工程地质、基坑支护、环境\n状况分析等安全技术资料和相关评估报告同时移交，并应办理移\n交手续。\n移交文件应由建设单位、设计单位、监测单位、监理单",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 109,
+        "page_end": 109,
+        "token_count": 321,
+        "char_count": 643
+      }
+    },
+    {
+      "chunk_id": 99,
+      "text": "位、移交和接收单位等共同签章。\n11.\n1.\n3 基坑工程使用单位应明确负责人和岗位职责，联系基坑\n设计、施工、使用和监测等相关单位，进行基坑安全使用与维护\n技术安全交底和培训，制定基坑工程安全使用的应急处置等处理\n程序，检查现场作业安全交底情况，并定期组织应急处置演练。\n11.\n1.\n4 暴雨、冰雹、台风等灾害天气后基坑工程易发生事故，\n因此，应对基坑工程进行现场检查，检查的重点是基坑本身安全\n及周边建（ 构）筑物的安全状况。\n11.\n1.\n5 基坑使用中应确保基坑支护结构的安全，主体结构施工\n不得对基坑支护造成损坏。\n， 现场如需要对支护结构工作状态进行\n改变时，应报告设计单位并进行复核，符合安全要求后方可进行\n施工。\n11.\n2 使用安全\n11.\n2.\n1 为了保证基坑使用安全，宜对基坑周围地面采取硬化处\n理，并定期检查基坑周围原有的排水管、沟，确保不得有渗水漏\n水迹象。\n当地表水、雨水渗入土坡或挡土结构外侧土层时，应立\n即采取截、排等处置措施。\n基坑内发生积水时，应及时排出。\n基坑土方开挖或使用中，\n基坑侧壁和地表如出现裂缝，应及时采用灌缝封闭处理。\n基坑工程应在四周设置防水围挡和设置防护栏杆。\n防护栏杆\n埋设牢固，高度宜为1.\n0m〜1.\n2m，并增加两道间距均分的水平\n栏杆，应挂密目网封闭，栏杆柱距不得大于2.\n0m，距离坑边水\n平距离不得小于0.\n5m。\n11.\n2.\n2 基坑工程的安全使用是基坑工程安全的重要环节，应确\n保使用过程中严格按照设计要求执行，基坑周边使用荷载不得超\n过设计值。\n同时，基坑周边1.\n5m 范围内不宜堆载，3m 以内限\n制堆载，坑边严禁重型车辆通行。\n当支护设计中已计入堆载和车\n辆运行的，基坑使用中也应严禁超载。\n11.\n2.\n3 由于场地所限，在基坑周边破裂面范围内建造临时设施",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 110,
+        "page_end": 110,
+        "token_count": 386,
+        "char_count": 772
+      }
+    },
+    {
+      "chunk_id": 100,
+      "text": "时，应符合基坑设计荷载规定要求，同时，对临时设施采用保护\n措施，应经施工负责人、工程项目总监批准后方可实施。\n11.\n2.\n4 雨期施工时，基坑使用现场应备有防洪、防暴雨的排水\n措施及应急材料、设备，同时，设备的备用电源应处在良好的工\n作状态。\n11.\n2.\n6 为了保证作业人员安全，应设置必要的紧急逃生通道，\n一般基坑单侧侧壁宜设置不少于1个人员上下坡道或爬梯，设置\n间隔不宜超过50m，且不得少于2个，不应在侧壁上掏坑攀登，\n设置的坡道或爬梯不应影响或破坏基坑支护系统安全。\n11.\n2.\n8 对于膨胀土基坑工程，在使用中如发现基坑周边地面产\n生裂缝，应对裂缝产生的原因进行分析，判断可能产生的影响，\n并应及时反馈给设计单位共同商议处理方案。\n11.\n2.\n9 基坑使用中支撑的拆除应满足基坑安全，具体要求应符\n合本规范第6章的规定。\n11.\n3 维护安全\n基坑工程是大面积的挖土卸荷过程，易引起周边环境的变\n化，特别是使用过程中水的渗人及周边的随意堆载、保护措施的\n设置及降水方案的合理性、监测工作质量等，直接影响着施工使\n用中的基坑维护安全、周边建（ 构）筑物安全以及作业人员安\n全。\n所以，基坑工程的维护安全，包括基坑本体的安全，同时还\n包括周边建'(构）筑物及环境保护安全，这不仅涉及勘察、设\n计、施工单位的责任，还涉及使用单位（ 下道工序的施工单位）、\n监测单位、监理单位、降排水施工、回填土施工等多家单位的施\n工质量及安全管理责任。\n11.\n3.\n1 基坑验收合格移交给使用单位后，基坑使用单位应对基\n坑工程安全负责。\n+基坑使用单位应保护基坑安全，避免造成各种\n损坏。\n使用单位应对后续施工中存在的影响基坑安全的行为及时\n采取措施，消除可能发生的安全隐患。\n为确保基坑使用安全，基坑使用单位宜每天早晚各1次进行",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 111,
+        "page_end": 111,
+        "token_count": 382,
+        "char_count": 765
+      }
+    },
+    {
+      "chunk_id": 101,
+      "text": "巡查1 雨期及灾害性天气时，应增加巡查次数，并应作好记录。\n11.\n3.\n2 基坑使用和维护期内，周边如发生较大的交通荷载或大\n于35kPa的振动荷载影响，应经设计单位评估其安全影响。\n11.\n3.\n3 基坑使用中，降水期间应对抽水设备和运行状况进行维\n护检查，每天检査不应少于2次，并应观测记录水泵的工作压\n力、真空泵、电动机、水泵温度、电流、电压、出水等情况，发\n现问题及时处理，使抽水设备和备用电源及设备始终处在正常\n状态。\n对现场所有的井点要有明显的安全保护标识，避免发生井点\n破坏，影响降水效果。\n同时，注意保护井口，防止杂物掉人井\n内，检查排水管、沟，防止渗漏。\n北方地区冬期降水应采取防冻\n措施。\n11.\n3.\n5 基坑使用中一旦围护结构出现缺陷，将可能直接影响基\n坑安全，应由基坑使用单位组织建设单位、设计单位、施工单位\n和监测单位等共同编制修复方案，并经评审后实施。\n11.\n3.\n6 基坑使用中除应符合自身的稳定性和承载力等安全要求\n之外，应符合基坑周边环境对变形控制要求，根据基坑周围环境\n的状况及保护要求，做好相互协调工作，采取相应的变形控制措\n施，避免发生相互影响。\n必要时可对邻近建（ 构）筑物及管线采\n取土体加固、结构托换、架空管线的防范措施。\n11.\n3.\n7 坑外地下管线沉降变形的产生原因比较复杂，后果影响\n范围可能较大，应综合采取处理措施。\n基坑使用中应采用信息法\n施工，施工中以数据分析、信息分析以及过程监测反馈设计为基\n础，实施必要的安全控制技术措施，同时，可结合现场情况和进\n展，适时调整安全技术措施。\n如发现邻近建（ 构）筑物、管线出\n现受损时，可采取锚杆静压桩、树根桩、隔离桩及注浆加固保护\n等修复措施。\n在实施修复中，应注意加强对保护对象和基坑变形\n的安全监测。\n11.\n3.\n8 基坑工程可能超过设计使用期限，基坑工程施工单位不\n可能全过程派员参加，因此，使用单位在后续使用中应严格按设",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 112,
+        "page_end": 112,
+        "token_count": 409,
+        "char_count": 819
+      }
+    },
+    {
+      "chunk_id": 102,
+      "text": "计文件和本规范规定的注意事项和规定等进行维护和使用K\n基坑工程使用超过了设计使用年限，基坑工程安全评估应组\n织建设单位、设计单位、基坑施工单位、监测单位等共同参加。\n对需要进行加固的，应由原支护设计单位、施工单位对加固方案\n进行复核，并由建设单位或总包单位组织专家进行论证。\n11.3 . 9 基坑使用后期阶段，支护结构的应力发生松弛，侧壁的\n稳定性较差，在安全管理上容易发生麻痹，大量事故案例表明人\n身伤亡多在此时发生，同时，由于现场作业面狭窄，事故抢救工\n作难以施展。因此应对基槽按设计要求及时回填，回填材料和施\n工工序应按设计要求进行。\n另一方面，符合设计要求的回填材料质量也将影响主体结构\n质量/同时，对主体结构起到防护作用，尤其对防止地下水对地\n基的侵入及地基土的侧向位移变形至关重要（此原因诱发的高层\n建筑倾斜事故近几年屡见不鲜），这点也是与现行国家标准《建\n筑地基基础设计规范》GB 50007 - 2011和现行行业标准《建筑\n桩基技术规范》JGJ 94-2008 等的规定是一致的。当回填质量可\n能影响坑外建筑物或管线沉降、裂缝等发展变化时，应采用砂、\n砂石料回填并注浆处理，必要时可采用低强度等级混凝土回填\n密实。\n铕一书号 ：15112 .2382g\n'定 价 ：18.00 元",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\JGJ311-2013 建筑深基坑工程施工安全技术规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "84b500bc804ab09f2d988f9bad4524e2a599bd79",
+        "page_start": 113,
+        "page_end": 114,
+        "token_count": 275,
+        "char_count": 550
+      }
+    }
+  ]
+}

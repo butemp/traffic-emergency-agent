@@ -1,0 +1,178 @@
+[
+  {
+    "id": "res_007",
+    "name": "邕江水上应急搜救中心",
+    "type": "fire",
+    "status": "active",
+    "location": {
+      "latitude": 22.8050,
+      "longitude": 108.3510,
+      "address": "南宁市青秀区滨江路水上基地"
+    },
+    "description": {
+      "summary": "负责邕江流域的水上搜救、溢油处置及防汛抗洪。",
+      "capabilities": ["水下声呐搜索", "潜水救援", "夜间水面搜寻", "船只拖带"],
+      "capacity": {
+        "rescue_boats": 5,
+        "underwater_drones": 2,
+        "diving_suits": 12,
+        "max_towing_capacity": "500 tons"
+      }
+    },
+    "contact": {
+      "general_phone": "0771-5512110",
+      "emergency_channel": "VHF CH16",
+      "duty_roster": [
+        {
+          "type": "specific_date",
+          "date": "2026-03-01",
+          "shift": "full_day",
+          "name": "莫船长",
+          "phone": "13307711234"
+        },
+        {
+          "type": "fixed_weekly",
+          "day_of_week": 7,
+          "shift": "08:00-20:00",
+          "name": "黄领航员",
+          "phone": "13307715678"
+        }
+      ],
+      "default_contact": { "name": "岸基指挥室", "phone": "0771-5512111" }
+    },
+    "metadata": { "last_updated": "2026-02-28", "priority_level": 1 }
+  },
+  {
+    "id": "res_008",
+    "name": "国家电网南宁供电局应急抢修中心",
+    "type": "inventory",
+    "status": "active",
+    "location": {
+      "latitude": 22.8315,
+      "longitude": 108.3320,
+      "address": "南宁市西乡塘区心圩路2号"
+    },
+    "description": {
+      "summary": "电力设施突发故障抢修及大负荷供电保障。",
+      "capabilities": ["带电作业", "临时发电", "变压器紧急更换"],
+      "capacity": {
+        "emergency_generator_trucks": 4,
+        "mobile_transformer": 1,
+        "repair_teams": 8,
+        "fuel_reserve": "2000L"
+      }
+    },
+    "contact": {
+      "general_phone": "95598",
+      "duty_roster": [
+        {
+          "type": "fixed_weekly",
+          "day_of_week": 7,
+          "shift": "20:00-08:00",
+          "name": "夜班主管吴工",
+          "phone": "13878880011"
+        }
+      ],
+      "default_contact": { "name": "抢修调度台", "phone": "0771-2911111" }
+    },
+    "metadata": { "last_updated": "2026-02-20", "priority_level": 2 }
+  },
+  {
+    "id": "res_009",
+    "name": "高新区危化品事故处置特勤站",
+    "type": "fire",
+    "status": "active",
+    "location": {
+      "latitude": 22.8640,
+      "longitude": 108.2850,
+      "address": "南宁高新区工业园北区"
+    },
+    "description": {
+      "summary": "专业处理化学品泄露、工业爆炸及核生化检测。",
+      "capabilities": ["重型防化", "洗消作业", "有毒气体监测", "远程灭火机器人"],
+      "capacity": {
+        "chemical_suits_level_a": 10,
+        "decontamination_trucks": 2,
+        "gas_analyzers": 5,
+        "foam_concentrate": "5000L"
+      }
+    },
+    "contact": {
+      "general_phone": "0771-3810119",
+      "emergency_channel": "380.500MHz",
+      "duty_roster": [
+        {
+          "type": "specific_date",
+          "date": "2026-03-01",
+          "name": "特勤韩站长",
+          "phone": "15077109988"
+        }
+      ],
+      "default_contact": { "name": "值班副站长", "phone": "15077109989" }
+    },
+    "metadata": { "last_updated": "2026-03-01", "priority_level": 1 }
+  },
+  {
+    "id": "res_010",
+    "name": "南宁中心血站（急救血液库）",
+    "type": "medical",
+    "status": "active",
+    "location": {
+      "latitude": 22.8420,
+      "longitude": 108.3880,
+      "address": "南宁市兴宁区科园大道"
+    },
+    "description": {
+      "summary": "全市医疗机构血液供应枢纽，支持大规模伤亡事件血液紧急调拨。",
+      "capabilities": ["成分血储备", "冷链运输", "疑难配血"],
+      "capacity": {
+        "blood_inventory_o": "80000ml",
+        "blood_inventory_a": "55000ml",
+        "blood_inventory_b": "62000ml",
+        "blood_inventory_ab": "21000ml",
+        "refrigerated_trucks": 6
+      }
+    },
+    "contact": {
+      "general_phone": "0771-3212345",
+      "duty_roster": [
+        {
+          "type": "fixed_weekly",
+          "day_of_week": 7,
+          "shift": "full_day",
+          "name": "林主任",
+          "phone": "18607714455"
+        }
+      ],
+      "default_contact": { "name": "供血科", "phone": "0771-3212346" }
+    },
+    "metadata": { "last_updated": "2026-02-28", "priority_level": 1 }
+  },
+  {
+    "id": "res_011",
+    "name": "南方重型机械救援中队",
+    "type": "transport",
+    "status": "active",
+    "location": {
+      "latitude": 22.7500,
+      "longitude": 108.4100,
+      "address": "南宁市经开区长凯路"
+    },
+    "description": {
+      "summary": "重型吊装、路障清理及大型机械抢险。",
+      "capabilities": ["重型吊装", "隧道开挖", "推土铲运"],
+      "capacity": {
+        "cranes_100t": 2,
+        "cranes_50t": 5,
+        "excavators": 10,
+        "heavy_trailers": 4
+      }
+    },
+    "contact": {
+      "general_phone": "0771-4812345",
+      "duty_roster": [],
+      "default_contact": { "name": "值班室", "phone": "13978801122" }
+    },
+    "metadata": { "last_updated": "2026-01-15", "priority_level": 3 }
+  }
+]

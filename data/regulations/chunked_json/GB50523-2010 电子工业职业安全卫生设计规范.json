@@ -1,0 +1,47 @@
+{
+  "doc_id": "de497ea3364340b104972b8e5c6c8a6646dce71c",
+  "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50523-2010 电子工业职业安全卫生设计规范.pdf",
+  "file_type": ".pdf",
+  "num_chunks": 3,
+  "chunks": [
+    {
+      "chunk_id": 0,
+      "text": "hQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nwww.bzfxw.com\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50523-2010 电子工业职业安全卫生设计规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "de497ea3364340b104972b8e5c6c8a6646dce71c",
+        "page_start": 2,
+        "page_end": 80,
+        "token_count": 645,
+        "char_count": 1291
+      }
+    },
+    {
+      "chunk_id": 1,
+      "text": "com QM9N}\nhQÆRN«Q www.\nbzfxw.\ncom QM9N}\nhQÆRN«Q www.\nbzfxw.\ncom QM9N}\nhQÆRN«Q www.\nbzfxw.\ncom QM9N}\nhQÆRN«Q www.\nbzfxw.\ncom QM9N}\nhQÆRN«Q www.\nbzfxw.\ncom QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50523-2010 电子工业职业安全卫生设计规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "de497ea3364340b104972b8e5c6c8a6646dce71c",
+        "page_start": 2,
+        "page_end": 80,
+        "token_count": 130,
+        "char_count": 261
+      }
+    },
+    {
+      "chunk_id": 2,
+      "text": "hQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}\nhQÆRN«Q www.bzfxw.com QM9N}",
+      "metadata": {
+        "source_path": "C:\\Users\\zjy\\Desktop\\RAG\\应急指挥决策大模型训练数据\\《2021安全管理规范大全》\\GB50523-2010 电子工业职业安全卫生设计规范.pdf",
+        "file_type": ".pdf",
+        "doc_id": "de497ea3364340b104972b8e5c6c8a6646dce71c",
+        "page_start": 82,
+        "page_end": 146,
+        "token_count": 494,
+        "char_count": 989
+      }
+    }
+  ]
+}
