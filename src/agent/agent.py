@@ -614,14 +614,53 @@ class Agent:
             logger.warning("收到未知阶段标识: %s", value)
             return None
 
+    def _normalize_candidate_plans(self, raw_plans: Any) -> List[Dict[str, Any]]:
+        """将模型返回的候选方案统一整理成字典列表。"""
+        if not raw_plans:
+            return []
+
+        if isinstance(raw_plans, (str, dict)):
+            raw_plans = [raw_plans]
+        elif not isinstance(raw_plans, list):
+            return []
+
+        normalized_plans: List[Dict[str, Any]] = []
+        for index, item in enumerate(raw_plans, start=1):
+            if isinstance(item, dict):
+                normalized_plans.append(item)
+                continue
+
+            if isinstance(item, str):
+                text = item.strip()
+                if not text:
+                    continue
+                normalized_plans.append(
+                    {
+                        "plan_id": f"plan_{index}",
+                        "title": f"方案{index}",
+                        "summary": text,
+                        "content": text,
+                        "advantages": [],
+                        "disadvantages": [],
+                        "applicable_scenarios": [],
+                    }
+                )
+                continue
+
+            logger.warning("忽略无法解析的 candidate_plan: type=%s", type(item).__name__)
+
+        return normalized_plans
+
     def apply_assistant_control(self, control: AssistantControl) -> None:
         """将模型控制信息应用到 TaskState。"""
         self.task_state.apply_incident_updates(control.incident_updates)
         self.task_state.apply_environment_updates(control.environment_updates)
 
-        if control.candidate_plans:
+        normalized_candidate_plans = self._normalize_candidate_plans(control.candidate_plans)
+
+        if normalized_candidate_plans:
             self.task_state.candidate_plans = []
-            for index, item in enumerate(control.candidate_plans, start=1):
+            for index, item in enumerate(normalized_candidate_plans, start=1):
                 self.task_state.add_candidate_plan(
                     CandidatePlan(
                         plan_id=str(item.get("plan_id", f"plan_{index}")),
@@ -647,9 +686,9 @@ class Agent:
             if control.awaiting_confirmation:
                 question_type = "confirmation"
                 suggested_options = ["确认执行", "返回调整"]
-            elif control.candidate_plans:
+            elif normalized_candidate_plans:
                 question_type = "plan_selection"
-                suggested_options = [plan.get("title", "") for plan in control.candidate_plans]
+                suggested_options = [plan.get("title", "") for plan in normalized_candidate_plans]
 
             self.task_state.set_pending_question(
                 question=question,
