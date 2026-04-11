@@ -27,7 +27,14 @@ sys.path.insert(0, str(Path(__file__).parent / "src"))
 from src.agent import Agent
 from src.providers import OpenAIProvider
 from src.tools import QueryRegulations, QueryHistoricalCases, RiskAssessment, MediaCaption
-from src.rag import QueryRAG, RAGConfig, BALANCED_RAG_CONFIG
+from src.rag import (
+    QueryRAG,
+    RAGConfig,
+    BALANCED_RAG_CONFIG,
+    FAST_RAG_CONFIG,
+    PRECISE_RAG_CONFIG,
+    COARSE_ONLY_RAG_CONFIG,
+)
 
 # 加载环境变量
 load_dotenv()

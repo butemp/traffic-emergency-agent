@@ -1,0 +1,12 @@
+name: human_collaboration
+description: 人机协作能力，负责信息补问、方案选择和风险确认
+version: "1.0"
+active_phases:
+  - INTAKE
+  - SITUATIONAL_AWARENESS
+  - PLAN_GENERATION
+  - PLAN_EVALUATION
+  - WAITING_USER
+tools: []
+priority: critical
+dependencies: []

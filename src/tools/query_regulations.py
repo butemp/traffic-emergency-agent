@@ -20,6 +20,11 @@ class QueryRegulations(BaseTool):
     根据关键词、事故类型、严重程度等条件查询相关法规和预案。
     """
 
+    @property
+    def name(self) -> str:
+        """工具名称"""
+        return "query_regulations"
+
     def __init__(self, data_path: str = "data/regulations"):
         """
         初始化工具

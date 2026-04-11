@@ -1,0 +1,10 @@
+name: resource_dispatch
+description: 资源调度能力，负责查询内部资源和必要的公开设施补充
+version: "1.0"
+active_phases:
+  - PLAN_GENERATION
+tools:
+  - search_map_resources
+  - search_nearby_pois
+priority: high
+dependencies: []

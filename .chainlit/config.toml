@@ -86,7 +86,7 @@ reaction_on_message_received = false
 
 [UI]
 # Name of the assistant.
-name = "Assistant"
+name = "交通应急指挥助手"
 
 # default_theme = "dark"
 
@@ -94,7 +94,7 @@ name = "Assistant"
 # If not set, the browser's language will be used
 # language = "en-US"
 
-# layout = "wide"
+layout = "wide"
 
 # default_sidebar_state = "open"
 
@@ -106,7 +106,7 @@ cot = "full"
 
 # Specify a CSS file that can be used to customize the user interface.
 # The CSS file can be served from the public directory or via an external link.
-# custom_css = "/public/test.css"
+custom_css = "/public/traffic-agent.css"
 
 # Specify additional attributes for a custom CSS file
 # custom_css_attributes = "media=\"print\""
@@ -116,7 +116,7 @@ cot = "full"
 # custom_js = "/public/test.js"
 
 # The style of alert boxes. Can be "classic" or "modern".
-alert_style = "classic"
+alert_style = "modern"
 
 # Specify additional attributes for custom JS file
 # custom_js_attributes = "async type = \"module\""

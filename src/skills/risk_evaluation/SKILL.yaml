@@ -1,0 +1,9 @@
+name: risk_evaluation
+description: 风险评估能力，负责对候选方案进行多维度评估和回退建议
+version: "1.0"
+active_phases:
+  - PLAN_EVALUATION
+tools:
+  - risk_assessment
+priority: high
+dependencies: []

@@ -1,0 +1,13 @@
+name: master_flow
+description: 主流程编排能力，负责阶段推进、信息完备性检查和最终输出规范
+version: "1.0"
+active_phases:
+  - INTAKE
+  - SITUATIONAL_AWARENESS
+  - PLAN_GENERATION
+  - PLAN_EVALUATION
+  - OUTPUT
+  - WAITING_USER
+tools: []
+priority: critical
+dependencies: []

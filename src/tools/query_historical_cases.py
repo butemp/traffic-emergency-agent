@@ -20,6 +20,11 @@ class QueryHistoricalCases(BaseTool):
     根据事故类型、地点、关键词等条件查询相似的历史处置案例。
     """
 
+    @property
+    def name(self) -> str:
+        """工具名称"""
+        return "query_historical_cases"
+
     def __init__(self, data_path: str = "data/historical_cases"):
         """
         初始化工具

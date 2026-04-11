@@ -10,7 +10,7 @@
 import os
 import sys
 from pathlib import Path
-from typing import Optional
+from typing import Any, Dict, Optional
 
 import chainlit as cl
 from dotenv import load_dotenv
@@ -18,7 +18,7 @@ from dotenv import load_dotenv
 # 添加src目录到路径
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
-from src.agent import Agent, Message
+from src.agent import Agent, Message, TaskPhase
 from src.agent.message import MessageRole
 from src.providers import OpenAIProvider
 from src.tools import (
@@ -192,6 +192,166 @@ def get_agent():
     return cl.user_session.get("agent")
 
 
+def get_active_tool_definitions(agent: Agent):
+    """根据当前阶段获取本轮应暴露给模型的工具定义。"""
+    return [tool.to_openai_format() for tool in agent.get_active_tools()]
+
+
+def get_user_visible_reply(agent: Agent, raw_content: str) -> str:
+    """提取用户可见文本，去掉内部控制块。"""
+    visible = agent.strip_control_block(raw_content)
+    return visible.strip()
+
+
+def format_candidate_plans(agent: Agent) -> str:
+    """将候选方案格式化为便于用户选择的文本。"""
+    if not agent.task_state.candidate_plans:
+        return ""
+
+    lines = ["### 可选方案\n"]
+    for index, plan in enumerate(agent.task_state.candidate_plans, start=1):
+        lines.append(f"**方案 {index}: {plan.title}**")
+        if plan.summary:
+            lines.append(f"- 核心思路: {plan.summary}")
+        if plan.advantages:
+            lines.append(f"- 优势: {'；'.join(plan.advantages)}")
+        if plan.disadvantages:
+            lines.append(f"- 劣势: {'；'.join(plan.disadvantages)}")
+        lines.append("")
+
+    return "\n".join(lines).strip()
+
+
+def format_pending_options(agent: Agent) -> str:
+    """格式化等待用户阶段的推荐回复选项。"""
+    pending = agent.task_state.pending_question
+    if not pending or not pending.suggested_options:
+        return ""
+
+    lines = ["### 建议回复选项\n"]
+    for option in pending.suggested_options:
+        if option:
+            lines.append(f"- {option}")
+    return "\n".join(lines).strip()
+
+
+def build_pending_interaction_props(agent: Agent) -> Optional[Dict[str, Any]]:
+    """根据当前 pending_question 构建卡片组件 props。"""
+    pending = agent.task_state.pending_question
+    if pending is None:
+        return None
+
+    phase = agent.task_state.current_phase.value
+    severity = agent.task_state.incident_info.severity or "unknown"
+    location_text = (
+        agent.task_state.environment_info.formatted_address
+        or agent.task_state.incident_info.location_text
+        or "位置待补充"
+    )
+
+    base_props: Dict[str, Any] = {
+        "phase": phase,
+        "severity": severity,
+        "locationText": location_text,
+        "title": "指挥交互面板",
+        "prompt": pending.question,
+        "reason": pending.reason,
+        "suggestedOptions": pending.suggested_options,
+        "submitted": False,
+    }
+
+    if pending.question_type == "plan_selection":
+        latest_eval = agent.task_state.evaluation_results[-1] if agent.task_state.evaluation_results else None
+        plan_cards = []
+        for index, plan in enumerate(agent.task_state.candidate_plans, start=1):
+            plan_cards.append(
+                {
+                    "planId": plan.plan_id,
+                    "label": f"方案 {index}",
+                    "title": plan.title,
+                    "summary": plan.summary,
+                    "advantages": plan.advantages,
+                    "disadvantages": plan.disadvantages,
+                    "selected": plan.selected,
+                    "userReply": f"方案{index}",
+                }
+            )
+
+        base_props.update(
+            {
+                "variant": "plan_selection",
+                "title": "请选择处置方案",
+                "subtitle": "每张卡片对应一套可执行方案，点击即可继续推进评估。",
+                "plans": plan_cards,
+                "evaluationSummary": {
+                    "score": latest_eval.overall_score if latest_eval else None,
+                    "riskLevel": latest_eval.risk_level if latest_eval else "",
+                },
+            }
+        )
+        return base_props
+
+    if pending.question_type == "confirmation":
+        selected_plan = next((plan for plan in agent.task_state.candidate_plans if plan.selected), None)
+        latest_eval = agent.task_state.evaluation_results[-1] if agent.task_state.evaluation_results else None
+        base_props.update(
+            {
+                "variant": "confirmation",
+                "title": "确认执行方案",
+                "subtitle": "当前方案已经完成评估，请确认是执行还是返回调整。",
+                "selectedPlan": {
+                    "title": selected_plan.title if selected_plan else "当前方案",
+                    "summary": selected_plan.summary if selected_plan else "",
+                },
+                "evaluationSummary": {
+                    "score": latest_eval.overall_score if latest_eval else None,
+                    "riskLevel": latest_eval.risk_level if latest_eval else "",
+                    "suggestions": latest_eval.suggestions if latest_eval else [],
+                },
+                "confirmReply": "确认执行",
+                "reviseReply": "返回调整",
+            }
+        )
+        return base_props
+
+    base_props.update(
+        {
+            "variant": "info_request",
+            "title": "请补充关键信息",
+            "subtitle": "系统需要更多现场信息，才能继续推进资源调度和方案生成。",
+            "expectedFields": pending.expected_fields,
+            "placeholder": "例如：伤员人数、具体路段、涉事车辆数量、是否有危化品等",
+        }
+    )
+    return base_props
+
+
+async def send_pending_interaction_card(agent: Agent) -> bool:
+    """
+    发送等待用户阶段的卡片交互。
+
+    返回：
+    - True: 卡片已发送
+    - False: 回退到纯文本交互
+    """
+    props = build_pending_interaction_props(agent)
+    pending = agent.task_state.pending_question
+
+    if props is None or pending is None:
+        return False
+
+    try:
+        element = cl.CustomElement(name="DecisionCards", props=props, display="inline")
+        await cl.Message(
+            content="",
+            author="系统",
+            elements=[element],
+        ).send()
+        return True
+    except Exception:
+        return False
+
+
 @cl.on_message
 async def on_message(message: cl.Message):
     """处理用户消息"""
@@ -288,9 +448,8 @@ async def on_message(message: cl.Message):
                         f"目前仅支持图片/视频生成caption；如果你要做法规/RAG/风险评估，请直接提问文本问题。",
                 author="系统"
             ).send()
-        # 添加用户消息到历史
-        user_msg = Message(role=MessageRole.USER, content=message.content)
-        agent.state.add_message(user_msg)
+        # 将用户输入同步到会话状态和任务状态
+        agent.start_new_turn(message.content)
 
         # 迭代处理：使用 Chainlit Step 展示思考过程
         iteration = 0
@@ -299,6 +458,7 @@ async def on_message(message: cl.Message):
         # 1. 创建主思考过程 Step
         async with cl.Step(name="Agent 思考中...", type="run") as run_step:
             run_step.input = message.content
+            run_step.output = f"当前阶段: {agent.task_state.current_phase.value}"
             
             # 保存最近一次的响应
             last_response = None
@@ -308,17 +468,25 @@ async def on_message(message: cl.Message):
                 logger.info(f"--- 迭代 {iteration} ---")
 
                 # 获取对话历史和工具定义
-                messages = agent.state.get_history()
-                tool_definitions = [tool.to_openai_format() for tool in agent.tools.values()]
+                messages = agent.get_runtime_messages()
+                tool_definitions = get_active_tool_definitions(agent)
+                active_tool_names = [tool["function"]["name"] for tool in tool_definitions]
 
                 # 2. LLM 决策过程 Step
                 async with cl.Step(name=f"决策 (轮次 {iteration})", type="llm") as decision_step:
+                    decision_step.input = {
+                        "phase": agent.task_state.current_phase.value,
+                        "active_tools": active_tool_names,
+                    }
                     try:
                         import time
                         start_time = time.time()
                         
                         # 异步调用 LLM
-                        response = await cl.make_async(agent.provider.chat)(messages, tools=tool_definitions)
+                        response = await cl.make_async(agent.provider.chat)(
+                            messages,
+                            tools=tool_definitions or None,
+                        )
                         elapsed = time.time() - start_time
                         logger.info(f"LLM响应耗时: {elapsed:.2f}秒")
                         
@@ -347,12 +515,16 @@ async def on_message(message: cl.Message):
                         tool_calls=response.tool_calls
                     )
                     agent.state.add_message(assistant_msg)
+                    agent.task_state.append_message(assistant_msg)
+                    called_tool_names = []
 
                     # 3. 工具执行过程 Step
                     for tool_call in response.tool_calls:
+                        called_tool_names.append(tool_call.name)
                         async with cl.Step(name=f"执行工具: {tool_call.name}", type="tool") as tool_step:
                             # 展示工具参数
                             tool_step.input = tool_call.arguments
+                            tool_args = {}
                             
                             try:
                                 # 执行工具
@@ -374,6 +546,8 @@ async def on_message(message: cl.Message):
                                     tool_call_id=tool_call.id
                                 )
                                 agent.state.add_message(tool_msg)
+                                agent.task_state.append_message(tool_msg)
+                                agent.after_tool_execution(tool_call.name, tool_args, tool_result)
 
                                 # 优化显示逻辑：针对不同工具做特殊处理
                                 if tool_call.name == "query_rag":
@@ -483,18 +657,61 @@ async def on_message(message: cl.Message):
                                     tool_call_id=tool_call.id
                                 )
                                 agent.state.add_message(error_msg)
+                                agent.task_state.append_message(error_msg)
+                                agent.after_tool_execution(
+                                    tool_call.name,
+                                    tool_args,
+                                    result="",
+                                    success=False,
+                                    error_message=str(e),
+                                )
+
+                    analysis_msg = agent.build_post_tool_analysis_message(", ".join(called_tool_names))
+                    agent.state.add_message(analysis_msg)
+                    agent.task_state.append_message(analysis_msg)
+                    run_step.output = f"当前阶段: {agent.task_state.current_phase.value}"
 
                     # 继续下一轮迭代
                     continue
 
                 else:
-                    # 没有工具调用，这是最终回答
-                    final_response = response.content
-                    
-                    # 添加助手消息到历史
-                    assistant_msg = Message(role=MessageRole.ASSISTANT, content=final_response)
+                    raw_response = response.content or ""
+                    visible_response = get_user_visible_reply(agent, raw_response)
+                    control = agent.parse_assistant_control(raw_response)
+                    agent.apply_assistant_control(control)
+
+                    assistant_msg = Message(role=MessageRole.ASSISTANT, content=visible_response)
                     agent.state.add_message(assistant_msg)
-                    
+                    agent.task_state.append_message(assistant_msg)
+
+                    if control.needs_user_input:
+                        user_prompt = control.user_prompt or visible_response or "请补充必要信息。"
+                        run_step.output = f"⏸️ 等待用户输入（阶段: {agent.task_state.current_phase.value}）"
+                        card_sent = await send_pending_interaction_card(agent)
+                        if not card_sent:
+                            plan_text = format_candidate_plans(agent)
+                            options_text = format_pending_options(agent)
+                            if plan_text:
+                                await cl.Message(content=plan_text).send()
+                            if options_text:
+                                await cl.Message(content=options_text).send()
+                            await cl.Message(content=user_prompt).send()
+                        agent.state.save()
+                        return
+
+                    if control.final_output or agent.task_state.current_phase == TaskPhase.OUTPUT_COMPLETE:
+                        final_response = visible_response
+                        run_step.output = "✅ 思考完成，生成最终方案。"
+                        break
+
+                    if control.next_phase is not None:
+                        run_step.output = (
+                            f"阶段推进: {control.phase_reason or '根据模型控制信息继续推进'}\n"
+                            f"当前阶段: {agent.task_state.current_phase.value}"
+                        )
+                        continue
+
+                    final_response = visible_response
                     run_step.output = "✅ 思考完成，生成回答。"
                     break
 
@@ -517,6 +734,7 @@ async def on_message(message: cl.Message):
                         # 添加到历史
                         assistant_msg = Message(role=MessageRole.ASSISTANT, content=final_response)
                         agent.state.add_message(assistant_msg)
+                        agent.task_state.append_message(assistant_msg)
                         
                     except Exception as e:
                         final_step.output = f"❌ 生成失败: {e}"

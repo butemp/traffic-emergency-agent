@@ -1,0 +1,16 @@
+name: situational_awareness
+description: 态势感知能力，负责补全位置、天气、路况和现场媒体信息
+version: "1.0"
+active_phases:
+  - INTAKE
+  - SITUATIONAL_AWARENESS
+  - PLAN_GENERATION
+tools:
+  - geocode_address
+  - reverse_geocode
+  - check_traffic_status
+  - get_weather_by_location
+  - media_caption
+  - search_nearby_pois
+priority: high
+dependencies: []
