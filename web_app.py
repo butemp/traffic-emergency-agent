@@ -14,6 +14,7 @@ from typing import Any, Dict, Optional
 
 import chainlit as cl
 from dotenv import load_dotenv
+from chainlit.input_widget import TextInput
 
 # 添加src目录到路径
 sys.path.insert(0, str(Path(__file__).parent / "src"))
@@ -39,6 +40,129 @@ from src.rag import QueryRAG, RAGConfig, BALANCED_RAG_CONFIG
 # 加载环境变量
 load_dotenv()
 
+SESSION_RUNTIME_CONFIG_KEY = "runtime_model_config"
+SETTING_OPENAI_API_KEY = "OPENAI_API_KEY"
+SETTING_OPENAI_MODEL = "OPENAI_MODEL"
+SETTING_OPENAI_BASE_URL = "OPENAI_BASE_URL"
+
+
+def default_runtime_config() -> Dict[str, str]:
+    """返回当前会话的默认模型配置。"""
+    return {
+        SETTING_OPENAI_API_KEY: (
+            os.getenv("OPENAI_API_KEY")
+            or os.getenv("DASHSCOPE_API_KEY")
+            or ""
+        ),
+        SETTING_OPENAI_MODEL: os.getenv("OPENAI_MODEL", "qwen-plus"),
+        SETTING_OPENAI_BASE_URL: os.getenv("OPENAI_BASE_URL", ""),
+    }
+
+
+def normalize_runtime_config(raw_config: Optional[Dict[str, Any]]) -> Dict[str, str]:
+    """对前端提交的模型配置做归一化处理。"""
+    defaults = default_runtime_config()
+    raw_config = raw_config or {}
+
+    api_key = str(raw_config.get(SETTING_OPENAI_API_KEY, defaults[SETTING_OPENAI_API_KEY]) or "").strip()
+    model = str(raw_config.get(SETTING_OPENAI_MODEL, defaults[SETTING_OPENAI_MODEL]) or "").strip()
+    base_url = str(raw_config.get(SETTING_OPENAI_BASE_URL, defaults[SETTING_OPENAI_BASE_URL]) or "").strip()
+
+    return {
+        SETTING_OPENAI_API_KEY: api_key,
+        SETTING_OPENAI_MODEL: model or defaults[SETTING_OPENAI_MODEL],
+        SETTING_OPENAI_BASE_URL: base_url,
+    }
+
+
+def get_runtime_config() -> Dict[str, str]:
+    """获取当前会话生效的模型配置。"""
+    stored_config = cl.user_session.get(SESSION_RUNTIME_CONFIG_KEY)
+    config = normalize_runtime_config(stored_config)
+    cl.user_session.set(SESSION_RUNTIME_CONFIG_KEY, config)
+    return config
+
+
+def build_provider_bundle(runtime_config: Dict[str, str]) -> Dict[str, OpenAIProvider]:
+    """根据当前会话配置构建聊天、评估和多模态 provider。"""
+    api_key = runtime_config.get(SETTING_OPENAI_API_KEY, "")
+    if not api_key:
+        raise ValueError("请在前端设置中填写 OPENAI_API_KEY，或在 .env 中配置可用的 API Key。")
+
+    base_url = runtime_config.get(SETTING_OPENAI_BASE_URL, "") or None
+    chat_model = runtime_config.get(SETTING_OPENAI_MODEL, "") or os.getenv("OPENAI_MODEL", "qwen-plus")
+    caption_model = os.getenv("CAPTION_MODEL") or chat_model
+    evaluation_model = os.getenv("EVAL_MODEL") or chat_model
+
+    return {
+        "chat": OpenAIProvider(
+            api_key=api_key,
+            base_url=base_url,
+            model=chat_model,
+            provider="auto",
+        ),
+        "caption": OpenAIProvider(
+            api_key=api_key,
+            base_url=base_url,
+            model=caption_model,
+            provider="auto",
+        ),
+        "evaluation": OpenAIProvider(
+            api_key=api_key,
+            base_url=base_url,
+            model=evaluation_model,
+            provider="auto",
+        ),
+    }
+
+
+def apply_runtime_config_to_agent(agent: Agent, runtime_config: Dict[str, str]) -> None:
+    """将前端配置应用到当前会话中的 Agent 和相关工具。"""
+    providers = build_provider_bundle(runtime_config)
+    agent.provider = providers["chat"]
+
+    for tool in agent.tools.values():
+        if isinstance(tool, MediaCaption):
+            tool.provider = providers["caption"]
+            tool.model = providers["caption"].model
+        elif isinstance(tool, RiskAssessment):
+            tool.provider = providers["evaluation"]
+
+
+async def send_runtime_settings_panel() -> Dict[str, str]:
+    """发送前端可编辑的模型设置面板。"""
+    current = get_runtime_config()
+
+    settings = await cl.ChatSettings(
+        [
+            TextInput(
+                id=SETTING_OPENAI_API_KEY,
+                label="OPENAI_API_KEY",
+                initial=current[SETTING_OPENAI_API_KEY],
+                placeholder="sk-...",
+                description="当前会话使用的 API Key。仅保存在本次 Web 会话中，不会回写到 .env。",
+            ),
+            TextInput(
+                id=SETTING_OPENAI_MODEL,
+                label="OPENAI_MODEL",
+                initial=current[SETTING_OPENAI_MODEL],
+                placeholder="gpt-4o-mini",
+                description="主对话模型名称。填写任意支持 OpenAI SDK 风格接口的模型名。",
+            ),
+            TextInput(
+                id=SETTING_OPENAI_BASE_URL,
+                label="OPENAI_BASE_URL",
+                initial=current[SETTING_OPENAI_BASE_URL],
+                placeholder="https://api.openai.com/v1",
+                description="可选。接 OpenAI 官方时可留空；接第三方 OpenAI-compatible 服务时填写其 Base URL。",
+            ),
+        ]
+    ).send()
+
+    normalized = normalize_runtime_config(settings)
+    cl.user_session.set(SESSION_RUNTIME_CONFIG_KEY, normalized)
+    return normalized
+
 # ===== 配置 =====
 # 设置页面信息
 @cl.on_chat_start
@@ -48,7 +172,10 @@ async def on_chat_start():
     if cl.user_session.get("welcome_shown"):
         return
 
+    runtime_config = await send_runtime_settings_panel()
+
     # 设置页面标题和描述
+    base_url_text = runtime_config[SETTING_OPENAI_BASE_URL] or "OpenAI 默认地址"
     await cl.Message(
         content="🚗 **欢迎使用交通应急指挥助手**\n\n"
         "我可以帮助你：\n"
@@ -59,7 +186,10 @@ async def on_chat_start():
         "- 🗺️ **地理信息查询**（地址转坐标、周边设施）\n"
         "- 🚦 **实时交通状况**（拥堵情况查询）\n"
         "- 🌤️ **天气查询**（实时天气和预报）\n\n"
-        "请输入你的问题，我会为你提供专业的建议。",
+        "当前会话模型配置：\n"
+        f"- `OPENAI_MODEL`: `{runtime_config[SETTING_OPENAI_MODEL]}`\n"
+        f"- `OPENAI_BASE_URL`: `{base_url_text}`\n\n"
+        "如需切换模型或接入其他 OpenAI-compatible 服务，请点击输入框旁的设置按钮修改以上三项。",
         author="系统"
     ).send()
 
@@ -70,32 +200,28 @@ async def on_chat_start():
     cl.user_session.set("agent_initialized", False)
 
 
-def create_agent():
+def create_agent(runtime_config: Optional[Dict[str, str]] = None):
     """创建Agent实例"""
     import logging
     logger = logging.getLogger(__name__)
 
-    # 从环境变量获取API Key
-    api_key = os.getenv("DASHSCOPE_API_KEY") or os.getenv("OPENAI_API_KEY")
-
+    runtime_config = normalize_runtime_config(runtime_config or get_runtime_config())
+    providers = build_provider_bundle(runtime_config)
     # 设置高德API Key（如果环境变量中有配置）
     gaode_key = os.getenv("GAODE_API_KEY")
     if gaode_key:
         GaodeConfig.set_api_key(gaode_key)
         logger.info(f"高德API Key已配置: {gaode_key[:10]}...")
 
-    # 创建Provider
-    provider = OpenAIProvider(
-        api_key=api_key,
-        model=os.getenv("OPENAI_MODEL", "qwen-plus"),
-        provider="auto"
-    )
+    provider = providers["chat"]
+    caption_provider = providers["caption"]
+    evaluation_provider = providers["evaluation"]
+    base_url = runtime_config[SETTING_OPENAI_BASE_URL] or "default"
 
-    # caption 专用 provider：qwen-vl-plus
-    caption_provider = OpenAIProvider(
-        api_key=api_key,
-        model=os.getenv("CAPTION_MODEL", "qwen-vl-plus"),
-        provider="auto"
+    logger.info(
+        "当前会话模型配置: model=%s, base_url=%s",
+        runtime_config[SETTING_OPENAI_MODEL],
+        base_url,
     )
 
     # 创建工具列表
@@ -122,13 +248,19 @@ def create_agent():
 
     # RiskAssessment 工具
     try:
-        tools.append(RiskAssessment(timeout=30))
+        tools.append(RiskAssessment(provider=evaluation_provider, timeout=30))
         logger.info("RiskAssessment 工具加载成功")
     except Exception as e:
         logger.warning(f"RiskAssessment 工具加载失败: {e}")
 
     try:
-        tools.append(MediaCaption(provider=caption_provider, timeout=60))
+        tools.append(
+            MediaCaption(
+                provider=caption_provider,
+                timeout=60,
+                model=caption_provider.model,
+            )
+        )
         logger.info("MediaCaption 工具加载成功")
     except Exception as e:
         logger.warning(f"MediaCaption 工具加载失败: {e}")
@@ -185,11 +317,45 @@ def create_agent():
 def get_agent():
     """获取当前会话的Agent"""
     if not cl.user_session.get("agent_initialized"):
-        agent = create_agent()
+        agent = create_agent(get_runtime_config())
         cl.user_session.set("agent", agent)
         cl.user_session.set("agent_initialized", True)
         return agent
     return cl.user_session.get("agent")
+
+
+@cl.on_settings_update
+async def on_settings_update(settings: Dict[str, Any]):
+    """处理前端模型设置更新，并立即作用到当前会话。"""
+    runtime_config = normalize_runtime_config(settings)
+    cl.user_session.set(SESSION_RUNTIME_CONFIG_KEY, runtime_config)
+
+    existing_agent = cl.user_session.get("agent")
+    try:
+        if existing_agent is not None:
+            apply_runtime_config_to_agent(existing_agent, runtime_config)
+            cl.user_session.set("agent", existing_agent)
+            cl.user_session.set("agent_initialized", True)
+        else:
+            cl.user_session.set("agent_initialized", False)
+    except Exception as exc:
+        cl.user_session.set("agent_initialized", False)
+        await cl.Message(
+            content=f"模型配置更新失败：{exc}",
+            author="系统",
+        ).send()
+        return
+
+    base_url_text = runtime_config[SETTING_OPENAI_BASE_URL] or "OpenAI 默认地址"
+    await cl.Message(
+        content=(
+            "已更新当前会话模型配置：\n"
+            f"- `OPENAI_MODEL`: `{runtime_config[SETTING_OPENAI_MODEL]}`\n"
+            f"- `OPENAI_BASE_URL`: `{base_url_text}`\n"
+            "下一条消息将按新配置执行。"
+        ),
+        author="系统",
+    ).send()
 
 
 def get_active_tool_definitions(agent: Agent):
