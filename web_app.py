@@ -25,6 +25,8 @@ from src.providers import OpenAIProvider
 from src.tools import (
     QueryRegulations,
     QueryHistoricalCases,
+    GetEmergencyPlan,
+    EvaluateIncidentSeverity,
     RiskAssessment,
     MediaCaption,
     SearchEmergencyResources,
@@ -38,6 +40,7 @@ from src.tools import (
     GaodeConfig
 )
 from src.rag import QueryRAG, RAGConfig, BALANCED_RAG_CONFIG
+from src.emergency_plans import EmergencyPlanService
 from src.resource_dispatch import ResourceDispatchEngine
 
 # 加载环境变量
@@ -128,6 +131,10 @@ def apply_runtime_config_to_agent(agent: Agent, runtime_config: Dict[str, str]) 
         if isinstance(tool, MediaCaption):
             tool.provider = providers["caption"]
             tool.model = providers["caption"].model
+        elif isinstance(tool, EvaluateIncidentSeverity):
+            tool.provider = providers["evaluation"]
+            tool.model = providers["evaluation"].model
+            tool.evaluator.provider = providers["evaluation"]
         elif isinstance(tool, RiskAssessment):
             tool.provider = providers["evaluation"]
 
@@ -230,11 +237,18 @@ def create_agent(runtime_config: Optional[Dict[str, str]] = None):
     # 创建工具列表
     tools = []
     dispatch_engine = None
+    plan_service = None
     try:
         dispatch_engine = ResourceDispatchEngine()
         logger.info("ResourceDispatchEngine 初始化成功")
     except Exception as e:
         logger.warning(f"ResourceDispatchEngine 初始化失败: {e}")
+
+    try:
+        plan_service = EmergencyPlanService(data_dir="data/regulations/data")
+        logger.info("EmergencyPlanService 初始化成功")
+    except Exception as e:
+        logger.warning(f"EmergencyPlanService 初始化失败: {e}")
 
     # 添加基础工具
     try:
@@ -254,6 +268,24 @@ def create_agent(runtime_config: Optional[Dict[str, str]] = None):
         logger.info("QueryRAG 工具加载成功")
     except Exception as e:
         logger.warning(f"QueryRAG 工具加载失败: {e}")
+
+    if plan_service is not None:
+        try:
+            tools.append(GetEmergencyPlan(plan_service=plan_service))
+            logger.info("GetEmergencyPlan 工具加载成功")
+        except Exception as e:
+            logger.warning(f"GetEmergencyPlan 工具加载失败: {e}")
+
+        try:
+            tools.append(
+                EvaluateIncidentSeverity(
+                    provider=evaluation_provider,
+                    plan_service=plan_service,
+                )
+            )
+            logger.info("EvaluateIncidentSeverity 工具加载成功")
+        except Exception as e:
+            logger.warning(f"EvaluateIncidentSeverity 工具加载失败: {e}")
 
     # RiskAssessment 工具
     try:
@@ -389,6 +421,96 @@ def get_user_visible_reply(agent: Agent, raw_content: str) -> str:
     """提取用户可见文本，去掉内部控制块。"""
     visible = agent.strip_control_block(raw_content)
     return visible.strip()
+
+
+def agent_has_tool(agent: Agent, tool_name: str) -> bool:
+    """判断当前 Agent 是否注册了指定工具。"""
+    return tool_name in agent.tools
+
+
+def looks_like_progress_only_response(text: str) -> bool:
+    """识别没有真正完成任务、只是在占位或虚构执行的回复。"""
+    if not text:
+        return False
+
+    waiting_markers = (
+        "请稍候",
+        "请稍等",
+        "稍后给出",
+        "正在生成",
+        "正在处理",
+        "正在重新搜索",
+        "系统正在生成",
+    )
+    execution_claim_markers = (
+        "已执行的行动",
+        "已通知",
+        "已下达指令",
+        "已启动应急响应",
+    )
+
+    if any(marker in text for marker in waiting_markers):
+        return True
+
+    if any(marker in text for marker in execution_claim_markers):
+        return True
+
+    return False
+
+
+def build_intake_retry_prompt(agent: Agent) -> str:
+    """当 INTAKE 未完成时，强制模型回到补问或更新逻辑。"""
+    missing = agent.task_state.incident_info.missing_required_fields()
+    missing_text = "、".join(missing) if missing else "无"
+    return (
+        "【系统纠正】当前仍处于 INTAKE 阶段，关键信息尚未完整。"
+        f"缺失字段：{missing_text}。\n"
+        "不要编造已经执行的现实动作，也不要用“请稍候/正在生成”结束本轮。\n"
+        "请执行以下二选一：\n"
+        "1. 如果信息仍不足，请直接向用户补问，最多 2 个问题，说明原因和期望格式，并在末尾附上 agent_control；\n"
+        "2. 如果你能从上下文可靠补全缺失信息，请在 agent_control 的 incident_updates 中补全后继续推进。"
+    )
+
+
+def build_severity_retry_prompt(agent: Agent) -> str:
+    """当 INTAKE 信息齐全但尚未完成预案定级时，强制模型先定级。"""
+    incident = agent.task_state.incident_info
+    summary = (
+        f"事故类型={incident.incident_type or '未知'}；"
+        f"位置={incident.location_text or agent.task_state.environment_info.formatted_address or '未知'}；"
+        f"伤亡={incident.casualty_status or incident.casualties or '未知'}；"
+        f"现场状态={incident.scene_status or '未知'}"
+    )
+    return (
+        "【系统纠正】当前 4 项关键信息已经齐全，但 response_level 仍未判定。\n"
+        f"当前摘要：{summary}\n"
+        "请优先调用 evaluate_incident_severity 完成预案定级，不要直接跳到方案生成，也不要用普通说明语带过。\n"
+        "定级完成后，再根据结果决定是继续补问还是进入 SITUATIONAL_AWARENESS。"
+    )
+
+
+def build_phase_transition_retry_prompt(agent: Agent) -> str:
+    """当 INTAKE 已完成定级但模型未继续推进时，提醒其明确切换阶段。"""
+    incident = agent.task_state.incident_info
+    return (
+        "【系统纠正】当前 INTAKE 已完成必要信息收集和预案定级，"
+        f"response_level={incident.response_level or '待确认'}。\n"
+        "请不要停留在概述性说明上。请执行以下二选一：\n"
+        "1. 如果仍有真正影响后续处置的缺口信息，请补问，并附上 agent_control；\n"
+        "2. 如果信息已足够，请明确切换到 SITUATIONAL_AWARENESS，并继续调用环境补全工具。"
+    )
+
+
+def build_no_placeholder_prompt() -> str:
+    """提醒模型不要用占位语或虚构执行动作结束。"""
+    return (
+        "【系统纠正】不要输出“请稍候/正在生成/已通知出发/已下达指令”之类的占位语或执行口吻。\n"
+        "你不能宣称已经通知队伍、启动真实行动或下达现实指令。\n"
+        "请立即继续完成真正的下一步：\n"
+        "- 需要信息就补问，并附上 agent_control；\n"
+        "- 信息足够就调用工具；\n"
+        "- 已完成就给出明确方案和 agent_control。"
+    )
 
 
 def format_candidate_plans(agent: Agent) -> str:
@@ -743,6 +865,35 @@ async def on_message(message: cl.Message):
                                     tool_step.elements = [
                                         cl.Text(name="RAG 检索结果", content=tool_result, language="markdown")
                                     ]
+                                elif tool_call.name == "evaluate_incident_severity":
+                                    try:
+                                        res_json = json.loads(tool_result)
+                                        tool_step.output = (
+                                            "📏 已完成预案定级："
+                                            f"{res_json.get('response_level', '待确认')} | "
+                                            f"场景={res_json.get('incident_category', '未知')} | "
+                                            f"灾害={res_json.get('disaster_type', '无') or '无'}"
+                                        )
+                                        tool_step.elements = [
+                                            cl.Text(name="定级结果", content=tool_result, language="json")
+                                        ]
+                                    except Exception:
+                                        tool_step.output = tool_result
+                                elif tool_call.name == "get_emergency_plan":
+                                    try:
+                                        res_json = json.loads(tool_result)
+                                        supplementary = res_json.get("supplementary_plan")
+                                        extra_note = " + 补充预案" if supplementary else ""
+                                        tool_step.output = (
+                                            f"📘 已获取预案模块：{res_json.get('plan_name', '未知预案')}{extra_note}\n"
+                                            f"模块：{res_json.get('module', '未知')} | "
+                                            f"级别：{res_json.get('level', '未指定') or '未指定'}"
+                                        )
+                                        tool_step.elements = [
+                                            cl.Text(name="预案内容", content=tool_result, language="json")
+                                        ]
+                                    except Exception:
+                                        tool_step.output = tool_result
                                 elif tool_call.name == "search_emergency_resources":
                                     try:
                                         res_json = json.loads(tool_result)
@@ -906,6 +1057,68 @@ async def on_message(message: cl.Message):
                     visible_response = get_user_visible_reply(agent, raw_response)
                     control = agent.parse_assistant_control(raw_response)
                     agent.apply_assistant_control(control)
+
+                    if (
+                        agent.task_state.current_phase == TaskPhase.INTAKE
+                        and not agent.task_state.intake_is_complete()
+                        and not control.needs_user_input
+                        and not control.final_output
+                    ):
+                        reminder = Message(
+                            role=MessageRole.SYSTEM,
+                            content=build_intake_retry_prompt(agent),
+                        )
+                        agent.state.add_message(reminder)
+                        agent.task_state.append_message(reminder)
+                        run_step.output = "🔁 Intake 信息未完整，要求模型继续补问或补全结构化字段。"
+                        continue
+
+                    if (
+                        agent.task_state.current_phase == TaskPhase.INTAKE
+                        and agent.task_state.intake_is_complete()
+                        and not agent.task_state.incident_info.response_level
+                        and agent_has_tool(agent, "evaluate_incident_severity")
+                        and not control.needs_user_input
+                        and not control.final_output
+                    ):
+                        reminder = Message(
+                            role=MessageRole.SYSTEM,
+                            content=build_severity_retry_prompt(agent),
+                        )
+                        agent.state.add_message(reminder)
+                        agent.task_state.append_message(reminder)
+                        run_step.output = "🔁 Intake 信息已齐全，要求模型先完成预案定级。"
+                        continue
+
+                    if (
+                        agent.task_state.current_phase == TaskPhase.INTAKE
+                        and agent.task_state.intake_ready_to_advance()
+                        and not control.needs_user_input
+                        and not control.final_output
+                        and control.next_phase is None
+                    ):
+                        reminder = Message(
+                            role=MessageRole.SYSTEM,
+                            content=build_phase_transition_retry_prompt(agent),
+                        )
+                        agent.state.add_message(reminder)
+                        agent.task_state.append_message(reminder)
+                        run_step.output = "🔁 Intake 已完成，要求模型明确进入下一阶段。"
+                        continue
+
+                    if (
+                        looks_like_progress_only_response(visible_response)
+                        and not control.needs_user_input
+                        and not control.final_output
+                    ):
+                        reminder = Message(
+                            role=MessageRole.SYSTEM,
+                            content=build_no_placeholder_prompt(),
+                        )
+                        agent.state.add_message(reminder)
+                        agent.task_state.append_message(reminder)
+                        run_step.output = "🔁 检测到占位式回复，要求模型继续执行真实下一步。"
+                        continue
 
                     assistant_msg = Message(role=MessageRole.ASSISTANT, content=visible_response)
                     agent.state.add_message(assistant_msg)

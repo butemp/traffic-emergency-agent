@@ -38,6 +38,12 @@ class IncidentInfo:
 
     incident_type: str = ""
     severity: str = ""
+    incident_category: str = ""
+    disaster_type: str = ""
+    scene_type: str = ""
+    response_level: str = ""
+    response_level_reason: str = ""
+    response_level_confidence: Optional[float] = None
     location_text: str = ""
     location_coords: Optional[Dict[str, float]] = None
     time_text: str = ""
@@ -277,6 +283,12 @@ class TaskState:
         direct_fields = {
             "incident_type",
             "severity",
+            "incident_category",
+            "disaster_type",
+            "scene_type",
+            "response_level",
+            "response_level_reason",
+            "response_level_confidence",
             "location_text",
             "time_text",
             "casualty_status",
@@ -326,6 +338,10 @@ class TaskState:
         """判断灾情接收阶段的最小信息是否已经齐备。"""
         return self.incident_info.is_complete()
 
+    def intake_ready_to_advance(self) -> bool:
+        """判断 INTAKE 是否已完成到可以进入下一阶段。"""
+        return self.intake_is_complete() and bool(self.incident_info.response_level)
+
     def build_context_summary(self) -> str:
         """
         生成简洁的任务上下文摘要。
@@ -336,11 +352,17 @@ class TaskState:
         pending_question = self.pending_question.question if self.pending_question else "无"
         candidate_plan_titles = [plan.title for plan in self.candidate_plans[:3]]
         selected_plan = next((plan.title for plan in self.candidate_plans if plan.selected), "无")
+        plan_titles = [ref.title for ref in self.knowledge_refs if ref.source_type == "emergency_plan"][:3]
 
         return (
             f"当前阶段: {self.current_phase.value}\n"
             f"事件类型: {self.incident_info.incident_type or '未知'}\n"
             f"严重程度: {self.incident_info.severity or '未知'}\n"
+            f"场景类别: {self.incident_info.incident_category or '未知'}\n"
+            f"灾害类别: {self.incident_info.disaster_type or '无'}\n"
+            f"分场景类型: {self.incident_info.scene_type or '未知'}\n"
+            f"响应级别: {self.incident_info.response_level or '待确认'}\n"
+            f"定级置信度: {self.incident_info.response_level_confidence if self.incident_info.response_level_confidence is not None else '未知'}\n"
             f"位置描述: {self.incident_info.location_text or '未知'}\n"
             f"坐标: {self.incident_info.location_coords or '未知'}\n"
             f"伤亡情况: {self.incident_info.casualty_status or self.incident_info.casualties or '未知'}\n"
@@ -348,6 +370,7 @@ class TaskState:
             f"缺失字段: {missing_fields or '无'}\n"
             f"已检索资源数: {len(self.available_resources)}\n"
             f"已记录知识引用数: {len(self.knowledge_refs)}\n"
+            f"已记录预案引用: {plan_titles or '无'}\n"
             f"候选方案数: {len(self.candidate_plans)}\n"
             f"候选方案标题: {candidate_plan_titles or '无'}\n"
             f"当前选中方案: {selected_plan}\n"

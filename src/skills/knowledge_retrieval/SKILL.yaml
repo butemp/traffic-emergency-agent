@@ -1,9 +1,12 @@
 name: knowledge_retrieval
 description: 知识检索能力，负责查询法规、预案、技术指南和历史案例
-version: "1.0"
+version: "2.0"
 active_phases:
+  - INTAKE
   - PLAN_GENERATION
 tools:
+  - evaluate_incident_severity
+  - get_emergency_plan
   - query_rag
   - query_historical_cases
 priority: high

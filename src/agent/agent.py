@@ -21,6 +21,7 @@ from .task_state import (
     TaskPhase,
     TaskState,
 )
+from ..emergency_plans import EmergencyPlanService
 from ..providers import OpenAIProvider
 from ..tools import BaseTool
 
@@ -58,22 +59,27 @@ class Agent:
 - 你只能使用“当前可用工具”部分列出的工具
 - 可以在同一轮中调用多个当前阶段需要的工具，但不要无意义地滥用工具
 - 所有事实判断必须优先基于工具结果，不要编造现场信息
+- 你不能宣称自己已经通知队伍、下达指令、启动真实救援或完成现实世界动作
+- 在没有真实执行工具支持的情况下，只能使用“建议、拟派、推荐、可调度、应当”等表述
 - 如关键信息缺失，应主动向用户补问，而不是假设
 - 如存在多个明显可行方案，应给用户清晰对比并请求选择
 - 对于高风险或 critical 场景，可以先给默认方案，再征求确认
 
 资源与知识规则：
-- 法规、预案、技术指南优先使用 query_rag
+- 事件定级优先使用 evaluate_incident_severity
+- 预案模块精确取用优先使用 get_emergency_plan
+- 技术规范和补充法规使用 query_rag
 - 历史经验补充使用 query_historical_cases
- - 内部资源调度优先使用 search_emergency_resources
- - 候选资源齐备后使用 optimize_dispatch_plan 生成分梯队调度方案
- - 公开设施仅在内部资源不足时使用 search_nearby_pois
+- 内部资源调度优先使用 search_emergency_resources
+- 候选资源齐备后使用 optimize_dispatch_plan 生成分梯队调度方案
+- 公开设施仅在内部资源不足时使用 search_nearby_pois
 - 风险评估阶段应调用 risk_assessment
 
 输出要求：
 - 调用工具前，说明你为什么需要该工具
 - 工具返回后，先分析再决策下一步
 - 如果进入最终输出阶段，方案应包含事件概述、处置步骤、资源调度、风险提示和依据引用
+- 预案相关结论应尽量标注模块依据，例如“组织指挥体系”“应急响应措施”
 - 如果不是最终输出，而是阶段推进、补问或确认，必须简洁明确
 """
 
@@ -162,7 +168,7 @@ class Agent:
 
         self._infer_incident_info_from_text(user_message)
 
-        if self.task_state.current_phase == TaskPhase.INTAKE and self.task_state.intake_is_complete():
+        if self.task_state.current_phase == TaskPhase.INTAKE and self.task_state.intake_ready_to_advance():
             self.task_state.transition_to(TaskPhase.SITUATIONAL_AWARENESS)
 
     def _infer_incident_info_from_text(self, user_message: str) -> None:
@@ -227,6 +233,8 @@ class Agent:
         elif not self.task_state.incident_info.casualty_status:
             if any(keyword in user_message for keyword in ("暂无伤亡", "无人员伤亡", "无人伤亡")):
                 self.task_state.incident_info.casualty_status = "暂无伤亡"
+            elif any(keyword in user_message for keyword in ("无新增伤亡", "暂无新增伤亡", "无新增伤亡信息")):
+                self.task_state.incident_info.casualty_status = "无新增伤亡信息"
             elif any(keyword in user_message for keyword in ("被困", "困于车内")):
                 self.task_state.incident_info.casualty_status = "有人被困"
             elif any(keyword in user_message for keyword in ("受伤", "伤员")):
@@ -253,6 +261,29 @@ class Agent:
                 if keyword in user_message:
                     self.task_state.incident_info.scene_status = scene_status
                     break
+
+        if not self.task_state.incident_info.incident_category:
+            self.task_state.incident_info.incident_category = EmergencyPlanService.infer_incident_category(
+                text=user_message,
+                location_text=self.task_state.incident_info.location_text,
+                incident_type=self.task_state.incident_info.incident_type,
+            )
+
+        if not self.task_state.incident_info.disaster_type:
+            self.task_state.incident_info.disaster_type = EmergencyPlanService.infer_disaster_type(
+                text=user_message,
+                incident_type=self.task_state.incident_info.incident_type,
+                scene_status=self.task_state.incident_info.scene_status,
+            )
+
+        if not self.task_state.incident_info.scene_type:
+            self.task_state.incident_info.scene_type = EmergencyPlanService.infer_scene_type(
+                incident_category=self.task_state.incident_info.incident_category,
+                incident_type=self.task_state.incident_info.incident_type,
+                disaster_type=self.task_state.incident_info.disaster_type,
+                scene_status=self.task_state.incident_info.scene_status,
+                raw_text=user_message,
+            )
 
     def _apply_waiting_user_reply(self, user_message: str) -> None:
         """处理用户对 WAITING_USER 阶段的回复。"""
@@ -482,6 +513,66 @@ class Agent:
             if resources:
                 self.task_state.available_resources = resources
 
+        elif tool_name == "evaluate_incident_severity" and result.get("status") == "success":
+            self.task_state.apply_incident_updates(
+                {
+                    "incident_category": result.get("incident_category", ""),
+                    "disaster_type": result.get("disaster_type", ""),
+                    "scene_type": result.get("scene_type", ""),
+                    "response_level": result.get("response_level", ""),
+                    "response_level_reason": result.get("reasoning", ""),
+                    "response_level_confidence": result.get("confidence"),
+                }
+            )
+            plan_reference = result.get("plan_reference", {}) or {}
+            if plan_reference.get("plan_name"):
+                self.task_state.add_knowledge_reference(
+                    KnowledgeReference(
+                        source_type="emergency_plan",
+                        title=plan_reference.get("plan_name", ""),
+                        excerpt=result.get("reasoning", ""),
+                        source_path=plan_reference.get("source_section", ""),
+                        metadata={
+                            "module": "grading_criteria",
+                            "incident_category": result.get("incident_category", ""),
+                            "disaster_type": result.get("disaster_type", ""),
+                            "response_level": result.get("response_level", ""),
+                        },
+                    )
+                )
+
+        elif tool_name == "get_emergency_plan" and result.get("status") == "success":
+            self.task_state.add_knowledge_reference(
+                KnowledgeReference(
+                    source_type="emergency_plan",
+                    title=result.get("plan_name", ""),
+                    excerpt=result.get("content", ""),
+                    source_path=result.get("source_reference", ""),
+                    metadata={
+                        "module": result.get("module", ""),
+                        "level": result.get("level", ""),
+                        "scene_type": result.get("scene_type", ""),
+                        "fallback_used": result.get("fallback_used", False),
+                    },
+                )
+            )
+            supplementary_plan = result.get("supplementary_plan") or {}
+            if supplementary_plan:
+                self.task_state.add_knowledge_reference(
+                    KnowledgeReference(
+                        source_type="emergency_plan",
+                        title=supplementary_plan.get("plan_name", ""),
+                        excerpt=supplementary_plan.get("content", ""),
+                        source_path=supplementary_plan.get("source_reference", ""),
+                        metadata={
+                            "module": result.get("module", ""),
+                            "level": result.get("level", ""),
+                            "scene_type": result.get("scene_type", ""),
+                            "role": "supplementary_plan",
+                        },
+                    )
+                )
+
         elif tool_name == "search_emergency_resources" and result.get("status") == "success":
             candidates = result.get("candidates", {})
             warehouses = candidates.get("warehouses", [])
@@ -540,6 +631,7 @@ class Agent:
             "media_caption",
         }
         planning_tools = {
+            "get_emergency_plan",
             "query_rag",
             "query_historical_cases",
             "search_emergency_resources",

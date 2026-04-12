@@ -1,0 +1,60 @@
+{
+  "scene_plans": {
+    "EXPRESSWAY": {
+      "plan_file": "plan_2.json",
+      "plan_name": "广西高速公路突发事件应急预案",
+      "description": "高速公路及其支线、连接线上的突发事件专项预案"
+    },
+    "HIGHWAY": {
+      "plan_file": "plan_4.json",
+      "plan_name": "广西壮族自治区公路交通突发事件应急预案",
+      "description": "普通公路及其桥梁、隧道等设施上的突发事件专项预案"
+    },
+    "ROAD_TRANSPORT": {
+      "plan_file": "plan_1.json",
+      "plan_name": "广西壮族自治区交通运输综合应急预案",
+      "description": "当前仓库中暂无道路运输专项预案，先回退到综合预案"
+    },
+    "PORT": {
+      "plan_file": "plan_5.json",
+      "plan_name": "广西壮族自治区港口突发事件应急预案",
+      "description": "港口、码头、仓储场所等港口突发事件专项预案"
+    },
+    "WATERWAY": {
+      "plan_file": "plan_1.json",
+      "plan_name": "广西壮族自治区交通运输综合应急预案",
+      "description": "当前仓库中暂无航道专项预案，先回退到综合预案"
+    },
+    "WATERWAY_XIJIANG": {
+      "plan_file": "plan_1.json",
+      "plan_name": "广西壮族自治区交通运输综合应急预案",
+      "description": "当前仓库中暂无西江水道专项预案，先回退到综合预案"
+    },
+    "WATER_TRANSPORT": {
+      "plan_file": "plan_1.json",
+      "plan_name": "广西壮族自治区交通运输综合应急预案",
+      "description": "当前仓库中暂无水路运输保障专项预案，先回退到综合预案"
+    },
+    "CITY_BUS": {
+      "plan_file": "plan_1.json",
+      "plan_name": "广西壮族自治区交通运输综合应急预案",
+      "description": "当前仓库中暂无城市公交专项预案，先回退到综合预案"
+    },
+    "URBAN_RAIL": {
+      "plan_file": "plan_1.json",
+      "plan_name": "广西壮族自治区交通运输综合应急预案",
+      "description": "当前仓库中暂无城市轨道交通专项预案，先回退到综合预案"
+    },
+    "CONSTRUCTION": {
+      "plan_file": "plan_1.json",
+      "plan_name": "广西壮族自治区交通运输综合应急预案",
+      "description": "当前仓库中暂无公路水运工程专项预案，先回退到综合预案"
+    }
+  },
+  "disaster_plans": {},
+  "fallback_plan": {
+    "plan_file": "plan_1.json",
+    "plan_name": "广西壮族自治区交通运输综合应急预案",
+    "description": "当前专项预案覆盖不到时使用的总纲预案"
+  }
+}

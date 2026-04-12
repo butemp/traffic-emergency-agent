@@ -9,6 +9,8 @@ from .query_regulations import QueryRegulations
 from .query_historical_cases import QueryHistoricalCases
 from .risk_assessment import RiskAssessment
 from .media_caption import MediaCaption
+from .get_emergency_plan import GetEmergencyPlan
+from .evaluate_incident_severity import EvaluateIncidentSeverity
 from .search_map_resources import SearchMapResources  # 新增资源搜索工具
 from .resource_dispatch_tools import SearchEmergencyResources, OptimizeDispatchPlan
 from .gaode_tools import (
@@ -27,6 +29,8 @@ __all__ = [
     "QueryHistoricalCases",
     "RiskAssessment",
     "MediaCaption",
+    "GetEmergencyPlan",
+    "EvaluateIncidentSeverity",
     "SearchMapResources", # 导出新工具
     "SearchEmergencyResources",
     "OptimizeDispatchPlan",
