@@ -160,9 +160,7 @@ class Agent:
 
     def _update_phase_from_user_message(self, user_message: str) -> None:
         """基于用户输入做轻量的阶段判断。"""
-        evaluation_keywords = ("评估", "风险", "可行性", "打分")
-
-        if any(keyword in user_message for keyword in evaluation_keywords):
+        if self._should_enter_plan_evaluation(user_message):
             self.task_state.transition_to(TaskPhase.PLAN_EVALUATION)
             return
 
@@ -170,6 +168,34 @@ class Agent:
 
         if self.task_state.current_phase == TaskPhase.INTAKE and self.task_state.intake_ready_to_advance():
             self.task_state.transition_to(TaskPhase.SITUATIONAL_AWARENESS)
+
+    def _should_enter_plan_evaluation(self, user_message: str) -> bool:
+        """
+        判断当前用户输入是否应该切到 PLAN_EVALUATION。
+
+        这里不能只看“评估 / 风险 / 打分”等关键词，否则首轮灾情描述里
+        带这些词时，会直接跳过态势感知、预案定级和资源调度。
+        """
+        evaluation_keywords = ("评估", "风险", "可行性", "打分")
+        if not any(keyword in user_message for keyword in evaluation_keywords):
+            return False
+
+        if self.task_state.current_phase in {TaskPhase.PLAN_EVALUATION, TaskPhase.OUTPUT}:
+            return True
+
+        has_plan_context = bool(
+            self.task_state.candidate_plans
+            or self.task_state.available_resources
+            or self.task_state.evaluation_results
+        )
+        if self.task_state.current_phase == TaskPhase.PLAN_GENERATION and has_plan_context:
+            return True
+
+        pending = self.task_state.pending_question
+        if pending and pending.question_type in {"plan_selection", "confirmation"}:
+            return True
+
+        return False
 
     def _infer_incident_info_from_text(self, user_message: str) -> None:
         """
@@ -734,7 +760,7 @@ class Agent:
         visible_text = self.strip_control_block(content) or content or ""
 
         needs_user_input = any(keyword in visible_text for keyword in ("请提供", "请确认", "请选择", "是否确认"))
-        final_output = self.task_state.current_phase in {TaskPhase.OUTPUT, TaskPhase.PLAN_EVALUATION}
+        final_output = self.task_state.current_phase in {TaskPhase.OUTPUT, TaskPhase.OUTPUT_COMPLETE}
         next_phase = None
 
         if self.task_state.current_phase == TaskPhase.PLAN_GENERATION and not needs_user_input:
