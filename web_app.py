@@ -27,6 +27,8 @@ from src.tools import (
     QueryHistoricalCases,
     RiskAssessment,
     MediaCaption,
+    SearchEmergencyResources,
+    OptimizeDispatchPlan,
     SearchMapResources, # 导入新工具
     CheckTrafficStatus,
     GetWeatherByLocation,
@@ -36,6 +38,7 @@ from src.tools import (
     GaodeConfig
 )
 from src.rag import QueryRAG, RAGConfig, BALANCED_RAG_CONFIG
+from src.resource_dispatch import ResourceDispatchEngine
 
 # 加载环境变量
 load_dotenv()
@@ -226,6 +229,12 @@ def create_agent(runtime_config: Optional[Dict[str, str]] = None):
 
     # 创建工具列表
     tools = []
+    dispatch_engine = None
+    try:
+        dispatch_engine = ResourceDispatchEngine()
+        logger.info("ResourceDispatchEngine 初始化成功")
+    except Exception as e:
+        logger.warning(f"ResourceDispatchEngine 初始化失败: {e}")
 
     # 添加基础工具
     try:
@@ -295,6 +304,19 @@ def create_agent(runtime_config: Optional[Dict[str, str]] = None):
         logger.info("SearchNearbyPOIs 工具加载成功")
     except Exception as e:
         logger.warning(f"SearchNearbyPOIs 工具加载失败: {e}")
+
+    if dispatch_engine is not None:
+        try:
+            tools.append(SearchEmergencyResources(engine=dispatch_engine))
+            logger.info("SearchEmergencyResources 工具加载成功")
+        except Exception as e:
+            logger.warning(f"SearchEmergencyResources 工具加载失败: {e}")
+
+        try:
+            tools.append(OptimizeDispatchPlan(engine=dispatch_engine))
+            logger.info("OptimizeDispatchPlan 工具加载成功")
+        except Exception as e:
+            logger.warning(f"OptimizeDispatchPlan 工具加载失败: {e}")
 
     try:
         tools.append(SearchMapResources(data_dir="data/graph")) # 注册新工具
@@ -721,6 +743,45 @@ async def on_message(message: cl.Message):
                                     tool_step.elements = [
                                         cl.Text(name="RAG 检索结果", content=tool_result, language="markdown")
                                     ]
+                                elif tool_call.name == "search_emergency_resources":
+                                    try:
+                                        res_json = json.loads(tool_result)
+                                        candidates = res_json.get("candidates", {})
+                                        warehouses = candidates.get("warehouses", [])
+                                        teams = candidates.get("teams", [])
+                                        coverage = res_json.get("coverage", {})
+                                        covered = "、".join(coverage.get("covered_categories", [])) or "无"
+                                        missing = "、".join(coverage.get("missing_categories", [])) or "无"
+                                        tool_step.output = (
+                                            f"📦 已完成内部资源搜索：仓库 {len(warehouses)} 个，队伍 {len(teams)} 支\n"
+                                            f"覆盖率：{coverage.get('coverage_ratio', 0)}\n"
+                                            f"已覆盖类别：{covered}\n"
+                                            f"仍缺类别：{missing}"
+                                        )
+                                        tool_step.elements = [
+                                            cl.Text(name="资源搜索结果", content=tool_result, language="json")
+                                        ]
+                                    except Exception:
+                                        tool_step.output = tool_result
+                                elif tool_call.name == "optimize_dispatch_plan":
+                                    try:
+                                        res_json = json.loads(tool_result)
+                                        dispatch_plan = res_json.get("dispatch_plan", {})
+                                        coverage_summary = res_json.get("coverage_summary", {})
+                                        tier1 = dispatch_plan.get("tier1", {}).get("resources", [])
+                                        tier2 = dispatch_plan.get("tier2", {}).get("resources", [])
+                                        tier3 = dispatch_plan.get("tier3", {}).get("resources", [])
+                                        missing = "、".join(coverage_summary.get("still_missing", [])) or "无"
+                                        tool_step.output = (
+                                            f"🚚 已生成调度方案：第一梯队 {len(tier1)} 个，第二梯队 {len(tier2)} 个，第三梯队 {len(tier3)} 个\n"
+                                            f"覆盖率：{coverage_summary.get('coverage_ratio', 0)}\n"
+                                            f"仍缺类别：{missing}"
+                                        )
+                                        tool_step.elements = [
+                                            cl.Text(name="调度方案详情", content=tool_result, language="json")
+                                        ]
+                                    except Exception:
+                                        tool_step.output = tool_result
                                 elif tool_call.name == "check_traffic_status":
                                     from src.tools.gaode_tools import CheckTrafficStatus # 假设可以这样引用，或者直接解析
                                     try:

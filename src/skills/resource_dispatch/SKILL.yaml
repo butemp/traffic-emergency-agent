@@ -4,7 +4,8 @@ version: "1.0"
 active_phases:
   - PLAN_GENERATION
 tools:
-  - search_map_resources
+  - search_emergency_resources
+  - optimize_dispatch_plan
   - search_nearby_pois
 priority: high
 dependencies: []

@@ -65,8 +65,9 @@ class Agent:
 资源与知识规则：
 - 法规、预案、技术指南优先使用 query_rag
 - 历史经验补充使用 query_historical_cases
-- 内部资源调度优先使用 search_map_resources
-- 公开设施仅在内部资源不足时使用 search_nearby_pois
+ - 内部资源调度优先使用 search_emergency_resources
+ - 候选资源齐备后使用 optimize_dispatch_plan 生成分梯队调度方案
+ - 公开设施仅在内部资源不足时使用 search_nearby_pois
 - 风险评估阶段应调用 risk_assessment
 
 输出要求：
@@ -444,6 +445,20 @@ class Agent:
             if resources:
                 self.task_state.available_resources = resources
 
+        elif tool_name == "search_emergency_resources" and result.get("status") == "success":
+            candidates = result.get("candidates", {})
+            warehouses = candidates.get("warehouses", [])
+            teams = candidates.get("teams", [])
+            self.task_state.available_resources = [*warehouses, *teams]
+
+        elif tool_name == "optimize_dispatch_plan" and result.get("status") == "success":
+            dispatch_plan = result.get("dispatch_plan", {})
+            planned_resources = []
+            for tier_name in ("tier1", "tier2", "tier3"):
+                planned_resources.extend(dispatch_plan.get(tier_name, {}).get("resources", []))
+            if planned_resources:
+                self.task_state.available_resources = planned_resources
+
         elif tool_name == "query_rag" and result.get("status") == "success":
             for item in result.get("results", []):
                 self.task_state.add_knowledge_reference(
@@ -490,6 +505,8 @@ class Agent:
         planning_tools = {
             "query_rag",
             "query_historical_cases",
+            "search_emergency_resources",
+            "optimize_dispatch_plan",
             "search_map_resources",
             "search_nearby_pois",
         }

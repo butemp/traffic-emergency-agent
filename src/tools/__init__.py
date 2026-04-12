@@ -10,6 +10,7 @@ from .query_historical_cases import QueryHistoricalCases
 from .risk_assessment import RiskAssessment
 from .media_caption import MediaCaption
 from .search_map_resources import SearchMapResources  # 新增资源搜索工具
+from .resource_dispatch_tools import SearchEmergencyResources, OptimizeDispatchPlan
 from .gaode_tools import (
     CheckTrafficStatus,
     GetWeatherByLocation,
@@ -27,6 +28,8 @@ __all__ = [
     "RiskAssessment",
     "MediaCaption",
     "SearchMapResources", # 导出新工具
+    "SearchEmergencyResources",
+    "OptimizeDispatchPlan",
     "CheckTrafficStatus",
     "GetWeatherByLocation",
     "GeocodeAddress",
@@ -34,4 +37,3 @@ __all__ = [
     "SearchNearbyPOIs",
     "GaodeConfig"
 ]
-

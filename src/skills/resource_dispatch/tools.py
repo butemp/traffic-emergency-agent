@@ -1,5 +1,9 @@
 """
-资源调度 Skill 工具占位模块。
+资源调度 Skill 工具说明模块。
 
-当前阶段仍复用 src/tools/search_map_resources.py 与高德 POI 工具。
+当前阶段使用两个专用工具：
+- search_emergency_resources
+- optimize_dispatch_plan
+
+必要时再补充调用 search_nearby_pois。
 """
