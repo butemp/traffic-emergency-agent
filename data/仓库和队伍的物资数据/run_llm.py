@@ -5,14 +5,14 @@
 支持多线程并发、断点续跑、失败重试。
 
 使用方式：
-    python classify_materials.py \
-        --input em_material.jsonl \
-        --output em_material_classified.jsonl \
-        --api-key YOUR_API_KEY \
-        --base-url https://dashscope.aliyuncs.com/compatible-mode/v1 \
-        --model qwen-plus \
-        --workers 4 \
-        --batch-size 60
+python run_llm.py \
+    --input em_material.jsonl \
+    --output em_material_classified.jsonl \
+    --api-key sk-TBi6zDfq2SkTvyZQCusU7g \
+    --base-url https://ai.gxtri.cn/llm/v1 \
+    --model deepseek-ai/DeepSeek-V3.2 \
+    --workers 4 \
+    --batch-size 4
 
 环境依赖：
     pip install openai
@@ -135,6 +135,8 @@ def classify_batch(
                 ]
             )
             content = response.choices[0].message.content.strip()
+            
+            print(f"  LLM 输出（第 {attempt+1} 次尝试）：\n{content}\n")
 
             # 解析：每行一个类别编码
             lines = [l.strip() for l in content.split("\n") if l.strip()]
