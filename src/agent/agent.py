@@ -160,10 +160,10 @@ class Agent:
             self.task_state.transition_to(TaskPhase.PLAN_EVALUATION)
             return
 
-        if self.task_state.current_phase == TaskPhase.INTAKE:
-            self.task_state.transition_to(TaskPhase.SITUATIONAL_AWARENESS)
-
         self._infer_incident_info_from_text(user_message)
+
+        if self.task_state.current_phase == TaskPhase.INTAKE and self.task_state.intake_is_complete():
+            self.task_state.transition_to(TaskPhase.SITUATIONAL_AWARENESS)
 
     def _infer_incident_info_from_text(self, user_message: str) -> None:
         """
@@ -216,6 +216,43 @@ class Agent:
                 casualties[key] = int(match.group(1))
         if casualties:
             self.task_state.incident_info.casualties.update(casualties)
+            summary_parts = []
+            if "dead" in casualties:
+                summary_parts.append(f"{casualties['dead']}人死亡")
+            if "injured" in casualties:
+                summary_parts.append(f"{casualties['injured']}人受伤")
+            if "trapped" in casualties:
+                summary_parts.append(f"{casualties['trapped']}人被困")
+            self.task_state.incident_info.casualty_status = "，".join(summary_parts)
+        elif not self.task_state.incident_info.casualty_status:
+            if any(keyword in user_message for keyword in ("暂无伤亡", "无人员伤亡", "无人伤亡")):
+                self.task_state.incident_info.casualty_status = "暂无伤亡"
+            elif any(keyword in user_message for keyword in ("被困", "困于车内")):
+                self.task_state.incident_info.casualty_status = "有人被困"
+            elif any(keyword in user_message for keyword in ("受伤", "伤员")):
+                self.task_state.incident_info.casualty_status = "有人员受伤"
+            elif "死亡" in user_message:
+                self.task_state.incident_info.casualty_status = "有人员死亡"
+
+        if not self.task_state.incident_info.scene_status:
+            scene_status_map = {
+                "双向阻断": "双向阻断",
+                "双向中断": "双向阻断",
+                "单向阻断": "单向阻断",
+                "道路中断": "道路中断",
+                "交通中断": "道路中断",
+                "无法通行": "道路无法通行",
+                "火势蔓延": "火势仍在蔓延",
+                "起火": "现场存在火情",
+                "泄漏已控制": "泄漏已得到控制",
+                "泄漏": "现场存在泄漏风险",
+                "拥堵": "现场交通拥堵",
+                "占道": "事故车辆占道",
+            }
+            for keyword, scene_status in scene_status_map.items():
+                if keyword in user_message:
+                    self.task_state.incident_info.scene_status = scene_status
+                    break
 
     def _apply_waiting_user_reply(self, user_message: str) -> None:
         """处理用户对 WAITING_USER 阶段的回复。"""

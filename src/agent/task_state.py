@@ -41,7 +41,9 @@ class IncidentInfo:
     location_text: str = ""
     location_coords: Optional[Dict[str, float]] = None
     time_text: str = ""
+    casualty_status: str = ""
     casualties: Dict[str, Any] = field(default_factory=dict)
+    scene_status: str = ""
     hazmat_involved: Optional[bool] = None
     hazmat_type: str = ""
     road_info: str = ""
@@ -54,10 +56,12 @@ class IncidentInfo:
 
         if not self.incident_type:
             missing.append("incident_type")
-        if not self.severity:
-            missing.append("severity")
         if not self.location_text and not self.location_coords:
             missing.append("location")
+        if not self.casualty_status and not self.casualties:
+            missing.append("casualties")
+        if not self.scene_status:
+            missing.append("scene_status")
 
         return missing
 
@@ -275,6 +279,8 @@ class TaskState:
             "severity",
             "location_text",
             "time_text",
+            "casualty_status",
+            "scene_status",
             "hazmat_involved",
             "hazmat_type",
             "road_info",
@@ -337,6 +343,8 @@ class TaskState:
             f"严重程度: {self.incident_info.severity or '未知'}\n"
             f"位置描述: {self.incident_info.location_text or '未知'}\n"
             f"坐标: {self.incident_info.location_coords or '未知'}\n"
+            f"伤亡情况: {self.incident_info.casualty_status or self.incident_info.casualties or '未知'}\n"
+            f"现场状态: {self.incident_info.scene_status or '未知'}\n"
             f"缺失字段: {missing_fields or '无'}\n"
             f"已检索资源数: {len(self.available_resources)}\n"
             f"已记录知识引用数: {len(self.knowledge_refs)}\n"
