@@ -423,9 +423,67 @@ def get_user_visible_reply(agent: Agent, raw_content: str) -> str:
     return visible.strip()
 
 
+STANDARD_PLAN_SECTIONS = [
+    "一、事件概述",
+    "二、响应定级",
+    "三、指挥架构",
+    "四、预警发布",
+    "五、处置行动方案",
+    "六、资源调度方案",
+    "七、信息报送与新闻发布",
+    "八、风险提示与注意事项",
+    "九、依据引用",
+]
+
+
 def agent_has_tool(agent: Agent, tool_name: str) -> bool:
     """判断当前 Agent 是否注册了指定工具。"""
     return tool_name in agent.tools
+
+
+def has_standard_plan_structure(text: str) -> bool:
+    """检查最终方案是否满足固定 9 章节结构。"""
+    if not text:
+        return False
+
+    positions = []
+    for heading in STANDARD_PLAN_SECTIONS:
+        position = text.find(heading)
+        if position < 0:
+            return False
+        positions.append(position)
+
+    return positions == sorted(positions)
+
+
+def contains_nonexistent_execution_claim(text: str) -> bool:
+    """识别模型把建议动作说成已执行现实动作的情况。"""
+    if not text:
+        return False
+
+    direct_markers = (
+        "已执行的行动",
+        "已通知",
+        "已下达指令",
+        "已启动应急响应",
+        "已派遣",
+        "已调派",
+        "已联系",
+        "已协调",
+        "已通过系统向联系人",
+    )
+    if any(marker in text for marker in direct_markers):
+        return True
+
+    risky_patterns = (
+        r"通知.{0,20}出发",
+        r"要求.{0,20}立即前往",
+        r"我将立即启动应急响应",
+        r"我将优先派遣",
+        r"我将立即在更小范围内重新搜索",
+        r"我将立即启动资源优化",
+    )
+    return any(re.search(pattern, text) for pattern in risky_patterns)
 
 
 def looks_like_progress_only_response(text: str) -> bool:
@@ -510,6 +568,39 @@ def build_no_placeholder_prompt() -> str:
         "- 需要信息就补问，并附上 agent_control；\n"
         "- 信息足够就调用工具；\n"
         "- 已完成就给出明确方案和 agent_control。"
+    )
+
+
+def build_no_execution_claim_prompt() -> str:
+    """提醒模型不要把建议动作写成已执行现实动作。"""
+    return (
+        "【系统纠正】你刚才把建议动作写成了系统已经执行的现实动作，这是不允许的。\n"
+        "当前系统只能做分析、检索、方案编排和建议，不会真实通知队伍、不会下达现实指令、不会自动派遣资源。\n"
+        "请立即重写当前回复，遵守以下要求：\n"
+        "1. 把“已通知/已下达/已派遣/已启动”改成“建议通知/拟派/建议启动/待人工联系”；\n"
+        "2. 如果用户已经确认方案，可写“建议按以下清单执行，由人工值班人员联系相关资源”；\n"
+        "3. 不要出现第一人称执行口吻，如“我将立即启动应急响应”“我将派遣某队伍”；\n"
+        "4. 如果需要继续搜索或优化，请直接调用工具，而不是口头宣称系统已经在执行。\n"
+        "请重写完整回复，并附上 agent_control。"
+    )
+
+
+def build_output_format_retry_prompt() -> str:
+    """当最终方案未满足标准模板时，强制模型按模板重排。"""
+    section_text = "\n".join(f"- {heading}" for heading in STANDARD_PLAN_SECTIONS)
+    return (
+        "【系统纠正】当前最终输出不符合应急指挥方案标准模板，不能直接结束。\n"
+        "请重新输出一份标准化应急指挥方案，严格满足以下要求：\n"
+        "1. 必须按以下 9 个固定章节、固定顺序输出：\n"
+        f"{section_text}\n"
+        "2. 一、事件概述 和 二、响应定级 必须用表格；\n"
+        "3. 三、指挥架构 必须列出总指挥/副总指挥，并用表格展示工作组；\n"
+        "4. 五、处置行动方案 必须拆成三个阶段，并在每个阶段用表格列出行动内容、责任单位、时间要求、预案依据；\n"
+        "5. 六、资源调度方案 必须按梯队展示，并补充资源覆盖情况；\n"
+        "6. 九、依据引用 必须汇总预案名称、引用章节、引用内容摘要；\n"
+        "7. 全文只能写建议性表述，不能写成“已通知/已派遣/已下达指令/已启动应急响应”；\n"
+        "8. 缺失信息请明确写“暂未获取”或“待现场确认”，不要省略章节。\n"
+        "请直接输出重排后的最终方案，并附上 agent_control，final_output=true。"
     )
 
 
@@ -1106,6 +1197,16 @@ async def on_message(message: cl.Message):
                         run_step.output = "🔁 Intake 已完成，要求模型明确进入下一阶段。"
                         continue
 
+                    if contains_nonexistent_execution_claim(visible_response):
+                        reminder = Message(
+                            role=MessageRole.SYSTEM,
+                            content=build_no_execution_claim_prompt(),
+                        )
+                        agent.state.add_message(reminder)
+                        agent.task_state.append_message(reminder)
+                        run_step.output = "🔁 检测到虚构现实执行动作，要求模型重写为建议性表述。"
+                        continue
+
                     if (
                         looks_like_progress_only_response(visible_response)
                         and not control.needs_user_input
@@ -1140,6 +1241,24 @@ async def on_message(message: cl.Message):
                         return
 
                     if control.final_output or agent.task_state.current_phase == TaskPhase.OUTPUT_COMPLETE:
+                        if contains_nonexistent_execution_claim(visible_response):
+                            reminder = Message(
+                                role=MessageRole.SYSTEM,
+                                content=build_no_execution_claim_prompt(),
+                            )
+                            agent.state.add_message(reminder)
+                            agent.task_state.append_message(reminder)
+                            run_step.output = "🔁 最终方案包含虚构执行口吻，要求模型重写。"
+                            continue
+                        if not has_standard_plan_structure(visible_response):
+                            reminder = Message(
+                                role=MessageRole.SYSTEM,
+                                content=build_output_format_retry_prompt(),
+                            )
+                            agent.state.add_message(reminder)
+                            agent.task_state.append_message(reminder)
+                            run_step.output = "🔁 最终方案未满足标准 9 章节模板，要求模型重排输出。"
+                            continue
                         final_response = visible_response
                         run_step.output = "✅ 思考完成，生成最终方案。"
                         break
@@ -1149,6 +1268,19 @@ async def on_message(message: cl.Message):
                             f"阶段推进: {control.phase_reason or '根据模型控制信息继续推进'}\n"
                             f"当前阶段: {agent.task_state.current_phase.value}"
                         )
+                        continue
+
+                    if (
+                        agent.task_state.current_phase in {TaskPhase.OUTPUT, TaskPhase.OUTPUT_COMPLETE}
+                        and not has_standard_plan_structure(visible_response)
+                    ):
+                        reminder = Message(
+                            role=MessageRole.SYSTEM,
+                            content=build_output_format_retry_prompt(),
+                        )
+                        agent.state.add_message(reminder)
+                        agent.task_state.append_message(reminder)
+                        run_step.output = "🔁 当前处于输出阶段，但方案未满足标准 9 章节模板，要求模型重排。"
                         continue
 
                     final_response = visible_response
@@ -1169,6 +1301,19 @@ async def on_message(message: cl.Message):
                         elapsed = time.time() - start_time
                         
                         final_response = final_response_message.content or ""
+                        if contains_nonexistent_execution_claim(final_response):
+                            reminder_msg = build_no_execution_claim_prompt()
+                            agent.state.add_message(Message(role=MessageRole.SYSTEM, content=reminder_msg))
+                            retry_response = await cl.make_async(agent.provider.chat)(agent.state.get_history(), tools=None)
+                            final_response = retry_response.content or ""
+                        if (
+                            agent.task_state.current_phase in {TaskPhase.OUTPUT, TaskPhase.OUTPUT_COMPLETE}
+                            and not has_standard_plan_structure(final_response)
+                        ):
+                            reminder_msg = build_output_format_retry_prompt()
+                            agent.state.add_message(Message(role=MessageRole.SYSTEM, content=reminder_msg))
+                            retry_response = await cl.make_async(agent.provider.chat)(agent.state.get_history(), tools=None)
+                            final_response = retry_response.content or ""
                         final_step.output = final_response
                         
                         # 添加到历史

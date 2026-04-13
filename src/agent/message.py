@@ -5,6 +5,8 @@
 """
 
 import json
+import re
+import uuid
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import List, Optional, Any
@@ -136,6 +138,60 @@ class ChatResponse:
     model: str = ""
     usage: dict = field(default_factory=dict)
 
+    @staticmethod
+    def _parse_embedded_tool_calls(content: str) -> tuple[str, List[ToolCall]]:
+        """
+        解析部分 OpenAI-compatible 模型把工具调用直接写进 content 的情况。
+
+        已观察到的格式示例：
+        <｜tool▁calls▁begin｜><｜tool▁call▁begin｜>tool_name<｜tool▁sep｜>{...}<｜tool▁call▁end｜><｜tool▁calls▁end｜>
+        """
+        if not content:
+            return "", []
+
+        call_pattern = re.compile(
+            r"(?:<｜tool▁call▁begin｜>|<\|tool_call_begin\|>)"
+            r"\s*([A-Za-z0-9_\-]+)\s*"
+            r"(?:<｜tool▁sep｜>|<\|tool_sep\|>)\s*"
+            r"(\{.*?\})\s*"
+            r"(?:<｜tool▁call▁end｜>|<\|tool_call_end\|>)",
+            re.DOTALL,
+        )
+
+        tool_calls: List[ToolCall] = []
+        for match in call_pattern.finditer(content):
+            tool_name = match.group(1).strip()
+            raw_arguments = match.group(2).strip()
+            try:
+                arguments = json.loads(raw_arguments)
+            except Exception:
+                continue
+
+            tool_calls.append(
+                ToolCall(
+                    id=f"embedded_{uuid.uuid4().hex[:12]}",
+                    name=tool_name,
+                    arguments=arguments,
+                )
+            )
+
+        if not tool_calls:
+            return content, []
+
+        cleaned_content = re.sub(
+            r"(?:<｜tool▁calls▁begin｜>|<\|tool_calls_begin\|>)",
+            "",
+            content,
+        )
+        cleaned_content = re.sub(
+            r"(?:<｜tool▁calls▁end｜>|<\|tool_calls_end\|>)",
+            "",
+            cleaned_content,
+        )
+        cleaned_content = call_pattern.sub("", cleaned_content).strip()
+
+        return cleaned_content, tool_calls
+
     @classmethod
     def from_openai(cls, response: Any) -> "ChatResponse":
         """
@@ -162,6 +218,10 @@ class ChatResponse:
 
         # 获取响应内容
         content = message.content or ""
+        if not tool_calls and isinstance(content, str):
+            content, embedded_tool_calls = cls._parse_embedded_tool_calls(content)
+            if embedded_tool_calls:
+                tool_calls = embedded_tool_calls
 
         return cls(
             content=content,
