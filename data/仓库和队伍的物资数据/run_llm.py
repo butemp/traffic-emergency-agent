@@ -27,6 +27,10 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from threading import Lock
 from openai import OpenAI
 
+DEFAULT_TEXT_API_KEY = "sk-TBi6zDfq2SkTvyZQCusU7g"
+DEFAULT_TEXT_BASE_URL = "https://ai.gxtri.cn/llm/v1"
+DEFAULT_TEXT_MODEL = "deepseek-ai/DeepSeek-V3.2"
+
 # ========== 分类体系 ==========
 
 VALID_CATEGORIES = {
@@ -217,9 +221,9 @@ def main():
     parser = argparse.ArgumentParser(description="应急物资 LLM 批量分类工具")
     parser.add_argument("--input", required=True, help="输入 jsonl 文件路径")
     parser.add_argument("--output", required=True, help="输出 jsonl 文件路径")
-    parser.add_argument("--api-key", required=True, help="API Key")
-    parser.add_argument("--base-url", required=True, help="API Base URL")
-    parser.add_argument("--model", default="deepseek-ai/DeepSeek-V3.2", help="模型名称（默认 deepseek-ai/DeepSeek-V3.2）")
+    parser.add_argument("--api-key", default=DEFAULT_TEXT_API_KEY, help="API Key")
+    parser.add_argument("--base-url", default=DEFAULT_TEXT_BASE_URL, help="API Base URL")
+    parser.add_argument("--model", default=DEFAULT_TEXT_MODEL, help=f"模型名称（默认 {DEFAULT_TEXT_MODEL}）")
     parser.add_argument("--batch-size", type=int, default=60, help="每批物资数量（默认 60）")
     parser.add_argument("--workers", type=int, default=4, help="并发线程数（默认 4）")
     parser.add_argument("--resume", action="store_true", help="断点续跑（跳过已处理的记录）")

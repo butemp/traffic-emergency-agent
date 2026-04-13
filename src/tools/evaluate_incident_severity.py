@@ -9,7 +9,7 @@ from typing import Any, Dict, Optional, TYPE_CHECKING
 from .base import BaseTool
 from .get_emergency_plan import get_shared_plan_service
 from ..emergency_plans import EmergencyPlanService, SeverityEvaluator
-from ..providers.defaults import DEFAULT_TEXT_BASE_URL, DEFAULT_TEXT_MODEL
+from ..providers.defaults import DEFAULT_TEXT_API_KEY, DEFAULT_TEXT_BASE_URL, DEFAULT_TEXT_MODEL
 
 if TYPE_CHECKING:
     from ..providers import OpenAIProvider
@@ -27,7 +27,7 @@ class EvaluateIncidentSeverity(BaseTool):
         if provider is None:
             from ..providers import OpenAIProvider
             provider = OpenAIProvider(
-                api_key=os.getenv("OPENAI_API_KEY") or os.getenv("DASHSCOPE_API_KEY"),
+                api_key=os.getenv("OPENAI_API_KEY") or os.getenv("DASHSCOPE_API_KEY") or DEFAULT_TEXT_API_KEY,
                 base_url=os.getenv("EVAL_BASE_URL") or os.getenv("OPENAI_BASE_URL") or DEFAULT_TEXT_BASE_URL,
                 model=os.getenv("EVAL_MODEL") or os.getenv("OPENAI_MODEL") or DEFAULT_TEXT_MODEL,
                 provider="auto",

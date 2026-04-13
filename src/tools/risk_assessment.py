@@ -9,7 +9,12 @@ import logging
 import os
 from typing import Dict, Any, Optional
 from .base import BaseTool
-from ..providers.defaults import DEFAULT_TEXT_BASE_URL, DEFAULT_TEXT_MODEL
+from ..providers.defaults import (
+    DEFAULT_TEXT_API_KEY,
+    DEFAULT_TEXT_BASE_URL,
+    DEFAULT_TEXT_MAX_TOKENS,
+    DEFAULT_TEXT_MODEL,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -112,7 +117,7 @@ class RiskAssessment(BaseTool):
             sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../.."))
 
             # 导入OpenAIProvider
-            api_key = os.getenv("OPENAI_API_KEY") or os.getenv("DASHSCOPE_API_KEY")
+            api_key = os.getenv("OPENAI_API_KEY") or os.getenv("DASHSCOPE_API_KEY") or DEFAULT_TEXT_API_KEY
             eval_model = os.getenv("EVAL_MODEL") or os.getenv("OPENAI_MODEL") or DEFAULT_TEXT_MODEL
             eval_base_url = os.getenv("EVAL_BASE_URL") or os.getenv("OPENAI_BASE_URL") or DEFAULT_TEXT_BASE_URL
 
@@ -142,7 +147,8 @@ class RiskAssessment(BaseTool):
                     response = client.chat.completions.create(
                         model=self.model,
                         messages=messages,
-                        temperature=0.7
+                        temperature=0.7,
+                        max_tokens=DEFAULT_TEXT_MAX_TOKENS,
                     )
                     return response.choices[0].message.content or ""
 

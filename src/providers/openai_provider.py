@@ -16,7 +16,12 @@ from typing import List, Optional, Any
 
 from openai import OpenAI
 from ..agent.message import ChatResponse
-from .defaults import DEFAULT_TEXT_BASE_URL, DEFAULT_TEXT_MODEL
+from .defaults import (
+    DEFAULT_TEXT_API_KEY,
+    DEFAULT_TEXT_BASE_URL,
+    DEFAULT_TEXT_MAX_TOKENS,
+    DEFAULT_TEXT_MODEL,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +40,7 @@ class OpenAIProvider:
         base_url: Optional[str] = None,
         model: str = DEFAULT_TEXT_MODEL,
         temperature: float = 0.7,
-        max_tokens: int = 2000,
+        max_tokens: int = DEFAULT_TEXT_MAX_TOKENS,
         provider: str = "auto"
     ):
         """
@@ -57,13 +62,14 @@ class OpenAIProvider:
         if api_key is None:
             api_key = (
                 os.getenv("OPENAI_API_KEY") or
-                os.getenv("DASHSCOPE_API_KEY")
+                os.getenv("DASHSCOPE_API_KEY") or
+                DEFAULT_TEXT_API_KEY
             )
             if not api_key:
                 raise ValueError(
                     "请设置API Key：\n"
                     "- 阿里云百炼: 设置 DASHSCOPE_API_KEY 环境变量\n"
-                    "- OpenAI: 设置 OPENAI_API_KEY 环境变量"
+                    "- OpenAI-compatible: 设置 OPENAI_API_KEY 环境变量"
                 )
 
         # 根据provider自动设置base_url

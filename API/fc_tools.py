@@ -3,9 +3,14 @@ from datetime import datetime
 import json
 import os
 
+DEFAULT_TEXT_API_KEY = "sk-TBi6zDfq2SkTvyZQCusU7g"
+DEFAULT_TEXT_BASE_URL = "https://ai.gxtri.cn/llm/v1"
+DEFAULT_TEXT_MODEL = "deepseek-ai/DeepSeek-V3.2"
+DEFAULT_TEXT_MAX_TOKENS = 8192
+
 client = OpenAI(
-    api_key=os.getenv("OPENAI_API_KEY") or os.getenv("DASHSCOPE_API_KEY"),
-    base_url=os.getenv("OPENAI_BASE_URL", "https://ai.gxtri.cn/llm/v1"),
+    api_key=os.getenv("OPENAI_API_KEY") or os.getenv("DASHSCOPE_API_KEY") or DEFAULT_TEXT_API_KEY,
+    base_url=os.getenv("OPENAI_BASE_URL", DEFAULT_TEXT_BASE_URL),
 )
 
 # 定义工具列表，模型在选择使用哪个工具时会参考工具的name和description
@@ -59,9 +64,10 @@ def get_current_time():
 # 封装模型响应函数
 def get_response(messages):
     completion = client.chat.completions.create(
-        model=os.getenv("OPENAI_MODEL", "deepseek-ai/DeepSeek-V3.2"),
+        model=os.getenv("OPENAI_MODEL", DEFAULT_TEXT_MODEL),
         messages=messages,
-        tools=tools
+        tools=tools,
+        max_tokens=DEFAULT_TEXT_MAX_TOKENS,
         )
     return completion.model_dump()
 

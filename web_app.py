@@ -26,7 +26,9 @@ from src.agent.message import MessageRole
 from src.providers import OpenAIProvider
 from src.providers.defaults import (
     DEFAULT_CAPTION_MODEL,
+    DEFAULT_TEXT_API_KEY,
     DEFAULT_TEXT_BASE_URL,
+    DEFAULT_TEXT_MAX_TOKENS,
     DEFAULT_TEXT_MODEL,
 )
 from src.tools import (
@@ -67,6 +69,7 @@ def default_runtime_config() -> Dict[str, str]:
         SETTING_OPENAI_API_KEY: (
             os.getenv("OPENAI_API_KEY")
             or os.getenv("DASHSCOPE_API_KEY")
+            or DEFAULT_TEXT_API_KEY
             or ""
         ),
         SETTING_OPENAI_MODEL: os.getenv("OPENAI_MODEL", DEFAULT_TEXT_MODEL),
@@ -101,9 +104,6 @@ def get_runtime_config() -> Dict[str, str]:
 def build_provider_bundle(runtime_config: Dict[str, str]) -> Dict[str, OpenAIProvider]:
     """根据当前会话配置构建聊天、评估和多模态 provider。"""
     api_key = runtime_config.get(SETTING_OPENAI_API_KEY, "")
-    if not api_key:
-        raise ValueError("请在前端设置中填写 OPENAI_API_KEY，或在 .env 中配置可用的 API Key。")
-
     base_url = runtime_config.get(SETTING_OPENAI_BASE_URL, "") or os.getenv("OPENAI_BASE_URL") or DEFAULT_TEXT_BASE_URL
     chat_model = runtime_config.get(SETTING_OPENAI_MODEL, "") or os.getenv("OPENAI_MODEL") or DEFAULT_TEXT_MODEL
     caption_model = os.getenv("CAPTION_MODEL") or DEFAULT_CAPTION_MODEL
@@ -117,6 +117,7 @@ def build_provider_bundle(runtime_config: Dict[str, str]) -> Dict[str, OpenAIPro
             api_key=api_key,
             base_url=base_url,
             model=chat_model,
+            max_tokens=DEFAULT_TEXT_MAX_TOKENS,
             provider="auto",
         ),
         "caption": OpenAIProvider(
@@ -129,6 +130,7 @@ def build_provider_bundle(runtime_config: Dict[str, str]) -> Dict[str, OpenAIPro
             api_key=api_key,
             base_url=evaluation_base_url,
             model=evaluation_model,
+            max_tokens=DEFAULT_TEXT_MAX_TOKENS,
             provider="auto",
         ),
     }
@@ -162,7 +164,7 @@ async def send_runtime_settings_panel() -> Dict[str, str]:
                 label="OPENAI_API_KEY",
                 initial=current[SETTING_OPENAI_API_KEY],
                 placeholder="sk-...",
-                description="当前会话使用的 API Key。仅保存在本次 Web 会话中，不会回写到 .env。",
+                description="当前会话使用的 API Key。默认已内置项目文本模型 Key；如需切换账号，可在此覆盖。",
             ),
             TextInput(
                 id=SETTING_OPENAI_MODEL,
