@@ -219,7 +219,7 @@ def main():
     parser.add_argument("--output", required=True, help="输出 jsonl 文件路径")
     parser.add_argument("--api-key", required=True, help="API Key")
     parser.add_argument("--base-url", required=True, help="API Base URL")
-    parser.add_argument("--model", default="qwen-plus", help="模型名称（默认 qwen-plus）")
+    parser.add_argument("--model", default="deepseek-ai/DeepSeek-V3.2", help="模型名称（默认 deepseek-ai/DeepSeek-V3.2）")
     parser.add_argument("--batch-size", type=int, default=60, help="每批物资数量（默认 60）")
     parser.add_argument("--workers", type=int, default=4, help="并发线程数（默认 4）")
     parser.add_argument("--resume", action="store_true", help="断点续跑（跳过已处理的记录）")

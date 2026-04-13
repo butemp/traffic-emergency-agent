@@ -26,6 +26,7 @@ sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 from src.agent import Agent
 from src.providers import OpenAIProvider
+from src.providers.defaults import DEFAULT_TEXT_BASE_URL, DEFAULT_TEXT_MODEL
 from src.tools import QueryRegulations, QueryHistoricalCases, RiskAssessment, MediaCaption
 from src.rag import (
     QueryRAG,
@@ -69,13 +70,13 @@ def create_agent(rag_config: RAGConfig = None) -> Agent:
     """
     # 从环境变量获取配置（支持阿里云百炼和OpenAI）
     # 优先使用DASHSCOPE_API_KEY（阿里云百炼）
-    api_key = os.getenv("DASHSCOPE_API_KEY") or os.getenv("OPENAI_API_KEY")
+    api_key = os.getenv("OPENAI_API_KEY") or os.getenv("DASHSCOPE_API_KEY")
     if not api_key:
         typer.echo("错误: 请设置 DASHSCOPE_API_KEY 或 OPENAI_API_KEY 环境变量", err=True)
         raise typer.Exit(1)
 
-    base_url = os.getenv("OPENAI_BASE_URL")
-    model = os.getenv("OPENAI_MODEL", "qwen-plus")
+    base_url = os.getenv("OPENAI_BASE_URL") or DEFAULT_TEXT_BASE_URL
+    model = os.getenv("OPENAI_MODEL", DEFAULT_TEXT_MODEL)
 
     # 使用默认配置（如果未提供）
     if rag_config is None:

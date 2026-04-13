@@ -343,6 +343,25 @@ class Agent:
                 self.task_state.transition_to(TaskPhase.PLAN_GENERATION)
                 return
 
+        if pending.question_type == "stall_resume":
+            continue_reply = str(pending.metadata.get("continue_reply", "") or "").strip().lower()
+            continue_aliases = ("继续行动", "继续推进", "继续处理", "继续", "请继续")
+
+            if (
+                continue_reply and normalized_reply == continue_reply
+            ) or any(token in normalized_reply for token in continue_aliases):
+                self.task_state.clear_pending_question()
+                self.task_state.transition_to(pending.return_phase or TaskPhase.INTAKE)
+                return
+
+            if reply:
+                if self.task_state.incident_info.additional_context:
+                    self.task_state.incident_info.additional_context += "\n"
+                self.task_state.incident_info.additional_context += f"[用户修正] {reply}"
+                self.task_state.clear_pending_question()
+                self.task_state.transition_to(pending.return_phase or TaskPhase.INTAKE)
+                return
+
         # 默认视为补充信息，更新灾情摘要后回到原阶段
         self._infer_incident_info_from_text(reply)
         if self.task_state.incident_info.additional_context:

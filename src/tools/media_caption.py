@@ -22,6 +22,7 @@ from dataclasses import dataclass
 from typing import Any, Dict, List, Optional, Tuple
 
 from .base import BaseTool
+from ..providers.defaults import DEFAULT_CAPTION_MODEL
 
 logger = logging.getLogger(__name__)
 
@@ -67,15 +68,15 @@ class MediaCaption(BaseTool):
 
         # 允许通过环境变量覆盖模型
         # 你可以设置 CAPTION_MODEL=qwen-vl-plus / gpt-4o-mini / 你自己的多模态模型名
-        self.model = model or os.getenv("CAPTION_MODEL") or os.getenv("OPENAI_MODEL", "qwen-vl-plus")
+        self.model = model or os.getenv("CAPTION_MODEL") or DEFAULT_CAPTION_MODEL
 
         # 若未传入provider，做一个“最小provider”避免循环导入（参考你RiskAssessment写法）
         if provider is None:
-            api_key = os.getenv("DASHSCOPE_API_KEY") or os.getenv("OPENAI_API_KEY")
+            api_key = os.getenv("CAPTION_API_KEY") or os.getenv("DASHSCOPE_API_KEY") or os.getenv("OPENAI_API_KEY")
             if not api_key:
                 raise RuntimeError("请设置 DASHSCOPE_API_KEY 或 OPENAI_API_KEY 环境变量")
 
-            base_url = os.getenv("OPENAI_BASE_URL")
+            base_url = os.getenv("CAPTION_BASE_URL") or None
             # 如果你明确用百炼 compatible-mode，也可以把 base_url 写死
             # base_url = base_url or "https://dashscope.aliyuncs.com/compatible-mode/v1"
 

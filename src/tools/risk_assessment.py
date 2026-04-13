@@ -9,6 +9,7 @@ import logging
 import os
 from typing import Dict, Any, Optional
 from .base import BaseTool
+from ..providers.defaults import DEFAULT_TEXT_BASE_URL, DEFAULT_TEXT_MODEL
 
 logger = logging.getLogger(__name__)
 
@@ -111,19 +112,22 @@ class RiskAssessment(BaseTool):
             sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../.."))
 
             # 导入OpenAIProvider
-            api_key = os.getenv("DASHSCOPE_API_KEY") or os.getenv("OPENAI_API_KEY")
-            eval_model = os.getenv("EVAL_MODEL", "qwen-plus")
+            api_key = os.getenv("OPENAI_API_KEY") or os.getenv("DASHSCOPE_API_KEY")
+            eval_model = os.getenv("EVAL_MODEL") or os.getenv("OPENAI_MODEL") or DEFAULT_TEXT_MODEL
+            eval_base_url = os.getenv("EVAL_BASE_URL") or os.getenv("OPENAI_BASE_URL") or DEFAULT_TEXT_BASE_URL
 
             # 简单的provider包装，避免循环导入
             class SimpleProvider:
-                def __init__(self, api_key, model, timeout):
+                def __init__(self, api_key, model, base_url, timeout):
                     from openai import OpenAI
+                    self.api_key = api_key
                     self.client = OpenAI(
                         api_key=api_key,
-                        base_url="https://dashscope.aliyuncs.com/compatible-mode/v1" if "qwen" in model or "dashscope" in os.getenv("DASHSCOPE_API_KEY", "").lower() else "https://api.openai.com/v1",
+                        base_url=base_url,
                         timeout=timeout
                     )
                     self.model = model
+                    self.base_url = base_url
                     self.timeout = timeout
 
                 def chat(self, messages, tools=None):
@@ -131,8 +135,8 @@ class RiskAssessment(BaseTool):
                     import httpx
                     # 创建带超时的客户端
                     client = OpenAI(
-                        api_key=self.client.api_key,
-                        base_url=self.client.base_url,
+                        api_key=self.api_key,
+                        base_url=self.base_url,
                         timeout=httpx.Timeout(self.timeout, connect=10.0)
                     )
                     response = client.chat.completions.create(
@@ -142,7 +146,7 @@ class RiskAssessment(BaseTool):
                     )
                     return response.choices[0].message.content or ""
 
-            provider = SimpleProvider(api_key, eval_model, timeout)
+            provider = SimpleProvider(api_key, eval_model, eval_base_url, timeout)
 
         self.provider = provider
         logger.info(f"初始化风险评估工具（LLM驱动，超时={timeout}秒）")

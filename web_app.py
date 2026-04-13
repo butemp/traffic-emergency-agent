@@ -8,6 +8,7 @@
 """
 
 import os
+import re
 import sys
 from pathlib import Path
 from typing import Any, Dict, Optional
@@ -20,8 +21,14 @@ from chainlit.input_widget import TextInput
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 from src.agent import Agent, Message, TaskPhase
+from src.agent.final_plan_reviewer import FinalPlanReviewer
 from src.agent.message import MessageRole
 from src.providers import OpenAIProvider
+from src.providers.defaults import (
+    DEFAULT_CAPTION_MODEL,
+    DEFAULT_TEXT_BASE_URL,
+    DEFAULT_TEXT_MODEL,
+)
 from src.tools import (
     QueryRegulations,
     QueryHistoricalCases,
@@ -50,6 +57,8 @@ SESSION_RUNTIME_CONFIG_KEY = "runtime_model_config"
 SETTING_OPENAI_API_KEY = "OPENAI_API_KEY"
 SETTING_OPENAI_MODEL = "OPENAI_MODEL"
 SETTING_OPENAI_BASE_URL = "OPENAI_BASE_URL"
+STALL_CONTINUE_REPLY = "请继续行动，直接执行下一步需要的工具；不要停在说明上。"
+MAX_FINAL_REVIEW_ROUNDS = 3
 
 
 def default_runtime_config() -> Dict[str, str]:
@@ -60,8 +69,8 @@ def default_runtime_config() -> Dict[str, str]:
             or os.getenv("DASHSCOPE_API_KEY")
             or ""
         ),
-        SETTING_OPENAI_MODEL: os.getenv("OPENAI_MODEL", "qwen-plus"),
-        SETTING_OPENAI_BASE_URL: os.getenv("OPENAI_BASE_URL", ""),
+        SETTING_OPENAI_MODEL: os.getenv("OPENAI_MODEL", DEFAULT_TEXT_MODEL),
+        SETTING_OPENAI_BASE_URL: os.getenv("OPENAI_BASE_URL", DEFAULT_TEXT_BASE_URL),
     }
 
 
@@ -95,10 +104,13 @@ def build_provider_bundle(runtime_config: Dict[str, str]) -> Dict[str, OpenAIPro
     if not api_key:
         raise ValueError("请在前端设置中填写 OPENAI_API_KEY，或在 .env 中配置可用的 API Key。")
 
-    base_url = runtime_config.get(SETTING_OPENAI_BASE_URL, "") or None
-    chat_model = runtime_config.get(SETTING_OPENAI_MODEL, "") or os.getenv("OPENAI_MODEL", "qwen-plus")
-    caption_model = os.getenv("CAPTION_MODEL") or chat_model
+    base_url = runtime_config.get(SETTING_OPENAI_BASE_URL, "") or os.getenv("OPENAI_BASE_URL") or DEFAULT_TEXT_BASE_URL
+    chat_model = runtime_config.get(SETTING_OPENAI_MODEL, "") or os.getenv("OPENAI_MODEL") or DEFAULT_TEXT_MODEL
+    caption_model = os.getenv("CAPTION_MODEL") or DEFAULT_CAPTION_MODEL
+    caption_api_key = os.getenv("CAPTION_API_KEY") or os.getenv("DASHSCOPE_API_KEY") or api_key
+    caption_base_url = os.getenv("CAPTION_BASE_URL") or None
     evaluation_model = os.getenv("EVAL_MODEL") or chat_model
+    evaluation_base_url = os.getenv("EVAL_BASE_URL") or base_url
 
     return {
         "chat": OpenAIProvider(
@@ -108,14 +120,14 @@ def build_provider_bundle(runtime_config: Dict[str, str]) -> Dict[str, OpenAIPro
             provider="auto",
         ),
         "caption": OpenAIProvider(
-            api_key=api_key,
-            base_url=base_url,
+            api_key=caption_api_key,
+            base_url=caption_base_url,
             model=caption_model,
             provider="auto",
         ),
         "evaluation": OpenAIProvider(
             api_key=api_key,
-            base_url=base_url,
+            base_url=evaluation_base_url,
             model=evaluation_model,
             provider="auto",
         ),
@@ -156,14 +168,14 @@ async def send_runtime_settings_panel() -> Dict[str, str]:
                 id=SETTING_OPENAI_MODEL,
                 label="OPENAI_MODEL",
                 initial=current[SETTING_OPENAI_MODEL],
-                placeholder="gpt-4o-mini",
+                placeholder=DEFAULT_TEXT_MODEL,
                 description="主对话模型名称。填写任意支持 OpenAI SDK 风格接口的模型名。",
             ),
             TextInput(
                 id=SETTING_OPENAI_BASE_URL,
                 label="OPENAI_BASE_URL",
                 initial=current[SETTING_OPENAI_BASE_URL],
-                placeholder="https://api.openai.com/v1",
+                placeholder=DEFAULT_TEXT_BASE_URL,
                 description="可选。接 OpenAI 官方时可留空；接第三方 OpenAI-compatible 服务时填写其 Base URL。",
             ),
         ]
@@ -516,6 +528,54 @@ def looks_like_progress_only_response(text: str) -> bool:
     return False
 
 
+def detect_stalled_response(text: str) -> str:
+    """识别“说明了下一步，但没有真正行动”的停住态回复。"""
+    if not text:
+        return ""
+
+    normalized = text.strip()
+    if not normalized or has_standard_plan_structure(normalized):
+        return ""
+
+    user_input_markers = ("请提供", "请补充", "请确认", "请选择", "是否确认")
+    if any(marker in normalized for marker in user_input_markers):
+        return ""
+
+    if looks_like_progress_only_response(normalized):
+        return "模型输出了进度说明或占位语，但没有真正调用工具，也没有给出最终方案。"
+
+    planning_patterns = (
+        r"下一步.{0,24}(调用|查询|搜索|评估|检索|生成|获取|推进|执行)",
+        r"接下来.{0,24}(调用|查询|搜索|评估|检索|生成|获取|推进|执行)",
+        r"随后.{0,24}(调用|查询|搜索|评估|检索|生成|获取|推进|执行)",
+        r"然后.{0,24}(调用|查询|搜索|评估|检索|生成|获取|推进|执行)",
+        r"我将.{0,28}(调用|查询|搜索|评估|检索|生成|获取|推进|优化|分析)",
+        r"我会.{0,28}(调用|查询|搜索|评估|检索|生成|获取|推进|优化|分析)",
+        r"将立即.{0,24}(调用|查询|搜索|评估|检索|生成|获取|推进|优化)",
+    )
+    if any(re.search(pattern, normalized) for pattern in planning_patterns):
+        return "模型描述了下一步计划，但没有真正调用对应工具，也没有完成当前轮输出。"
+
+    return ""
+
+
+def build_stall_resume_question() -> str:
+    """构造停住态下给用户的交互提示。"""
+    return "检测到模型刚刚停在说明态。你可以选择让它继续行动，或补充新的 refine 信息后再继续推进。"
+
+
+def build_stall_resume_reason(stalled_response: str, detected_reason: str) -> str:
+    """格式化停住态原因说明。"""
+    excerpt = " ".join((stalled_response or "").split())
+    if len(excerpt) > 140:
+        excerpt = excerpt[:137] + "..."
+
+    base_reason = detected_reason or "模型刚刚没有真正执行下一步动作。"
+    if excerpt:
+        return f"{base_reason}\n停住回复摘录：{excerpt}"
+    return base_reason
+
+
 def build_intake_retry_prompt(agent: Agent) -> str:
     """当 INTAKE 未完成时，强制模型回到补问或更新逻辑。"""
     missing = agent.task_state.incident_info.missing_required_fields()
@@ -602,6 +662,106 @@ def build_output_format_retry_prompt() -> str:
         "8. 缺失信息请明确写“暂未获取”或“待现场确认”，不要省略章节。\n"
         "请直接输出重排后的最终方案，并附上 agent_control，final_output=true。"
     )
+
+
+def collect_final_plan_guardrail_issues(text: str) -> list[str]:
+    """收集最终方案的硬性校验问题。"""
+    issues: list[str] = []
+
+    if not text.strip():
+        issues.append("最终方案内容为空。")
+        return issues
+
+    if contains_nonexistent_execution_claim(text):
+        issues.append("方案中出现了把建议动作写成已执行现实动作的表述。")
+
+    if not has_standard_plan_structure(text):
+        issues.append("方案未满足固定 9 章节结构或章节顺序不正确。")
+
+    return issues
+
+
+def build_final_review_retry_prompt(
+    candidate_text: str,
+    review_result: Any,
+    guardrail_issues: list[str],
+    attempt: int,
+) -> str:
+    """构造最终方案审核未通过时给主模型的重写提示。"""
+    issue_lines = [f"- {item}" for item in guardrail_issues]
+    issue_lines.extend(f"- {item}" for item in (review_result.issues or []))
+    advice_lines = [f"- {item}" for item in (review_result.revision_advice or [])]
+
+    issue_block = "\n".join(issue_lines) if issue_lines else "- 审核器未给出明确问题，但当前版本仍未通过审核。"
+    advice_block = "\n".join(advice_lines) if advice_lines else "- 请严格按标准模板重写，并补齐缺失内容。"
+
+    return (
+        f"【最终方案审核未通过，第 {attempt} 轮重写】\n"
+        "你刚才输出了一版候选最终方案，但独立审核器认为它还不能直接展示给用户。\n"
+        "请基于下面的问题和建议，重新生成一版完整、可直接交付的最终方案。\n\n"
+        "硬性要求：\n"
+        "1. 必须输出完整最终方案，而不是说明你接下来要做什么；\n"
+        "2. 必须保持 9 个固定章节和顺序；\n"
+        "3. 只能使用建议性表述，不能写成已经通知、已经下达、已经派遣；\n"
+        "4. 对暂时缺失的信息要明确写“暂未获取”或“待现场确认”；\n"
+        "5. 回复末尾必须附上 agent_control，并设置 final_output=true；\n"
+        "6. 这次是最终方案重写，不要再补问用户，也不要输出占位语。\n\n"
+        f"【审核发现的问题】\n{issue_block}\n\n"
+        f"【审核建议】\n{advice_block}\n\n"
+        f"【上一版候选最终方案】\n{candidate_text}"
+    )
+
+
+async def review_final_response_before_display(
+    agent: Agent,
+    candidate_text: str,
+    review_provider: OpenAIProvider,
+) -> tuple[str, Any, bool, int]:
+    """
+    在最终方案展示前做独立审核，必要时最多回退主模型 3 轮。
+
+    返回：
+    - 最终文本
+    - 审核结果
+    - 是否达到最大轮次后仍未通过
+    - 实际审核轮次
+    """
+    reviewer = FinalPlanReviewer(review_provider)
+    current_text = candidate_text.strip()
+    last_review_result = None
+
+    for attempt in range(1, MAX_FINAL_REVIEW_ROUNDS + 1):
+        guardrail_issues = collect_final_plan_guardrail_issues(current_text)
+        review_result = await cl.make_async(reviewer.review)(agent.task_state, current_text)
+        last_review_result = review_result
+
+        if not guardrail_issues and review_result.passed:
+            return current_text, review_result, False, attempt
+
+        if attempt == MAX_FINAL_REVIEW_ROUNDS:
+            return current_text, review_result, True, attempt
+
+        retry_prompt = build_final_review_retry_prompt(
+            candidate_text=current_text,
+            review_result=review_result,
+            guardrail_issues=guardrail_issues,
+            attempt=attempt,
+        )
+        reminder = Message(role=MessageRole.SYSTEM, content=retry_prompt)
+        agent.state.add_message(reminder)
+        agent.task_state.append_message(reminder)
+
+        regenerated = await cl.make_async(agent.provider.chat)(
+            agent.get_runtime_messages(),
+            tools=None,
+        )
+        regenerated_raw = regenerated.content or ""
+        regenerated_visible = get_user_visible_reply(agent, regenerated_raw).strip()
+        regenerated_control = agent.parse_assistant_control(regenerated_raw)
+        agent.apply_assistant_control(regenerated_control)
+        current_text = regenerated_visible or current_text
+
+    return current_text, last_review_result, True, MAX_FINAL_REVIEW_ROUNDS
 
 
 def format_candidate_plans(agent: Agent) -> str:
@@ -715,6 +875,19 @@ def build_pending_interaction_props(agent: Agent) -> Optional[Dict[str, Any]]:
         )
         return base_props
 
+    if pending.question_type == "stall_resume":
+        base_props.update(
+            {
+                "variant": "stall_resume",
+                "title": "检测到流程停住",
+                "subtitle": "模型刚刚停在说明态，没有真正调用下一步工具。你可以直接要求它继续行动，或补充新的 refine 信息。",
+                "continueReply": pending.metadata.get("continue_reply", STALL_CONTINUE_REPLY),
+                "stalledResponse": pending.metadata.get("stalled_response", ""),
+                "placeholder": "例如：补充事故信息、强调响应偏好、排除某个资源、要求更快到场等",
+            }
+        )
+        return base_props
+
     base_props.update(
         {
             "variant": "info_request",
@@ -741,6 +914,29 @@ async def send_pending_interaction_card(agent: Agent) -> bool:
     if props is None or pending is None:
         return False
 
+
+async def send_pending_interaction_fallback(agent: Agent) -> None:
+    """当自定义卡片不可用时，回退到纯文本交互。"""
+    pending = agent.task_state.pending_question
+    if pending is None:
+        return
+
+    if pending.question_type == "stall_resume":
+        stalled_response = pending.metadata.get("stalled_response", "")
+        if stalled_response:
+            await cl.Message(
+                content=f"### 模型刚才的停住回复\n\n{stalled_response}",
+                author="系统",
+            ).send()
+
+    plan_text = format_candidate_plans(agent)
+    options_text = format_pending_options(agent)
+    if plan_text:
+        await cl.Message(content=plan_text).send()
+    if options_text:
+        await cl.Message(content=options_text).send()
+    await cl.Message(content=pending.question).send()
+
     try:
         element = cl.CustomElement(name="DecisionCards", props=props, display="inline")
         await cl.Message(
@@ -765,6 +961,7 @@ async def on_message(message: cl.Message):
 
         # 获取Agent
         agent = get_agent()
+        review_provider = build_provider_bundle(get_runtime_config())["evaluation"]
         logger.info("=== Agent获取成功 ===")
 
         # =========================
@@ -1212,14 +1409,59 @@ async def on_message(message: cl.Message):
                         and not control.needs_user_input
                         and not control.final_output
                     ):
-                        reminder = Message(
-                            role=MessageRole.SYSTEM,
-                            content=build_no_placeholder_prompt(),
+                        assistant_msg = Message(role=MessageRole.ASSISTANT, content=visible_response)
+                        agent.state.add_message(assistant_msg)
+                        agent.task_state.append_message(assistant_msg)
+                        agent.task_state.set_pending_question(
+                            question=build_stall_resume_question(),
+                            reason=build_stall_resume_reason(
+                                visible_response,
+                                "模型输出了进度说明或占位语，但没有真正调用工具。",
+                            ),
+                            suggested_options=["继续行动", "补充 refine 信息"],
+                            question_type="stall_resume",
+                            metadata={
+                                "continue_reply": STALL_CONTINUE_REPLY,
+                                "stalled_response": visible_response,
+                            },
+                            return_phase=agent.task_state.current_phase,
                         )
-                        agent.state.add_message(reminder)
-                        agent.task_state.append_message(reminder)
-                        run_step.output = "🔁 检测到占位式回复，要求模型继续执行真实下一步。"
-                        continue
+                        run_step.output = "⏸️ 检测到模型停在说明态，等待用户选择继续行动或补充 refine。"
+                        card_sent = await send_pending_interaction_card(agent)
+                        if not card_sent:
+                            await send_pending_interaction_fallback(agent)
+                        agent.state.save()
+                        return
+
+                    stalled_reason = ""
+                    if (
+                        not control.needs_user_input
+                        and not control.final_output
+                        and control.next_phase is None
+                    ):
+                        stalled_reason = detect_stalled_response(visible_response)
+
+                    if stalled_reason:
+                        assistant_msg = Message(role=MessageRole.ASSISTANT, content=visible_response)
+                        agent.state.add_message(assistant_msg)
+                        agent.task_state.append_message(assistant_msg)
+                        agent.task_state.set_pending_question(
+                            question=build_stall_resume_question(),
+                            reason=build_stall_resume_reason(visible_response, stalled_reason),
+                            suggested_options=["继续行动", "补充 refine 信息"],
+                            question_type="stall_resume",
+                            metadata={
+                                "continue_reply": STALL_CONTINUE_REPLY,
+                                "stalled_response": visible_response,
+                            },
+                            return_phase=agent.task_state.current_phase,
+                        )
+                        run_step.output = "⏸️ 检测到模型停在说明态，等待用户选择继续行动或补充 refine。"
+                        card_sent = await send_pending_interaction_card(agent)
+                        if not card_sent:
+                            await send_pending_interaction_fallback(agent)
+                        agent.state.save()
+                        return
 
                     assistant_msg = Message(role=MessageRole.ASSISTANT, content=visible_response)
                     agent.state.add_message(assistant_msg)
@@ -1230,37 +1472,25 @@ async def on_message(message: cl.Message):
                         run_step.output = f"⏸️ 等待用户输入（阶段: {agent.task_state.current_phase.value}）"
                         card_sent = await send_pending_interaction_card(agent)
                         if not card_sent:
-                            plan_text = format_candidate_plans(agent)
-                            options_text = format_pending_options(agent)
-                            if plan_text:
-                                await cl.Message(content=plan_text).send()
-                            if options_text:
-                                await cl.Message(content=options_text).send()
-                            await cl.Message(content=user_prompt).send()
+                            await send_pending_interaction_fallback(agent)
                         agent.state.save()
                         return
 
-                    if control.final_output or agent.task_state.current_phase == TaskPhase.OUTPUT_COMPLETE:
-                        if contains_nonexistent_execution_claim(visible_response):
-                            reminder = Message(
-                                role=MessageRole.SYSTEM,
-                                content=build_no_execution_claim_prompt(),
+                    if control.final_output or agent.task_state.current_phase in {TaskPhase.OUTPUT, TaskPhase.OUTPUT_COMPLETE}:
+                        reviewed_response, review_result, review_exhausted, review_rounds = await review_final_response_before_display(
+                            agent=agent,
+                            candidate_text=visible_response,
+                            review_provider=review_provider,
+                        )
+                        final_response = reviewed_response
+                        if review_exhausted:
+                            run_step.output = (
+                                f"⚠️ 最终方案经过 {review_rounds} 轮审核重写后仍未完全通过，"
+                                "已按当前版本展示给用户。"
                             )
-                            agent.state.add_message(reminder)
-                            agent.task_state.append_message(reminder)
-                            run_step.output = "🔁 最终方案包含虚构执行口吻，要求模型重写。"
-                            continue
-                        if not has_standard_plan_structure(visible_response):
-                            reminder = Message(
-                                role=MessageRole.SYSTEM,
-                                content=build_output_format_retry_prompt(),
-                            )
-                            agent.state.add_message(reminder)
-                            agent.task_state.append_message(reminder)
-                            run_step.output = "🔁 最终方案未满足标准 9 章节模板，要求模型重排输出。"
-                            continue
-                        final_response = visible_response
-                        run_step.output = "✅ 思考完成，生成最终方案。"
+                        else:
+                            review_summary = review_result.summary or "已通过独立审核。"
+                            run_step.output = f"✅ 思考完成，最终方案已通过审核。{review_summary}"
                         break
 
                     if control.next_phase is not None:
@@ -1268,19 +1498,6 @@ async def on_message(message: cl.Message):
                             f"阶段推进: {control.phase_reason or '根据模型控制信息继续推进'}\n"
                             f"当前阶段: {agent.task_state.current_phase.value}"
                         )
-                        continue
-
-                    if (
-                        agent.task_state.current_phase in {TaskPhase.OUTPUT, TaskPhase.OUTPUT_COMPLETE}
-                        and not has_standard_plan_structure(visible_response)
-                    ):
-                        reminder = Message(
-                            role=MessageRole.SYSTEM,
-                            content=build_output_format_retry_prompt(),
-                        )
-                        agent.state.add_message(reminder)
-                        agent.task_state.append_message(reminder)
-                        run_step.output = "🔁 当前处于输出阶段，但方案未满足标准 9 章节模板，要求模型重排。"
                         continue
 
                     final_response = visible_response
@@ -1314,17 +1531,60 @@ async def on_message(message: cl.Message):
                             agent.state.add_message(Message(role=MessageRole.SYSTEM, content=reminder_msg))
                             retry_response = await cl.make_async(agent.provider.chat)(agent.state.get_history(), tools=None)
                             final_response = retry_response.content or ""
-                        final_step.output = final_response
-                        
-                        # 添加到历史
-                        assistant_msg = Message(role=MessageRole.ASSISTANT, content=final_response)
-                        agent.state.add_message(assistant_msg)
-                        agent.task_state.append_message(assistant_msg)
+                        stalled_reason = ""
+                        if agent.task_state.current_phase not in {TaskPhase.OUTPUT, TaskPhase.OUTPUT_COMPLETE}:
+                            stalled_reason = detect_stalled_response(final_response)
+                        if stalled_reason:
+                            assistant_msg = Message(role=MessageRole.ASSISTANT, content=final_response)
+                            agent.state.add_message(assistant_msg)
+                            agent.task_state.append_message(assistant_msg)
+                            agent.task_state.set_pending_question(
+                                question=build_stall_resume_question(),
+                                reason=build_stall_resume_reason(final_response, stalled_reason),
+                                suggested_options=["继续行动", "补充 refine 信息"],
+                                question_type="stall_resume",
+                                metadata={
+                                    "continue_reply": STALL_CONTINUE_REPLY,
+                                    "stalled_response": final_response,
+                                },
+                                return_phase=agent.task_state.current_phase,
+                            )
+                            final_response = ""
+                            final_step.output = "⏸️ 检测到模型停在说明态，已切换到人工选择继续推进。"
+                        else:
+                            if agent.task_state.current_phase in {TaskPhase.OUTPUT, TaskPhase.OUTPUT_COMPLETE}:
+                                reviewed_response, review_result, review_exhausted, review_rounds = await review_final_response_before_display(
+                                    agent=agent,
+                                    candidate_text=final_response,
+                                    review_provider=review_provider,
+                                )
+                                final_response = reviewed_response
+                                if review_exhausted:
+                                    final_step.output = (
+                                        f"⚠️ 最终方案经过 {review_rounds} 轮审核重写后仍未完全通过，"
+                                        "已按当前版本输出。"
+                                    )
+                                else:
+                                    final_step.output = review_result.summary or "最终方案已通过独立审核。"
+                            else:
+                                final_step.output = final_response
+
+                            # 添加到历史
+                            assistant_msg = Message(role=MessageRole.ASSISTANT, content=final_response)
+                            agent.state.add_message(assistant_msg)
+                            agent.task_state.append_message(assistant_msg)
                         
                     except Exception as e:
                         final_step.output = f"❌ 生成失败: {e}"
                         final_step.is_error = True
             
+        if agent.task_state.current_phase == TaskPhase.WAITING_USER and agent.task_state.pending_question:
+            card_sent = await send_pending_interaction_card(agent)
+            if not card_sent:
+                await send_pending_interaction_fallback(agent)
+            agent.state.save()
+            return
+
         # 4. 最后发送完整回复
         if final_response:
             # 这里的 final_response 可能包含 markdown

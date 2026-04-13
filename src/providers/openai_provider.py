@@ -16,6 +16,7 @@ from typing import List, Optional, Any
 
 from openai import OpenAI
 from ..agent.message import ChatResponse
+from .defaults import DEFAULT_TEXT_BASE_URL, DEFAULT_TEXT_MODEL
 
 logger = logging.getLogger(__name__)
 
@@ -32,7 +33,7 @@ class OpenAIProvider:
         self,
         api_key: str = None,
         base_url: Optional[str] = None,
-        model: str = "qwen-plus",
+        model: str = DEFAULT_TEXT_MODEL,
         temperature: float = 0.7,
         max_tokens: int = 2000,
         provider: str = "auto"
@@ -43,7 +44,7 @@ class OpenAIProvider:
         Args:
             api_key: API密钥（默认从环境变量读取）
             base_url: API基础URL（可选，默认根据provider自动设置）
-            model: 使用的模型名称（默认qwen-plus）
+            model: 使用的模型名称（默认 DeepSeek-V3.2）
             temperature: 温度参数（0-1，越高越随机）
             max_tokens: 最大生成token数
             provider: 服务提供商（auto/dashscope/openai/deepseek）
@@ -55,8 +56,8 @@ class OpenAIProvider:
         # 自动获取API Key
         if api_key is None:
             api_key = (
-                os.getenv("DASHSCOPE_API_KEY") or
-                os.getenv("OPENAI_API_KEY")
+                os.getenv("OPENAI_API_KEY") or
+                os.getenv("DASHSCOPE_API_KEY")
             )
             if not api_key:
                 raise ValueError(
@@ -67,9 +68,14 @@ class OpenAIProvider:
 
         # 根据provider自动设置base_url
         if base_url is None:
+            base_url = os.getenv("OPENAI_BASE_URL") or None
+
+        if base_url is None:
             if provider == "auto":
                 # 自动检测
-                if "dashscope" in os.getenv("DASHSCOPE_API_KEY", "").lower() or model.startswith("qwen"):
+                if model == DEFAULT_TEXT_MODEL:
+                    provider = "openai_compatible_default"
+                elif "dashscope" in os.getenv("DASHSCOPE_API_KEY", "").lower() or model.startswith("qwen"):
                     provider = "dashscope"
                 elif os.getenv("OPENAI_API_KEY"):
                     provider = "openai"
@@ -78,11 +84,14 @@ class OpenAIProvider:
             if provider == "dashscope":
                 base_url = "https://dashscope.aliyuncs.com/compatible-mode/v1"
                 logger.info("使用阿里云百炼 DashScope API")
+            elif provider == "openai_compatible_default":
+                base_url = DEFAULT_TEXT_BASE_URL
+                logger.info("使用默认 OpenAI-compatible 文本模型端点")
             elif provider == "openai":
                 base_url = "https://api.openai.com/v1"
                 logger.info("使用OpenAI API")
             else:
-                base_url = "https://api.openai.com/v1"
+                base_url = DEFAULT_TEXT_BASE_URL if model == DEFAULT_TEXT_MODEL else "https://api.openai.com/v1"
 
         self.api_key = api_key
         self.base_url = base_url

@@ -271,7 +271,7 @@ function InfoRequestView() {
     setSubmitted(Boolean(props.submitted))
   }, [props.draft, props.submitted])
 
-  const chips = useMemo(() => props.suggestedOptions || [], [])
+  const chips = useMemo(() => props.suggestedOptions || [], [props.suggestedOptions])
 
   return (
     <div className="tea-section-stack">
@@ -341,6 +341,109 @@ function InfoRequestView() {
   )
 }
 
+function StallResumeView() {
+  const [draft, setDraft] = useState(props.draft || "")
+  const [submitted, setSubmitted] = useState(Boolean(props.submitted))
+  const [action, setAction] = useState(props.action || "")
+
+  useEffect(() => {
+    setDraft(props.draft || "")
+    setSubmitted(Boolean(props.submitted))
+    setAction(props.action || "")
+  }, [props.draft, props.submitted, props.action])
+
+  const bannerLabel =
+    submitted && action === "continue"
+      ? "已请求模型继续行动，系统正在重新推进下一步..."
+      : submitted && action === "refine"
+        ? "补充 refine 已提交，系统正在按新条件继续处理..."
+        : ""
+
+  return (
+    <div className="tea-section-stack">
+      <SubmittedNotice label={bannerLabel} />
+
+      <Card className={`tea-info-card tea-stall-card ${submitted ? "tea-card-locked" : ""}`}>
+        <CardHeader>
+          <div className="tea-confirm-headline">
+            <Badge className="tea-chip tea-chip-accent">流程停住</Badge>
+            <AlertTriangle className="h-4 w-4 text-[var(--tea-accent)]" />
+          </div>
+          <CardTitle className="tea-plan-title">{props.title}</CardTitle>
+          <CardDescription className="tea-plan-summary">
+            {props.subtitle || props.prompt}
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="tea-info-content">
+          {props.reason ? (
+            <div className="tea-inline-note">
+              <ClipboardList className="h-4 w-4" />
+              {props.reason}
+            </div>
+          ) : null}
+
+          {props.stalledResponse ? (
+            <div className="tea-stall-preview">
+              <div className="tea-list-title">模型刚才的停住回复</div>
+              <p>{props.stalledResponse}</p>
+            </div>
+          ) : null}
+
+          <div className="tea-stall-grid">
+            <div className="tea-stall-block">
+              <div className="tea-list-title tea-list-title-good">继续行动</div>
+              <p className="tea-plan-summary">
+                直接告诉模型不要停在说明上，继续调用下一步所需工具，或者在条件齐备时直接完成最终方案。
+              </p>
+              <Button
+                className="tea-primary-btn"
+                disabled={submitted}
+                onClick={async () => {
+                  setSubmitted(true)
+                  setAction("continue")
+                  await updateElement({ ...props, submitted: true, action: "continue" })
+                  sendUserMessage(props.continueReply || "请继续行动")
+                }}
+              >
+                继续行动
+                <ChevronRight className="h-4 w-4 ml-1" />
+              </Button>
+            </div>
+
+            <div className="tea-stall-block">
+              <div className="tea-list-title tea-list-title-warn">补充 refine</div>
+              <p className="tea-plan-summary">
+                如果你想修正条件、补充现场信息、排除资源或强调偏好，可以直接输入后再继续推进。
+              </p>
+              <Textarea
+                className="tea-textarea"
+                placeholder={props.placeholder || "请输入新的修正信息"}
+                value={draft}
+                disabled={submitted}
+                onChange={(event) => setDraft(event.target.value)}
+              />
+              <Button
+                variant="outline"
+                className="tea-secondary-btn"
+                disabled={submitted || !draft.trim()}
+                onClick={async () => {
+                  const message = draft.trim()
+                  setSubmitted(true)
+                  setAction("refine")
+                  await updateElement({ ...props, submitted: true, action: "refine", draft: message })
+                  sendUserMessage(message)
+                }}
+              >
+                提交 refine
+              </Button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
+
 export default function DecisionCards() {
   return (
     <div className="tea-decision-shell">
@@ -356,6 +459,7 @@ export default function DecisionCards() {
       {props.variant === "plan_selection" ? <PlanSelectionView /> : null}
       {props.variant === "confirmation" ? <ConfirmationView /> : null}
       {props.variant === "info_request" ? <InfoRequestView /> : null}
+      {props.variant === "stall_resume" ? <StallResumeView /> : null}
     </div>
   )
 }
