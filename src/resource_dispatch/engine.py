@@ -402,6 +402,8 @@ class ResourceDispatchEngine:
             "resource_id": resource_id,
             "resource_type": resource_type,
             "name": self._clean_text(record.get(name_field)),
+            "longitude": longitude,
+            "latitude": latitude,
             "distance_km": round(distance_km, 2),
             "distance_type": distance_type,
             "relevance_score": relevance_score,
@@ -681,6 +683,11 @@ class ResourceDispatchEngine:
             "type": resource_type,
             "resource_id": resource["resource_id"],
             "name": resource["name"],
+            "longitude": resource.get("longitude"),
+            "latitude": resource.get("latitude"),
+            "address": resource.get("address"),
+            "road_code": resource.get("road_code"),
+            "stake": resource.get("stake"),
             "distance_km": resource["distance_km"],
             "relevance_score": resource["relevance_score"],
             "contact": resource["contact"],
@@ -690,10 +697,12 @@ class ResourceDispatchEngine:
         if resource_type == "warehouse":
             item["action"] = self._build_warehouse_action(resource)
             item["materials_summary"] = resource.get("materials_summary", {})
+            item["source_org"] = resource.get("belong_org_name")
         else:
             item["action"] = self._build_team_action(resource)
             item["team_size"] = resource.get("team_size")
             item["specialties"] = resource.get("specialties", [])
+            item["source_org"] = resource.get("name")
 
         return item
 

@@ -8,7 +8,7 @@ import json
 import logging
 import os
 import requests
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 from .base import BaseTool
 
 logger = logging.getLogger(__name__)
@@ -637,3 +637,205 @@ class SearchNearbyPOIs(BaseTool):
                 "status": "error",
                 "message": str(e)
             }, ensure_ascii=False, indent=2)
+
+
+class PlanDispatchRoutes(BaseTool):
+    """
+    批量规划资源点到事故点的驾车路线。
+    """
+
+    @property
+    def name(self) -> str:
+        return "plan_dispatch_routes"
+
+    @property
+    def description(self) -> str:
+        return """为仓库、救援队伍、医院、消防站等资源规划到事故现场的驾车路线。
+
+适用于资源调度方案生成阶段，帮助说明资源从哪里出发、预计多久到达、主要走哪条路线。
+如果资源没有经纬度，应先用 geocode_address 或 search_nearby_pois 获取坐标。
+"""
+
+    @property
+    def parameters(self) -> Dict[str, Any]:
+        return {
+            "type": "object",
+            "properties": {
+                "destination_longitude": {
+                    "type": "number",
+                    "description": "事故点经度",
+                },
+                "destination_latitude": {
+                    "type": "number",
+                    "description": "事故点纬度",
+                },
+                "destination_name": {
+                    "type": "string",
+                    "description": "事故点名称或位置描述",
+                },
+                "origins": {
+                    "type": "array",
+                    "description": "出发资源列表，最多建议 6 个",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {"type": "string", "description": "资源名称"},
+                            "resource_type": {"type": "string", "description": "资源类型，如 warehouse/team/hospital/fire_station/expert"},
+                            "longitude": {"type": "number", "description": "资源经度"},
+                            "latitude": {"type": "number", "description": "资源纬度"},
+                            "address": {"type": "string", "description": "资源地址"},
+                        },
+                        "required": ["name", "longitude", "latitude"],
+                    },
+                },
+                "strategy": {
+                    "type": "integer",
+                    "description": "高德驾车策略，默认 10，表示速度优先并规避拥堵",
+                    "default": 10,
+                },
+            },
+            "required": ["destination_longitude", "destination_latitude", "origins"],
+        }
+
+    def execute(
+        self,
+        destination_longitude: float,
+        destination_latitude: float,
+        origins: List[Dict[str, Any]],
+        destination_name: str = "事故现场",
+        strategy: int = 10,
+    ) -> str:
+        logger.info("规划调度路线: origins=%s, destination=(%s,%s)", len(origins or []), destination_longitude, destination_latitude)
+
+        results = []
+        for origin in (origins or [])[:8]:
+            route = self._plan_single_route(
+                origin=origin,
+                destination_longitude=destination_longitude,
+                destination_latitude=destination_latitude,
+                destination_name=destination_name or "事故现场",
+                strategy=int(strategy or 10),
+            )
+            results.append(route)
+
+        return json.dumps(
+            {
+                "status": "success",
+                "destination": {
+                    "name": destination_name or "事故现场",
+                    "longitude": destination_longitude,
+                    "latitude": destination_latitude,
+                },
+                "routes": results,
+                "data_note": "路线和到达时间来自高德驾车路径规划；实际出动需结合交通管制和现场通行条件人工确认。",
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+
+    def _plan_single_route(
+        self,
+        origin: Dict[str, Any],
+        destination_longitude: float,
+        destination_latitude: float,
+        destination_name: str,
+        strategy: int,
+    ) -> Dict[str, Any]:
+        name = str(origin.get("name") or "未命名资源")
+        longitude = origin.get("longitude")
+        latitude = origin.get("latitude")
+
+        if longitude in (None, "") or latitude in (None, ""):
+            return {
+                "status": "skipped",
+                "origin_name": name,
+                "resource_type": origin.get("resource_type", ""),
+                "message": "资源缺少经纬度，无法规划路线",
+            }
+
+        url = f"{GaodeConfig.BASE_URL}/direction/driving"
+        params = {
+            "key": GaodeConfig.API_KEY,
+            "origin": f"{float(longitude)},{float(latitude)}",
+            "destination": f"{float(destination_longitude)},{float(destination_latitude)}",
+            "strategy": strategy,
+            "extensions": "base",
+        }
+
+        try:
+            response = requests.get(url, params=params, timeout=10)
+            data = response.json()
+            if data.get("status") != "1":
+                return {
+                    "status": "error",
+                    "origin_name": name,
+                    "resource_type": origin.get("resource_type", ""),
+                    "message": data.get("info", "路线规划失败"),
+                }
+
+            paths = ((data.get("route") or {}).get("paths") or [])
+            if not paths:
+                return {
+                    "status": "not_found",
+                    "origin_name": name,
+                    "resource_type": origin.get("resource_type", ""),
+                    "message": "未找到可用路线",
+                }
+
+            path = paths[0]
+            distance_m = self._clean_float(path.get("distance")) or 0.0
+            duration_s = self._clean_float(path.get("duration")) or 0.0
+            steps = []
+            for step in (path.get("steps") or [])[:8]:
+                instruction = step.get("instruction", "")
+                road = step.get("road", "")
+                if instruction:
+                    steps.append(
+                        {
+                            "instruction": instruction,
+                            "road": road,
+                            "distance_m": self._clean_float(step.get("distance")),
+                            "duration_min": round((self._clean_float(step.get("duration")) or 0) / 60, 1),
+                        }
+                    )
+
+            return {
+                "status": "success",
+                "origin_name": name,
+                "origin_address": origin.get("address", ""),
+                "resource_type": origin.get("resource_type", ""),
+                "origin": {
+                    "longitude": float(longitude),
+                    "latitude": float(latitude),
+                },
+                "destination_name": destination_name,
+                "distance_km": round(distance_m / 1000, 2),
+                "duration_min": round(duration_s / 60, 1),
+                "route_summary": self._build_route_summary(steps),
+                "steps": steps,
+            }
+
+        except Exception as error:
+            logger.error("路线规划异常: %s", error)
+            return {
+                "status": "error",
+                "origin_name": name,
+                "resource_type": origin.get("resource_type", ""),
+                "message": str(error),
+            }
+
+    def _build_route_summary(self, steps: List[Dict[str, Any]]) -> str:
+        roads = []
+        for step in steps:
+            road = step.get("road")
+            if road and road not in roads:
+                roads.append(road)
+        return " → ".join(roads[:5]) if roads else "路线详情以高德返回为准"
+
+    def _clean_float(self, value: Any) -> Optional[float]:
+        if value in (None, ""):
+            return None
+        try:
+            return float(value)
+        except (TypeError, ValueError):
+            return None

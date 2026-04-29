@@ -40,12 +40,14 @@ from src.tools import (
     MediaCaption,
     SearchEmergencyResources,
     OptimizeDispatchPlan,
+    SearchExperts,
     SearchMapResources, # 导入新工具
     CheckTrafficStatus,
     GetWeatherByLocation,
     GeocodeAddress,
     ReverseGeocode,
     SearchNearbyPOIs,
+    PlanDispatchRoutes,
     GaodeConfig
 )
 from src.rag import QueryRAG, RAGConfig, BALANCED_RAG_CONFIG
@@ -351,6 +353,12 @@ def create_agent(runtime_config: Optional[Dict[str, str]] = None):
     except Exception as e:
         logger.warning(f"SearchNearbyPOIs 工具加载失败: {e}")
 
+    try:
+        tools.append(PlanDispatchRoutes())
+        logger.info("PlanDispatchRoutes 工具加载成功")
+    except Exception as e:
+        logger.warning(f"PlanDispatchRoutes 工具加载失败: {e}")
+
     if dispatch_engine is not None:
         try:
             tools.append(SearchEmergencyResources(engine=dispatch_engine))
@@ -363,6 +371,12 @@ def create_agent(runtime_config: Optional[Dict[str, str]] = None):
             logger.info("OptimizeDispatchPlan 工具加载成功")
         except Exception as e:
             logger.warning(f"OptimizeDispatchPlan 工具加载失败: {e}")
+
+    try:
+        tools.append(SearchExperts(data_path="data/专家数据/expert_info.xls"))
+        logger.info("SearchExperts 工具加载成功")
+    except Exception as e:
+        logger.warning(f"SearchExperts 工具加载失败: {e}")
 
     try:
         tools.append(SearchMapResources(data_dir="data/graph")) # 注册新工具
@@ -658,10 +672,12 @@ def build_output_format_retry_prompt() -> str:
         "2. 一、事件概述 和 二、响应定级 必须用表格；\n"
         "3. 三、指挥架构 必须列出总指挥/副总指挥，并用表格展示工作组；\n"
         "4. 五、处置行动方案 必须拆成三个阶段，并在每个阶段用表格列出行动内容、责任单位、时间要求、预案依据；\n"
-        "5. 六、资源调度方案 必须按梯队展示，并补充资源覆盖情况；\n"
-        "6. 九、依据引用 必须汇总预案名称、引用章节、引用内容摘要；\n"
-        "7. 全文只能写建议性表述，不能写成“已通知/已派遣/已下达指令/已启动应急响应”；\n"
-        "8. 缺失信息请明确写“暂未获取”或“待现场确认”，不要省略章节。\n"
+        "5. 三、指挥架构 必须覆盖应急管理、消防救援、公安交管、医疗救援、专家技术支持等关键角色；\n"
+        "6. 五、处置行动方案 必须包含涉险人员二次排查、其他伤员排查、家属联络安抚和二次事故防范；\n"
+        "7. 六、资源调度方案 必须按梯队展示，并补充资源来源单位/出发地、调度路径、预计到达、联系人电话和资源覆盖情况；\n"
+        "8. 九、依据引用 必须汇总预案名称、引用章节、引用内容摘要；\n"
+        "9. 全文只能写建议性表述，不能写成“已通知/已派遣/已下达指令/已启动应急响应”；\n"
+        "10. 缺失信息请明确写“暂未获取”或“待现场确认”，不要省略章节。\n"
         "请直接输出重排后的最终方案，并附上 agent_control，final_output=true。"
     )
 
@@ -705,9 +721,12 @@ def build_final_review_retry_prompt(
         "1. 必须输出完整最终方案，而不是说明你接下来要做什么；\n"
         "2. 必须保持 9 个固定章节和顺序；\n"
         "3. 只能使用建议性表述，不能写成已经通知、已经下达、已经派遣；\n"
-        "4. 对暂时缺失的信息要明确写“暂未获取”或“待现场确认”；\n"
-        "5. 回复末尾必须附上 agent_control，并设置 final_output=true；\n"
-        "6. 这次是最终方案重写，不要再补问用户，也不要输出占位语。\n\n"
+        "4. 指挥架构必须覆盖应急管理、消防救援、公安交管、医疗救援和专家技术支持；\n"
+        "5. 资源调度必须说明来源单位/出发地、调度路径、预计到达和联系人电话；\n"
+        "6. 处置行动必须包含涉险人员二次排查、现场其他伤员排查、家属联络安抚；\n"
+        "7. 对暂时缺失的信息要明确写“暂未获取”或“待现场确认”；\n"
+        "8. 回复末尾必须附上 agent_control，并设置 final_output=true；\n"
+        "9. 这次是最终方案重写，不要再补问用户，也不要输出占位语。\n\n"
         f"【审核发现的问题】\n{issue_block}\n\n"
         f"【审核建议】\n{advice_block}\n\n"
         f"【上一版候选最终方案】\n{candidate_text}"
@@ -1220,6 +1239,33 @@ async def on_message(message: cl.Message):
                                         )
                                         tool_step.elements = [
                                             cl.Text(name="调度方案详情", content=tool_result, language="json")
+                                        ]
+                                    except Exception:
+                                        tool_step.output = tool_result
+                                elif tool_call.name == "search_experts":
+                                    try:
+                                        res_json = json.loads(tool_result)
+                                        experts = res_json.get("experts", [])
+                                        names = "、".join(item.get("name", "") for item in experts[:5]) or "无"
+                                        tool_step.output = f"🧑‍💼 已检索专家 {len(experts)} 名：{names}"
+                                        tool_step.elements = [
+                                            cl.Text(name="专家检索结果", content=tool_result, language="json")
+                                        ]
+                                    except Exception:
+                                        tool_step.output = tool_result
+                                elif tool_call.name == "plan_dispatch_routes":
+                                    try:
+                                        res_json = json.loads(tool_result)
+                                        routes = res_json.get("routes", [])
+                                        ok_routes = [item for item in routes if item.get("status") == "success"]
+                                        route_lines = [
+                                            f"{item.get('origin_name', '未知')}：{item.get('distance_km', '未知')}km，约{item.get('duration_min', '未知')}分钟"
+                                            for item in ok_routes[:5]
+                                        ]
+                                        summary = "\n".join(route_lines) or "未获取到可用路线"
+                                        tool_step.output = f"🧭 已规划调度路线 {len(ok_routes)}/{len(routes)} 条\n{summary}"
+                                        tool_step.elements = [
+                                            cl.Text(name="路线规划结果", content=tool_result, language="json")
                                         ]
                                     except Exception:
                                         tool_step.output = tool_result

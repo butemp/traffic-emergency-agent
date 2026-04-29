@@ -632,6 +632,41 @@ class Agent:
             if planned_resources:
                 self.task_state.available_resources = planned_resources
 
+        elif tool_name == "search_experts" and result.get("status") == "success":
+            expert_resources = []
+            for expert in result.get("experts", []):
+                expert_resources.append(
+                    {
+                        "type": "expert",
+                        "resource_id": expert.get("expert_id", ""),
+                        "name": expert.get("name", ""),
+                        "source_org": expert.get("work_unit", ""),
+                        "specialty_field": expert.get("specialty_field", ""),
+                        "professional_title": expert.get("professional_title", ""),
+                        "contact": {
+                            "name": expert.get("name", ""),
+                            "phone": expert.get("phone", ""),
+                        },
+                        "distance_km": expert.get("distance_km"),
+                        "dispatch_note": expert.get("dispatch_note", ""),
+                    }
+                )
+            if expert_resources:
+                self.task_state.available_resources.extend(expert_resources)
+
+        elif tool_name == "plan_dispatch_routes" and result.get("status") == "success":
+            route_notes = []
+            for route in result.get("routes", []):
+                if route.get("status") != "success":
+                    continue
+                route_notes.append(
+                    f"{route.get('origin_name', '未知资源')}至{route.get('destination_name', '事故现场')}: "
+                    f"{route.get('distance_km', '未知')}km, 约{route.get('duration_min', '未知')}分钟, "
+                    f"路线: {route.get('route_summary', '待确认')}"
+                )
+            if route_notes:
+                self.task_state.environment_info.additional_notes.extend(route_notes)
+
         elif tool_name == "query_rag" and result.get("status") == "success":
             for item in result.get("results", []):
                 self.task_state.add_knowledge_reference(
@@ -683,6 +718,8 @@ class Agent:
             "optimize_dispatch_plan",
             "search_map_resources",
             "search_nearby_pois",
+            "search_experts",
+            "plan_dispatch_routes",
         }
 
         if tool_name in situational_tools and self.task_state.current_phase == TaskPhase.SITUATIONAL_AWARENESS:

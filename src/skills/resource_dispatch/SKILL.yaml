@@ -6,6 +6,8 @@ active_phases:
 tools:
   - search_emergency_resources
   - optimize_dispatch_plan
+  - search_experts
+  - plan_dispatch_routes
   - search_nearby_pois
 priority: high
 dependencies: []

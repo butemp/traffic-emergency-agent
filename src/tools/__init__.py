@@ -13,12 +13,14 @@ from .get_emergency_plan import GetEmergencyPlan
 from .evaluate_incident_severity import EvaluateIncidentSeverity
 from .search_map_resources import SearchMapResources  # 新增资源搜索工具
 from .resource_dispatch_tools import SearchEmergencyResources, OptimizeDispatchPlan
+from .expert_tools import SearchExperts
 from .gaode_tools import (
     CheckTrafficStatus,
     GetWeatherByLocation,
     GeocodeAddress,
     ReverseGeocode,
     SearchNearbyPOIs,
+    PlanDispatchRoutes,
     GaodeConfig
 )
 
@@ -34,10 +36,12 @@ __all__ = [
     "SearchMapResources", # 导出新工具
     "SearchEmergencyResources",
     "OptimizeDispatchPlan",
+    "SearchExperts",
     "CheckTrafficStatus",
     "GetWeatherByLocation",
     "GeocodeAddress",
     "ReverseGeocode",
     "SearchNearbyPOIs",
+    "PlanDispatchRoutes",
     "GaodeConfig"
 ]
