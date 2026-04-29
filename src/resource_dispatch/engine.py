@@ -29,6 +29,20 @@ DATA_FRESHNESS = {
     "suggestion": "建议出发前电话确认关键物资的可用性",
 }
 
+CATEGORY_LABELS = {
+    "SIGN": "交通标志标牌",
+    "WARNING": "警示防护设备",
+    "PPE": "个人防护用品",
+    "FIRE": "消防器材",
+    "TOOL": "工具与工程机械",
+    "VEHICLE": "车辆装备",
+    "MATERIAL": "抢险材料",
+    "RESCUE": "救生救援装备",
+    "COMMS": "通信照明设备",
+    "DEICE": "除冰除雪物资",
+    "OTHER": "其他物资",
+}
+
 CATEGORY_TO_POI = {
     "RESCUE": {"poi_type": "医院", "reason": "缺少救生装备，建议查询附近医院"},
     "FIRE": {"poi_type": "消防站", "reason": "缺少消防器材，建议查询附近消防站"},
@@ -390,6 +404,7 @@ class ResourceDispatchEngine:
 
         materials_by_category = record.get("materials_by_category") or {}
         materials_summary = self._build_materials_summary(materials_by_category, matched_categories or categories)
+        materials_summary_zh = self._localize_materials_summary(materials_summary)
 
         relevance_score = self._compute_relevance_score(
             categories=categories,
@@ -413,9 +428,13 @@ class ResourceDispatchEngine:
             "address": self._clean_text(record.get("address")),
             "contact": self._build_contact(record, resource_type),
             "categories": categories,
+            "categories_zh": self._category_labels(categories),
             "matched_categories": matched_categories,
+            "matched_categories_zh": self._category_labels(matched_categories),
             "unmatched_categories": unmatched_categories,
+            "unmatched_categories_zh": self._category_labels(unmatched_categories),
             "materials_summary": materials_summary,
+            "materials_summary_zh": materials_summary_zh,
             "recommend_reasons": [],
         }
 
@@ -513,6 +532,7 @@ class ResourceDispatchEngine:
                 )
 
             category_detail[category] = {
+                "category_label": self._category_label(category),
                 "status": "covered" if sources else "missing",
                 "source_count": len(sources),
                 "total_items": sum(source["item_count"] for source in sources),
@@ -557,7 +577,9 @@ class ResourceDispatchEngine:
             "specialty_detail": specialty_detail,
             "coverage_ratio": round(coverage_ratio, 2),
             "covered_categories": covered_categories,
+            "covered_categories_zh": self._category_labels(covered_categories),
             "missing_categories": missing_categories,
+            "missing_categories_zh": self._category_labels(missing_categories),
             "covered_specialties": covered_specialties,
             "missing_specialties": missing_specialties,
             "recommendation": self._generate_recommendation(missing_categories),
@@ -578,7 +600,7 @@ class ResourceDispatchEngine:
                     category,
                     {
                         "poi_type": None,
-                        "reason": f"缺少 {category} 类物资，建议扩大搜索范围或人工协调",
+                        "reason": f"缺少{self._category_label(category)}，建议扩大搜索范围或人工协调",
                     },
                 )
             )
@@ -671,7 +693,9 @@ class ResourceDispatchEngine:
         return {
             "coverage_ratio": round(coverage_ratio, 2),
             "covered": covered,
+            "covered_zh": self._category_labels(covered),
             "still_missing": still_uncovered,
+            "still_missing_zh": self._category_labels(still_uncovered),
             "suggestion": suggestion or "已完成内部资源调度",
             "selected_warehouse_ids": [item["resource_id"] for item in selected_warehouses],
             "selected_team_ids": [item["resource_id"] for item in selected_teams],
@@ -697,11 +721,14 @@ class ResourceDispatchEngine:
         if resource_type == "warehouse":
             item["action"] = self._build_warehouse_action(resource)
             item["materials_summary"] = resource.get("materials_summary", {})
+            item["materials_summary_zh"] = resource.get("materials_summary_zh", {})
+            item["matched_categories_zh"] = resource.get("matched_categories_zh", [])
             item["source_org"] = resource.get("belong_org_name")
         else:
             item["action"] = self._build_team_action(resource)
             item["team_size"] = resource.get("team_size")
             item["specialties"] = resource.get("specialties", [])
+            item["matched_categories_zh"] = resource.get("matched_categories_zh", [])
             item["source_org"] = resource.get("name")
 
         return item
@@ -782,7 +809,7 @@ class ResourceDispatchEngine:
             reasons.append(f"距事故点 {candidate['distance_km']}km")
 
         if candidate.get("matched_categories"):
-            reasons.append("覆盖所需类别：" + "、".join(candidate["matched_categories"]))
+            reasons.append("覆盖所需类别：" + "、".join(candidate.get("matched_categories_zh") or candidate["matched_categories"]))
 
         if candidate["resource_type"] == "team":
             if candidate.get("matched_specialties"):
@@ -792,6 +819,27 @@ class ResourceDispatchEngine:
 
         reasons.append(f"综合评分 {candidate['relevance_score']}")
         return reasons
+
+    def _category_label(self, category: Any) -> str:
+        """将内部类别编码转换为中文展示名称。"""
+        code = self._clean_text(category)
+        if not code:
+            return "未知类别"
+        return CATEGORY_LABELS.get(code.upper(), code)
+
+    def _category_labels(self, categories: Iterable[Any]) -> List[str]:
+        """批量转换类别中文名并去重。"""
+        return list(dict.fromkeys(self._category_label(category) for category in categories if category))
+
+    def _localize_materials_summary(
+        self,
+        materials_summary: Dict[str, List[Dict[str, Any]]],
+    ) -> Dict[str, List[Dict[str, Any]]]:
+        """生成面向最终方案展示的中文物资摘要。"""
+        localized: Dict[str, List[Dict[str, Any]]] = {}
+        for category, items in materials_summary.items():
+            localized[self._category_label(category)] = items
+        return localized
 
     def _normalize_categories(self, values: Optional[Iterable[Any]]) -> List[str]:
         """归一化物资类别。"""

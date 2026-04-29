@@ -690,8 +690,8 @@ class PlanDispatchRoutes(BaseTool):
                 },
                 "strategy": {
                     "type": "integer",
-                    "description": "高德驾车策略，默认 10，表示速度优先并规避拥堵",
-                    "default": 10,
+                    "description": "高德驾车策略，默认 0。常用值：0=最快，1=最短，2=避收费，3=避高速，4=最优",
+                    "default": 0,
                 },
             },
             "required": ["destination_longitude", "destination_latitude", "origins"],
@@ -703,7 +703,7 @@ class PlanDispatchRoutes(BaseTool):
         destination_latitude: float,
         origins: List[Dict[str, Any]],
         destination_name: str = "事故现场",
-        strategy: int = 10,
+        strategy: int = 0,
     ) -> str:
         logger.info("规划调度路线: origins=%s, destination=(%s,%s)", len(origins or []), destination_longitude, destination_latitude)
 
@@ -714,7 +714,7 @@ class PlanDispatchRoutes(BaseTool):
                 destination_longitude=destination_longitude,
                 destination_latitude=destination_latitude,
                 destination_name=destination_name or "事故现场",
-                strategy=int(strategy or 10),
+                strategy=int(strategy or 0),
             )
             results.append(route)
 
@@ -759,6 +759,7 @@ class PlanDispatchRoutes(BaseTool):
             "origin": f"{float(longitude)},{float(latitude)}",
             "destination": f"{float(destination_longitude)},{float(destination_latitude)}",
             "strategy": strategy,
+            "output": "json",
             "extensions": "base",
         }
 
@@ -785,6 +786,7 @@ class PlanDispatchRoutes(BaseTool):
             path = paths[0]
             distance_m = self._clean_float(path.get("distance")) or 0.0
             duration_s = self._clean_float(path.get("duration")) or 0.0
+            traffic_lights = path.get("traffic_lights", "N/A")
             steps = []
             for step in (path.get("steps") or [])[:8]:
                 instruction = step.get("instruction", "")
@@ -792,8 +794,11 @@ class PlanDispatchRoutes(BaseTool):
                 if instruction:
                     steps.append(
                         {
+                            "指令": instruction,
+                            "道路": road or "未知道路",
+                            "距离": self._format_distance_m(self._clean_float(step.get("distance"))),
                             "instruction": instruction,
-                            "road": road,
+                            "road": road or "未知道路",
                             "distance_m": self._clean_float(step.get("distance")),
                             "duration_min": round((self._clean_float(step.get("duration")) or 0) / 60, 1),
                         }
@@ -811,7 +816,19 @@ class PlanDispatchRoutes(BaseTool):
                 "destination_name": destination_name,
                 "distance_km": round(distance_m / 1000, 2),
                 "duration_min": round(duration_s / 60, 1),
+                "距离": f"{distance_m / 1000:.1f} 公里",
+                "预计时间": f"{int(duration_s) // 60} 分钟",
+                "红绿灯数": traffic_lights,
+                "步骤数量": len(path.get("steps") or []),
                 "route_summary": self._build_route_summary(steps),
+                "导航步骤": [
+                    {
+                        "指令": step["指令"],
+                        "道路": step["道路"],
+                        "距离": step["距离"],
+                    }
+                    for step in steps
+                ],
                 "steps": steps,
             }
 
@@ -831,6 +848,13 @@ class PlanDispatchRoutes(BaseTool):
             if road and road not in roads:
                 roads.append(road)
         return " → ".join(roads[:5]) if roads else "路线详情以高德返回为准"
+
+    def _format_distance_m(self, value: Optional[float]) -> str:
+        if value is None:
+            return "未知"
+        if value >= 1000:
+            return f"{value / 1000:.1f} 千米"
+        return f"{value:.0f} 米"
 
     def _clean_float(self, value: Any) -> Optional[float]:
         if value in (None, ""):

@@ -677,7 +677,9 @@ def build_output_format_retry_prompt() -> str:
         "7. 六、资源调度方案 必须按梯队展示，并补充资源来源单位/出发地、调度路径、预计到达、联系人电话和资源覆盖情况；\n"
         "8. 九、依据引用 必须汇总预案名称、引用章节、引用内容摘要；\n"
         "9. 全文只能写建议性表述，不能写成“已通知/已派遣/已下达指令/已启动应急响应”；\n"
-        "10. 缺失信息请明确写“暂未获取”或“待现场确认”，不要省略章节。\n"
+        "10. 资源类别只能用中文名称，不能直接输出 WARNING、PPE、SIGN、VEHICLE 等内部编码；\n"
+        "11. 如已有专家检索结果，必须在指挥架构或专家技术支持中写出专家姓名、单位、专业方向和建议支持方式；\n"
+        "12. 缺失信息请明确写“暂未获取”或“待现场确认”，不要省略章节。\n"
         "请直接输出重排后的最终方案，并附上 agent_control，final_output=true。"
     )
 
@@ -695,6 +697,26 @@ def collect_final_plan_guardrail_issues(text: str) -> list[str]:
 
     if not has_standard_plan_structure(text):
         issues.append("方案未满足固定 9 章节结构或章节顺序不正确。")
+
+    internal_category_codes = (
+        "WARNING",
+        "PPE",
+        "SIGN",
+        "VEHICLE",
+        "RESCUE",
+        "COMMS",
+        "DEICE",
+        "MATERIAL",
+    )
+    leaked_codes = [
+        code for code in internal_category_codes
+        if re.search(rf"(?<![A-Za-z]){code}(?![A-Za-z])", text)
+    ]
+    if leaked_codes:
+        issues.append(
+            "资源类别仍包含内部英文编码，应改为中文名称："
+            + "、".join(leaked_codes)
+        )
 
     return issues
 
@@ -724,9 +746,11 @@ def build_final_review_retry_prompt(
         "4. 指挥架构必须覆盖应急管理、消防救援、公安交管、医疗救援和专家技术支持；\n"
         "5. 资源调度必须说明来源单位/出发地、调度路径、预计到达和联系人电话；\n"
         "6. 处置行动必须包含涉险人员二次排查、现场其他伤员排查、家属联络安抚；\n"
-        "7. 对暂时缺失的信息要明确写“暂未获取”或“待现场确认”；\n"
-        "8. 回复末尾必须附上 agent_control，并设置 final_output=true；\n"
-        "9. 这次是最终方案重写，不要再补问用户，也不要输出占位语。\n\n"
+        "7. 资源类别必须用中文名称，不能直接输出 WARNING、PPE、SIGN、VEHICLE 等内部编码；\n"
+        "8. 如已有专家检索结果，必须写出专家姓名、单位、专业方向和建议支持方式；\n"
+        "9. 对暂时缺失的信息要明确写“暂未获取”或“待现场确认”；\n"
+        "10. 回复末尾必须附上 agent_control，并设置 final_output=true；\n"
+        "11. 这次是最终方案重写，不要再补问用户，也不要输出占位语。\n\n"
         f"【审核发现的问题】\n{issue_block}\n\n"
         f"【审核建议】\n{advice_block}\n\n"
         f"【上一版候选最终方案】\n{candidate_text}"
@@ -1210,8 +1234,14 @@ async def on_message(message: cl.Message):
                                         warehouses = candidates.get("warehouses", [])
                                         teams = candidates.get("teams", [])
                                         coverage = res_json.get("coverage", {})
-                                        covered = "、".join(coverage.get("covered_categories", [])) or "无"
-                                        missing = "、".join(coverage.get("missing_categories", [])) or "无"
+                                        covered = "、".join(
+                                            coverage.get("covered_categories_zh")
+                                            or coverage.get("covered_categories", [])
+                                        ) or "无"
+                                        missing = "、".join(
+                                            coverage.get("missing_categories_zh")
+                                            or coverage.get("missing_categories", [])
+                                        ) or "无"
                                         tool_step.output = (
                                             f"📦 已完成内部资源搜索：仓库 {len(warehouses)} 个，队伍 {len(teams)} 支\n"
                                             f"覆盖率：{coverage.get('coverage_ratio', 0)}\n"
@@ -1231,7 +1261,10 @@ async def on_message(message: cl.Message):
                                         tier1 = dispatch_plan.get("tier1", {}).get("resources", [])
                                         tier2 = dispatch_plan.get("tier2", {}).get("resources", [])
                                         tier3 = dispatch_plan.get("tier3", {}).get("resources", [])
-                                        missing = "、".join(coverage_summary.get("still_missing", [])) or "无"
+                                        missing = "、".join(
+                                            coverage_summary.get("still_missing_zh")
+                                            or coverage_summary.get("still_missing", [])
+                                        ) or "无"
                                         tool_step.output = (
                                             f"🚚 已生成调度方案：第一梯队 {len(tier1)} 个，第二梯队 {len(tier2)} 个，第三梯队 {len(tier3)} 个\n"
                                             f"覆盖率：{coverage_summary.get('coverage_ratio', 0)}\n"

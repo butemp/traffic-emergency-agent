@@ -70,7 +70,8 @@ class SearchEmergencyResources(BaseTool):
                     "items": {"type": "string"},
                     "description": (
                         "所需物资类别列表。可选值：SIGN、WARNING、PPE、FIRE、TOOL、"
-                        "VEHICLE、MATERIAL、RESCUE、COMMS、DEICE"
+                        "VEHICLE、MATERIAL、RESCUE、COMMS、DEICE。"
+                        "这些是工具内部参数编码，最终方案展示时必须转为中文类别名称"
                     ),
                 },
                 "required_specialties": {
@@ -129,6 +130,10 @@ class SearchEmergencyResources(BaseTool):
             resource_type=resource_type,
             exclude_ids=exclude_ids,
             max_results=max_results,
+        )
+        result["display_guidance"] = (
+            "最终方案中资源类别请使用 *_zh 字段或 category_label 中文名称，"
+            "不要直接输出 WARNING、PPE、SIGN、VEHICLE 等内部编码。"
         )
         return json.dumps(result, ensure_ascii=False, indent=2)
 
@@ -210,5 +215,9 @@ class OptimizeDispatchPlan(BaseTool):
             preferred_ids=preferred_ids,
             max_warehouses=max_warehouses,
             max_teams=max_teams,
+        )
+        result["display_guidance"] = (
+            "最终方案中资源类别请使用 materials_summary_zh、matched_categories_zh、covered_zh、still_missing_zh 等中文字段，"
+            "不要直接输出 WARNING、PPE、SIGN、VEHICLE 等内部编码。"
         )
         return json.dumps(result, ensure_ascii=False, indent=2)

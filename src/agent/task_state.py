@@ -353,6 +353,15 @@ class TaskState:
         candidate_plan_titles = [plan.title for plan in self.candidate_plans[:3]]
         selected_plan = next((plan.title for plan in self.candidate_plans if plan.selected), "无")
         plan_titles = [ref.title for ref in self.knowledge_refs if ref.source_type == "emergency_plan"][:3]
+        expert_resources = [
+            (
+                f"{resource.get('name', '未知专家')}"
+                f"({resource.get('source_org') or resource.get('specialty_field') or '单位待确认'})"
+            )
+            for resource in self.available_resources
+            if resource.get("type") == "expert"
+        ][:5]
+        route_notes = self.environment_info.additional_notes[:5]
 
         return (
             f"当前阶段: {self.current_phase.value}\n"
@@ -369,6 +378,8 @@ class TaskState:
             f"现场状态: {self.incident_info.scene_status or '未知'}\n"
             f"缺失字段: {missing_fields or '无'}\n"
             f"已检索资源数: {len(self.available_resources)}\n"
+            f"候选专家: {expert_resources or '无'}\n"
+            f"调度路线摘要: {route_notes or '无'}\n"
             f"已记录知识引用数: {len(self.knowledge_refs)}\n"
             f"已记录预案引用: {plan_titles or '无'}\n"
             f"候选方案数: {len(self.candidate_plans)}\n"
