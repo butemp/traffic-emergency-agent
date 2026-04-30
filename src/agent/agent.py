@@ -766,6 +766,14 @@ class Agent:
         if not raw_payload:
             return self._fallback_control(content)
 
+        if isinstance(raw_payload.get("agent_control"), dict):
+            raw_payload = raw_payload["agent_control"]
+
+        phase_value = str(raw_payload.get("phase", "") or "").upper()
+        if phase_value in {"COMPLETED", "OUTPUT_COMPLETE"}:
+            raw_payload.setdefault("final_output", True)
+            raw_payload.setdefault("next_phase", "OUTPUT_COMPLETE")
+
         next_phase = raw_payload.get("next_phase") or ""
         control = AssistantControl(
             next_phase=self._safe_phase(next_phase),
@@ -796,7 +804,9 @@ class Agent:
             if not match:
                 continue
             try:
-                return json.loads(match.group(1))
+                payload = json.loads(match.group(1))
+                if isinstance(payload, dict):
+                    return payload
             except Exception:
                 logger.warning("agent_control 解析失败，原始内容将走回退逻辑")
                 return {}

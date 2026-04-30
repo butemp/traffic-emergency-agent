@@ -7,6 +7,7 @@
     chainlit run web_app.py -h 0.0.0.0 -p 8000
 """
 
+import json
 import os
 import re
 import sys
@@ -68,14 +69,11 @@ MAX_FINAL_REVIEW_ROUNDS = 3
 def default_runtime_config() -> Dict[str, str]:
     """返回当前会话的默认模型配置。"""
     return {
-        SETTING_OPENAI_API_KEY: (
-            os.getenv("OPENAI_API_KEY")
-            or os.getenv("DASHSCOPE_API_KEY")
-            or DEFAULT_TEXT_API_KEY
-            or ""
-        ),
-        SETTING_OPENAI_MODEL: os.getenv("OPENAI_MODEL", DEFAULT_TEXT_MODEL),
-        SETTING_OPENAI_BASE_URL: os.getenv("OPENAI_BASE_URL", DEFAULT_TEXT_BASE_URL),
+        # Web 端默认统一走项目内配置，避免服务器残留 OPENAI_API_KEY/DASHSCOPE_API_KEY
+        # 把会话默认值悄悄切回其他模型。用户仍可在前端设置面板里手动覆盖。
+        SETTING_OPENAI_API_KEY: DEFAULT_TEXT_API_KEY or "",
+        SETTING_OPENAI_MODEL: DEFAULT_TEXT_MODEL,
+        SETTING_OPENAI_BASE_URL: DEFAULT_TEXT_BASE_URL,
     }
 
 
@@ -684,7 +682,7 @@ def build_output_format_retry_prompt() -> str:
     )
 
 
-def collect_final_plan_guardrail_issues(text: str) -> list[str]:
+def collect_final_plan_guardrail_issues(text: str, agent: Optional[Agent] = None) -> list[str]:
     """收集最终方案的硬性校验问题。"""
     issues: list[str] = []
 
@@ -718,7 +716,165 @@ def collect_final_plan_guardrail_issues(text: str) -> list[str]:
             + "、".join(leaked_codes)
         )
 
+    if agent is not None:
+        issues.extend(collect_pre_output_tool_issues(agent))
+
+        expert_names = [
+            str(resource.get("name") or "")
+            for resource in agent.task_state.available_resources
+            if resource.get("type") == "expert" and resource.get("name")
+        ]
+        if expert_names and not any(name in text for name in expert_names[:5]):
+            issues.append("已检索到专家，但最终方案没有写出专家姓名、单位、专业方向和建议支持方式。")
+
+        route_notes = agent.task_state.environment_info.additional_notes
+        if route_notes and "调度路径" not in text and "高德" not in text:
+            issues.append("已完成调度路线规划，但最终方案没有展示高德路线、预计到达或调度路径。")
+
     return issues
+
+
+def _tool_called_successfully(agent: Agent, tool_name: str) -> bool:
+    """判断指定工具是否至少成功执行过一次。"""
+    return any(
+        record.tool_name == tool_name and record.success
+        for record in agent.task_state.tool_call_log
+    )
+
+
+def _clean_float(value: Any) -> Optional[float]:
+    """把工具结果里的坐标字段安全转成 float。"""
+    if value in (None, ""):
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _incident_coordinates(agent: Agent) -> Optional[Dict[str, float]]:
+    """获取事故点坐标。"""
+    coords = agent.task_state.incident_info.location_coords or {}
+    longitude = _clean_float(coords.get("longitude"))
+    latitude = _clean_float(coords.get("latitude"))
+    if longitude is None or latitude is None:
+        return None
+    return {"longitude": longitude, "latitude": latitude}
+
+
+def _route_origin_candidates(agent: Agent, limit: int = 8) -> list[Dict[str, Any]]:
+    """从内部资源和外部 POI 中整理可用于高德路径规划的出发点。"""
+    origins: list[Dict[str, Any]] = []
+    seen: set[tuple[str, float, float]] = set()
+
+    def append_origin(item: Dict[str, Any]) -> None:
+        longitude = _clean_float(item.get("longitude"))
+        latitude = _clean_float(item.get("latitude"))
+        name = str(item.get("name") or item.get("resource_name") or "").strip()
+        if not name or longitude is None or latitude is None:
+            return
+
+        key = (name, round(longitude, 6), round(latitude, 6))
+        if key in seen:
+            return
+        seen.add(key)
+        origins.append(
+            {
+                "name": name,
+                "resource_type": item.get("resource_type") or item.get("type") or "应急资源",
+                "address": item.get("address") or item.get("origin_address") or item.get("source_org") or "",
+                "longitude": longitude,
+                "latitude": latitude,
+            }
+        )
+
+    for resource in agent.task_state.available_resources:
+        if resource.get("type") == "expert":
+            continue
+        append_origin(resource)
+        if len(origins) >= limit:
+            return origins[:limit]
+
+    for poi in agent.task_state.environment_info.nearby_pois:
+        location = str(poi.get("location") or "")
+        if "," not in location:
+            continue
+        longitude_text, latitude_text = location.split(",", 1)
+        append_origin(
+            {
+                "name": poi.get("name", ""),
+                "resource_type": poi.get("type") or "外部公共资源",
+                "address": poi.get("address", ""),
+                "longitude": longitude_text,
+                "latitude": latitude_text,
+            }
+        )
+        if len(origins) >= limit:
+            break
+
+    return origins[:limit]
+
+
+def collect_pre_output_tool_issues(agent: Agent) -> list[str]:
+    """最终输出前必须补齐的工具链缺口。"""
+    issues: list[str] = []
+
+    if agent_has_tool(agent, "search_experts") and not _tool_called_successfully(agent, "search_experts"):
+        issues.append("尚未调用 search_experts 检索专家库，最终方案不能直接缺少专家技术支持。")
+
+    has_route_inputs = bool(_incident_coordinates(agent) and _route_origin_candidates(agent))
+    if (
+        agent_has_tool(agent, "plan_dispatch_routes")
+        and has_route_inputs
+        and not _tool_called_successfully(agent, "plan_dispatch_routes")
+    ):
+        issues.append("已有事故点坐标和可调度资源坐标，但尚未调用 plan_dispatch_routes 做高德路径规划。")
+
+    return issues
+
+
+def build_pre_output_tool_prompt(agent: Agent, issues: list[str]) -> str:
+    """构造最终输出前的强制补工具提示。"""
+    incident = agent.task_state.incident_info
+    coords = _incident_coordinates(agent)
+    origins = _route_origin_candidates(agent)
+    keywords = [
+        item
+        for item in [
+            incident.incident_type,
+            incident.scene_type,
+            incident.disaster_type,
+            "交通安全",
+            "应急管理",
+        ]
+        if item
+    ]
+
+    lines = [
+        "【系统纠正】当前不能直接输出最终方案，因为最终方案缺少必要的专家或路径依据。",
+        "请不要重写方案，也不要用文字解释带过；请先调用缺失工具补齐数据，再进入最终输出。",
+        "",
+        "缺口：",
+        *[f"- {issue}" for issue in issues],
+        "",
+        "请按需要调用：",
+        f"- search_experts：keywords={json.dumps(keywords or ['交通安全', '应急管理'], ensure_ascii=False)}, incident_type={incident.incident_type or '交通突发事件'}",
+    ]
+
+    if coords and origins:
+        lines.extend(
+            [
+                "- plan_dispatch_routes：使用下面的 destination 和 origins，不要自行编造路线。",
+                f"destination_longitude={coords['longitude']}",
+                f"destination_latitude={coords['latitude']}",
+                f"destination_name={json.dumps(incident.location_text or '事故现场', ensure_ascii=False)}",
+                "origins=" + json.dumps(origins, ensure_ascii=False, indent=2),
+            ]
+        )
+    else:
+        lines.append("- 如果事故点还没有坐标，请先调用 geocode_address；如资源缺少坐标，最终方案中必须写“路线暂未规划，需由人工调度平台确认”。")
+
+    return "\n".join(lines)
 
 
 def build_final_review_retry_prompt(
