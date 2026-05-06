@@ -674,10 +674,28 @@ def build_output_format_retry_prompt() -> str:
         "6. 五、处置行动方案 必须包含涉险人员二次排查、其他伤员排查、家属联络安抚和二次事故防范；\n"
         "7. 六、资源调度方案 必须按梯队展示，并补充资源来源单位/出发地、调度路径、预计到达、联系人电话和资源覆盖情况；\n"
         "8. 九、依据引用 必须汇总预案名称、引用章节、引用内容摘要；\n"
-        "9. 全文只能写建议性表述，不能写成“已通知/已派遣/已下达指令/已启动应急响应”；\n"
+        "9. 全文只能写建议性表述，不能写成'已通知/已派遣/已下达指令/已启动应急响应'；\n"
         "10. 资源类别只能用中文名称，不能直接输出 WARNING、PPE、SIGN、VEHICLE 等内部编码；\n"
         "11. 如已有专家检索结果，必须在指挥架构或专家技术支持中写出专家姓名、单位、专业方向和建议支持方式；\n"
-        "12. 缺失信息请明确写“暂未获取”或“待现场确认”，不要省略章节。\n"
+        "12. 缺失信息请明确写'暂未获取'或'待现场确认'，不要省略章节。\n"
+        "\n"
+        "【Markdown 格式硬性要求】\n"
+        "- 所有表格必须有表头行和分隔行（即 |---|---|--- 格式），且列数一致；\n"
+        "- 章节标题统一使用 ### 级别，子标题用 ####；\n"
+        "- 列表项统一使用 - 开头，不要混用 * 或数字列表与无序列表；\n"
+        "- 不要出现未闭合的表格行或格式断裂。\n"
+        "\n"
+        "【资源调度方案硬性要求】\n"
+        "- 六、资源调度方案 必须基于 search_emergency_resources 和 optimize_dispatch_plan 的实际返回数据编写；\n"
+        "- 每个仓库/队伍必须详细列出可调配的物资清单（物资名称x数量），不能只写物资类别名；\n"
+        "- 表格中'携带物资/可调配物资'列要放在显著位置（前几列）；\n"
+        "- 每个梯队的每个资源都要单独成行，完整写明：名称、所属单位、可调配物资、距离、预计到达、调度路径、联系人、电话。\n"
+        "\n"
+        "【风险提示与注意事项硬性要求】\n"
+        "- 必须分为安全风险、处置风险、衍生风险三类，每类至少 2-3 条；\n"
+        "- 每条风险必须配有对应的防范或处置措施，使用'风险描述 → 应对措施'的配对格式或表格形式；\n"
+        "- 风险内容必须结合本次事故的实际情况（天气、路况、事故类型、现场环境），不能写空泛通用的风险。\n"
+        "\n"
         "请直接输出重排后的最终方案，并附上 agent_control，final_output=true。"
     )
 
@@ -716,6 +734,23 @@ def collect_final_plan_guardrail_issues(text: str, agent: Optional[Agent] = None
             + "、".join(leaked_codes)
         )
 
+    # Markdown 表格格式检查
+    markdown_issues = _check_markdown_table_format(text)
+    if markdown_issues:
+        issues.append("Markdown 格式存在问题：" + "；".join(markdown_issues))
+
+    # 资源调度内容充实度检查
+    dispatch_section = _extract_section(text, "六、资源调度方案")
+    if dispatch_section:
+        dispatch_issues = _check_resource_dispatch_detail(dispatch_section, agent)
+        issues.extend(dispatch_issues)
+
+    # 风险提示与注意事项详细度检查
+    risk_section = _extract_section(text, "八、风险提示与注意事项")
+    if risk_section:
+        risk_issues = _check_risk_section_detail(risk_section)
+        issues.extend(risk_issues)
+
     if agent is not None:
         issues.extend(collect_pre_output_tool_issues(agent))
 
@@ -730,6 +765,134 @@ def collect_final_plan_guardrail_issues(text: str, agent: Optional[Agent] = None
         route_notes = agent.task_state.environment_info.additional_notes
         if route_notes and "调度路径" not in text and "高德" not in text:
             issues.append("已完成调度路线规划，但最终方案没有展示高德路线、预计到达或调度路径。")
+
+    return issues
+
+
+def _extract_section(text: str, section_heading: str) -> str:
+    """从最终方案中提取指定章节内容。"""
+    start = text.find(section_heading)
+    if start < 0:
+        return ""
+
+    # 查找下一个章节标题
+    next_sections = [
+        "七、信息报送", "八、风险提示", "九、依据引用",
+        "一、事件概述", "二、响应定级", "三、指挥架构",
+        "四、预警发布", "五、处置行动",
+    ]
+    end = len(text)
+    for next_heading in next_sections:
+        pos = text.find(next_heading, start + len(section_heading))
+        if 0 < pos < end:
+            end = pos
+    return text[start:end]
+
+
+def _check_markdown_table_format(text: str) -> list[str]:
+    """检查 Markdown 表格格式是否规范。"""
+    issues: list[str] = []
+    lines = text.split("\n")
+
+    i = 0
+    while i < len(lines):
+        line = lines[i].strip()
+        # 检测表头行（包含 | 的行，但排除分隔行本身）
+        if (
+            line.startswith("|")
+            and line.endswith("|")
+            and line.count("|") >= 3
+            and not re.match(r"^\|[\s\-:|]+\|$", line)
+        ):
+            col_count = line.count("|") - 1  # 表头列数
+            # 检查下一行是否是分隔行
+            if i + 1 < len(lines):
+                next_line = lines[i + 1].strip()
+                if not (next_line.startswith("|") and re.search(r"-{2,}", next_line)):
+                    issues.append(f"表格缺少分隔行（在 '{line[:40]}...' 之后）")
+                else:
+                    # 检查分隔行列数是否一致
+                    sep_col_count = next_line.count("|") - 1
+                    if sep_col_count != col_count:
+                        issues.append(f"表格分隔行列数({sep_col_count})与表头列数({col_count})不一致")
+            if len(issues) >= 3:
+                break
+        i += 1
+
+    return issues
+
+
+def _check_resource_dispatch_detail(dispatch_section: str, agent: Optional[Agent] = None) -> list[str]:
+    """检查资源调度方案的内容详细度。"""
+    issues: list[str] = []
+
+    # 检查是否有实际的仓库/队伍名称（而非泛泛而谈）
+    if agent is not None:
+        resource_names = [
+            str(resource.get("name") or "")
+            for resource in agent.task_state.available_resources
+            if resource.get("type") != "expert" and resource.get("name")
+        ]
+        if resource_names:
+            found_count = sum(1 for name in resource_names[:10] if name in dispatch_section)
+            if found_count == 0:
+                issues.append(
+                    "资源调度方案未引用任何实际搜索到的仓库或队伍名称，"
+                    "必须基于 search_emergency_resources/optimize_dispatch_plan 的实际返回数据来编写。"
+                )
+
+    # 检查是否有物资详情（物资名×数量的模式）
+    material_patterns = [
+        r"[×xX]\s*\d+",  # ×2, x3
+        r"\d+\s*[个台套件把条箱桶瓶组块根付顶辆双]",  # 50个, 3台
+    ]
+    has_material_detail = any(
+        re.search(pattern, dispatch_section) for pattern in material_patterns
+    )
+    if not has_material_detail and len(dispatch_section) > 100:
+        issues.append(
+            "资源调度方案缺少具体的物资数量信息，"
+            "每个仓库/队伍应详细列出可调配的物资名称和数量（如'锥桶x50、爆闪灯x20'）。"
+        )
+
+    return issues
+
+
+def _check_risk_section_detail(risk_section: str) -> list[str]:
+    """检查风险提示与注意事项的详细度。"""
+    issues: list[str] = []
+
+    # 检查三类风险是否都有
+    risk_categories = ["安全风险", "处置风险", "衍生风险"]
+    missing_categories = [cat for cat in risk_categories if cat not in risk_section]
+    if missing_categories:
+        issues.append(
+            "风险提示与注意事项缺少以下分类：" + "、".join(missing_categories)
+            + "，必须包含安全风险、处置风险、衍生风险三类。"
+        )
+
+    # 检查是否有应对措施（而不只是列出风险）
+    countermeasure_markers = (
+        "应对", "措施", "防范", "防护", "建议", "需", "应",
+        "确保", "做好", "加强", "注意", "提前", "安排",
+    )
+    lines = [line.strip() for line in risk_section.split("\n") if line.strip().startswith("-")]
+    if len(lines) >= 3:
+        lines_with_measures = sum(
+            1 for line in lines
+            if any(marker in line for marker in countermeasure_markers)
+        )
+        if lines_with_measures < len(lines) * 0.5:
+            issues.append(
+                "风险提示中多数条目只列出了风险描述，缺少对应的防范或处置措施，"
+                "每条风险应配有具体的应对方案。"
+            )
+
+    # 检查风险条目数量是否充足
+    if len(lines) < 6:
+        issues.append(
+            "风险提示条目过少（当前仅 %d 条），安全风险、处置风险、衍生风险每类至少应有 2-3 条。" % len(lines)
+        )
 
     return issues
 
@@ -819,6 +982,13 @@ def collect_pre_output_tool_issues(agent: Agent) -> list[str]:
     """最终输出前必须补齐的工具链缺口。"""
     issues: list[str] = []
 
+    if agent_has_tool(agent, "search_emergency_resources") and not _tool_called_successfully(agent, "search_emergency_resources"):
+        issues.append("尚未调用 search_emergency_resources 搜索应急仓库和救援队伍，最终方案必须基于实际资源数据进行调度。")
+
+    if agent_has_tool(agent, "optimize_dispatch_plan") and not _tool_called_successfully(agent, "optimize_dispatch_plan"):
+        if _tool_called_successfully(agent, "search_emergency_resources"):
+            issues.append("已完成资源搜索但尚未调用 optimize_dispatch_plan 生成分梯队调度方案，最终方案的资源调度必须基于优化后的调度结果。")
+
     if agent_has_tool(agent, "search_experts") and not _tool_called_successfully(agent, "search_experts"):
         issues.append("尚未调用 search_experts 检索专家库，最终方案不能直接缺少专家技术支持。")
 
@@ -851,17 +1021,48 @@ def build_pre_output_tool_prompt(agent: Agent, issues: list[str]) -> str:
     ]
 
     lines = [
-        "【系统纠正】当前不能直接输出最终方案，因为最终方案缺少必要的专家或路径依据。",
+        "【系统纠正】当前不能直接输出最终方案，因为最终方案缺少必要的资源调度、专家或路径依据。",
         "请不要重写方案，也不要用文字解释带过；请先调用缺失工具补齐数据，再进入最终输出。",
         "",
         "缺口：",
         *[f"- {issue}" for issue in issues],
         "",
-        "请按需要调用：",
-        f"- search_experts：keywords={json.dumps(keywords or ['交通安全', '应急管理'], ensure_ascii=False)}, incident_type={incident.incident_type or '交通突发事件'}",
+        "请按需要依次调用：",
     ]
 
-    if coords and origins:
+    # 资源搜索指引
+    if not _tool_called_successfully(agent, "search_emergency_resources") and coords:
+        required_cats = []
+        if incident.incident_type:
+            type_cat_map = {
+                "交通事故": ["WARNING", "RESCUE", "VEHICLE", "PPE", "COMMS"],
+                "危化品泄漏": ["WARNING", "PPE", "FIRE", "RESCUE", "COMMS"],
+                "火灾": ["FIRE", "WARNING", "PPE", "RESCUE", "COMMS"],
+                "地质灾害": ["WARNING", "RESCUE", "TOOL", "VEHICLE", "COMMS"],
+                "洪涝": ["WARNING", "RESCUE", "MATERIAL", "VEHICLE", "COMMS"],
+            }
+            required_cats = type_cat_map.get(incident.incident_type, ["WARNING", "RESCUE", "VEHICLE", "PPE", "COMMS"])
+        else:
+            required_cats = ["WARNING", "RESCUE", "VEHICLE", "PPE", "COMMS"]
+        lines.append(
+            f"- search_emergency_resources：longitude={coords['longitude']}, latitude={coords['latitude']}, "
+            f"required_categories={json.dumps(required_cats, ensure_ascii=False)}"
+        )
+
+    # 调度优化指引
+    if not _tool_called_successfully(agent, "optimize_dispatch_plan") and _tool_called_successfully(agent, "search_emergency_resources"):
+        lines.append(
+            "- optimize_dispatch_plan：基于 search_emergency_resources 的搜索结果生成分梯队调度方案"
+        )
+
+    # 专家检索指引
+    if not _tool_called_successfully(agent, "search_experts"):
+        lines.append(
+            f"- search_experts：keywords={json.dumps(keywords or ['交通安全', '应急管理'], ensure_ascii=False)}, incident_type={incident.incident_type or '交通突发事件'}"
+        )
+
+    # 路径规划指引
+    if coords and origins and not _tool_called_successfully(agent, "plan_dispatch_routes"):
         lines.extend(
             [
                 "- plan_dispatch_routes：使用下面的 destination 和 origins，不要自行编造路线。",
@@ -871,8 +1072,14 @@ def build_pre_output_tool_prompt(agent: Agent, issues: list[str]) -> str:
                 "origins=" + json.dumps(origins, ensure_ascii=False, indent=2),
             ]
         )
-    else:
-        lines.append("- 如果事故点还没有坐标，请先调用 geocode_address；如资源缺少坐标，最终方案中必须写“路线暂未规划，需由人工调度平台确认”。")
+    elif not coords:
+        lines.append("- 如果事故点还没有坐标，请先调用 geocode_address；如资源缺少坐标，最终方案中必须写'路线暂未规划，需由人工调度平台确认'。")
+
+    lines.extend([
+        "",
+        "重要提醒：最终方案的'六、资源调度方案'必须基于以上工具的实际返回数据来编写，"
+        "包括每个仓库/队伍的名称、可调配物资清单（物资名称x数量）、距离、联系人等，不能凭空编造。",
+    ])
 
     return "\n".join(lines)
 
@@ -904,9 +1111,22 @@ def build_final_review_retry_prompt(
         "6. 处置行动必须包含涉险人员二次排查、现场其他伤员排查、家属联络安抚；\n"
         "7. 资源类别必须用中文名称，不能直接输出 WARNING、PPE、SIGN、VEHICLE 等内部编码；\n"
         "8. 如已有专家检索结果，必须写出专家姓名、单位、专业方向和建议支持方式；\n"
-        "9. 对暂时缺失的信息要明确写“暂未获取”或“待现场确认”；\n"
+        "9. 对暂时缺失的信息要明确写'暂未获取'或'待现场确认'；\n"
         "10. 回复末尾必须附上 agent_control，并设置 final_output=true；\n"
         "11. 这次是最终方案重写，不要再补问用户，也不要输出占位语。\n\n"
+        "Markdown 格式要求：\n"
+        "- 所有表格必须有表头行和分隔行（|---|---|），且每行列数与表头一致；\n"
+        "- 章节标题用 ### 级别，子标题用 ####；\n"
+        "- 不要出现未闭合的表格行或格式断裂。\n\n"
+        "资源调度方案要求：\n"
+        "- 必须基于 search_emergency_resources 和 optimize_dispatch_plan 返回的实际数据编写，不能凭空编造仓库和队伍；\n"
+        "- 每个仓库/队伍必须详细列出可调配物资清单（物资名称x数量），不能只写类别名；\n"
+        "- 表格中'携带物资/可调配物资'列要放在显著位置（靠前列），这是指挥员最关心的信息；\n"
+        "- 每个梯队的每个资源都要单独成行，内容要充实，资源调度部分整体字数应充足。\n\n"
+        "风险提示与注意事项要求：\n"
+        "- 必须分为安全风险、处置风险、衍生风险三类，每类至少 2-3 条；\n"
+        "- 每条风险必须配有对应的防范或处置措施，不能只列风险不写应对方案；\n"
+        "- 风险内容必须结合本次事故实际情况，不要写空泛通用的风险。\n\n"
         f"【审核发现的问题】\n{issue_block}\n\n"
         f"【审核建议】\n{advice_block}\n\n"
         f"【上一版候选最终方案】\n{candidate_text}"
