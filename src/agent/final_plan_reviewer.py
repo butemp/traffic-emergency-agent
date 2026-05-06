@@ -25,6 +25,7 @@ class FinalPlanReviewResult:
     summary: str = ""
     issues: List[str] = field(default_factory=list)
     revision_advice: List[str] = field(default_factory=list)
+    section_reviews: List[Dict[str, Any]] = field(default_factory=list)
     raw_payload: Dict[str, Any] = field(default_factory=dict)
 
 
@@ -50,6 +51,7 @@ class FinalPlanReviewer:
 12. 资源调度方案是否足够详细：每个仓库/队伍是否列出了可调配的具体物资清单（物资名称×数量），而不是只写物资类别名称；资源调度部分整体内容是否充实、不过于简略
 13. 资源调度方案中物资信息是否放在显著位置：表格中"携带物资/可调配物资"列是否靠前展示，这是指挥员最优先关注的信息
 14. 风险提示与注意事项是否足够详细：是否分为安全风险、处置风险、衍生风险三类；每条风险是否配有对应的防范或处置措施（不能只列风险不写应对方案）；内容是否结合本次事故的实际情况而非泛泛而谈
+15. 必须逐章审核 9 个章节的详细度。尤其是“指挥架构”“处置行动方案”“资源调度方案”“风险提示与注意事项”，不能只给总评。每章都要判断是否内容充实、是否能直接支撑指挥员决策。
 
 输出要求：
 - 只输出 JSON
@@ -60,7 +62,16 @@ class FinalPlanReviewer:
   "score": 92,
   "summary": "一句话结论",
   "issues": ["问题1", "问题2"],
-  "revision_advice": ["修改建议1", "修改建议2"]
+  "revision_advice": ["修改建议1", "修改建议2"],
+  "section_reviews": [
+    {
+      "section": "三、指挥架构",
+      "passed": false,
+      "score": 60,
+      "issues": ["缺少消防救援组和专家技术支持组"],
+      "revision_advice": "补充总指挥、副总指挥、各工作组牵头单位、参与单位、职责和首要动作"
+    }
+  ]
 }
 """
 
@@ -130,16 +141,47 @@ class FinalPlanReviewer:
                 summary="审核器未返回可解析结果，默认判定为需要重写。",
                 issues=["审核器未返回可解析 JSON"],
                 revision_advice=["请重新生成最终方案，并严格遵守既定模板和建议性表述要求。"],
+                section_reviews=[],
                 raw_payload={},
             )
 
         issues = payload.get("issues", []) or []
         advice = payload.get("revision_advice", []) or []
+        section_reviews = payload.get("section_reviews", []) or []
 
         if isinstance(issues, str):
             issues = [issues]
         if isinstance(advice, str):
             advice = [advice]
+        if isinstance(section_reviews, dict):
+            section_reviews = [section_reviews]
+        if not isinstance(section_reviews, list):
+            section_reviews = []
+
+        normalized_section_reviews: List[Dict[str, Any]] = []
+        for item in section_reviews:
+            if not isinstance(item, dict):
+                continue
+            normalized = {
+                "section": str(item.get("section", "") or ""),
+                "passed": bool(item.get("passed", False)),
+                "score": int(item.get("score", 0) or 0),
+                "issues": item.get("issues", []) or [],
+                "revision_advice": str(item.get("revision_advice", "") or ""),
+            }
+            if isinstance(normalized["issues"], str):
+                normalized["issues"] = [normalized["issues"]]
+            normalized["issues"] = [str(issue) for issue in normalized["issues"] if str(issue).strip()]
+            normalized_section_reviews.append(normalized)
+
+        for item in normalized_section_reviews:
+            if item.get("passed"):
+                continue
+            section = item.get("section") or "未指定章节"
+            for issue in item.get("issues", []):
+                issues.append(f"{section}: {issue}")
+            if item.get("revision_advice"):
+                advice.append(f"{section}: {item['revision_advice']}")
 
         return FinalPlanReviewResult(
             passed=bool(payload.get("passed", False)),
@@ -147,5 +189,6 @@ class FinalPlanReviewer:
             summary=str(payload.get("summary", "") or ""),
             issues=[str(item) for item in issues if str(item).strip()],
             revision_advice=[str(item) for item in advice if str(item).strip()],
+            section_reviews=normalized_section_reviews,
             raw_payload=payload,
         )

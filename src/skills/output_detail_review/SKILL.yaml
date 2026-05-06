@@ -1,0 +1,8 @@
+name: output_detail_review
+description: 最终方案逐章详细度审核能力，负责约束首稿方案必须内容充实、逐章可执行
+version: "1.0"
+active_phases:
+  - OUTPUT
+tools: []
+priority: critical
+dependencies: []

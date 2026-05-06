@@ -741,19 +741,21 @@ class Agent:
 
 现在请按照以下步骤进行：
 
-**第一步：分析工具结果（必须完成）**
+**内部步骤：分析工具结果（必须完成，但最终方案中不要展示这个标题）**
 请对刚才的工具调用结果进行简要分析：
 - 每个工具返回了什么关键信息？
 - 这些信息之间有什么关联？
 - 基于这些结果，你发现了什么？
 
-**第二步：决定下一步操作**
+**内部步骤：决定下一步操作**
 根据你的分析，选择以下之一：
 - 如果信息已经足够，直接给出处置建议，并附上 agent_control 控制块
 - 如果还需要更多信息，说明需要调用什么工具并调用
 - 如果需要向用户补问，先向用户说明原因，并附上 agent_control 控制块
 
-注意：请确保你的回答包含第一步的分析内容。"""
+注意：
+- 如果只是阶段中间分析，可以简要说明工具结果。
+- 如果你准备输出最终应急指挥方案，不要展示“第一步：分析工具结果”“第二步：处置方案生成”等过程说明，直接输出标准化 9 章节方案。"""
         return Message(role=MessageRole.SYSTEM, content=analysis_prompt)
 
     def parse_assistant_control(self, content: str) -> AssistantControl:
@@ -810,6 +812,19 @@ class Agent:
             except Exception:
                 logger.warning("agent_control 解析失败，原始内容将走回退逻辑")
                 return {}
+        trailing_match = re.search(
+            r"(?:^|\n)\s*(?:json\s*)?(\{\s*\"agent_control\"\s*:\s*\{.*\}\s*\})\s*$",
+            content,
+            re.DOTALL | re.IGNORECASE,
+        )
+        if trailing_match:
+            try:
+                payload = json.loads(trailing_match.group(1))
+                if isinstance(payload, dict):
+                    return payload
+            except Exception:
+                logger.warning("裸露 agent_control JSON 解析失败，原始内容将走回退逻辑")
+                return {}
         return {}
 
     def strip_control_block(self, content: str) -> str:
@@ -819,6 +834,12 @@ class Agent:
 
         stripped = re.sub(r"```agent_control\s*\{.*?\}\s*```", "", content, flags=re.DOTALL)
         stripped = re.sub(r"```json\s*\{.*?\}\s*```", "", stripped, flags=re.DOTALL)
+        stripped = re.sub(
+            r"(?:^|\n)\s*(?:json\s*)?\{\s*\"agent_control\"\s*:\s*\{.*\}\s*\}\s*$",
+            "",
+            stripped,
+            flags=re.DOTALL | re.IGNORECASE,
+        )
         return stripped.strip()
 
     def _fallback_control(self, content: str) -> AssistantControl:

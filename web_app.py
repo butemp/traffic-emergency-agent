@@ -461,6 +461,37 @@ STANDARD_PLAN_SECTIONS = [
     "九、依据引用",
 ]
 
+DETAIL_CRITICAL_SECTIONS = {
+    "三、指挥架构",
+    "五、处置行动方案",
+    "六、资源调度方案",
+    "八、风险提示与注意事项",
+}
+
+SECTION_MIN_LENGTHS = {
+    "一、事件概述": 180,
+    "二、响应定级": 180,
+    "三、指挥架构": 360,
+    "四、预警发布": 180,
+    "五、处置行动方案": 520,
+    "六、资源调度方案": 420,
+    "七、信息报送与新闻发布": 280,
+    "八、风险提示与注意事项": 360,
+    "九、依据引用": 180,
+}
+
+SECTION_DETAIL_REQUIREMENTS = {
+    "一、事件概述": ("事件类型", "事发时间", "事发位置", "经纬度", "事件描述", "伤亡情况", "道路影响", "天气状况", "路况状况"),
+    "二、响应定级": ("响应级别", "定级依据", "响应启动主体", "适用预案", "预案依据"),
+    "三、指挥架构": ("总指挥", "副总指挥", "应急管理", "公安", "消防", "医疗", "专家", "职责"),
+    "四、预警发布": ("预警级别", "发布主体", "发布流程", "发布渠道", "预警内容", "预案依据"),
+    "五、处置行动方案": ("先期处置", "全面响应", "持续处置", "现场警戒", "交通", "二次排查", "家属", "舆情"),
+    "六、资源调度方案": ("第一梯队", "第二梯队", "外部资源", "专家技术支持", "资源覆盖", "联系人", "电话", "调度路径"),
+    "七、信息报送与新闻发布": ("初报", "续报", "报送对象", "新闻发布", "舆情", "责任单位"),
+    "八、风险提示与注意事项": ("安全风险", "处置风险", "衍生风险", "应对", "责任单位"),
+    "九、依据引用": ("预案名称", "引用章节", "引用内容", "支撑"),
+}
+
 
 def agent_has_tool(agent: Agent, tool_name: str) -> bool:
     """判断当前 Agent 是否注册了指定工具。"""
@@ -696,6 +727,13 @@ def build_output_format_retry_prompt() -> str:
         "- 每条风险必须配有对应的防范或处置措施，使用'风险描述 → 应对措施'的配对格式或表格形式；\n"
         "- 风险内容必须结合本次事故的实际情况（天气、路况、事故类型、现场环境），不能写空泛通用的风险。\n"
         "\n"
+        "【逐章详细度硬性要求】\n"
+        "- 不要输出“第一步：分析工具结果”“第二步：处置方案生成”等过程说明；\n"
+        "- 指挥架构至少列出 7 个工作组，并写清牵头单位、参与单位、职责和首要动作；\n"
+        "- 处置行动方案三个阶段合计不少于 12 条行动，每条都要有责任单位、协同单位、时间要求和依据；\n"
+        "- 信息报送与新闻发布必须覆盖初报、续报、终报、新闻发布、舆情监测和回应口径；\n"
+        "- 依据引用必须说明每条依据支撑了哪个关键决策。\n"
+        "\n"
         "请直接输出重排后的最终方案，并附上 agent_control，final_output=true。"
     )
 
@@ -711,8 +749,15 @@ def collect_final_plan_guardrail_issues(text: str, agent: Optional[Agent] = None
     if contains_nonexistent_execution_claim(text):
         issues.append("方案中出现了把建议动作写成已执行现实动作的表述。")
 
+    process_markers = ("第一步：分析工具结果", "第二步：处置方案生成", "基于以上分析，我现在可以生成")
+    if any(marker in text for marker in process_markers):
+        issues.append("最终方案中混入了模型推理过程说明，应删除“第一步/第二步”等过程性文字，只保留标准 9 章节方案。")
+
     if not has_standard_plan_structure(text):
         issues.append("方案未满足固定 9 章节结构或章节顺序不正确。")
+
+    detail_issues = collect_section_detail_issues(text)
+    issues.extend(detail_issues)
 
     internal_category_codes = (
         "WARNING",
@@ -775,18 +820,46 @@ def _extract_section(text: str, section_heading: str) -> str:
     if start < 0:
         return ""
 
-    # 查找下一个章节标题
-    next_sections = [
-        "七、信息报送", "八、风险提示", "九、依据引用",
-        "一、事件概述", "二、响应定级", "三、指挥架构",
-        "四、预警发布", "五、处置行动",
-    ]
     end = len(text)
-    for next_heading in next_sections:
+    for next_heading in STANDARD_PLAN_SECTIONS:
+        if next_heading == section_heading:
+            continue
         pos = text.find(next_heading, start + len(section_heading))
         if 0 < pos < end:
             end = pos
     return text[start:end]
+
+
+def collect_section_detail_issues(text: str) -> list[str]:
+    """逐章检查最终方案是否足够详细。"""
+    issues: list[str] = []
+
+    for heading in STANDARD_PLAN_SECTIONS:
+        section = _extract_section(text, heading)
+        if not section:
+            continue
+
+        content = section.replace(heading, "", 1).strip()
+        visible_length = len(re.sub(r"\s+", "", content))
+        minimum_length = SECTION_MIN_LENGTHS.get(heading, 160)
+        if visible_length < minimum_length:
+            issues.append(
+                f"{heading} 内容过于简略，当前约 {visible_length} 字，建议至少 {minimum_length} 字并补齐关键字段。"
+            )
+
+        requirements = SECTION_DETAIL_REQUIREMENTS.get(heading, ())
+        missing_terms = [term for term in requirements if term not in section]
+        allowed_missing = 2 if heading in DETAIL_CRITICAL_SECTIONS else 3
+        if len(missing_terms) > allowed_missing:
+            issues.append(
+                f"{heading} 缺少关键内容：{'、'.join(missing_terms[:8])}。"
+            )
+
+    issues.extend(_check_command_structure_detail(_extract_section(text, "三、指挥架构")))
+    issues.extend(_check_action_plan_detail(_extract_section(text, "五、处置行动方案")))
+    issues.extend(_check_reporting_section_detail(_extract_section(text, "七、信息报送与新闻发布")))
+    issues.extend(_check_reference_section_detail(_extract_section(text, "九、依据引用")))
+    return issues
 
 
 def _check_markdown_table_format(text: str) -> list[str]:
@@ -797,27 +870,117 @@ def _check_markdown_table_format(text: str) -> list[str]:
     i = 0
     while i < len(lines):
         line = lines[i].strip()
-        # 检测表头行（包含 | 的行，但排除分隔行本身）
-        if (
-            line.startswith("|")
-            and line.endswith("|")
-            and line.count("|") >= 3
-            and not re.match(r"^\|[\s\-:|]+\|$", line)
-        ):
-            col_count = line.count("|") - 1  # 表头列数
-            # 检查下一行是否是分隔行
-            if i + 1 < len(lines):
-                next_line = lines[i + 1].strip()
-                if not (next_line.startswith("|") and re.search(r"-{2,}", next_line)):
-                    issues.append(f"表格缺少分隔行（在 '{line[:40]}...' 之后）")
-                else:
-                    # 检查分隔行列数是否一致
-                    sep_col_count = next_line.count("|") - 1
-                    if sep_col_count != col_count:
-                        issues.append(f"表格分隔行列数({sep_col_count})与表头列数({col_count})不一致")
+
+        if not _looks_like_table_row(line):
+            i += 1
+            continue
+
+        if i + 1 >= len(lines) or not _looks_like_table_separator(lines[i + 1].strip()):
+            issues.append(f"表格缺少分隔行（在 '{line[:40]}...' 之后）")
             if len(issues) >= 3:
                 break
+            i += 1
+            continue
+
+        col_count = _table_col_count(line)
+        sep_col_count = _table_col_count(lines[i + 1].strip())
+        if sep_col_count != col_count:
+            issues.append(f"表格分隔行列数({sep_col_count})与表头列数({col_count})不一致")
+
+        i += 2
+        while i < len(lines) and _looks_like_table_row(lines[i].strip()):
+            row = lines[i].strip()
+            if _table_col_count(row) != col_count:
+                issues.append(f"表格数据行列数与表头不一致（在 '{row[:40]}...'）")
+                break
+            i += 1
+
+        if len(issues) >= 3:
+            break
+
+    return issues
+
+
+def _looks_like_table_row(line: str) -> bool:
+    return (
+        line.startswith("|")
+        and line.endswith("|")
+        and line.count("|") >= 3
+        and not _looks_like_table_separator(line)
+    )
+
+
+def _looks_like_table_separator(line: str) -> bool:
+    return bool(re.match(r"^\|[\s\-:|]+\|$", line)) and "--" in line
+
+
+def _table_col_count(line: str) -> int:
+    return max(0, line.count("|") - 1)
+
+
+def _count_table_data_rows(section: str) -> int:
+    rows = 0
+    lines = section.splitlines()
+    i = 0
+    while i < len(lines):
+        line = lines[i].strip()
+        if _looks_like_table_row(line) and i + 1 < len(lines) and _looks_like_table_separator(lines[i + 1].strip()):
+            i += 2
+            while i < len(lines) and _looks_like_table_row(lines[i].strip()):
+                rows += 1
+                i += 1
+            continue
         i += 1
+    return rows
+
+
+def _check_command_structure_detail(section: str) -> list[str]:
+    """检查指挥架构是否足够完整。"""
+    if not section:
+        return []
+
+    issues: list[str] = []
+    required_roles = {
+        "应急管理": "应急管理部门/属地政府",
+        "公安": "公安交管部门",
+        "消防": "消防救援部门",
+        "医疗": "卫生健康或医疗救援部门",
+        "专家": "专家技术支持组",
+        "综合协调": "综合协调工作组",
+        "善后": "善后安抚或家属联络组",
+    }
+    missing = [label for marker, label in required_roles.items() if marker not in section]
+    if missing:
+        issues.append("三、指挥架构不够完整，缺少：" + "、".join(missing))
+
+    row_count = _count_table_data_rows(section)
+    if row_count < 7:
+        issues.append("三、指挥架构工作组数量不足，建议至少列出 7 个工作组并写清牵头单位、参与单位、职责和首要动作。")
+
+    return issues
+
+
+def _check_action_plan_detail(section: str) -> list[str]:
+    """检查处置行动方案是否足够详细。"""
+    if not section:
+        return []
+
+    issues: list[str] = []
+    stage_markers = ("先期处置", "全面响应", "持续处置")
+    missing_stages = [stage for stage in stage_markers if stage not in section]
+    if missing_stages:
+        issues.append("五、处置行动方案缺少阶段：" + "、".join(missing_stages))
+
+    action_rows = _count_table_data_rows(section)
+    list_actions = len(re.findall(r"(?m)^\s*(?:-|\d+[\.、])\s+", section))
+    action_count = max(action_rows, list_actions)
+    if action_count < 12:
+        issues.append(f"五、处置行动方案行动项不足，当前约 {action_count} 条，建议至少 12 条并覆盖三个阶段。")
+
+    required_actions = ("现场警戒", "交通管制", "二次排查", "伤员", "家属", "清障", "舆情")
+    missing_actions = [item for item in required_actions if item not in section]
+    if missing_actions:
+        issues.append("五、处置行动方案缺少关键动作：" + "、".join(missing_actions))
 
     return issues
 
@@ -877,6 +1040,9 @@ def _check_risk_section_detail(risk_section: str) -> list[str]:
         "确保", "做好", "加强", "注意", "提前", "安排",
     )
     lines = [line.strip() for line in risk_section.split("\n") if line.strip().startswith("-")]
+    table_rows = _count_table_data_rows(risk_section)
+    risk_item_count = max(len(lines), table_rows)
+
     if len(lines) >= 3:
         lines_with_measures = sum(
             1 for line in lines
@@ -887,12 +1053,50 @@ def _check_risk_section_detail(risk_section: str) -> list[str]:
                 "风险提示中多数条目只列出了风险描述，缺少对应的防范或处置措施，"
                 "每条风险应配有具体的应对方案。"
             )
+    elif table_rows >= 3:
+        if not any(marker in risk_section for marker in countermeasure_markers):
+            issues.append(
+                "风险提示表格缺少防范或处置措施列，每条风险应写清应对措施和责任单位。"
+            )
 
     # 检查风险条目数量是否充足
-    if len(lines) < 6:
+    if risk_item_count < 6:
         issues.append(
-            "风险提示条目过少（当前仅 %d 条），安全风险、处置风险、衍生风险每类至少应有 2-3 条。" % len(lines)
+            "风险提示条目过少（当前约 %d 条），安全风险、处置风险、衍生风险每类至少应有 2-3 条。" % risk_item_count
         )
+
+    return issues
+
+
+def _check_reporting_section_detail(section: str) -> list[str]:
+    """检查信息报送与新闻发布章节是否完整。"""
+    if not section:
+        return []
+
+    issues: list[str] = []
+    required = ("初报", "续报", "终报", "报送对象", "新闻发布", "舆情", "责任单位", "时限")
+    missing = [item for item in required if item not in section]
+    if len(missing) > 2:
+        issues.append("七、信息报送与新闻发布缺少关键内容：" + "、".join(missing))
+
+    if _count_table_data_rows(section) < 5:
+        issues.append("七、信息报送与新闻发布内容偏少，建议分别列出初报、续报、终报、新闻发布、舆情回应等事项。")
+
+    return issues
+
+
+def _check_reference_section_detail(section: str) -> list[str]:
+    """检查依据引用章节是否完整。"""
+    if not section:
+        return []
+
+    issues: list[str] = []
+    if "《" not in section or "》" not in section:
+        issues.append("九、依据引用未列出明确的预案或法规名称。")
+    if "章节" not in section and "第" not in section:
+        issues.append("九、依据引用未写清引用章节或条款位置。")
+    if _count_table_data_rows(section) < 2:
+        issues.append("九、依据引用条目过少，建议用表格列出预案、工具结果、案例或法规依据及其支撑的决策。")
 
     return issues
 
@@ -1113,11 +1317,20 @@ def build_final_review_retry_prompt(
         "8. 如已有专家检索结果，必须写出专家姓名、单位、专业方向和建议支持方式；\n"
         "9. 对暂时缺失的信息要明确写'暂未获取'或'待现场确认'；\n"
         "10. 回复末尾必须附上 agent_control，并设置 final_output=true；\n"
-        "11. 这次是最终方案重写，不要再补问用户，也不要输出占位语。\n\n"
+        "11. 这次是最终方案重写，不要再补问用户，也不要输出占位语；\n"
+        "12. 不要输出“第一步：分析工具结果”“第二步：处置方案生成”等过程说明，直接给标准 9 章节方案。\n\n"
         "Markdown 格式要求：\n"
         "- 所有表格必须有表头行和分隔行（|---|---|），且每行列数与表头一致；\n"
         "- 章节标题用 ### 级别，子标题用 ####；\n"
         "- 不要出现未闭合的表格行或格式断裂。\n\n"
+        "逐章详细度要求：\n"
+        "- 一、事件概述：至少覆盖事件类型、时间、位置、坐标、伤亡、道路影响、天气、路况和信息来源；\n"
+        "- 二、响应定级：必须写出定级依据、启动主体、适用预案、条款摘要和复核条件；\n"
+        "- 三、指挥架构：必须详细列出总指挥、副总指挥和不少于 7 个工作组，写清牵头单位、参与单位、职责和首要动作；\n"
+        "- 四、预警发布：必须写清发布主体、流程、渠道、内容要点、更新频率和解除条件；\n"
+        "- 五、处置行动方案：三个阶段合计不少于 12 条行动，每条有责任单位、协同单位、时间要求和预案依据；\n"
+        "- 七、信息报送与新闻发布：必须包含初报、续报、终报、新闻发布、舆情监测和回应口径；\n"
+        "- 九、依据引用：必须列出预案/法规/工具结果/案例依据，并说明支撑哪个决策。\n\n"
         "资源调度方案要求：\n"
         "- 必须基于 search_emergency_resources 和 optimize_dispatch_plan 返回的实际数据编写，不能凭空编造仓库和队伍；\n"
         "- 每个仓库/队伍必须详细列出可调配物资清单（物资名称x数量），不能只写类别名；\n"
@@ -1152,7 +1365,7 @@ async def review_final_response_before_display(
     last_review_result = None
 
     for attempt in range(1, MAX_FINAL_REVIEW_ROUNDS + 1):
-        guardrail_issues = collect_final_plan_guardrail_issues(current_text)
+        guardrail_issues = collect_final_plan_guardrail_issues(current_text, agent=agent)
         review_result = await cl.make_async(reviewer.review)(agent.task_state, current_text)
         last_review_result = review_result
 
@@ -1919,6 +2132,19 @@ async def on_message(message: cl.Message):
                             await send_pending_interaction_fallback(agent)
                         agent.state.save()
                         return
+
+                    if control.final_output or agent.task_state.current_phase in {TaskPhase.OUTPUT, TaskPhase.OUTPUT_COMPLETE}:
+                        pre_output_issues = collect_pre_output_tool_issues(agent)
+                        if pre_output_issues:
+                            agent.task_state.transition_to(TaskPhase.PLAN_GENERATION)
+                            reminder = Message(
+                                role=MessageRole.SYSTEM,
+                                content=build_pre_output_tool_prompt(agent, pre_output_issues),
+                            )
+                            agent.state.add_message(reminder)
+                            agent.task_state.append_message(reminder)
+                            run_step.output = "🔁 最终方案缺少资源、专家或路线依据，已退回方案生成阶段补齐工具结果。"
+                            continue
 
                     assistant_msg = Message(role=MessageRole.ASSISTANT, content=visible_response)
                     agent.state.add_message(assistant_msg)
