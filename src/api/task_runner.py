@@ -544,6 +544,25 @@ async def _run_agent_loop(
             store.update_progress(task_id, current_action="自动确认，继续推进中")
             continue
 
+        # ── DeepSeek 原始 tool call token 泄漏检测 ──
+        # 模型有时会把内部 special token 当文本输出，不是真正的工具调用
+        _LEAKED_TOKENS = ("<｜tool▁calls▁begin｜>", "<｜tool▁call▁begin｜>", "<｜tool▁sep｜>", "<｜tool▁call▁end｜>", "<｜tool▁calls▁end｜>")
+        if any(tok in visible for tok in _LEAKED_TOKENS):
+            logger.warning("检测到模型泄漏 tool call special token，视为停住态: task_id=%s", task_id)
+            # 清理掉泄漏 token 后的文本对模型没有价值，直接注入重试指令
+            push_msg = Message(
+                role=MessageRole.SYSTEM,
+                content=(
+                    "【系统纠正】你刚才把内部 tool call 控制符当文本输出了，这不是有效的工具调用。\n"
+                    "如果你需要调用工具，请通过正常的 function calling 机制发起，不要在文本中输出 <｜tool▁calls▁begin｜> 等标记。\n"
+                    "请立即重新执行：调用对应工具，或直接输出最终方案并设置 final_output=true。"
+                ),
+            )
+            agent.state.add_message(push_msg)
+            agent.task_state.append_message(push_msg)
+            store.update_progress(task_id, current_action="检测到 token 泄漏，自动重试中")
+            continue
+
         # ── 停住态 / 占位语检测 → 直接注入推进指令 ──
         from web_app import (
             looks_like_progress_only_response,

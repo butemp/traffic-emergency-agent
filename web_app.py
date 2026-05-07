@@ -3640,9 +3640,16 @@ async def on_chat_end():
 
 
 # --- HTTP API 路由挂载 ---
+# Chainlit 会注册 catch-all 静态文件路由来服务前端 SPA，
+# 导致后追加的路由永远匹配不到。这里把 API 路由插到路由列表最前面。
 from chainlit.server import app as fastapi_app
 from src.api.routes import router as api_router
+
+_n_before = len(fastapi_app.routes)
 fastapi_app.include_router(api_router)
+_n_new = len(fastapi_app.routes) - _n_before
+if _n_new > 0:
+    fastapi_app.routes[:] = fastapi_app.routes[-_n_new:] + fastapi_app.routes[:-_n_new]
 
 
 if __name__ == "__main__":
