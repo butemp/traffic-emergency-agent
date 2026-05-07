@@ -9,6 +9,8 @@ import re
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING, Any, Dict, List
 
+from ..providers.defaults import DEFAULT_TEXT_MAX_TOKENS
+
 if TYPE_CHECKING:
     from ..providers import OpenAIProvider
     from .task_state import TaskState
@@ -80,7 +82,12 @@ class FinalPlanReviewer:
 
     def __init__(self, provider: "OpenAIProvider", max_tokens: int | None = None):
         self.provider = provider
-        self.max_tokens = max_tokens or int(os.getenv("FINAL_REVIEW_MAX_TOKENS", "32000"))
+        configured_tokens = os.getenv("FINAL_REVIEW_MAX_TOKENS") or os.getenv("OPENAI_MAX_TOKENS")
+        try:
+            fallback_tokens = int(configured_tokens) if configured_tokens else DEFAULT_TEXT_MAX_TOKENS
+        except (TypeError, ValueError):
+            fallback_tokens = DEFAULT_TEXT_MAX_TOKENS
+        self.max_tokens = max_tokens or fallback_tokens
 
     def review(self, task_state: "TaskState", candidate_plan: str) -> FinalPlanReviewResult:
         """审核最终方案。"""

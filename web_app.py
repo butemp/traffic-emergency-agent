@@ -62,9 +62,19 @@ SESSION_RUNTIME_CONFIG_KEY = "runtime_model_config"
 SETTING_OPENAI_API_KEY = "OPENAI_API_KEY"
 SETTING_OPENAI_MODEL = "OPENAI_MODEL"
 SETTING_OPENAI_BASE_URL = "OPENAI_BASE_URL"
+SETTING_OPENAI_MAX_TOKENS = "OPENAI_MAX_TOKENS"
 STALL_CONTINUE_REPLY = "请继续行动，直接执行下一步需要的工具；不要停在说明上。"
 MAX_AGENT_ITERATIONS = 24
 MAX_FINAL_REVIEW_ROUNDS = 5
+
+
+def parse_positive_int(value: Any, default: int) -> int:
+    """解析正整数配置，失败时回退默认值。"""
+    try:
+        parsed = int(str(value).strip())
+    except (TypeError, ValueError):
+        return default
+    return parsed if parsed > 0 else default
 
 
 def default_runtime_config() -> Dict[str, str]:
@@ -75,6 +85,7 @@ def default_runtime_config() -> Dict[str, str]:
         SETTING_OPENAI_API_KEY: DEFAULT_TEXT_API_KEY or "",
         SETTING_OPENAI_MODEL: DEFAULT_TEXT_MODEL,
         SETTING_OPENAI_BASE_URL: DEFAULT_TEXT_BASE_URL,
+        SETTING_OPENAI_MAX_TOKENS: str(DEFAULT_TEXT_MAX_TOKENS),
     }
 
 
@@ -86,11 +97,16 @@ def normalize_runtime_config(raw_config: Optional[Dict[str, Any]]) -> Dict[str, 
     api_key = str(raw_config.get(SETTING_OPENAI_API_KEY, defaults[SETTING_OPENAI_API_KEY]) or "").strip()
     model = str(raw_config.get(SETTING_OPENAI_MODEL, defaults[SETTING_OPENAI_MODEL]) or "").strip()
     base_url = str(raw_config.get(SETTING_OPENAI_BASE_URL, defaults[SETTING_OPENAI_BASE_URL]) or "").strip()
+    max_tokens = parse_positive_int(
+        raw_config.get(SETTING_OPENAI_MAX_TOKENS, defaults[SETTING_OPENAI_MAX_TOKENS]),
+        DEFAULT_TEXT_MAX_TOKENS,
+    )
 
     return {
         SETTING_OPENAI_API_KEY: api_key,
         SETTING_OPENAI_MODEL: model or defaults[SETTING_OPENAI_MODEL],
         SETTING_OPENAI_BASE_URL: base_url,
+        SETTING_OPENAI_MAX_TOKENS: str(max_tokens),
     }
 
 
@@ -107,6 +123,7 @@ def build_provider_bundle(runtime_config: Dict[str, str]) -> Dict[str, OpenAIPro
     api_key = runtime_config.get(SETTING_OPENAI_API_KEY, "")
     base_url = runtime_config.get(SETTING_OPENAI_BASE_URL, "") or os.getenv("OPENAI_BASE_URL") or DEFAULT_TEXT_BASE_URL
     chat_model = runtime_config.get(SETTING_OPENAI_MODEL, "") or os.getenv("OPENAI_MODEL") or DEFAULT_TEXT_MODEL
+    max_tokens = parse_positive_int(runtime_config.get(SETTING_OPENAI_MAX_TOKENS), DEFAULT_TEXT_MAX_TOKENS)
     caption_model = os.getenv("CAPTION_MODEL") or DEFAULT_CAPTION_MODEL
     caption_api_key = os.getenv("CAPTION_API_KEY") or os.getenv("DASHSCOPE_API_KEY") or api_key
     caption_base_url = os.getenv("CAPTION_BASE_URL") or None
@@ -118,7 +135,7 @@ def build_provider_bundle(runtime_config: Dict[str, str]) -> Dict[str, OpenAIPro
             api_key=api_key,
             base_url=base_url,
             model=chat_model,
-            max_tokens=DEFAULT_TEXT_MAX_TOKENS,
+            max_tokens=max_tokens,
             provider="auto",
         ),
         "caption": OpenAIProvider(
@@ -131,7 +148,7 @@ def build_provider_bundle(runtime_config: Dict[str, str]) -> Dict[str, OpenAIPro
             api_key=api_key,
             base_url=evaluation_base_url,
             model=evaluation_model,
-            max_tokens=DEFAULT_TEXT_MAX_TOKENS,
+            max_tokens=max_tokens,
             provider="auto",
         ),
     }
@@ -181,6 +198,13 @@ async def send_runtime_settings_panel() -> Dict[str, str]:
                 placeholder=DEFAULT_TEXT_BASE_URL,
                 description="可选。接 OpenAI 官方时可留空；接第三方 OpenAI-compatible 服务时填写其 Base URL。",
             ),
+            TextInput(
+                id=SETTING_OPENAI_MAX_TOKENS,
+                label="OPENAI_MAX_TOKENS",
+                initial=current[SETTING_OPENAI_MAX_TOKENS],
+                placeholder=str(DEFAULT_TEXT_MAX_TOKENS),
+                description="单次最大生成 token 数。真实上下文窗口仍由模型/网关决定；如服务端不支持过大值会报错。",
+            ),
         ]
     ).send()
 
@@ -213,8 +237,9 @@ async def on_chat_start():
         "- 🌤️ **天气查询**（实时天气和预报）\n\n"
         "当前会话模型配置：\n"
         f"- `OPENAI_MODEL`: `{runtime_config[SETTING_OPENAI_MODEL]}`\n"
-        f"- `OPENAI_BASE_URL`: `{base_url_text}`\n\n"
-        "如需切换模型或接入其他 OpenAI-compatible 服务，请点击输入框旁的设置按钮修改以上三项。",
+        f"- `OPENAI_BASE_URL`: `{base_url_text}`\n"
+        f"- `OPENAI_MAX_TOKENS`: `{runtime_config[SETTING_OPENAI_MAX_TOKENS]}`\n\n"
+        "如需切换模型或接入其他 OpenAI-compatible 服务，请点击输入框旁的设置按钮修改以上配置。",
         author="系统"
     ).send()
 
@@ -433,6 +458,7 @@ async def on_settings_update(settings: Dict[str, Any]):
             "已更新当前会话模型配置：\n"
             f"- `OPENAI_MODEL`: `{runtime_config[SETTING_OPENAI_MODEL]}`\n"
             f"- `OPENAI_BASE_URL`: `{base_url_text}`\n"
+            f"- `OPENAI_MAX_TOKENS`: `{runtime_config[SETTING_OPENAI_MAX_TOKENS]}`\n"
             "下一条消息将按新配置执行。"
         ),
         author="系统",
