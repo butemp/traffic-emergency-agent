@@ -1408,6 +1408,9 @@ def collect_pre_output_tool_issues(agent: Agent) -> list[str]:
     if agent_has_tool(agent, "query_historical_cases") and not _tool_called_successfully(agent, "query_historical_cases"):
         issues.append("尚未调用 query_historical_cases 查询类似案例，最终方案应尽量吸收历史处置经验。")
 
+    if agent_has_tool(agent, "query_regulations") and not _tool_called_successfully(agent, "query_regulations"):
+        issues.append("尚未调用 query_regulations 查询细粒度法规、规则和预案处置要求，最终方案需要更具体的操作依据。")
+
     if agent_has_tool(agent, "query_rag") and not _tool_called_successfully(agent, "query_rag"):
         issues.append("尚未调用 query_rag 补充技术规范或处置细节，最终方案应尽量有更充分的知识依据。")
 
@@ -1549,6 +1552,25 @@ def build_pre_output_tool_prompt(agent: Agent, issues: list[str]) -> str:
         historical_type = incident.incident_type if incident.incident_type in {"交通事故", "自然灾害", "危化品泄漏", "设施故障", "其他"} else "交通事故"
         lines.append(
             f"- query_historical_cases：keywords={json.dumps(' '.join(keywords or ['交通事故', '救援', '清障']), ensure_ascii=False)}, accident_type={json.dumps(historical_type, ensure_ascii=False)}, location={json.dumps(incident.location_text or '', ensure_ascii=False)}"
+        )
+
+    if agent_has_tool(agent, "query_regulations") and not _tool_called_successfully(agent, "query_regulations"):
+        regulation_type = incident.incident_type if incident.incident_type in {"交通事故", "自然灾害", "危化品泄漏", "其他"} else "交通事故"
+        severity_text = incident.response_level.replace("级", "") if incident.response_level else ""
+        regulation_keywords = " ".join(
+            part
+            for part in [
+                incident.incident_type or "交通事故",
+                incident.scene_status,
+                "现场处置",
+                "交通管制",
+                "信息报送",
+                "善后",
+            ]
+            if part
+        )
+        lines.append(
+            f"- query_regulations：keywords={json.dumps(regulation_keywords, ensure_ascii=False)}, accident_type={json.dumps(regulation_type, ensure_ascii=False)}, severity={json.dumps(severity_text, ensure_ascii=False)}"
         )
 
     if agent_has_tool(agent, "query_rag") and not _tool_called_successfully(agent, "query_rag"):

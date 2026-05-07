@@ -7,6 +7,7 @@ active_phases:
 tools:
   - evaluate_incident_severity
   - get_emergency_plan
+  - query_regulations
   - query_rag
   - query_historical_cases
 priority: high

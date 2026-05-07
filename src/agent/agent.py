@@ -69,7 +69,8 @@ class Agent:
 资源与知识规则：
 - 事件定级优先使用 evaluate_incident_severity
 - 预案模块精确取用优先使用 get_emergency_plan
-- 技术规范和补充法规使用 query_rag
+- 特定事件的细粒度处置规则、法规条文和预案要求使用 query_regulations
+- 技术规范、标准指南和更广泛的补充法规使用 query_rag
 - 历史经验补充使用 query_historical_cases
 - 内部资源调度优先使用 search_emergency_resources
 - 候选资源齐备后使用 optimize_dispatch_plan 生成分梯队调度方案
