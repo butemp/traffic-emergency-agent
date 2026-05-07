@@ -232,6 +232,66 @@ body {
   color: #475569;
 }
 
+.prose table,
+.markdown-body table,
+[class*="markdown"] table {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 14px 0 18px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 18px;
+  border-spacing: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 250, 245, 0.94));
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);
+  white-space: nowrap;
+}
+
+.prose thead,
+.markdown-body thead,
+[class*="markdown"] thead {
+  background: rgba(15, 118, 110, 0.08);
+}
+
+.prose th,
+.prose td,
+.markdown-body th,
+.markdown-body td,
+[class*="markdown"] th,
+[class*="markdown"] td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.07);
+  border-right: 1px solid rgba(15, 23, 42, 0.06);
+  vertical-align: top;
+}
+
+.prose th,
+.markdown-body th,
+[class*="markdown"] th {
+  color: var(--tea-deep);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.prose td,
+.markdown-body td,
+[class*="markdown"] td {
+  color: rgba(15, 23, 42, 0.78);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.prose td:nth-child(4),
+.markdown-body td:nth-child(4),
+[class*="markdown"] td:nth-child(4) {
+  min-width: 240px;
+  max-width: 420px;
+  white-space: normal;
+}
+
 .tea-plan-content,
 .tea-confirm-content,
 .tea-info-content {

@@ -153,7 +153,7 @@ class ChatResponse:
             r"(?:<｜tool▁call▁begin｜>|<\|tool_call_begin\|>)"
             r"\s*([A-Za-z0-9_\-]+)\s*"
             r"(?:<｜tool▁sep｜>|<\|tool_sep\|>)\s*"
-            r"(\{.*?\})\s*"
+            r"(.*?)\s*"
             r"(?:<｜tool▁call▁end｜>|<\|tool_call_end\|>)",
             re.DOTALL,
         )

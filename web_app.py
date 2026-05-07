@@ -63,7 +63,8 @@ SETTING_OPENAI_API_KEY = "OPENAI_API_KEY"
 SETTING_OPENAI_MODEL = "OPENAI_MODEL"
 SETTING_OPENAI_BASE_URL = "OPENAI_BASE_URL"
 STALL_CONTINUE_REPLY = "请继续行动，直接执行下一步需要的工具；不要停在说明上。"
-MAX_FINAL_REVIEW_ROUNDS = 3
+MAX_AGENT_ITERATIONS = 24
+MAX_FINAL_REVIEW_ROUNDS = 5
 
 
 def default_runtime_config() -> Dict[str, str]:
@@ -386,7 +387,7 @@ def create_agent(runtime_config: Optional[Dict[str, str]] = None):
     agent = Agent(
         provider=provider,
         tools=tools,
-        max_iterations=10,  # 增加迭代次数，支持更复杂的工具调用链
+        max_iterations=MAX_AGENT_ITERATIONS,
         save_conversations=True,
         conversation_path="data/conversations"
     )
@@ -469,15 +470,15 @@ DETAIL_CRITICAL_SECTIONS = {
 }
 
 SECTION_MIN_LENGTHS = {
-    "一、事件概述": 180,
-    "二、响应定级": 180,
-    "三、指挥架构": 360,
-    "四、预警发布": 180,
-    "五、处置行动方案": 520,
-    "六、资源调度方案": 420,
-    "七、信息报送与新闻发布": 280,
-    "八、风险提示与注意事项": 360,
-    "九、依据引用": 180,
+    "一、事件概述": 240,
+    "二、响应定级": 240,
+    "三、指挥架构": 520,
+    "四、预警发布": 260,
+    "五、处置行动方案": 800,
+    "六、资源调度方案": 900,
+    "七、信息报送与新闻发布": 420,
+    "八、风险提示与注意事项": 900,
+    "九、依据引用": 260,
 }
 
 SECTION_DETAIL_REQUIREMENTS = {
@@ -486,9 +487,15 @@ SECTION_DETAIL_REQUIREMENTS = {
     "三、指挥架构": ("总指挥", "副总指挥", "应急管理", "公安", "消防", "医疗", "专家", "职责"),
     "四、预警发布": ("预警级别", "发布主体", "发布流程", "发布渠道", "预警内容", "预案依据"),
     "五、处置行动方案": ("先期处置", "全面响应", "持续处置", "现场警戒", "交通", "二次排查", "家属", "舆情"),
-    "六、资源调度方案": ("第一梯队", "第二梯队", "外部资源", "专家技术支持", "资源覆盖", "联系人", "电话", "调度路径"),
+    "六、资源调度方案": (
+        "第一梯队", "第二梯队", "外部资源", "专家技术支持", "资源覆盖",
+        "联系人", "电话", "调度路径", "可调配物资", "用途", "使用位置", "调度理由", "缺口", "补充建议",
+    ),
     "七、信息报送与新闻发布": ("初报", "续报", "报送对象", "新闻发布", "舆情", "责任单位"),
-    "八、风险提示与注意事项": ("安全风险", "处置风险", "衍生风险", "应对", "责任单位"),
+    "八、风险提示与注意事项": (
+        "安全风险", "处置风险", "衍生风险", "风险描述", "触发条件",
+        "影响后果", "应对措施", "责任单位", "监测指标", "升级条件",
+    ),
     "九、依据引用": ("预案名称", "引用章节", "引用内容", "支撑"),
 }
 
@@ -696,6 +703,7 @@ def build_output_format_retry_prompt() -> str:
     return (
         "【系统纠正】当前最终输出不符合应急指挥方案标准模板，不能直接结束。\n"
         "请重新输出一份标准化应急指挥方案，严格满足以下要求：\n"
+        "0. 完整性优先，不要担心篇幅长；能写细就不要压缩，尤其是资源调度、风险提示、指挥架构和处置行动；\n"
         "1. 必须按以下 9 个固定章节、固定顺序输出：\n"
         f"{section_text}\n"
         "2. 一、事件概述 和 二、响应定级 必须用表格；\n"
@@ -703,7 +711,7 @@ def build_output_format_retry_prompt() -> str:
         "4. 五、处置行动方案 必须拆成三个阶段，并在每个阶段用表格列出行动内容、责任单位、时间要求、预案依据；\n"
         "5. 三、指挥架构 必须覆盖应急管理、消防救援、公安交管、医疗救援、专家技术支持等关键角色；\n"
         "6. 五、处置行动方案 必须包含涉险人员二次排查、其他伤员排查、家属联络安抚和二次事故防范；\n"
-        "7. 六、资源调度方案 必须按梯队展示，并补充资源来源单位/出发地、调度路径、预计到达、联系人电话和资源覆盖情况；\n"
+        "7. 六、资源调度方案 必须按梯队展示，并补充资源来源单位/出发地、调度路径、预计到达、联系人电话、关键物资用途说明和资源覆盖与缺口分析；\n"
         "8. 九、依据引用 必须汇总预案名称、引用章节、引用内容摘要；\n"
         "9. 全文只能写建议性表述，不能写成'已通知/已派遣/已下达指令/已启动应急响应'；\n"
         "10. 资源类别只能用中文名称，不能直接输出 WARNING、PPE、SIGN、VEHICLE 等内部编码；\n"
@@ -712,7 +720,9 @@ def build_output_format_retry_prompt() -> str:
         "\n"
         "【Markdown 格式硬性要求】\n"
         "- 所有表格必须有表头行和分隔行（即 |---|---|--- 格式），且列数一致；\n"
+        "- 表格前后必须留空行；如果表头有 9 列，分隔行也必须有 9 个 --- 单元格；\n"
         "- 章节标题统一使用 ### 级别，子标题用 ####；\n"
+        "- 资源调度中的“第一梯队/第二梯队/外部资源补充/专家技术支持/关键物资用途说明/资源覆盖与缺口分析”必须写成 #### 小标题，不能作为普通段落夹在表格之间；\n"
         "- 列表项统一使用 - 开头，不要混用 * 或数字列表与无序列表；\n"
         "- 不要出现未闭合的表格行或格式断裂。\n"
         "\n"
@@ -720,12 +730,14 @@ def build_output_format_retry_prompt() -> str:
         "- 六、资源调度方案 必须基于 search_emergency_resources 和 optimize_dispatch_plan 的实际返回数据编写；\n"
         "- 每个仓库/队伍必须详细列出可调配的物资清单（物资名称x数量），不能只写物资类别名；\n"
         "- 表格中'携带物资/可调配物资'列要放在显著位置（前几列）；\n"
-        "- 每个梯队的每个资源都要单独成行，完整写明：名称、所属单位、可调配物资、距离、预计到达、调度路径、联系人、电话。\n"
+        "- 每个梯队的每个资源都要单独成行，完整写明：名称、所属单位、可调配物资、距离、预计到达、调度路径、联系人、电话；\n"
+        "- 必须增加'关键物资用途说明'表格，写清物资名称、来源资源、用途、使用位置、调度理由、注意事项；\n"
+        "- 必须增加'资源覆盖与缺口分析'表格，逐类说明已覆盖、不足、补充来源、人工协调建议。\n"
         "\n"
         "【风险提示与注意事项硬性要求】\n"
-        "- 必须分为安全风险、处置风险、衍生风险三类，每类至少 2-3 条；\n"
-        "- 每条风险必须配有对应的防范或处置措施，使用'风险描述 → 应对措施'的配对格式或表格形式；\n"
-        "- 风险内容必须结合本次事故的实际情况（天气、路况、事故类型、现场环境），不能写空泛通用的风险。\n"
+        "- 必须分为安全风险、处置风险、衍生风险三类，每类至少 3 条，能写 10-12 条时不要压缩；\n"
+        "- 每条风险必须用表格写清：风险描述、触发条件、影响后果、应对措施、责任单位、监测指标、升级条件；\n"
+        "- 风险内容必须结合本次事故的实际情况（天气、路况、事故类型、现场环境、资源缺口、舆情压力），不能写空泛通用的风险。\n"
         "\n"
         "【逐章详细度硬性要求】\n"
         "- 不要输出“第一步：分析工具结果”“第二步：处置方案生成”等过程说明；\n"
@@ -901,6 +913,117 @@ def _check_markdown_table_format(text: str) -> list[str]:
     return issues
 
 
+def normalize_final_markdown_for_display(text: str) -> str:
+    """展示前轻量规范 Markdown，避免表格小错误影响前端渲染。"""
+    if not text:
+        return ""
+
+    normalized = _normalize_resource_subheadings(text)
+    normalized = _normalize_markdown_tables(normalized)
+    normalized = re.sub(r"\n{3,}", "\n\n", normalized)
+    return normalized.strip()
+
+
+def _normalize_resource_subheadings(text: str) -> str:
+    """将资源调度中的裸文本梯队标题转成稳定的小标题。"""
+    lines: list[str] = []
+
+    for raw_line in text.splitlines():
+        line = raw_line.strip()
+        if _looks_like_resource_subheading(line) and not line.startswith("#"):
+            if lines and lines[-1].strip():
+                lines.append("")
+            lines.append(f"#### {line}")
+            lines.append("")
+            continue
+        lines.append(raw_line)
+
+    return "\n".join(lines)
+
+
+def _looks_like_resource_subheading(line: str) -> bool:
+    if not line or line.startswith("|"):
+        return False
+
+    heading_patterns = (
+        r"^第[一二三四五六七八九十]+梯队(?:（.*?）|\(.*?\))?[：:]?$",
+        r"^外部资源补充(?:（.*?）|\(.*?\))?[：:]?$",
+        r"^专家技术支持(?:（.*?）|\(.*?\))?[：:]?$",
+        r"^关键物资用途说明(?:（.*?）|\(.*?\))?[：:]?$",
+        r"^资源覆盖情况(?:（.*?）|\(.*?\))?[：:]?$",
+        r"^资源覆盖与缺口分析(?:（.*?）|\(.*?\))?[：:]?$",
+    )
+    return any(re.match(pattern, line) for pattern in heading_patterns)
+
+
+def _normalize_markdown_tables(text: str) -> str:
+    """修正常见 Markdown 表格断裂：分隔列数不一致、表格前后缺少空行。"""
+    source_lines = text.splitlines()
+    output_lines: list[str] = []
+    i = 0
+
+    while i < len(source_lines):
+        line = source_lines[i]
+        stripped = line.strip()
+
+        if not _looks_like_table_row(stripped):
+            output_lines.append(line)
+            i += 1
+            continue
+
+        next_line = source_lines[i + 1].strip() if i + 1 < len(source_lines) else ""
+        if not _looks_like_table_separator(next_line):
+            output_lines.append(line)
+            i += 1
+            continue
+
+        table_lines = _collect_normalized_table_lines(source_lines, i)
+        if output_lines and output_lines[-1].strip():
+            output_lines.append("")
+        output_lines.extend(table_lines)
+
+        i += len(table_lines)
+        if i < len(source_lines) and source_lines[i].strip():
+            output_lines.append("")
+
+    return "\n".join(output_lines)
+
+
+def _collect_normalized_table_lines(lines: list[str], start: int) -> list[str]:
+    header_cells = _split_table_cells(lines[start])
+    col_count = len(header_cells)
+    table_lines = [_format_table_row(header_cells), _format_table_separator(col_count)]
+
+    i = start + 2
+    while i < len(lines) and _looks_like_table_row(lines[i].strip()):
+        row_cells = _split_table_cells(lines[i])
+        table_lines.append(_format_table_row(_fit_table_cells(row_cells, col_count)))
+        i += 1
+
+    return table_lines
+
+
+def _split_table_cells(line: str) -> list[str]:
+    return [cell.strip() for cell in line.strip().strip("|").split("|")]
+
+
+def _fit_table_cells(cells: list[str], col_count: int) -> list[str]:
+    """让数据行列数和表头一致。多出来的内容合并到最后一列，少了则补空。"""
+    if len(cells) == col_count:
+        return cells
+    if len(cells) < col_count:
+        return cells + [""] * (col_count - len(cells))
+    return cells[: col_count - 1] + ["；".join(cells[col_count - 1 :])]
+
+
+def _format_table_row(cells: list[str]) -> str:
+    return "| " + " | ".join(cells) + " |"
+
+
+def _format_table_separator(col_count: int) -> str:
+    return "| " + " | ".join(["---"] * col_count) + " |"
+
+
 def _looks_like_table_row(line: str) -> bool:
     return (
         line.startswith("|")
@@ -1018,6 +1141,29 @@ def _check_resource_dispatch_detail(dispatch_section: str, agent: Optional[Agent
             "每个仓库/队伍应详细列出可调配的物资名称和数量（如'锥桶x50、爆闪灯x20'）。"
         )
 
+    table_rows = _count_table_data_rows(dispatch_section)
+    if table_rows < 8:
+        issues.append(
+            f"资源调度方案表格内容偏少，当前约 {table_rows} 行。建议至少包含梯队资源、外部补充、专家支持、物资用途说明和资源覆盖与缺口分析等多张表。"
+        )
+
+    purpose_markers = ("用途", "用于", "作用", "使用位置", "适用场景", "调度理由", "优先级")
+    if not any(marker in dispatch_section for marker in purpose_markers):
+        issues.append(
+            "资源调度方案缺少物资用途说明。每类关键物资应写清用于什么处置动作、放在现场哪个位置、为什么优先调度。"
+        )
+    if "关键物资用途说明" not in dispatch_section:
+        issues.append("资源调度方案缺少“关键物资用途说明”小节，无法判断物资如何服务现场处置动作。")
+
+    coverage_markers = ("资源覆盖", "覆盖状态", "缺口", "未覆盖", "补充建议")
+    missing_coverage = [marker for marker in coverage_markers if marker not in dispatch_section]
+    if len(missing_coverage) > 2:
+        issues.append(
+            "资源调度方案缺少资源覆盖与缺口分析，必须说明已覆盖物资、未覆盖物资、补充来源和人工协调建议。"
+        )
+    if "资源覆盖与缺口分析" not in dispatch_section and "资源覆盖情况" not in dispatch_section:
+        issues.append("资源调度方案缺少“资源覆盖与缺口分析”小节，无法看出哪些资源已覆盖、哪些仍需补充。")
+
     return issues
 
 
@@ -1060,9 +1206,18 @@ def _check_risk_section_detail(risk_section: str) -> list[str]:
             )
 
     # 检查风险条目数量是否充足
-    if risk_item_count < 6:
+    if risk_item_count < 9:
         issues.append(
-            "风险提示条目过少（当前约 %d 条），安全风险、处置风险、衍生风险每类至少应有 2-3 条。" % risk_item_count
+            "风险提示条目过少（当前约 %d 条），安全风险、处置风险、衍生风险每类至少应有 3 条。" % risk_item_count
+        )
+
+    detail_markers = ("风险描述", "触发条件", "影响后果", "应对措施", "责任单位", "监测指标", "升级条件")
+    missing_detail_markers = [marker for marker in detail_markers if marker not in risk_section]
+    if len(missing_detail_markers) > 2:
+        issues.append(
+            "风险提示与注意事项不够细，缺少字段："
+            + "、".join(missing_detail_markers)
+            + "。建议用表格列出风险描述、触发条件、影响后果、应对措施、责任单位、监测指标和升级条件。"
         )
 
     return issues
@@ -1107,6 +1262,18 @@ def _tool_called_successfully(agent: Agent, tool_name: str) -> bool:
         record.tool_name == tool_name and record.success
         for record in agent.task_state.tool_call_log
     )
+
+
+def _successful_tool_arg_values(agent: Agent, tool_name: str, arg_name: str) -> set[str]:
+    """收集指定工具成功调用时某个参数的取值。"""
+    values: set[str] = set()
+    for record in agent.task_state.tool_call_log:
+        if record.tool_name != tool_name or not record.success:
+            continue
+        value = record.arguments.get(arg_name)
+        if value not in (None, ""):
+            values.add(str(value))
+    return values
 
 
 def _clean_float(value: Any) -> Optional[float]:
@@ -1185,6 +1352,45 @@ def _route_origin_candidates(agent: Agent, limit: int = 8) -> list[Dict[str, Any
 def collect_pre_output_tool_issues(agent: Agent) -> list[str]:
     """最终输出前必须补齐的工具链缺口。"""
     issues: list[str] = []
+    has_coords = bool(_incident_coordinates(agent))
+
+    if (
+        agent_has_tool(agent, "geocode_address")
+        and not has_coords
+        and (agent.task_state.incident_info.location_text or agent.task_state.environment_info.formatted_address)
+        and not _tool_called_successfully(agent, "geocode_address")
+    ):
+        issues.append("尚未调用 geocode_address 获取事故点坐标，后续天气、路况、资源搜索和路径规划都需要坐标支撑。")
+
+    if (
+        agent_has_tool(agent, "evaluate_incident_severity")
+        and not agent.task_state.incident_info.response_level
+        and not _tool_called_successfully(agent, "evaluate_incident_severity")
+    ):
+        issues.append("尚未调用 evaluate_incident_severity 完成预案定级，最终方案不能缺少响应级别和定级依据。")
+
+    if agent_has_tool(agent, "get_emergency_plan"):
+        required_plan_modules = {
+            "grading_criteria",
+            "command_structure",
+            "response_measures",
+            "scene_disposal",
+            "warning_rules",
+        }
+        called_plan_modules = _successful_tool_arg_values(agent, "get_emergency_plan", "module")
+        missing_plan_modules = sorted(required_plan_modules - called_plan_modules)
+        if missing_plan_modules:
+            issues.append(
+                "get_emergency_plan 预案模块未补齐，缺少："
+                + "、".join(missing_plan_modules)
+                + "。最终方案必须包含定级、指挥架构、响应措施、分场景处置和预警发布依据。"
+            )
+
+    if has_coords and agent_has_tool(agent, "get_weather_by_location") and not _tool_called_successfully(agent, "get_weather_by_location"):
+        issues.append("已有事故点坐标但尚未调用 get_weather_by_location 查询天气，最终方案需要天气对救援安全和风险的影响分析。")
+
+    if has_coords and agent_has_tool(agent, "check_traffic_status") and not _tool_called_successfully(agent, "check_traffic_status"):
+        issues.append("已有事故点坐标但尚未调用 check_traffic_status 查询路况，最终方案需要路况、拥堵和绕行风险依据。")
 
     if agent_has_tool(agent, "search_emergency_resources") and not _tool_called_successfully(agent, "search_emergency_resources"):
         issues.append("尚未调用 search_emergency_resources 搜索应急仓库和救援队伍，最终方案必须基于实际资源数据进行调度。")
@@ -1196,7 +1402,16 @@ def collect_pre_output_tool_issues(agent: Agent) -> list[str]:
     if agent_has_tool(agent, "search_experts") and not _tool_called_successfully(agent, "search_experts"):
         issues.append("尚未调用 search_experts 检索专家库，最终方案不能直接缺少专家技术支持。")
 
-    has_route_inputs = bool(_incident_coordinates(agent) and _route_origin_candidates(agent))
+    if agent_has_tool(agent, "risk_assessment") and not _tool_called_successfully(agent, "risk_assessment"):
+        issues.append("尚未调用 risk_assessment 进行风险评估，最终方案的风险提示与注意事项必须有系统化评估支撑。")
+
+    if agent_has_tool(agent, "query_historical_cases") and not _tool_called_successfully(agent, "query_historical_cases"):
+        issues.append("尚未调用 query_historical_cases 查询类似案例，最终方案应尽量吸收历史处置经验。")
+
+    if agent_has_tool(agent, "query_rag") and not _tool_called_successfully(agent, "query_rag"):
+        issues.append("尚未调用 query_rag 补充技术规范或处置细节，最终方案应尽量有更充分的知识依据。")
+
+    has_route_inputs = bool(has_coords and _route_origin_candidates(agent))
     if (
         agent_has_tool(agent, "plan_dispatch_routes")
         and has_route_inputs
@@ -1225,7 +1440,7 @@ def build_pre_output_tool_prompt(agent: Agent, issues: list[str]) -> str:
     ]
 
     lines = [
-        "【系统纠正】当前不能直接输出最终方案，因为最终方案缺少必要的资源调度、专家或路径依据。",
+        "【系统纠正】当前不能直接输出最终方案，因为最终方案缺少必要的预案、态势、资源、专家、路线、风险或案例依据。",
         "请不要重写方案，也不要用文字解释带过；请先调用缺失工具补齐数据，再进入最终输出。",
         "",
         "缺口：",
@@ -1234,8 +1449,73 @@ def build_pre_output_tool_prompt(agent: Agent, issues: list[str]) -> str:
         "请按需要依次调用：",
     ]
 
+    if agent_has_tool(agent, "geocode_address") and not _tool_called_successfully(agent, "geocode_address"):
+        location_for_geocode = incident.location_text or agent.task_state.environment_info.formatted_address
+        if location_for_geocode:
+            lines.append(
+                f"- geocode_address：address={json.dumps(location_for_geocode, ensure_ascii=False)}"
+            )
+
+    if (
+        agent_has_tool(agent, "evaluate_incident_severity")
+        and not incident.response_level
+        and not _tool_called_successfully(agent, "evaluate_incident_severity")
+    ):
+        severity_summary = "；".join(
+            item
+            for item in [
+                incident.incident_type,
+                incident.location_text,
+                incident.casualty_status,
+                incident.scene_status,
+                incident.additional_context,
+            ]
+            if item
+        )
+        lines.append(
+            "- evaluate_incident_severity：先独立完成 incident_category、disaster_type、response_level 和 scene_type 判定。"
+        )
+        lines.append(
+            f"  incident_summary={json.dumps(severity_summary or '交通突发事件，需根据上下文定级', ensure_ascii=False)}"
+        )
+
+    if agent_has_tool(agent, "get_emergency_plan"):
+        required_plan_modules = {
+            "grading_criteria",
+            "command_structure",
+            "response_measures",
+            "scene_disposal",
+            "warning_rules",
+        }
+        missing_plan_modules = sorted(
+            required_plan_modules - _successful_tool_arg_values(agent, "get_emergency_plan", "module")
+        )
+        incident_category = incident.incident_category or "EXPRESSWAY"
+        disaster_type = incident.disaster_type or ""
+        response_level = incident.response_level or ""
+        scene_type = incident.scene_type or ""
+        if missing_plan_modules:
+            lines.extend(
+                [
+                    "- get_emergency_plan：按缺失模块逐个调用，补齐 "
+                    + "、".join(missing_plan_modules)
+                    + "。",
+                    f"  incident_category={json.dumps(incident_category, ensure_ascii=False)}, disaster_type={json.dumps(disaster_type, ensure_ascii=False)}, level={json.dumps(response_level, ensure_ascii=False)}, scene_type={json.dumps(scene_type, ensure_ascii=False)}",
+                ]
+            )
+
+    if coords and agent_has_tool(agent, "get_weather_by_location") and not _tool_called_successfully(agent, "get_weather_by_location"):
+        lines.append(
+            f"- get_weather_by_location：longitude={coords['longitude']}, latitude={coords['latitude']}, extensions='base'"
+        )
+
+    if coords and agent_has_tool(agent, "check_traffic_status") and not _tool_called_successfully(agent, "check_traffic_status"):
+        lines.append(
+            f"- check_traffic_status：longitude={coords['longitude']}, latitude={coords['latitude']}, radius=5000"
+        )
+
     # 资源搜索指引
-    if not _tool_called_successfully(agent, "search_emergency_resources") and coords:
+    if agent_has_tool(agent, "search_emergency_resources") and not _tool_called_successfully(agent, "search_emergency_resources") and coords:
         required_cats = []
         if incident.incident_type:
             type_cat_map = {
@@ -1254,19 +1534,40 @@ def build_pre_output_tool_prompt(agent: Agent, issues: list[str]) -> str:
         )
 
     # 调度优化指引
-    if not _tool_called_successfully(agent, "optimize_dispatch_plan") and _tool_called_successfully(agent, "search_emergency_resources"):
+    if agent_has_tool(agent, "optimize_dispatch_plan") and not _tool_called_successfully(agent, "optimize_dispatch_plan") and _tool_called_successfully(agent, "search_emergency_resources"):
         lines.append(
             "- optimize_dispatch_plan：基于 search_emergency_resources 的搜索结果生成分梯队调度方案"
         )
 
     # 专家检索指引
-    if not _tool_called_successfully(agent, "search_experts"):
+    if agent_has_tool(agent, "search_experts") and not _tool_called_successfully(agent, "search_experts"):
         lines.append(
             f"- search_experts：keywords={json.dumps(keywords or ['交通安全', '应急管理'], ensure_ascii=False)}, incident_type={incident.incident_type or '交通突发事件'}"
         )
 
+    if agent_has_tool(agent, "query_historical_cases") and not _tool_called_successfully(agent, "query_historical_cases"):
+        historical_type = incident.incident_type if incident.incident_type in {"交通事故", "自然灾害", "危化品泄漏", "设施故障", "其他"} else "交通事故"
+        lines.append(
+            f"- query_historical_cases：keywords={json.dumps(' '.join(keywords or ['交通事故', '救援', '清障']), ensure_ascii=False)}, accident_type={json.dumps(historical_type, ensure_ascii=False)}, location={json.dumps(incident.location_text or '', ensure_ascii=False)}"
+        )
+
+    if agent_has_tool(agent, "query_rag") and not _tool_called_successfully(agent, "query_rag"):
+        rag_query_parts = [
+            incident.incident_type or "交通突发事件",
+            incident.location_text,
+            incident.scene_status,
+            "现场处置",
+            "交通管制",
+            "风险防控",
+            "信息报送",
+        ]
+        rag_query = " ".join(part for part in rag_query_parts if part)
+        lines.append(
+            f"- query_rag：query={json.dumps(rag_query, ensure_ascii=False)}, top_k=8"
+        )
+
     # 路径规划指引
-    if coords and origins and not _tool_called_successfully(agent, "plan_dispatch_routes"):
+    if coords and origins and agent_has_tool(agent, "plan_dispatch_routes") and not _tool_called_successfully(agent, "plan_dispatch_routes"):
         lines.extend(
             [
                 "- plan_dispatch_routes：使用下面的 destination 和 origins，不要自行编造路线。",
@@ -1278,6 +1579,24 @@ def build_pre_output_tool_prompt(agent: Agent, issues: list[str]) -> str:
         )
     elif not coords:
         lines.append("- 如果事故点还没有坐标，请先调用 geocode_address；如资源缺少坐标，最终方案中必须写'路线暂未规划，需由人工调度平台确认'。")
+
+    if agent_has_tool(agent, "risk_assessment") and not _tool_called_successfully(agent, "risk_assessment"):
+        scenario_text = "；".join(
+            item
+            for item in [
+                incident.incident_type,
+                incident.location_text or agent.task_state.environment_info.formatted_address,
+                incident.casualty_status,
+                incident.scene_status,
+                incident.response_level,
+            ]
+            if item
+        )
+        lines.append(
+            "- risk_assessment：先用当前已掌握信息和拟定方案要点进行评估，focus_areas=['信息完整性','响应及时性','措施有效性','资源充足性','风险可控性']。"
+        )
+        if scenario_text:
+            lines.append(f"  scenario={json.dumps(scenario_text, ensure_ascii=False)}")
 
     lines.extend([
         "",
@@ -1308,6 +1627,7 @@ def build_final_review_retry_prompt(
         "请基于下面的问题和建议，重新生成一版完整、可直接交付的最终方案。\n\n"
         "硬性要求：\n"
         "1. 必须输出完整最终方案，而不是说明你接下来要做什么；\n"
+        "1.1 完整性优先，不要担心篇幅长；资源调度、风险提示、指挥架构和处置行动应尽可能详细；\n"
         "2. 必须保持 9 个固定章节和顺序；\n"
         "3. 只能使用建议性表述，不能写成已经通知、已经下达、已经派遣；\n"
         "4. 指挥架构必须覆盖应急管理、消防救援、公安交管、医疗救援和专家技术支持；\n"
@@ -1321,7 +1641,9 @@ def build_final_review_retry_prompt(
         "12. 不要输出“第一步：分析工具结果”“第二步：处置方案生成”等过程说明，直接给标准 9 章节方案。\n\n"
         "Markdown 格式要求：\n"
         "- 所有表格必须有表头行和分隔行（|---|---|），且每行列数与表头一致；\n"
+        "- 表格前后必须留空行；如果表头有 9 列，分隔行也必须有 9 个 --- 单元格；\n"
         "- 章节标题用 ### 级别，子标题用 ####；\n"
+        "- 资源调度中的梯队标题和资源用途/缺口小节必须用 ####，例如 #### 第一梯队（立即出动，预计15分钟内到达）、#### 关键物资用途说明；\n"
         "- 不要出现未闭合的表格行或格式断裂。\n\n"
         "逐章详细度要求：\n"
         "- 一、事件概述：至少覆盖事件类型、时间、位置、坐标、伤亡、道路影响、天气、路况和信息来源；\n"
@@ -1335,10 +1657,12 @@ def build_final_review_retry_prompt(
         "- 必须基于 search_emergency_resources 和 optimize_dispatch_plan 返回的实际数据编写，不能凭空编造仓库和队伍；\n"
         "- 每个仓库/队伍必须详细列出可调配物资清单（物资名称x数量），不能只写类别名；\n"
         "- 表格中'携带物资/可调配物资'列要放在显著位置（靠前列），这是指挥员最关心的信息；\n"
-        "- 每个梯队的每个资源都要单独成行，内容要充实，资源调度部分整体字数应充足。\n\n"
+        "- 每个梯队的每个资源都要单独成行，内容要充实，资源调度部分整体字数应充足；\n"
+        "- 必须增加'关键物资用途说明'表格：物资名称、来源资源、用途、使用位置、调度理由、注意事项；\n"
+        "- 必须增加'资源覆盖与缺口分析'表格：所需类别、覆盖状态、现有来源、缺口、补充建议、人工确认事项。\n\n"
         "风险提示与注意事项要求：\n"
-        "- 必须分为安全风险、处置风险、衍生风险三类，每类至少 2-3 条；\n"
-        "- 每条风险必须配有对应的防范或处置措施，不能只列风险不写应对方案；\n"
+        "- 必须分为安全风险、处置风险、衍生风险三类，每类至少 3 条，能写 10-12 条时不要压缩；\n"
+        "- 每条风险必须用表格写清：风险描述、触发条件、影响后果、应对措施、责任单位、监测指标、升级条件；\n"
         "- 风险内容必须结合本次事故实际情况，不要写空泛通用的风险。\n\n"
         f"【审核发现的问题】\n{issue_block}\n\n"
         f"【审核建议】\n{advice_block}\n\n"
@@ -2143,7 +2467,7 @@ async def on_message(message: cl.Message):
                             )
                             agent.state.add_message(reminder)
                             agent.task_state.append_message(reminder)
-                            run_step.output = "🔁 最终方案缺少资源、专家或路线依据，已退回方案生成阶段补齐工具结果。"
+                            run_step.output = "🔁 最终方案缺少预案、态势、资源、专家、路线、风险或案例依据，已退回补齐工具结果。"
                             continue
 
                     assistant_msg = Message(role=MessageRole.ASSISTANT, content=visible_response)
@@ -2271,6 +2595,7 @@ async def on_message(message: cl.Message):
         # 4. 最后发送完整回复
         if final_response:
             # 这里的 final_response 可能包含 markdown
+            final_response = normalize_final_markdown_for_display(final_response)
             await cl.Message(content=final_response).send()
         else:
             await cl.Message(content="🤔 似乎没有生成有效回复，请重试。").send()

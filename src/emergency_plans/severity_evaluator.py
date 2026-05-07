@@ -126,7 +126,7 @@ class SeverityEvaluator:
                     )},
                 ],
                 temperature=0.1,
-                max_tokens=900,
+                max_tokens=4096,
             )
             payload = self._extract_json_payload(response.content or "")
         except Exception as error:
