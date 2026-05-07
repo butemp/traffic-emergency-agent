@@ -2018,16 +2018,29 @@ async def review_final_response_before_display(
     last_review_result = None
     pipeline_result = None
 
-    try:
-        pipeline_result = await generate_final_plan_pipeline_with_frontend(
-            pipeline=pipeline,
-            task_state=agent.task_state,
-            seed_plan=current_text,
-        )
-        current_text = pipeline_result.final_markdown
-        logger.info("章节化最终方案已生成: run_dir=%s", pipeline_result.run_dir)
-    except Exception as error:
-        logger.exception("章节化最终方案生成失败，回退到主模型候选方案审核: %s", error)
+    # Pipeline 生成，最多尝试 2 次
+    for pipeline_attempt in range(1, 3):
+        try:
+            pipeline_result = await generate_final_plan_pipeline_with_frontend(
+                pipeline=pipeline,
+                task_state=agent.task_state,
+                seed_plan=current_text,
+            )
+            current_text = pipeline_result.final_markdown
+            logger.info("章节化最终方案已生成: run_dir=%s, attempt=%s", pipeline_result.run_dir, pipeline_attempt)
+            break
+        except Exception as error:
+            logger.exception(
+                "章节化最终方案生成失败 (第%s次): %s",
+                pipeline_attempt, error,
+            )
+            if pipeline_attempt < 2:
+                logger.info("将在下一次尝试重新生成章节化方案")
+
+    # 如果 Pipeline 两次都失败了，用主模型生成一个符合 9 章节结构的详细方案作为兜底
+    if pipeline_result is None:
+        logger.warning("Pipeline 生成全部失败，启动主模型兜底重写")
+        current_text = await _fallback_full_rewrite(agent, current_text)
 
     for attempt in range(1, MAX_FINAL_REVIEW_ROUNDS + 1):
         guardrail_issues = collect_final_plan_guardrail_issues(current_text, agent=agent)
@@ -2081,6 +2094,44 @@ async def review_final_response_before_display(
         current_text = regenerated_visible or current_text
 
     return current_text, last_review_result, True, MAX_FINAL_REVIEW_ROUNDS
+
+
+async def _fallback_full_rewrite(agent: Agent, candidate_text: str) -> str:
+    """Pipeline 完全失败时，用主模型兜底生成一个完整的 9 章节方案。"""
+    section_text = "\n".join(f"- {heading}" for heading in STANDARD_PLAN_SECTIONS)
+    fallback_prompt = (
+        "【系统指令：Pipeline 章节化生成失败，现在需要你直接生成完整的最终方案】\n\n"
+        "你之前生成了一版候选方案，但章节化处理流程遇到异常。\n"
+        "现在需要你基于已有的工具调用结果和灾情信息，直接生成一份完整、详细的标准化应急指挥方案。\n\n"
+        "硬性要求：\n"
+        "1. 必须严格按以下 9 个固定章节输出，不能增删、不能换序：\n"
+        f"{section_text}\n\n"
+        "2. 每个章节都要尽可能详细，不能只写 3-5 行概述：\n"
+        "   - 三、指挥架构：必须列出总指挥/副总指挥和至少 7 个工作组（综合协调、公安交管、消防救援、医疗救援、抢险清障、专家技术支持、信息与舆情、善后安抚），每个写牵头单位、参与单位、主要职责\n"
+        "   - 五、处置行动方案：必须分三个阶段（先期处置0-30分钟、全面响应30分钟-2小时、持续处置2小时以后），每阶段至少 4 条行动，用表格写\n"
+        "   - 六、资源调度方案：必须基于工具返回的实际资源数据，按梯队展示，每个资源单独成行写名称、物资清单（物资名x数量）、距离、路线、联系人\n"
+        "   - 八、风险提示与注意事项：必须分安全风险/处置风险/衍生风险三类，至少 9 条，每条写风险描述、应对措施\n\n"
+        "3. 所有表格必须有表头行和分隔行（|---|---|），列数一致\n"
+        "4. 只能用建议性表述，不能写已通知/已派遣/已下达指令\n"
+        "5. 资源类别只能用中文名称\n"
+        "6. 不要输出过程说明，直接输出标准化 9 章节方案\n"
+        "7. 回复末尾附上 agent_control，final_output=true\n\n"
+        "【你之前的候选方案（仅作参考）】\n"
+        f"{candidate_text[:8000]}"
+    )
+    reminder = Message(role=MessageRole.SYSTEM, content=fallback_prompt)
+    agent.state.add_message(reminder)
+    agent.task_state.append_message(reminder)
+
+    regenerated = await cl.make_async(agent.provider.chat)(
+        agent.get_runtime_messages(),
+        tools=None,
+    )
+    regenerated_raw = regenerated.content or ""
+    regenerated_visible = get_user_visible_reply(agent, regenerated_raw).strip()
+    regenerated_control = agent.parse_assistant_control(regenerated_raw)
+    agent.apply_assistant_control(regenerated_control)
+    return regenerated_visible or candidate_text
 
 
 def format_candidate_plans(agent: Agent) -> str:
@@ -2371,7 +2422,9 @@ async def on_message(message: cl.Message):
         # 迭代处理：使用 Chainlit Step 展示思考过程
         iteration = 0
         final_response = ""
-        
+        called_tools_history: list[str] = []  # 跟踪所有已调用的工具（有序）
+        consecutive_no_progress = 0  # 连续无进展轮次计数
+
         # 1. 创建主思考过程 Step
         async with cl.Step(name="Agent 思考中...", type="run") as run_step:
             run_step.input = message.content
@@ -2692,6 +2745,51 @@ async def on_message(message: cl.Message):
                     agent.task_state.append_message(analysis_msg)
                     run_step.output = f"当前阶段: {agent.task_state.current_phase.value}"
 
+                    # 记录已调用工具，检测循环
+                    called_tools_history.extend(called_tool_names)
+
+                    # 检测工具调用是否陷入循环（连续 3 轮调用相同工具集合）
+                    if len(called_tools_history) >= 6:
+                        recent_3 = called_tools_history[-3:]
+                        prev_3 = called_tools_history[-6:-3]
+                        if set(recent_3) == set(prev_3):
+                            logger.warning(
+                                "检测到工具调用循环: recent=%s, prev=%s，强制推进到输出阶段",
+                                recent_3, prev_3,
+                            )
+                            agent.task_state.transition_to(TaskPhase.OUTPUT)
+                            reminder = Message(
+                                role=MessageRole.SYSTEM,
+                                content=(
+                                    "【系统检测到工具调用循环】你已经重复调用了相同的工具，不要再调用工具了。\n"
+                                    "请基于已有的全部工具结果，直接输出完整的标准化 9 章节应急指挥方案，"
+                                    "并在末尾附上 agent_control，设置 final_output=true。"
+                                ),
+                            )
+                            agent.state.add_message(reminder)
+                            agent.task_state.append_message(reminder)
+
+                    # 检测是否在 PLAN_GENERATION 阶段停留过久（工具调用超过 15 次）
+                    if (
+                        len(called_tools_history) >= 15
+                        and agent.task_state.current_phase == TaskPhase.PLAN_GENERATION
+                    ):
+                        logger.warning(
+                            "PLAN_GENERATION 阶段工具调用已达 %s 次，强制推进到输出阶段",
+                            len(called_tools_history),
+                        )
+                        agent.task_state.transition_to(TaskPhase.OUTPUT)
+                        reminder = Message(
+                            role=MessageRole.SYSTEM,
+                            content=(
+                                "【系统提醒】你已经调用了足够多的工具，信息已经充分。\n"
+                                "请停止调用工具，直接基于已有的全部工具结果输出完整的标准化 9 章节应急指挥方案，"
+                                "并在末尾附上 agent_control，设置 final_output=true。"
+                            ),
+                        )
+                        agent.state.add_message(reminder)
+                        agent.task_state.append_message(reminder)
+
                     # 继续下一轮迭代
                     continue
 
@@ -2821,15 +2919,23 @@ async def on_message(message: cl.Message):
                     if control.final_output or agent.task_state.current_phase in {TaskPhase.OUTPUT, TaskPhase.OUTPUT_COMPLETE}:
                         pre_output_issues = collect_pre_output_tool_issues(agent)
                         if pre_output_issues:
-                            agent.task_state.transition_to(TaskPhase.PLAN_GENERATION)
-                            reminder = Message(
-                                role=MessageRole.SYSTEM,
-                                content=build_pre_output_tool_prompt(agent, pre_output_issues),
-                            )
-                            agent.state.add_message(reminder)
-                            agent.task_state.append_message(reminder)
-                            run_step.output = "🔁 最终方案缺少预案、态势、资源、专家、路线、风险或案例依据，已退回补齐工具结果。"
-                            continue
+                            consecutive_no_progress += 1
+                            # 如果反复退回补工具超过 3 次，不再退回，直接进入输出
+                            if consecutive_no_progress >= 3:
+                                logger.warning(
+                                    "已连续 %s 次退回补工具但模型未能补齐，强制进入最终输出",
+                                    consecutive_no_progress,
+                                )
+                            else:
+                                agent.task_state.transition_to(TaskPhase.PLAN_GENERATION)
+                                reminder = Message(
+                                    role=MessageRole.SYSTEM,
+                                    content=build_pre_output_tool_prompt(agent, pre_output_issues),
+                                )
+                                agent.state.add_message(reminder)
+                                agent.task_state.append_message(reminder)
+                                run_step.output = "🔁 最终方案缺少预案、态势、资源、专家、路线、风险或案例依据，已退回补齐工具结果。"
+                                continue
 
                     assistant_msg = Message(role=MessageRole.ASSISTANT, content=visible_response)
                     agent.state.add_message(assistant_msg)
