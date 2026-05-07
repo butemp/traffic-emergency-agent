@@ -475,20 +475,17 @@ class Agent:
         messages = self._build_runtime_messages_from_state()
         active_tool_defs = [tool.to_openai_format() for tool in self.get_active_tools()]
         estimated_input = estimate_messages_tokens(messages) + estimate_tools_tokens(active_tool_defs)
-        max_completion = int(getattr(self.provider, "max_tokens", 0) or 0)
         context_window = _int_env("OPENAI_CONTEXT_WINDOW_TOKENS", DEFAULT_CONTEXT_WINDOW_TOKENS)
-        safety_tokens = _int_env("OPENAI_CONTEXT_SAFETY_TOKENS", DEFAULT_CONTEXT_SAFETY_TOKENS)
         compression_ratio = _float_env("OPENAI_CONTEXT_COMPRESSION_RATIO", 0.8)
         compression_threshold = int(context_window * compression_ratio)
-        estimated_total = estimated_input + max_completion + safety_tokens
 
-        if estimated_total >= compression_threshold:
+        # 只在输入上下文本身接近窗口时压缩。
+        # completion 预留由 OpenAIProvider._fit_token_budget 动态下调，
+        # 否则 max_tokens=65536 会让很小的输入也过早触发压缩。
+        if estimated_input >= compression_threshold:
             logger.warning(
-                "上下文接近阈值，触发压缩: input≈%s, max_completion=%s, safety=%s, total≈%s, threshold=%s, window=%s",
+                "输入上下文接近阈值，触发压缩: input≈%s, threshold=%s, window=%s",
                 estimated_input,
-                max_completion,
-                safety_tokens,
-                estimated_total,
                 compression_threshold,
                 context_window,
             )
