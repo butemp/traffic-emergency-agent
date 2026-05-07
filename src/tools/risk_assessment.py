@@ -292,9 +292,29 @@ class RiskAssessment(BaseTool):
 
         # 调用LLM（不使用工具调用）
         response = self.provider.chat(messages, tools=None)
+        response_text = self._extract_response_text(response)
 
-        logger.debug(f"LLM响应（前500字符）: {response[:500]}...")
-        return response
+        logger.debug(f"LLM响应（前500字符）: {response_text[:500]}...")
+        return response_text
+
+    @staticmethod
+    def _extract_response_text(response: Any) -> str:
+        """兼容字符串 Provider 和 OpenAIProvider.ChatResponse 返回。"""
+        if response is None:
+            return ""
+        if isinstance(response, str):
+            return response
+
+        content = getattr(response, "content", None)
+        if content is not None:
+            return str(content)
+
+        if isinstance(response, dict):
+            content = response.get("content")
+            if content is not None:
+                return str(content)
+
+        return str(response)
 
     def _parse_llm_response(self, response: str) -> Dict[str, Any]:
         """

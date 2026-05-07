@@ -397,11 +397,17 @@ def create_agent(runtime_config: Optional[Dict[str, str]] = None):
         except Exception as e:
             logger.warning(f"OptimizeDispatchPlan 工具加载失败: {e}")
 
+    expert_data_path = Path(__file__).parent / "data" / "专家数据" / "expert_info.xls"
     try:
-        tools.append(SearchExperts(data_path="data/专家数据/expert_info.xls"))
+        tools.append(SearchExperts(data_path=str(expert_data_path)))
         logger.info("SearchExperts 工具加载成功")
     except Exception as e:
-        logger.warning(f"SearchExperts 工具加载失败: {e}")
+        logger.warning(
+            "SearchExperts 工具加载失败: path=%s, error=%s",
+            expert_data_path,
+            e,
+            exc_info=True,
+        )
 
     try:
         tools.append(SearchMapResources(data_dir="data/graph")) # 注册新工具
