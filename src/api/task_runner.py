@@ -1,0 +1,692 @@
+"""无 Chainlit 依赖的 Agent 端到端执行逻辑。
+
+API 模式下采用「一键处置」策略：
+- 默认用户已输入全部详情信息，不向用户补问
+- 缺失信息在方案中考虑多种情况，而非阻塞等待
+- 自动跳过所有用户交互点（方案选择、确认、补问）
+- 连续停住超过阈值时强制进入最终输出
+"""
+
+from __future__ import annotations
+
+import asyncio
+import logging
+import os
+import time
+from dataclasses import asdict
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+from .task_store import TaskRecord, TaskStore
+
+logger = logging.getLogger(__name__)
+
+MAX_AGENT_ITERATIONS = 24
+MAX_FINAL_REVIEW_ROUNDS = 5
+# 连续无工具调用且非最终输出的轮次上限，超过后强制进入 Pipeline
+MAX_CONSECUTIVE_STALLS = 3
+
+# ── API 端到端模式系统指令 ────────────────────────────────
+# 注入到 Agent 消息历史中，覆盖交互式行为
+
+API_MODE_SYSTEM_PROMPT = """【API 端到端模式——重要】
+你当前运行在 HTTP API 无人值守模式下，没有人类用户在线等待回复。
+你必须严格遵守以下规则：
+
+1. **绝对不要向用户提问、补问或等待确认。** 不要输出"请提供""请确认""请选择"等交互语句。
+   - needs_user_input 必须始终为 false。
+2. **信息缺失时的处理方式：** 如果关键信息缺失（如伤亡不明、位置模糊），你必须：
+   - 基于已有信息做合理推断，并在方案中标注"待现场确认"；
+   - 对不确定的关键决策点，列出多种情景及对应处置建议；
+   - 不要因为信息不完整就停止推进。
+3. **自动推进阶段：** 完成当前阶段可用工具调用后，立即切换到下一阶段，不要等待指令。
+4. **候选方案自动选择：** 如果你生成了多个候选方案，自动选择最稳妥（覆盖最全面、风险最低）的方案继续推进，不要等用户选择。
+5. **目标：** 尽快走完 INTAKE → SITUATIONAL_AWARENESS → PLAN_GENERATION → PLAN_EVALUATION → OUTPUT 全流程，输出完整 9 章节标准化应急指挥方案。
+6. **效率：** 一轮能调用工具就调用，不要花一轮来"说明你接下来打算做什么"。
+"""
+
+
+def _parse_positive_int(value: Any, default: int) -> int:
+    try:
+        parsed = int(str(value).strip())
+    except (TypeError, ValueError):
+        return default
+    return parsed if parsed > 0 else default
+
+
+# ── Agent / Provider 构建（不依赖 Chainlit） ─────────────
+
+def _build_provider_bundle(config: Optional[Dict[str, str]] = None):
+    """根据可选配置构建 chat / caption / evaluation provider。"""
+    from src.providers import OpenAIProvider
+    from src.providers.defaults import (
+        DEFAULT_CAPTION_MODEL,
+        DEFAULT_TEXT_API_KEY,
+        DEFAULT_TEXT_BASE_URL,
+        DEFAULT_TEXT_MAX_TOKENS,
+        DEFAULT_TEXT_MODEL,
+    )
+
+    config = config or {}
+    api_key = config.get("OPENAI_API_KEY") or DEFAULT_TEXT_API_KEY or ""
+    base_url = config.get("OPENAI_BASE_URL") or os.getenv("OPENAI_BASE_URL") or DEFAULT_TEXT_BASE_URL
+    chat_model = config.get("OPENAI_MODEL") or os.getenv("OPENAI_MODEL") or DEFAULT_TEXT_MODEL
+    max_tokens = _parse_positive_int(config.get("OPENAI_MAX_TOKENS"), DEFAULT_TEXT_MAX_TOKENS)
+
+    caption_model = os.getenv("CAPTION_MODEL") or DEFAULT_CAPTION_MODEL
+    caption_api_key = os.getenv("CAPTION_API_KEY") or os.getenv("DASHSCOPE_API_KEY") or api_key
+    caption_base_url = os.getenv("CAPTION_BASE_URL") or None
+
+    evaluation_model = os.getenv("EVAL_MODEL") or chat_model
+    evaluation_base_url = os.getenv("EVAL_BASE_URL") or base_url
+
+    return {
+        "chat": OpenAIProvider(
+            api_key=api_key, base_url=base_url, model=chat_model,
+            max_tokens=max_tokens, provider="auto",
+        ),
+        "caption": OpenAIProvider(
+            api_key=caption_api_key, base_url=caption_base_url, model=caption_model,
+            provider="auto",
+        ),
+        "evaluation": OpenAIProvider(
+            api_key=api_key, base_url=evaluation_base_url, model=evaluation_model,
+            max_tokens=max_tokens, provider="auto",
+        ),
+    }
+
+
+def create_agent_for_api(config: Optional[Dict[str, str]] = None):
+    """创建独立的 Agent 实例（不依赖 Chainlit session）。"""
+    from src.agent import Agent
+    from src.tools import (
+        QueryRegulations, QueryHistoricalCases, GetEmergencyPlan,
+        EvaluateIncidentSeverity, RiskAssessment, MediaCaption,
+        SearchEmergencyResources, OptimizeDispatchPlan, SearchExperts,
+        SearchMapResources, CheckTrafficStatus, GetWeatherByLocation,
+        GeocodeAddress, ReverseGeocode, SearchNearbyPOIs, PlanDispatchRoutes,
+        GaodeConfig,
+    )
+    from src.rag import QueryRAG, BALANCED_RAG_CONFIG
+    from src.emergency_plans import EmergencyPlanService
+    from src.resource_dispatch import ResourceDispatchEngine
+
+    providers = _build_provider_bundle(config)
+
+    gaode_key = os.getenv("GAODE_API_KEY")
+    if gaode_key:
+        GaodeConfig.set_api_key(gaode_key)
+
+    tools = []
+    dispatch_engine = None
+    plan_service = None
+
+    try:
+        dispatch_engine = ResourceDispatchEngine()
+    except Exception as e:
+        logger.warning("ResourceDispatchEngine 初始化失败: %s", e)
+
+    try:
+        plan_service = EmergencyPlanService(data_dir="data/regulations/data")
+    except Exception as e:
+        logger.warning("EmergencyPlanService 初始化失败: %s", e)
+
+    # 基础工具
+    _try_add(tools, lambda: QueryRegulations(data_path="data/regulations"))
+    _try_add(tools, lambda: QueryHistoricalCases(data_path="data/historical_cases"))
+    _try_add(tools, lambda: QueryRAG(data_dir="data/regulations/chunked_json", config=BALANCED_RAG_CONFIG))
+
+    if plan_service is not None:
+        _try_add(tools, lambda: GetEmergencyPlan(plan_service=plan_service))
+        _try_add(tools, lambda: EvaluateIncidentSeverity(
+            provider=providers["evaluation"], plan_service=plan_service,
+        ))
+
+    _try_add(tools, lambda: RiskAssessment(provider=providers["evaluation"], timeout=30))
+    _try_add(tools, lambda: MediaCaption(
+        provider=providers["caption"], timeout=60, model=providers["caption"].model,
+    ))
+
+    # 高德工具
+    _try_add(tools, CheckTrafficStatus)
+    _try_add(tools, GetWeatherByLocation)
+    _try_add(tools, GeocodeAddress)
+    _try_add(tools, ReverseGeocode)
+    _try_add(tools, SearchNearbyPOIs)
+    _try_add(tools, PlanDispatchRoutes)
+
+    if dispatch_engine is not None:
+        _try_add(tools, lambda: SearchEmergencyResources(engine=dispatch_engine))
+        _try_add(tools, lambda: OptimizeDispatchPlan(engine=dispatch_engine))
+
+    expert_data_path = Path(__file__).resolve().parent.parent.parent / "data" / "专家数据" / "expert_info.xls"
+    _try_add(tools, lambda: SearchExperts(data_path=str(expert_data_path)))
+    _try_add(tools, lambda: SearchMapResources(data_dir="data/graph"))
+
+    agent = Agent(
+        provider=providers["chat"],
+        tools=tools,
+        max_iterations=MAX_AGENT_ITERATIONS,
+        save_conversations=True,
+        conversation_path="data/conversations",
+    )
+    return agent
+
+
+def _try_add(tools: list, factory) -> None:
+    """安全地尝试创建并添加工具。"""
+    try:
+        tool = factory() if callable(factory) else factory
+        tools.append(tool)
+    except Exception as e:
+        logger.warning("工具加载失败: %s", e)
+
+
+def _build_review_provider(config: Optional[Dict[str, str]] = None):
+    """构建用于 Pipeline 和 Reviewer 的 provider。"""
+    providers = _build_provider_bundle(config)
+    return providers["evaluation"]
+
+
+# ── 预填充灾情信息 ────────────────────────────────────────
+
+def _prefill_incident_info(agent, incident_info: Dict[str, Any]) -> None:
+    """将请求中提供的 incident_info 直接写入 Agent 的 TaskState。"""
+    agent.task_state.apply_incident_updates(incident_info)
+
+
+# ── 从 TaskState 收集中间数据 ─────────────────────────────
+
+def _collect_process_data(agent) -> Dict[str, Any]:
+    """从 Agent 的 TaskState 中提取中间过程数据。"""
+    ts = agent.task_state
+    incident = ts.incident_info
+
+    incident_dict = {
+        "incident_type": incident.incident_type,
+        "severity": incident.severity,
+        "incident_category": incident.incident_category,
+        "disaster_type": incident.disaster_type,
+        "scene_type": incident.scene_type,
+        "response_level": incident.response_level,
+        "response_level_reason": incident.response_level_reason,
+        "location_text": incident.location_text,
+        "location_coords": incident.location_coords,
+        "casualty_status": incident.casualty_status,
+        "casualties": incident.casualties,
+        "scene_status": incident.scene_status,
+    }
+
+    env = ts.environment_info
+    environment_dict = {
+        "formatted_address": env.formatted_address,
+        "weather": env.weather,
+        "traffic": env.traffic,
+        "nearby_pois": env.nearby_pois[:10],
+        "route_notes": env.additional_notes[:10],
+    }
+
+    tool_calls = [
+        {
+            "tool_name": r.tool_name,
+            "arguments": r.arguments,
+            "success": r.success,
+            "result_preview": r.result_preview[:200],
+            "error_message": r.error_message,
+        }
+        for r in ts.tool_call_log
+    ]
+
+    knowledge_refs = [
+        {
+            "source_type": ref.source_type,
+            "title": ref.title,
+            "source_path": ref.source_path,
+            "score": ref.score,
+        }
+        for ref in ts.knowledge_refs
+    ]
+
+    experts = [
+        r for r in ts.available_resources if r.get("type") == "expert"
+    ]
+
+    risk_assessment = [
+        {
+            "overall_score": er.overall_score,
+            "risk_level": er.risk_level,
+            "summary": er.summary,
+            "suggestions": er.suggestions,
+        }
+        for er in ts.evaluation_results
+    ]
+
+    return {
+        "incident_info": incident_dict,
+        "environment": environment_dict,
+        "resources": ts.available_resources[:30],
+        "experts": experts,
+        "tool_calls": tool_calls,
+        "risk_assessment": risk_assessment,
+        "knowledge_refs": knowledge_refs,
+    }
+
+
+# ── 核心：异步执行任务 ───────────────────────────────────
+
+async def run_task(task_id: str, store: TaskStore) -> None:
+    """后台执行一个完整的方案生成任务（无 Chainlit 依赖，端到端无交互）。"""
+    record = store.get(task_id)
+    if not record:
+        logger.error("任务不存在: task_id=%s", task_id)
+        return
+
+    try:
+        store.update_progress(task_id, status="running", current_action="正在初始化 Agent")
+
+        # 1. 创建 Agent
+        agent = create_agent_for_api(record.request.get("config"))
+        record.agent = agent
+
+        # 2. 预填充 incident_info
+        if record.request.get("incident_info"):
+            _prefill_incident_info(agent, record.request["incident_info"])
+
+        # 3. 注入 API 端到端模式指令
+        _inject_api_mode_prompt(agent)
+
+        # 4. Agent 主循环
+        await _run_agent_loop(task_id, store, agent, record)
+
+    except asyncio.CancelledError:
+        store.fail(task_id, {
+            "code": "CANCELLED",
+            "message": "任务已取消",
+            "phase": "",
+            "iteration": 0,
+        })
+    except Exception as exc:
+        logger.exception("任务执行异常: task_id=%s", task_id)
+        phase = ""
+        if record.agent:
+            phase = record.agent.task_state.current_phase.value
+        store.fail(task_id, {
+            "code": "INTERNAL_ERROR",
+            "message": str(exc),
+            "phase": phase,
+            "iteration": record.progress.get("iteration", 0),
+        })
+
+
+def _inject_api_mode_prompt(agent) -> None:
+    """在 Agent 消息历史中注入 API 端到端模式系统指令。"""
+    from src.agent.message import Message, MessageRole
+    api_mode_msg = Message(role=MessageRole.SYSTEM, content=API_MODE_SYSTEM_PROMPT)
+    agent.state.add_message(api_mode_msg)
+    agent.task_state.append_message(api_mode_msg)
+
+
+def _force_output_prompt() -> str:
+    """当连续停住超过阈值时，强制模型直接进入最终输出。"""
+    return (
+        "【系统强制指令】你已经连续多轮未调用任何工具也未产出最终方案。\n"
+        "当前处于 API 无人值守模式，不允许等待用户。\n"
+        "请立即基于目前已有的全部信息（即使不完整），直接输出完整的 9 章节标准化应急指挥方案。\n"
+        "对于缺失的信息，在对应章节写明"待现场确认"并给出多种情景处置建议。\n"
+        "在回答末尾附上 agent_control，设置 final_output=true。"
+    )
+
+
+async def _run_agent_loop(
+    task_id: str,
+    store: TaskStore,
+    agent,
+    record: TaskRecord,
+) -> None:
+    """Agent 端到端主循环：自动调用工具 → 自动推进阶段 → Pipeline 输出。"""
+    from src.agent.task_state import TaskPhase
+    from src.agent.message import Message, MessageRole
+
+    incident_description = record.request["incident_description"]
+    agent.start_new_turn(incident_description)
+
+    iteration = 0
+    called_tools_history: List[str] = []
+    called_tools_set: set[str] = set()
+    consecutive_no_tool_rounds = 0  # 连续无工具调用计数
+
+    while iteration < agent.max_iterations:
+        iteration += 1
+
+        # 检查取消
+        if record.cancel_event.is_set():
+            store.fail(task_id, {
+                "code": "CANCELLED",
+                "message": "任务已取消",
+                "phase": agent.task_state.current_phase.value,
+                "iteration": iteration,
+            })
+            return
+
+        store.update_progress(
+            task_id,
+            phase=agent.task_state.current_phase.value,
+            iteration=iteration,
+            current_action=f"第 {iteration} 轮推理中",
+        )
+
+        # 获取消息和工具定义
+        messages = agent.get_runtime_messages()
+        tool_defs = [t.to_openai_format() for t in agent.get_active_tools()]
+
+        # 调用 LLM（同步调用，放到线程池避免阻塞事件循环）
+        try:
+            response = await asyncio.to_thread(
+                agent.provider.chat, messages, tools=tool_defs or None,
+            )
+        except Exception as exc:
+            logger.error("LLM 调用失败: task_id=%s, error=%s", task_id, exc)
+            store.fail(task_id, {
+                "code": "LLM_ERROR",
+                "message": str(exc),
+                "phase": agent.task_state.current_phase.value,
+                "iteration": iteration,
+            })
+            return
+
+        # ── 有工具调用 → 重置停住计数 ──
+        if response.tool_calls:
+            consecutive_no_tool_rounds = 0
+            tool_call = response.tool_calls[0]
+
+            # 重复工具调用检测
+            if tool_call.name in called_tools_set:
+                skip_msg = Message(
+                    role=MessageRole.ASSISTANT,
+                    content=f"（工具 {tool_call.name} 已经调用过，跳过重复调用）",
+                )
+                agent.state.add_message(skip_msg)
+                continue
+
+            # 记录 assistant message
+            assistant_msg = Message(
+                role=MessageRole.ASSISTANT,
+                content=response.content or "",
+                tool_calls=[tool_call],
+            )
+            agent.state.add_message(assistant_msg)
+            called_tools_set.add(tool_call.name)
+            called_tools_history.append(tool_call.name)
+
+            store.update_progress(
+                task_id,
+                current_action=f"正在调用工具: {tool_call.name}",
+                tools_called=list(called_tools_history),
+            )
+
+            # 执行工具（同步，放线程池）
+            try:
+                tool_result = await asyncio.to_thread(
+                    agent._execute_tool, tool_call,
+                )
+                tool_msg = Message(
+                    role=MessageRole.TOOL,
+                    content=tool_result,
+                    tool_call_id=tool_call.id,
+                )
+                agent.state.add_message(tool_msg)
+                agent.task_state.append_message(tool_msg)
+                agent.after_tool_execution(tool_call.name, tool_call.arguments, tool_result)
+
+            except Exception as exc:
+                logger.error("工具执行失败: tool=%s, error=%s", tool_call.name, exc)
+                error_msg = Message(
+                    role=MessageRole.TOOL,
+                    content=f"工具执行失败: {exc}",
+                    tool_call_id=tool_call.id,
+                )
+                agent.state.add_message(error_msg)
+                agent.task_state.append_message(error_msg)
+                agent.after_tool_execution(
+                    tool_call.name, tool_call.arguments,
+                    result="", success=False, error_message=str(exc),
+                )
+
+            # 插入分析指令
+            analysis_msg = agent.build_post_tool_analysis_message(tool_call.name)
+            agent.state.add_message(analysis_msg)
+            agent.task_state.append_message(analysis_msg)
+
+            store.update_progress(
+                task_id,
+                current_action=f"已调用 {tool_call.name}，分析结果中",
+                tools_called=list(called_tools_history),
+            )
+            continue
+
+        # ── 无工具调用 → 解析控制块 ──
+        consecutive_no_tool_rounds += 1
+        control = agent.parse_assistant_control(response.content)
+        agent.apply_assistant_control(control)
+        visible = agent.strip_control_block(response.content)
+
+        # 记录 assistant message
+        assistant_msg = Message(role=MessageRole.ASSISTANT, content=visible)
+        agent.state.add_message(assistant_msg)
+        agent.task_state.append_message(assistant_msg)
+
+        # ── 判断是否进入最终输出 ──
+        is_final = (
+            control.final_output
+            or agent.task_state.current_phase in {TaskPhase.OUTPUT, TaskPhase.OUTPUT_COMPLETE}
+        )
+
+        if is_final:
+            store.update_progress(task_id, current_action="正在生成最终方案（章节化流水线）")
+            await _run_final_pipeline(task_id, store, agent, record, visible)
+            return
+
+        # ── 连续停住超过阈值 → 强制进入 Pipeline ──
+        if consecutive_no_tool_rounds >= MAX_CONSECUTIVE_STALLS:
+            logger.warning(
+                "连续 %d 轮无工具调用，强制进入最终输出: task_id=%s",
+                consecutive_no_tool_rounds, task_id,
+            )
+            store.update_progress(task_id, current_action="连续停住，强制生成最终方案")
+
+            # 最后给模型一次机会：注入强制输出指令
+            force_msg = Message(role=MessageRole.SYSTEM, content=_force_output_prompt())
+            agent.state.add_message(force_msg)
+            agent.task_state.append_message(force_msg)
+
+            try:
+                force_response = await asyncio.to_thread(
+                    agent.provider.chat,
+                    agent.get_runtime_messages(),
+                    tools=None,  # 不给工具，强制纯文本输出
+                )
+                seed = agent.strip_control_block(force_response.content or "")
+            except Exception:
+                seed = ""
+
+            store.update_progress(task_id, current_action="正在生成最终方案（章节化流水线）")
+            await _run_final_pipeline(task_id, store, agent, record, seed)
+            return
+
+        # ── 用户交互点：全部自动跳过 ──
+        if control.needs_user_input:
+            # 方案选择 → 自动选第一个
+            if agent.task_state.candidate_plans:
+                first_plan = agent.task_state.candidate_plans[0]
+                for plan in agent.task_state.candidate_plans:
+                    plan.selected = plan.plan_id == first_plan.plan_id
+                agent.task_state.clear_pending_question()
+                agent.task_state.transition_to(TaskPhase.PLAN_EVALUATION)
+                auto_msg = Message(
+                    role=MessageRole.USER,
+                    content=f"自动选择方案：{first_plan.title}。请继续推进。",
+                )
+                agent.state.add_message(auto_msg)
+                agent.task_state.append_message(auto_msg)
+                store.update_progress(task_id, current_action=f"自动选择方案: {first_plan.title}")
+                continue
+
+            # 确认 / 补问 → 一律自动确认并继续
+            if agent.task_state.current_phase == TaskPhase.WAITING_USER:
+                agent.task_state.clear_pending_question()
+                agent.task_state.resume_from_waiting()
+            auto_msg = Message(
+                role=MessageRole.USER,
+                content="确认。请基于当前已有信息直接继续推进，缺失信息在方案中标注"待现场确认"并考虑多种情景。",
+            )
+            agent.state.add_message(auto_msg)
+            agent.task_state.append_message(auto_msg)
+            store.update_progress(task_id, current_action="自动确认，继续推进中")
+            continue
+
+        # ── 停住态 / 占位语检测 → 直接注入推进指令 ──
+        from web_app import (
+            looks_like_progress_only_response,
+            detect_stalled_response,
+            contains_nonexistent_execution_claim,
+            build_no_execution_claim_prompt,
+        )
+
+        if contains_nonexistent_execution_claim(visible):
+            retry_msg = Message(role=MessageRole.SYSTEM, content=build_no_execution_claim_prompt())
+            agent.state.add_message(retry_msg)
+            agent.task_state.append_message(retry_msg)
+            store.update_progress(task_id, current_action="检测到虚构执行表述，自动重试中")
+            continue
+
+        if looks_like_progress_only_response(visible) or detect_stalled_response(visible):
+            push_msg = Message(
+                role=MessageRole.SYSTEM,
+                content=(
+                    "【系统纠正】不要停在说明态。当前是 API 无人值守模式。\n"
+                    "请立即执行下一步：如果还需要信息就调用对应工具；"
+                    "如果信息足够就直接输出完整最终方案并设置 final_output=true。"
+                ),
+            )
+            agent.state.add_message(push_msg)
+            agent.task_state.append_message(push_msg)
+            store.update_progress(task_id, current_action="检测到停住态，自动推进中")
+            continue
+
+        # 普通中间输出，继续下一轮
+        continue
+
+    # 超过最大迭代 → 强制进入 Pipeline
+    store.update_progress(task_id, current_action="已达最大迭代次数，强制生成最终方案")
+    try:
+        await _run_final_pipeline(task_id, store, agent, record, "")
+    except Exception:
+        store.fail(task_id, {
+            "code": "MAX_ITERATIONS",
+            "message": f"Agent 迭代超过上限 ({agent.max_iterations})，无法完成任务",
+            "phase": agent.task_state.current_phase.value,
+            "iteration": iteration,
+        })
+
+
+async def _run_final_pipeline(
+    task_id: str,
+    store: TaskStore,
+    agent,
+    record: TaskRecord,
+    seed_plan: str,
+) -> None:
+    """执行 FinalPlanPipeline + FinalPlanReviewer 生成最终方案。"""
+    from src.agent.final_plan_pipeline import FinalPlanPipeline
+    from src.agent.final_plan_reviewer import FinalPlanReviewer
+
+    review_provider = _build_review_provider(record.request.get("config"))
+    pipeline = FinalPlanPipeline(review_provider)
+
+    store.update_progress(task_id, pipeline_status="generating_sections")
+
+    # Pipeline 生成（同步，放线程池）
+    try:
+        pipeline_result = await asyncio.to_thread(
+            pipeline.generate,
+            agent.task_state,
+            seed_plan=seed_plan,
+        )
+    except Exception as exc:
+        logger.exception("Pipeline 生成失败: task_id=%s", task_id)
+        store.fail(task_id, {
+            "code": "PIPELINE_ERROR",
+            "message": str(exc),
+            "phase": agent.task_state.current_phase.value,
+            "iteration": record.progress.get("iteration", 0),
+        })
+        return
+
+    final_markdown = pipeline_result.final_markdown
+    store.update_progress(task_id, pipeline_status="reviewing")
+
+    # 全局审核循环
+    reviewer = FinalPlanReviewer(review_provider)
+    review_result = None
+
+    for review_round in range(1, MAX_FINAL_REVIEW_ROUNDS + 1):
+        if record.cancel_event.is_set():
+            store.fail(task_id, {
+                "code": "CANCELLED",
+                "message": "任务在审核阶段被取消",
+                "phase": agent.task_state.current_phase.value,
+                "iteration": record.progress.get("iteration", 0),
+            })
+            return
+
+        store.update_progress(
+            task_id,
+            current_action=f"全局审核第 {review_round}/{MAX_FINAL_REVIEW_ROUNDS} 轮",
+            pipeline_status=f"review_round_{review_round}",
+        )
+
+        try:
+            review_result = await asyncio.to_thread(
+                reviewer.review, agent.task_state, final_markdown,
+            )
+        except Exception as exc:
+            logger.warning("审核调用失败: task_id=%s, round=%s, error=%s", task_id, review_round, exc)
+            break
+
+        if review_result.passed:
+            break
+
+        # 未通过 → 章节局部重写
+        store.update_progress(
+            task_id,
+            current_action=f"审核未通过，重写问题章节（第 {review_round} 轮）",
+            pipeline_status=f"repair_round_{review_round}",
+        )
+
+        from web_app import collect_final_plan_guardrail_issues
+        guardrail_issues = collect_final_plan_guardrail_issues(final_markdown, agent)
+
+        try:
+            pipeline_result = await asyncio.to_thread(
+                pipeline.repair_from_review,
+                agent.task_state, pipeline_result,
+                review_result, guardrail_issues, review_round,
+            )
+            final_markdown = pipeline_result.final_markdown
+        except Exception as exc:
+            logger.warning("章节重写失败: task_id=%s, error=%s", task_id, exc)
+            break
+
+    # 规范化 Markdown
+    from web_app import normalize_final_markdown_for_display
+    final_markdown = normalize_final_markdown_for_display(final_markdown)
+
+    # 组装结果
+    result = {
+        "plan_markdown": final_markdown,
+        "sections": pipeline_result.section_texts,
+        "review": review_result.raw_payload if review_result else None,
+    }
+    process_data = _collect_process_data(agent)
+
+    store.complete(task_id, result=result, process_data=process_data)

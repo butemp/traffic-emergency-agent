@@ -3639,6 +3639,12 @@ async def on_chat_end():
     pass
 
 
+# --- HTTP API 路由挂载 ---
+from chainlit.server import app as fastapi_app
+from src.api.routes import router as api_router
+fastapi_app.include_router(api_router)
+
+
 if __name__ == "__main__":
     # 运行Chainlit应用
     cl.run(
