@@ -22,6 +22,7 @@ from chainlit.input_widget import TextInput
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 from src.agent import Agent, Message, TaskPhase
+from src.agent.final_plan_pipeline import FinalPlanPipeline
 from src.agent.final_plan_reviewer import FinalPlanReviewer
 from src.agent.message import MessageRole
 from src.providers import OpenAIProvider
@@ -1724,7 +1725,11 @@ async def review_final_response_before_display(
     review_provider: OpenAIProvider,
 ) -> tuple[str, Any, bool, int]:
     """
-    在最终方案展示前做独立审核，必要时最多回退主模型 3 轮。
+    在最终方案展示前走章节化生成流水线，再做独立审核。
+
+    主模型给出的 candidate_text 只作为事实线索和风格参考；
+    真正展示给用户的最终方案由 FinalPlanPipeline 按 9 个章节分别生成、
+    分别审核，并在全局审核失败时只重写问题章节。
 
     返回：
     - 最终文本
@@ -1733,8 +1738,20 @@ async def review_final_response_before_display(
     - 实际审核轮次
     """
     reviewer = FinalPlanReviewer(review_provider)
+    pipeline = FinalPlanPipeline(review_provider)
     current_text = candidate_text.strip()
     last_review_result = None
+    pipeline_result = None
+
+    try:
+        pipeline_result = await cl.make_async(pipeline.generate)(
+            task_state=agent.task_state,
+            seed_plan=current_text,
+        )
+        current_text = pipeline_result.final_markdown
+        logger.info("章节化最终方案已生成: run_dir=%s", pipeline_result.run_dir)
+    except Exception as error:
+        logger.exception("章节化最终方案生成失败，回退到主模型候选方案审核: %s", error)
 
     for attempt in range(1, MAX_FINAL_REVIEW_ROUNDS + 1):
         guardrail_issues = collect_final_plan_guardrail_issues(current_text, agent=agent)
@@ -1746,6 +1763,25 @@ async def review_final_response_before_display(
 
         if attempt == MAX_FINAL_REVIEW_ROUNDS:
             return current_text, review_result, True, attempt
+
+        if pipeline_result is not None:
+            try:
+                pipeline_result = await cl.make_async(pipeline.repair_from_review)(
+                    task_state=agent.task_state,
+                    pipeline_result=pipeline_result,
+                    review_result=review_result,
+                    guardrail_issues=guardrail_issues,
+                    attempt=attempt,
+                )
+                current_text = pipeline_result.final_markdown
+                logger.info(
+                    "章节化最终方案按审核意见完成局部重写: attempt=%s, run_dir=%s",
+                    attempt,
+                    pipeline_result.run_dir,
+                )
+                continue
+            except Exception as error:
+                logger.exception("章节化局部重写失败，回退到主模型整稿重写: %s", error)
 
         retry_prompt = build_final_review_retry_prompt(
             candidate_text=current_text,
@@ -2538,6 +2574,10 @@ async def on_message(message: cl.Message):
                             review_provider=review_provider,
                         )
                         final_response = reviewed_response
+                        if final_response.strip() and final_response.strip() != visible_response.strip():
+                            final_msg = Message(role=MessageRole.ASSISTANT, content=final_response)
+                            agent.state.add_message(final_msg)
+                            agent.task_state.append_message(final_msg)
                         if review_exhausted:
                             run_step.output = (
                                 f"⚠️ 最终方案经过 {review_rounds} 轮审核重写后仍未完全通过，"

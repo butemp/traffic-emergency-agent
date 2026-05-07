@@ -190,10 +190,10 @@ class RiskAssessment(BaseTool):
                     "enum": ["信息完整性", "响应及时性", "措施有效性", "资源充足性", "风险可控性"]
                 }
             },
-            "required": ["scenario", "plan"]
+            "required": ["scenario"]
         }
 
-    def execute(self, scenario: str, plan: str, focus_areas: list = None) -> str:
+    def execute(self, scenario: str, plan: str = "", focus_areas: list = None) -> str:
         """
         执行风险评估
 
@@ -207,6 +207,12 @@ class RiskAssessment(BaseTool):
         """
         import time
         start_time = time.time()
+        plan = (plan or "").strip()
+        if not plan:
+            plan = (
+                "当前模型未向 risk_assessment 传入完整候选方案。"
+                "请基于已知灾情先评估方案信息缺口，重点检查是否缺少资源调度、指挥架构、路线规划、风险控制和信息报送。"
+            )
 
         logger.info(f"执行风险评估: scenario长度={len(scenario)}, plan长度={len(plan)}")
 

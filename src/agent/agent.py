@@ -6,6 +6,7 @@ Agent核心类
 
 import json
 import logging
+import os
 import re
 import time
 from typing import Any, Dict, List, Optional
@@ -23,7 +24,12 @@ from .task_state import (
 )
 from ..emergency_plans import EmergencyPlanService
 from ..providers import OpenAIProvider
+from ..providers.defaults import (
+    DEFAULT_CONTEXT_SAFETY_TOKENS,
+    DEFAULT_CONTEXT_WINDOW_TOKENS,
+)
 from ..tools import BaseTool
+from ..utils.token_budget import estimate_messages_tokens, estimate_tools_tokens
 
 # 配置日志
 logging.basicConfig(
@@ -31,6 +37,28 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+
+def _int_env(name: str, default: int) -> int:
+    value = os.getenv(name)
+    if not value:
+        return default
+    try:
+        parsed = int(value)
+    except (TypeError, ValueError):
+        return default
+    return parsed if parsed > 0 else default
+
+
+def _float_env(name: str, default: float) -> float:
+    value = os.getenv(name)
+    if not value:
+        return default
+    try:
+        parsed = float(value)
+    except (TypeError, ValueError):
+        return default
+    return parsed if parsed > 0 else default
 
 
 class Agent:
@@ -444,9 +472,44 @@ class Agent:
         - 当前阶段的 Skill Prompt
         - 当前可用工具说明
         """
+        messages = self._build_runtime_messages_from_state()
+        active_tool_defs = [tool.to_openai_format() for tool in self.get_active_tools()]
+        estimated_input = estimate_messages_tokens(messages) + estimate_tools_tokens(active_tool_defs)
+        max_completion = int(getattr(self.provider, "max_tokens", 0) or 0)
+        context_window = _int_env("OPENAI_CONTEXT_WINDOW_TOKENS", DEFAULT_CONTEXT_WINDOW_TOKENS)
+        safety_tokens = _int_env("OPENAI_CONTEXT_SAFETY_TOKENS", DEFAULT_CONTEXT_SAFETY_TOKENS)
+        compression_ratio = _float_env("OPENAI_CONTEXT_COMPRESSION_RATIO", 0.8)
+        compression_threshold = int(context_window * compression_ratio)
+        estimated_total = estimated_input + max_completion + safety_tokens
+
+        if estimated_total >= compression_threshold:
+            logger.warning(
+                "上下文接近阈值，触发压缩: input≈%s, max_completion=%s, safety=%s, total≈%s, threshold=%s, window=%s",
+                estimated_input,
+                max_completion,
+                safety_tokens,
+                estimated_total,
+                compression_threshold,
+                context_window,
+            )
+            compressed = self.state.compact_for_context(
+                keep_recent=_int_env("OPENAI_CONTEXT_KEEP_RECENT", 16),
+                max_summary_chars=_int_env("OPENAI_CONTEXT_SUMMARY_CHARS", 8000),
+            )
+            if compressed:
+                messages = self._build_runtime_messages_from_state()
+                logger.info(
+                    "上下文压缩后估算: input≈%s, messages=%s",
+                    estimate_messages_tokens(messages),
+                    len(messages),
+                )
+
+        return messages
+
+    def _build_runtime_messages_from_state(self) -> List[dict]:
+        """基于当前 ConversationState 构建带动态 system prompt 的消息。"""
         messages = self.state.get_history()
         runtime_system_prompt = self._build_runtime_system_prompt()
-
         if messages and messages[0]["role"] == MessageRole.SYSTEM.value:
             runtime_messages = [dict(message) for message in messages]
             runtime_messages[0]["content"] = runtime_system_prompt

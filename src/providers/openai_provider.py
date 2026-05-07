@@ -17,11 +17,14 @@ from typing import List, Optional, Any
 from openai import OpenAI
 from ..agent.message import ChatResponse
 from .defaults import (
+    DEFAULT_CONTEXT_SAFETY_TOKENS,
+    DEFAULT_CONTEXT_WINDOW_TOKENS,
     DEFAULT_TEXT_API_KEY,
     DEFAULT_TEXT_BASE_URL,
     DEFAULT_TEXT_MAX_TOKENS,
     DEFAULT_TEXT_MODEL,
 )
+from ..utils.token_budget import estimate_messages_tokens, estimate_tools_tokens
 
 logger = logging.getLogger(__name__)
 
@@ -147,6 +150,8 @@ class OpenAIProvider:
             params["tool_choice"] = "auto"  # 让模型自动决定是否调用工具
             logger.debug(f"启用工具调用，工具数量: {len(tools)}")
 
+        self._fit_token_budget(params=params, tools=tools)
+
         # 记录请求信息
         logger.info(f"发送请求: model={params['model']}, 消息数量={len(messages)}")
 
@@ -167,3 +172,44 @@ class OpenAIProvider:
         except Exception as e:
             logger.error(f"OpenAI API调用失败: {e}")
             raise
+
+    def _fit_token_budget(self, params: dict, tools: Optional[List[dict]]) -> None:
+        """根据上下文窗口动态收缩 max_tokens，避免 input + completion 超限。"""
+        context_window = self._int_env("OPENAI_CONTEXT_WINDOW_TOKENS", DEFAULT_CONTEXT_WINDOW_TOKENS)
+        safety_tokens = self._int_env("OPENAI_CONTEXT_SAFETY_TOKENS", DEFAULT_CONTEXT_SAFETY_TOKENS)
+        estimated_input = estimate_messages_tokens(params.get("messages", [])) + estimate_tools_tokens(tools)
+        requested_completion = int(params.get("max_tokens") or 0)
+        available_completion = context_window - estimated_input - safety_tokens
+
+        if available_completion <= 0:
+            logger.warning(
+                "请求输入已接近或超过上下文窗口: input≈%s, safety=%s, window=%s",
+                estimated_input,
+                safety_tokens,
+                context_window,
+            )
+            params["max_tokens"] = max(512, min(requested_completion, 1024))
+            return
+
+        if requested_completion > available_completion:
+            adjusted = max(512, available_completion)
+            logger.warning(
+                "动态下调 max_tokens: requested=%s, adjusted=%s, input≈%s, window=%s, safety=%s",
+                requested_completion,
+                adjusted,
+                estimated_input,
+                context_window,
+                safety_tokens,
+            )
+            params["max_tokens"] = adjusted
+
+    @staticmethod
+    def _int_env(name: str, default: int) -> int:
+        value = os.getenv(name)
+        if not value:
+            return default
+        try:
+            parsed = int(value)
+        except (TypeError, ValueError):
+            return default
+        return parsed if parsed > 0 else default
