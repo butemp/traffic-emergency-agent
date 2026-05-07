@@ -237,14 +237,20 @@ class FinalPlanPipeline:
         exhausted_sections: List[str] = []
 
         for spec in SECTION_SPECS:
-            text, paths, exhausted = self._generate_section_with_review(
-                spec=spec,
-                evidence=evidence,
-                seed_plan=seed_plan,
-                global_feedback=global_feedback,
-                sections_dir=sections_dir,
-                reviews_dir=reviews_dir,
-            )
+            try:
+                text, paths, exhausted = self._generate_section_with_review(
+                    spec=spec,
+                    evidence=evidence,
+                    seed_plan=seed_plan,
+                    global_feedback=global_feedback,
+                    sections_dir=sections_dir,
+                    reviews_dir=reviews_dir,
+                )
+            except Exception as error:
+                logger.exception("章节生成失败，写入错误占位后继续: section=%s, error=%s", spec.title, error)
+                text = self._build_section_error_placeholder(spec, error)
+                paths = []
+                exhausted = True
             section_texts[spec.title] = text
             section_path = sections_dir / spec.filename
             self._write_text(section_path, text)
@@ -294,15 +300,21 @@ class FinalPlanPipeline:
 
             section_feedback = self._filter_feedback_for_section(spec.title, global_feedback)
             previous_draft = section_texts.get(spec.title, "")
-            text, paths, exhausted = self._generate_section_with_review(
-                spec=spec,
-                evidence=evidence,
-                seed_plan=previous_draft,
-                global_feedback=section_feedback,
-                sections_dir=sections_dir,
-                reviews_dir=reviews_dir,
-                tag=f"global_retry_{attempt}",
-            )
+            try:
+                text, paths, exhausted = self._generate_section_with_review(
+                    spec=spec,
+                    evidence=evidence,
+                    seed_plan=previous_draft,
+                    global_feedback=section_feedback,
+                    sections_dir=sections_dir,
+                    reviews_dir=reviews_dir,
+                    tag=f"global_retry_{attempt}",
+                )
+            except Exception as error:
+                logger.exception("章节局部重写失败，保留错误占位: section=%s, error=%s", spec.title, error)
+                text = self._build_section_error_placeholder(spec, error, previous_draft=previous_draft)
+                paths = []
+                exhausted = True
             section_texts[spec.title] = text
             section_path = sections_dir / spec.filename
             self._write_text(section_path, text)
@@ -654,6 +666,34 @@ class FinalPlanPipeline:
             lines.append(text)
             lines.append("")
         return "\n".join(lines).strip()
+
+    def _build_section_error_placeholder(
+        self,
+        spec: SectionSpec,
+        error: Exception,
+        previous_draft: str = "",
+    ) -> str:
+        """章节生成失败时写入可展示、可审核的错误占位，避免整稿完全中断。"""
+        lines = [
+            f"### {spec.title}",
+            "",
+            "[本章节生成失败，需重新生成或人工补充]",
+            "",
+            f"- 失败原因：{type(error).__name__}: {error}",
+            f"- 本章节最低字数要求：{spec.min_chars}",
+            f"- 本章节必含信息：{'、'.join(spec.required_terms)}",
+            "- 处理建议：检查模型调用、上下文长度、网关返回和章节审核日志后重试。",
+        ]
+        if previous_draft:
+            lines.extend(
+                [
+                    "",
+                    "#### 上一版草稿摘要",
+                    "",
+                    self._limit_text(previous_draft, 3000),
+                ]
+            )
+        return "\n".join(lines)
 
     def _normalize_section_text(self, spec: SectionSpec, raw_text: str) -> str:
         text = self._strip_control_blocks(raw_text or "").strip()

@@ -1738,6 +1738,57 @@ def build_final_review_retry_prompt(
     )
 
 
+async def send_final_plan_pipeline_preview(pipeline_result: Any, label: str = "章节化最终方案") -> None:
+    """把章节流水线的中间产物展示到前端，方便定位最终方案生成问题。"""
+    if pipeline_result is None:
+        return
+
+    section_texts = getattr(pipeline_result, "section_texts", {}) or {}
+    section_paths = getattr(pipeline_result, "section_paths", {}) or {}
+    exhausted_sections = getattr(pipeline_result, "exhausted_sections", []) or []
+    run_dir = getattr(pipeline_result, "run_dir", "")
+    evidence_path = getattr(pipeline_result, "evidence_path", "")
+
+    summary_lines = [
+        f"### {label}",
+        "",
+        f"- 本地目录：`{run_dir}`",
+        f"- 证据包：`{evidence_path}`",
+        f"- 已生成章节数：{len(section_texts)}",
+    ]
+    if exhausted_sections:
+        summary_lines.append(f"- 未完全通过章节内审核：{'、'.join(exhausted_sections)}")
+    else:
+        summary_lines.append("- 章节内审核：未发现耗尽重写轮次的章节")
+
+    summary_lines.append("")
+    summary_lines.append("下面的附件展示了每个章节的当前 Markdown 内容。")
+
+    elements = []
+    for index, (title, content) in enumerate(section_texts.items(), start=1):
+        path = section_paths.get(title)
+        element_content = "\n".join(
+            [
+                f"> 文件路径：`{path}`" if path else "> 文件路径：暂未记录",
+                "",
+                content or "[空章节]",
+            ]
+        )
+        elements.append(
+            cl.Text(
+                name=f"{index:02d}_{title}",
+                content=element_content,
+                language="markdown",
+            )
+        )
+
+    await cl.Message(
+        content="\n".join(summary_lines),
+        author="章节生成流水线",
+        elements=elements,
+    ).send()
+
+
 async def review_final_response_before_display(
     agent: Agent,
     candidate_text: str,
@@ -1769,6 +1820,7 @@ async def review_final_response_before_display(
         )
         current_text = pipeline_result.final_markdown
         logger.info("章节化最终方案已生成: run_dir=%s", pipeline_result.run_dir)
+        await send_final_plan_pipeline_preview(pipeline_result, label="章节化最终方案首版")
     except Exception as error:
         logger.exception("章节化最终方案生成失败，回退到主模型候选方案审核: %s", error)
 
@@ -1797,6 +1849,10 @@ async def review_final_response_before_display(
                     "章节化最终方案按审核意见完成局部重写: attempt=%s, run_dir=%s",
                     attempt,
                     pipeline_result.run_dir,
+                )
+                await send_final_plan_pipeline_preview(
+                    pipeline_result,
+                    label=f"章节化最终方案局部重写 第 {attempt} 轮",
                 )
                 continue
             except Exception as error:
