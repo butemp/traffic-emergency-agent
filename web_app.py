@@ -22,7 +22,7 @@ from chainlit.input_widget import TextInput
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 from src.agent import Agent, Message, TaskPhase
-from src.agent.final_plan_pipeline import FinalPlanPipeline
+from src.agent.final_plan_pipeline import FinalPlanPipeline, FinalPlanPipelineResult, SECTION_SPECS
 from src.agent.final_plan_reviewer import FinalPlanReviewer
 from src.agent.message import MessageRole
 from src.providers import OpenAIProvider
@@ -1789,6 +1789,211 @@ async def send_final_plan_pipeline_preview(pipeline_result: Any, label: str = "�
     ).send()
 
 
+async def send_final_plan_section_message(title: str, content: str, path: Any, label: str) -> None:
+    """章节生成完成后立即展示该章节内容。"""
+    await cl.Message(
+        content="\n".join(
+            [
+                f"### {label}: {title}",
+                "",
+                f"- 文件路径：`{path}`" if path else "- 文件路径：暂未记录",
+                "",
+                content or "[空章节]",
+            ]
+        ),
+        author="章节生成流水线",
+    ).send()
+
+
+async def generate_final_plan_pipeline_with_frontend(
+    pipeline: FinalPlanPipeline,
+    task_state: Any,
+    seed_plan: str = "",
+    global_feedback: str = "",
+) -> FinalPlanPipelineResult:
+    """逐章生成最终方案，并在每章完成后立即展示到前端。"""
+    run_dir = pipeline._create_run_dir()
+    sections_dir = run_dir / "sections"
+    reviews_dir = run_dir / "reviews"
+    sections_dir.mkdir(parents=True, exist_ok=True)
+    reviews_dir.mkdir(parents=True, exist_ok=True)
+
+    evidence = pipeline._build_evidence_bundle(task_state=task_state, seed_plan=seed_plan)
+    evidence_path = run_dir / "evidence_bundle.md"
+    pipeline._write_text(evidence_path, evidence)
+
+    await cl.Message(
+        content="\n".join(
+            [
+                "### 开始章节化生成最终应急指挥方案",
+                "",
+                f"- 本地目录：`{run_dir}`",
+                f"- 证据包：`{evidence_path}`",
+                "- 生成方式：9 个章节逐章生成、逐章审核；每章完成后会立即展示。",
+            ]
+        ),
+        author="章节生成流水线",
+    ).send()
+
+    section_texts: Dict[str, str] = {}
+    section_paths: Dict[str, Path] = {}
+    review_paths: Dict[str, list[Path]] = {}
+    exhausted_sections: list[str] = []
+
+    for index, spec in enumerate(SECTION_SPECS, start=1):
+        async with cl.Step(name=f"生成章节 {index}/9：{spec.title}", type="llm") as section_step:
+            section_step.input = {
+                "section": spec.title,
+                "min_chars": spec.min_chars,
+                "required_terms": list(spec.required_terms),
+            }
+            try:
+                text, paths, exhausted = await cl.make_async(pipeline._generate_section_with_review)(
+                    spec=spec,
+                    evidence=evidence,
+                    seed_plan=seed_plan,
+                    global_feedback=global_feedback,
+                    sections_dir=sections_dir,
+                    reviews_dir=reviews_dir,
+                )
+            except Exception as error:
+                logger.exception("章节生成失败，写入错误占位后继续: section=%s, error=%s", spec.title, error)
+                text = pipeline._build_section_error_placeholder(spec, error)
+                paths = []
+                exhausted = True
+
+            section_path = sections_dir / spec.filename
+            pipeline._write_text(section_path, text)
+            section_texts[spec.title] = text
+            section_paths[spec.title] = section_path
+            review_paths[spec.title] = paths
+            if exhausted:
+                exhausted_sections.append(spec.title)
+
+            section_step.output = (
+                f"已生成 {spec.title}，长度 {len(text)} 字，"
+                f"{'未完全通过章节内审核' if exhausted else '已通过章节内审核'}。"
+            )
+
+        await send_final_plan_section_message(
+            title=spec.title,
+            content=text,
+            path=section_path,
+            label=f"章节 {index}/9 已生成",
+        )
+
+    final_markdown = pipeline._merge_sections(section_texts)
+    pipeline._write_text(run_dir / "final_plan.md", final_markdown)
+
+    return FinalPlanPipelineResult(
+        final_markdown=final_markdown,
+        run_dir=run_dir,
+        evidence_path=evidence_path,
+        section_texts=section_texts,
+        section_paths=section_paths,
+        review_paths=review_paths,
+        exhausted_sections=exhausted_sections,
+    )
+
+
+async def repair_final_plan_pipeline_with_frontend(
+    pipeline: FinalPlanPipeline,
+    task_state: Any,
+    pipeline_result: FinalPlanPipelineResult,
+    review_result: Any,
+    guardrail_issues: list[str],
+    attempt: int,
+) -> FinalPlanPipelineResult:
+    """根据全局审核意见逐章局部重写，并立即展示重写章节。"""
+    failed_titles = pipeline._select_failed_sections(review_result, guardrail_issues)
+    if not failed_titles:
+        failed_titles = {"三、指挥架构", "五、处置行动方案", "六、资源调度方案", "八、风险提示与注意事项"}
+
+    evidence = pipeline._read_text(pipeline_result.evidence_path)
+    sections_dir = pipeline_result.run_dir / "sections"
+    reviews_dir = pipeline_result.run_dir / "reviews"
+    section_texts = dict(pipeline_result.section_texts)
+    section_paths = dict(pipeline_result.section_paths)
+    review_paths = {title: list(paths) for title, paths in pipeline_result.review_paths.items()}
+    exhausted_sections = list(pipeline_result.exhausted_sections)
+    global_feedback = pipeline._format_global_feedback(review_result, guardrail_issues)
+
+    await cl.Message(
+        content="\n".join(
+            [
+                f"### 开始局部重写最终方案章节（第 {attempt} 轮）",
+                "",
+                f"- 本轮重写章节：{'、'.join(sorted(failed_titles))}",
+                f"- 本地目录：`{pipeline_result.run_dir}`",
+            ]
+        ),
+        author="章节生成流水线",
+    ).send()
+
+    for spec in SECTION_SPECS:
+        if spec.title not in failed_titles:
+            continue
+
+        section_feedback = pipeline._filter_feedback_for_section(spec.title, global_feedback)
+        previous_draft = section_texts.get(spec.title, "")
+        async with cl.Step(name=f"局部重写章节：{spec.title}", type="llm") as section_step:
+            section_step.input = {
+                "section": spec.title,
+                "feedback": section_feedback,
+            }
+            try:
+                text, paths, exhausted = await cl.make_async(pipeline._generate_section_with_review)(
+                    spec=spec,
+                    evidence=evidence,
+                    seed_plan=previous_draft,
+                    global_feedback=section_feedback,
+                    sections_dir=sections_dir,
+                    reviews_dir=reviews_dir,
+                    tag=f"global_retry_{attempt}",
+                )
+            except Exception as error:
+                logger.exception("章节局部重写失败，保留错误占位: section=%s, error=%s", spec.title, error)
+                text = pipeline._build_section_error_placeholder(spec, error, previous_draft=previous_draft)
+                paths = []
+                exhausted = True
+
+            section_path = sections_dir / spec.filename
+            pipeline._write_text(section_path, text)
+            section_texts[spec.title] = text
+            section_paths[spec.title] = section_path
+            review_paths.setdefault(spec.title, []).extend(paths)
+            if exhausted and spec.title not in exhausted_sections:
+                exhausted_sections.append(spec.title)
+            elif not exhausted and spec.title in exhausted_sections:
+                exhausted_sections.remove(spec.title)
+
+            section_step.output = (
+                f"已重写 {spec.title}，长度 {len(text)} 字，"
+                f"{'仍未完全通过章节内审核' if exhausted else '已通过章节内审核'}。"
+            )
+
+        await send_final_plan_section_message(
+            title=spec.title,
+            content=text,
+            path=section_path,
+            label=f"局部重写第 {attempt} 轮完成",
+        )
+
+    final_markdown = pipeline._merge_sections(section_texts)
+    pipeline._write_text(pipeline_result.run_dir / f"final_plan_global_retry_{attempt}.md", final_markdown)
+    pipeline._write_text(pipeline_result.run_dir / "final_plan.md", final_markdown)
+
+    return FinalPlanPipelineResult(
+        final_markdown=final_markdown,
+        run_dir=pipeline_result.run_dir,
+        evidence_path=pipeline_result.evidence_path,
+        section_texts=section_texts,
+        section_paths=section_paths,
+        review_paths=review_paths,
+        exhausted_sections=exhausted_sections,
+    )
+
+
 async def review_final_response_before_display(
     agent: Agent,
     candidate_text: str,
@@ -1814,13 +2019,13 @@ async def review_final_response_before_display(
     pipeline_result = None
 
     try:
-        pipeline_result = await cl.make_async(pipeline.generate)(
+        pipeline_result = await generate_final_plan_pipeline_with_frontend(
+            pipeline=pipeline,
             task_state=agent.task_state,
             seed_plan=current_text,
         )
         current_text = pipeline_result.final_markdown
         logger.info("章节化最终方案已生成: run_dir=%s", pipeline_result.run_dir)
-        await send_final_plan_pipeline_preview(pipeline_result, label="章节化最终方案首版")
     except Exception as error:
         logger.exception("章节化最终方案生成失败，回退到主模型候选方案审核: %s", error)
 
@@ -1837,7 +2042,8 @@ async def review_final_response_before_display(
 
         if pipeline_result is not None:
             try:
-                pipeline_result = await cl.make_async(pipeline.repair_from_review)(
+                pipeline_result = await repair_final_plan_pipeline_with_frontend(
+                    pipeline=pipeline,
                     task_state=agent.task_state,
                     pipeline_result=pipeline_result,
                     review_result=review_result,
@@ -1849,10 +2055,6 @@ async def review_final_response_before_display(
                     "章节化最终方案按审核意见完成局部重写: attempt=%s, run_dir=%s",
                     attempt,
                     pipeline_result.run_dir,
-                )
-                await send_final_plan_pipeline_preview(
-                    pipeline_result,
-                    label=f"章节化最终方案局部重写 第 {attempt} 轮",
                 )
                 continue
             except Exception as error:
