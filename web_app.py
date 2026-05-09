@@ -8,15 +8,19 @@
 """
 
 import json
+import logging
 import os
 import re
 import sys
 from pathlib import Path
 from typing import Any, Dict, Optional
 
+logger = logging.getLogger(__name__)
+
 import chainlit as cl
 from dotenv import load_dotenv
 from chainlit.input_widget import TextInput
+from chainlit.types import ThreadDict
 
 # 添加src目录到路径
 sys.path.insert(0, str(Path(__file__).parent / "src"))
@@ -55,6 +59,11 @@ from src.tools import (
 from src.rag import QueryRAG, RAGConfig, BALANCED_RAG_CONFIG
 from src.emergency_plans import EmergencyPlanService
 from src.resource_dispatch import ResourceDispatchEngine
+
+# 注册历史对话数据层
+import chainlit.data as cl_data
+from src.data_layer import JsonDataLayer
+cl_data._data_layer = JsonDataLayer()
 
 # 加载环境变量
 load_dotenv()
@@ -3623,11 +3632,27 @@ body {
 
 # ===== 侧边栏 =====
 @cl.on_chat_resume
-async def on_chat_resume(thread_id: str):
-    """恢复会话时"""
+async def on_chat_resume(thread: ThreadDict):
+    """恢复会话时，展示历史消息（只读浏览）。"""
+    steps = thread.get("steps", [])
+    if not steps:
+        await cl.Message(content="该历史会话没有消息记录。", author="系统").send()
+        return
+
+    for step in steps:
+        role = step.get("name", "") or step.get("type", "")
+        if role == "user" or step.get("type") == "user_message":
+            content = step.get("input") or step.get("output") or ""
+            if content:
+                await cl.Message(content=content, author="用户（历史）").send()
+        elif role in ("assistant", "assistant_message") or step.get("type") == "assistant_message":
+            content = step.get("output") or step.get("input") or ""
+            if content:
+                await cl.Message(content=content, author="助手（历史）").send()
+
     await cl.Message(
-        content="👋 欢迎回来！我已经准备好继续为你服务。",
-        author="系统"
+        content="以上是历史对话记录（只读浏览）。如需开启新会话，请点击左上角'新对话'。",
+        author="系统",
     ).send()
 
 

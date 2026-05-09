@@ -193,7 +193,7 @@ class RiskAssessment(BaseTool):
             "required": ["scenario"]
         }
 
-    def execute(self, scenario: str, plan: str = "", focus_areas: list = None) -> str:
+    def execute(self, scenario: str, plan: str = "", focus_areas: list = None, **_extra) -> str:
         """
         执行风险评估
 
