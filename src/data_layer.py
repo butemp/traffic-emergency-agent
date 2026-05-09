@@ -204,3 +204,18 @@ class JsonDataLayer(BaseDataLayer):
 
     async def build_debug_url(self) -> str:
         return ""
+
+    async def create_element(self, element: Any) -> None:
+        pass
+
+    async def get_element(self, thread_id: str, element_id: str) -> Optional[Any]:
+        return None
+
+    async def delete_element(self, element_id: str) -> None:
+        pass
+
+    async def delete_step(self, step_id: str) -> None:
+        pass
+
+    async def close(self) -> None:
+        pass
