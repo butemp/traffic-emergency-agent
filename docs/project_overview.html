@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交通应急指挥智能体 - 项目技术解读</title>
+    <style>
+        :root {
+            --primary: #1a5276;
+            --primary-light: #2980b9;
+            --accent: #e67e22;
+            --bg: #f8f9fa;
+            --card: #ffffff;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --border: #e0e0e0;
+            --code-bg: #1e1e2e;
+            --code-text: #cdd6f4;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        /* Header */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 60px 0 50px;
+            text-align: center;
+        }
+        .hero h1 { font-size: 2.4em; font-weight: 700; margin-bottom: 12px; letter-spacing: 2px; }
+        .hero p { font-size: 1.15em; opacity: 0.9; max-width: 700px; margin: 0 auto; }
+        .hero .badges { margin-top: 20px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .hero .badge {
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Layout */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* TOC */
+        .toc {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 28px 32px;
+            margin: -30px auto 40px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .toc h2 { font-size: 1.2em; color: var(--primary); margin-bottom: 14px; }
+        .toc ol { padding-left: 20px; columns: 2; column-gap: 40px; }
+        .toc li { margin-bottom: 6px; break-inside: avoid; }
+        .toc a { color: var(--primary-light); text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+
+        /* Sections */
+        .section {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 36px 40px;
+            margin-bottom: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+        .section h2 {
+            font-size: 1.55em;
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary-light);
+            padding-bottom: 10px;
+            margin-bottom: 24px;
+        }
+        .section h3 {
+            font-size: 1.2em;
+            color: var(--primary);
+            margin: 28px 0 14px;
+            padding-left: 12px;
+            border-left: 4px solid var(--accent);
+        }
+        .section h4 {
+            font-size: 1.05em;
+            color: var(--text);
+            margin: 20px 0 10px;
+        }
+        .section p { margin-bottom: 12px; }
+        .section ul, .section ol { padding-left: 24px; margin-bottom: 14px; }
+        .section li { margin-bottom: 6px; }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0 20px;
+            font-size: 0.92em;
+        }
+        th {
+            background: var(--primary);
+            color: white;
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 9px 14px;
+            border-bottom: 1px solid var(--border);
+        }
+        tr:nth-child(even) td { background: #f7f9fc; }
+        tr:hover td { background: #eef3f8; }
+
+        /* Code blocks */
+        pre {
+            background: var(--code-bg);
+            color: var(--code-text);
+            border-radius: 8px;
+            padding: 18px 22px;
+            overflow-x: auto;
+            margin: 14px 0 18px;
+            font-size: 0.88em;
+            line-height: 1.7;
+        }
+        code {
+            font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+        }
+        p code, li code, td code {
+            background: #eef1f5;
+            color: var(--primary);
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        /* Info boxes */
+        .info-box {
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            font-size: 0.95em;
+        }
+        .info-box.tip { background: #eafaf1; border-left: 4px solid var(--success); }
+        .info-box.warn { background: #fef9e7; border-left: 4px solid var(--warning); }
+        .info-box.key { background: #ebf5fb; border-left: 4px solid var(--primary-light); }
+
+        /* Flow diagram (text-based) */
+        .flow {
+            background: var(--code-bg);
+            color: var(--code-text);
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin: 14px 0 18px;
+            font-family: "JetBrains Mono", Consolas, monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        /* Tags */
+        .tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-right: 6px;
+        }
+        .tag.green { background: #d5f5e3; color: #1e8449; }
+        .tag.blue { background: #d6eaf8; color: #1a5276; }
+        .tag.orange { background: #fdebd0; color: #b9770e; }
+        .tag.red { background: #fadbd8; color: #c0392b; }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-light);
+            font-size: 0.88em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8em; }
+            .section { padding: 24px 20px; }
+            .toc ol { columns: 1; }
+            table { font-size: 0.82em; }
+            th, td { padding: 7px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<div class="hero">
+    <div class="container">
+        <h1>交通应急指挥智能体</h1>
+        <p>基于 ReAct Agent + RAG + 资源调度引擎 + 章节化生成的端到端交通应急响应决策系统</p>
+        <div class="badges">
+            <span class="badge">ReAct Agent</span>
+            <span class="badge">Skill-Based 架构</span>
+            <span class="badge">RAG 两阶段检索</span>
+            <span class="badge">三梯队资源调度</span>
+            <span class="badge">9 章节 Pipeline 生成</span>
+            <span class="badge">多层质量审核</span>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== TOC ==================== -->
+<div class="container">
+<div class="toc">
+    <h2>目录</h2>
+    <ol>
+        <li><a href="#s1">功能架构</a></li>
+        <li><a href="#s2">模块划分与调用关系</a></li>
+        <li><a href="#s3">七阶段任务流程</a></li>
+        <li><a href="#s4">FinalPlanPipeline 章节化生成</a></li>
+        <li><a href="#s5">多层质量保证体系</a></li>
+        <li><a href="#s6">ReAct Agent 循环</a></li>
+        <li><a href="#s7">Skill-Based 动态路由</a></li>
+        <li><a href="#s8">RAG 两阶段检索</a></li>
+        <li><a href="#s9">资源调度引擎算法</a></li>
+        <li><a href="#s10">Token 预算与上下文压缩</a></li>
+        <li><a href="#s11">防循环与阶段保护</a></li>
+        <li><a href="#s12">API 异步任务服务</a></li>
+        <li><a href="#s13">工具集一览</a></li>
+    </ol>
+</div>
+
+<!-- ==================== 1. 功能架构 ==================== -->
+<div class="section" id="s1">
+    <h2>一、功能架构</h2>
+    <p>本系统面向交通指挥中心和应急管理部门，提供从<strong>灾情接收</strong>到<strong>标准化应急方案输出</strong>的全流程自动化决策支持。</p>
+
+    <div class="info-box key">
+        <strong>核心价值：</strong>
+        <ul style="margin-top:8px;">
+            <li><strong>完整性优先</strong> — 不因信息不完整而停止推进，通过多工具协作和多情景推理补全方案</li>
+            <li><strong>质量保证</strong> — Guardrail 硬性校验 → Reviewer 全局审核 → Pipeline Repair 章节修复 → Fallback 兜底重写</li>
+            <li><strong>可溯源</strong> — 完整记录工具调用、知识引用、审核轮次和生成过程</li>
+            <li><strong>双模式</strong> — Chainlit Web 沉浸式交互 + HTTP API 无人值守</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== 2. 模块划分 ==================== -->
+<div class="section" id="s2">
+    <h2>二、模块划分与调用关系</h2>
+
+    <div class="flow">用户输入灾情
+    │
+    ▼
+┌─────────────────────────────────────────────────┐
+│  Agent 核心引擎 (src/agent/)                      │
+│                                                   │
+│  agent.py ──→ SkillRouter ──→ 按阶段激活 Skill    │
+│  ReAct 循环       动态路由       和对应工具集       │
+│       │                                           │
+│       ▼ 工具调用                                   │
+│  ┌─────────────────────────────────────────┐     │
+│  │  工具层 (src/tools/) — 14 个工具          │     │
+│  │  地理信息 │ 知识检索 │ 资源调度 │ 评估    │     │
+│  └─────────────────────────────────────────┘     │
+│       │ 达到 OUTPUT 阶段                           │
+│       ▼                                           │
+│  FinalPlanPipeline ─→ 9 章节逐章生成+审核          │
+│  FinalPlanReviewer ─→ 17 项全局审核                │
+│  Guardrail         ─→ 硬性格式/内容校验            │
+└─────────────────────────────────────────────────┘
+    │                        │
+    ▼                        ▼
+ Chainlit Web            HTTP API
+ 沉浸式交互             异步任务+轮询</div>
+
+    <table>
+        <tr><th>模块</th><th>路径</th><th>职责</th></tr>
+        <tr><td><code>agent.py</code></td><td>src/agent/</td><td>ReAct 主循环（最多 24 轮迭代），驱动工具调用和阶段推进</td></tr>
+        <tr><td><code>task_state.py</code></td><td>src/agent/</td><td>7 阶段状态机 + 结构化灾情/环境/资源/评估数据</td></tr>
+        <tr><td><code>skill_router.py</code></td><td>src/agent/</td><td>根据当前阶段动态激活 Skill 和工具</td></tr>
+        <tr><td><code>final_plan_pipeline.py</code></td><td>src/agent/</td><td>9 章节逐章生成，每章独立 LLM 调用 + 审核，带 few-shot 示例</td></tr>
+        <tr><td><code>final_plan_reviewer.py</code></td><td>src/agent/</td><td>全局 17 项标准审核，评分 + 问题反馈</td></tr>
+        <tr><td><code>retriever.py</code></td><td>src/rag/</td><td>两阶段检索：BGE Embedding 粗排 → BGE Reranker 精排</td></tr>
+        <tr><td><code>engine.py</code></td><td>src/resource_dispatch/</td><td>Haversine 距离 + 多维计分 + 贪心选择 + 三梯队编排</td></tr>
+        <tr><td><code>task_runner.py</code></td><td>src/api/</td><td>无人值守模式的 Agent 执行器，禁用所有用户交互</td></tr>
+        <tr><td><code>data_layer.py</code></td><td>src/</td><td>基于本地 JSON 的 Chainlit 历史对话展示</td></tr>
+        <tr><td><code>token_budget.py</code></td><td>src/utils/</td><td>Token 估算与上下文自适应压缩</td></tr>
+    </table>
+</div>
+
+<!-- ==================== 3. 七阶段流程 ==================== -->
+<div class="section" id="s3">
+    <h2>三、七阶段任务流程</h2>
+
+    <div class="flow">INTAKE → SITUATIONAL_AWARENESS → PLAN_GENERATION → PLAN_EVALUATION → OUTPUT → OUTPUT_COMPLETE
+                                                                                  ↘ WAITING_USER（仅 Web 模式）</div>
+
+    <table>
+        <tr><th>阶段</th><th>目标</th><th>关键工具</th></tr>
+        <tr>
+            <td><span class="tag blue">INTAKE</span></td>
+            <td>提取灾情结构化信息（类型/位置/伤亡/现场状态），LLM 定级（response_level）。缺失信息优先推断而非补问。</td>
+            <td><code>evaluate_incident_severity</code></td>
+        </tr>
+        <tr>
+            <td><span class="tag blue">SITUATIONAL AWARENESS</span></td>
+            <td>地理编码获取坐标，查天气/路况，多模态识别图片。所有环境数据写入 TaskState。</td>
+            <td><code>geocode_address</code> <code>get_weather</code> <code>check_traffic</code> <code>media_caption</code></td>
+        </tr>
+        <tr>
+            <td><span class="tag orange">PLAN GENERATION</span></td>
+            <td>获取预案依据（5 个模块），RAG 检索法规，搜索资源+生成调度方案，检索专家，规划路线，查历史案例。</td>
+            <td><code>get_emergency_plan</code> <code>query_rag</code> <code>search_emergency_resources</code> <code>optimize_dispatch_plan</code> <code>search_experts</code> <code>plan_dispatch_routes</code></td>
+        </tr>
+        <tr>
+            <td><span class="tag orange">PLAN EVALUATION</span></td>
+            <td>多维度风险评估（信息完整性/响应及时性/措施有效性/资源充足性/风险可控性）。</td>
+            <td><code>risk_assessment</code></td>
+        </tr>
+        <tr>
+            <td><span class="tag green">OUTPUT</span></td>
+            <td>触发 FinalPlanPipeline 章节化生成 + 全局审核循环。</td>
+            <td>无工具，纯 LLM 生成</td>
+        </tr>
+        <tr>
+            <td><span class="tag green">OUTPUT_COMPLETE</span></td>
+            <td>方案通过审核，展示给用户。</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><span class="tag red">WAITING_USER</span></td>
+            <td>Web 模式下等待用户补充信息（API 模式强制禁用）。仅在位置完全无法确定时触发。</td>
+            <td>—</td>
+        </tr>
+    </table>
+</div>
+
+<!-- ==================== 4. Pipeline ==================== -->
+<div class="section" id="s4">
+    <h2>四、FinalPlanPipeline 章节化生成</h2>
+    <p>最终方案不是一次性生成，而是拆成 <strong>9 个章节</strong>，每章由独立的 LLM 调用生成并单独审核。</p>
+
+    <div class="flow">证据包（TaskState + 工具结果 + 知识引用 + 候选方案）
+         │
+         ▼
+   ┌─ 9 个章节循环 ──────────────────────────────┐
+   │  for each SectionSpec:                       │
+   │                                              │
+   │  WRITER 系统 ──→ 生成章节（基于证据包 +       │
+   │                  instructions + few-shot）    │
+   │       │                                      │
+   │       ▼                                      │
+   │  REVIEW 系统 ──→ 审核（字数/关键词/格式/事实） │
+   │       │                                      │
+   │  通过 → 下一章  /  未通过 → 反馈重写（≤2轮）   │
+   └──────────────────────────────────────────────┘
+         │
+         ▼
+   合并 9 章节 → 全局审核（17 项标准，≤5 轮）
+         │
+   通过 → 输出  /  未通过 → 局部重写问题章节
+                          /  兜底 → 主模型整稿重写</div>
+
+    <h3>9 个章节规范</h3>
+    <table>
+        <tr><th>章节</th><th>格式特点</th><th>最小字数</th></tr>
+        <tr><td>一、事件概述</td><td>两列表格（字段/内容），13 行，覆盖类型/时间/位置/坐标/伤亡/天气/路况等</td><td>260</td></tr>
+        <tr><td>二、响应定级</td><td>两列表格，8 行，含定级依据/预案条款/复核条件</td><td>300</td></tr>
+        <tr><td>三、指挥架构</td><td>四列表格 10 个角色 + 专家库列表 + 备注</td><td>650</td></tr>
+        <tr><td>四、预警发布</td><td>8 个子标题 + 可直接发布的预警文本</td><td>320</td></tr>
+        <tr><td>五、处置行动方案</td><td>三阶段各一个六列表格，共 ≥12 条行动</td><td>900</td></tr>
+        <tr><td>六、资源调度方案</td><td>5 个小节（梯队/专家/缺口分析），物资用途融入梯队表格</td><td>1000</td></tr>
+        <tr><td>七、信息报送与新闻发布</td><td>信息报送五列表格 + 新闻发布四列表格 + 说明</td><td>480</td></tr>
+        <tr><td>八、风险提示与注意事项</td><td>三类风险各一个七列表格，共 ≥9 条</td><td>1000</td></tr>
+        <tr><td>九、依据引用</td><td>五列表格，汇总预案/工具结果/案例的引用和支撑决策</td><td>340</td></tr>
+    </table>
+
+    <div class="info-box tip">
+        <strong>每个章节都配有完整的 few-shot 示例</strong>，模型严格参照格式生成，内容替换为证据包中的实际数据。
+    </div>
+</div>
+
+<!-- ==================== 5. 质量保证 ==================== -->
+<div class="section" id="s5">
+    <h2>五、多层质量保证体系</h2>
+
+    <table>
+        <tr><th>层级</th><th>名称</th><th>检查内容</th><th>处理方式</th></tr>
+        <tr>
+            <td><span class="tag red">Layer 1</span></td>
+            <td>Guardrail 硬性校验</td>
+            <td>虚构执行表述、内部编码泄漏、Markdown 表格格式、9 章节结构完整性</td>
+            <td>标记 Issue，进入审核修复</td>
+        </tr>
+        <tr>
+            <td><span class="tag orange">Layer 2</span></td>
+            <td>章节内审核</td>
+            <td>字数 ≥ min_chars、必含关键词覆盖、LLM 内容质量审核</td>
+            <td>每章最多 2 轮重写</td>
+        </tr>
+        <tr>
+            <td><span class="tag blue">Layer 3</span></td>
+            <td>全局审核</td>
+            <td>17 项标准（指挥架构/处置行动/资源调度/风险提示的完整性和详细度）</td>
+            <td>最多 5 轮，每轮局部重写问题章节</td>
+        </tr>
+        <tr>
+            <td><span class="tag green">Layer 4</span></td>
+            <td>兜底重写</td>
+            <td>Pipeline 完全失败时的最后防线</td>
+            <td>主模型整稿重写，强制 9 章节格式</td>
+        </tr>
+    </table>
+
+    <h3>FinalPlanReviewer 17 项审核标准（摘要）</h3>
+    <ol>
+        <li>9 章节结构完整、顺序正确</li>
+        <li>使用建议性表述（不能写"已通知/已派遣"）</li>
+        <li>核心内容齐全</li>
+        <li>指挥架构覆盖 6 类关键角色</li>
+        <li>资源调度含来源单位、路径、联系电话</li>
+        <li>处置行动含二次排查、伤员分类、家属安抚</li>
+        <li>资源类别使用中文名称</li>
+        <li>专家信息完整（姓名/单位/方向/支持方式）</li>
+        <li>缺失信息标注"待现场确认"</li>
+        <li>无空洞、矛盾或过度简略</li>
+        <li>Markdown 表格格式规范</li>
+        <li>资源物资详单具体到数量</li>
+        <li>物资列靠前展示</li>
+        <li>资源覆盖与缺口分析完整</li>
+        <li>风险分三类，每类 ≥3 条，表格 7 列完整</li>
+        <li>逐章审核（每章详细度评分）</li>
+        <li>梯队和缺口用 <code>####</code> 小标题</li>
+    </ol>
+</div>
+
+<!-- ==================== 6. ReAct Agent ==================== -->
+<div class="section" id="s6">
+    <h2>六、ReAct Agent 循环</h2>
+    <p>基于 <strong>Reasoning + Acting</strong> 范式的自主推理循环，每轮动态构建 System Prompt 并决策下一步行动。</p>
+
+    <pre><code>while iteration &lt; 24:
+    # 1. 动态构建 System Prompt
+    #    = 基础 Prompt + TaskState 摘要 + 当前 Skill Prompt + 可用工具列表
+    messages = agent.get_runtime_messages()
+
+    # 2. 调用 LLM
+    response = provider.chat(messages, tools=tool_definitions)
+
+    # 3a. 有工具调用 → 执行工具
+    if response.tool_calls:
+        tool_call = response.tool_calls[0]   # 一次只执行一个
+
+        if tool_call.name in called_tools:   # 防循环
+            skip; continue
+
+        result = execute_tool(tool_call)
+        after_tool_execution(...)            # 同步到 TaskState
+        insert_analysis_message(...)         # 强制分析再决策
+        continue
+
+    # 3b. 无工具调用 → 解析控制块
+    else:
+        control = parse_agent_control(response.content)
+        apply_assistant_control(control)     # 阶段推进
+        return strip_control_block(response.content)</code></pre>
+
+    <div class="info-box key">
+        <strong>关键特性：</strong>
+        <ul style="margin-top:8px;">
+            <li><strong>一次一工具</strong> — 即使 LLM 返回多个 tool_calls，只执行第一个</li>
+            <li><strong>工具防循环</strong> — <code>called_tools</code> 集合追踪，重复调用自动跳过</li>
+            <li><strong>分析强制</strong> — 工具执行后插入分析指令，要求模型先分析再决策</li>
+            <li><strong>上下文压缩</strong> — 输入超过窗口 80% 时自动压缩历史消息</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== 7. Skill-Based ==================== -->
+<div class="section" id="s7">
+    <h2>七、Skill-Based 动态路由</h2>
+    <p>7 个 Skill 模块，每个由 <code>SKILL.yaml</code>（元数据）+ <code>prompt.md</code>（行为指令）+ <code>tools.py</code>（工具绑定）组成。<code>SkillRouter</code> 根据当前 <code>TaskPhase</code> 实时筛选应激活的工具集和 Prompt 片段。</p>
+
+    <table>
+        <tr><th>Skill</th><th>优先级</th><th>激活阶段</th><th>工具数</th><th>职责</th></tr>
+        <tr><td>master_flow</td><td><span class="tag red">critical</span></td><td>全部</td><td>0</td><td>主流程编排、阶段推进规则</td></tr>
+        <tr><td>human_collaboration</td><td><span class="tag red">critical</span></td><td>全部（除 OUTPUT）</td><td>0</td><td>人机交互管理（默认不补问）</td></tr>
+        <tr><td>situational_awareness</td><td><span class="tag orange">high</span></td><td>INTAKE ~ PLAN_GEN</td><td>6</td><td>地理编码、天气、路况、多模态</td></tr>
+        <tr><td>knowledge_retrieval</td><td><span class="tag orange">high</span></td><td>INTAKE ~ PLAN_GEN</td><td>5</td><td>预案定级、法规检索、RAG、案例</td></tr>
+        <tr><td>resource_dispatch</td><td><span class="tag orange">high</span></td><td>PLAN_GENERATION</td><td>5</td><td>资源搜索、调度优化、专家、路线</td></tr>
+        <tr><td>risk_evaluation</td><td><span class="tag orange">high</span></td><td>PLAN_EVAL</td><td>1</td><td>方案风险评估</td></tr>
+        <tr><td>output_detail_review</td><td><span class="tag red">critical</span></td><td>OUTPUT</td><td>0</td><td>最终方案逐章详细度控制</td></tr>
+    </table>
+</div>
+
+<!-- ==================== 8. RAG ==================== -->
+<div class="section" id="s8">
+    <h2>八、RAG 两阶段检索</h2>
+
+    <div class="flow">查询文本
+    │
+    ▼
+阶段 1：粗排（Embedding 检索）
+    BGE-Large-ZH 对查询和 60+ 法规文档块计算余弦相似度
+    取 top-20 候选
+    │
+    ▼
+阶段 2：精排（Reranker 重排序）
+    BGE-Reranker-v2-m3 交叉编码模型对 top-20 重新排序
+    返回 top-8 最终结果（含相关性分数）</div>
+
+    <table>
+        <tr><th>组件</th><th>模型</th><th>作用</th></tr>
+        <tr><td>Embedding</td><td>BAAI/bge-large-zh-v1.5</td><td>中文语义向量化，高效粗排</td></tr>
+        <tr><td>Reranker</td><td>BAAI/bge-reranker-v2-m3</td><td>交叉编码精排，提高检索精度</td></tr>
+    </table>
+
+    <p><strong>数据来源：</strong>5 份广西交通应急预案 PDF → 切片为 60+ JSON 文档块 → 构建向量索引。</p>
+</div>
+
+<!-- ==================== 9. 资源调度 ==================== -->
+<div class="section" id="s9">
+    <h2>九、资源调度引擎算法</h2>
+
+    <h3>距离计算（Haversine + 桩号联动）</h3>
+    <ul>
+        <li><strong>基础距离：</strong>Haversine 球面距离公式</li>
+        <li><strong>同路段优化：</strong>桩号距离 = <code>max(stake_distance, geo_distance × 0.8)</code></li>
+        <li><strong>跨路段惩罚：</strong>不同路段距离 × 1.5 倍</li>
+    </ul>
+
+    <h3>相关性评分（满分 100）</h3>
+    <table>
+        <tr><th>维度</th><th>权重</th><th>规则</th></tr>
+        <tr><td>距离</td><td>40 分</td><td>≤10km 满分，10-50km 线性衰减</td></tr>
+        <tr><td>类别匹配</td><td>35 分</td><td>覆盖所需物资类别的比例</td></tr>
+        <tr><td>同路段</td><td>15 分</td><td>在同一条高速/道路上</td></tr>
+        <tr><td>资源丰富度</td><td>10 分</td><td>物资类别数 × 2，上限 10</td></tr>
+    </table>
+
+    <h3>贪心选择 + 三梯队编排</h3>
+    <pre><code># 贪心价值函数：覆盖新类别数 × 100 − 距离
+while uncovered_categories and len(selected) &lt; max_count:
+    best = argmax(new_coverage × 100 − distance_km)
+    selected.append(best)
+    uncovered -= best.matched_categories
+
+# 按距离分梯队
+tier1 = [r for r in selected if r.distance_km &lt;= 15]   # 预计 15 分钟内
+tier2 = [r for r in selected if 15 &lt; r.distance_km &lt;= 35]  # 预计 30 分钟内
+tier3 = [r for r in selected if r.distance_km &gt; 35]    # 预计 45 分钟以上</code></pre>
+</div>
+
+<!-- ==================== 10. Token 预算 ==================== -->
+<div class="section" id="s10">
+    <h2>十、Token 预算与上下文压缩</h2>
+
+    <h3>Token 估算</h3>
+    <ul>
+        <li>中文字符 ≈ 1 字 1 token（× 1.1 安全系数）</li>
+        <li>ASCII 字符 ≈ 3 字 1 token</li>
+    </ul>
+
+    <h3>自适应压缩</h3>
+    <pre><code>estimated_input = estimate_messages_tokens(messages) + estimate_tools_tokens(tools)
+threshold = context_window × 0.8  # 默认 80%
+
+if estimated_input >= threshold:
+    state.compact_for_context(
+        keep_recent=16,          # 保留最近 16 条消息原文
+        max_summary_chars=8000   # 更早的压缩为 ≤8000 字摘要
+    )</code></pre>
+
+    <div class="info-box warn">
+        <strong>关键约束：</strong>压缩时保证 <code>tool_call</code> 与 <code>tool</code> 返回的配对关系不被破坏，否则模型 API 会报错。
+    </div>
+</div>
+
+<!-- ==================== 11. 防循环 ==================== -->
+<div class="section" id="s11">
+    <h2>十一、防循环与阶段保护</h2>
+
+    <table>
+        <tr><th>机制</th><th>位置</th><th>触发条件</th><th>处理方式</th></tr>
+        <tr>
+            <td><code>called_tools</code> 集合</td>
+            <td>agent.py</td>
+            <td>同一轮重复调用同一工具</td>
+            <td>跳过，进入下一轮 LLM 调用</td>
+        </tr>
+        <tr>
+            <td>工具循环检测</td>
+            <td>web_app.py</td>
+            <td>最近 3 次工具 = 前 3 次工具</td>
+            <td>强制推进到 OUTPUT 阶段</td>
+        </tr>
+        <tr>
+            <td>PLAN_GENERATION 超时</td>
+            <td>web_app.py</td>
+            <td>工具调用总数 ≥ 15 次</td>
+            <td>强制推进到 OUTPUT 阶段</td>
+        </tr>
+        <tr>
+            <td>pre_output 退回上限</td>
+            <td>web_app.py</td>
+            <td>连续退回补工具 ≥ 3 次</td>
+            <td>不再退回，直接放行进入输出</td>
+        </tr>
+        <tr>
+            <td>连续停住检测</td>
+            <td>task_runner.py</td>
+            <td>API 模式连续 3 轮无工具调用</td>
+            <td>强制进入 Pipeline 生成</td>
+        </tr>
+    </table>
+</div>
+
+<!-- ==================== 12. API ==================== -->
+<div class="section" id="s12">
+    <h2>十二、API 异步任务服务</h2>
+
+    <div class="flow">HTTP POST /api/v1/tasks  →  创建任务，返回 task_id
+         │
+         ├─ 后台 asyncio.create_task(run_task)
+         │   ├─ Agent 主循环（24 轮）
+         │   ├─ FinalPlanPipeline（9 章节）
+         │   └─ 全局审核（≤5 轮）
+         │
+HTTP GET  /api/v1/tasks/{id}  →  轮询进度 / 获取结果
+         │
+HTTP DELETE /api/v1/tasks/{id}  →  取消任务</div>
+
+    <div class="info-box key">
+        <strong>API 模式与 Web 模式的核心差异：</strong>
+        <ul style="margin-top:8px;">
+            <li>注入 <code>API_MODE_SYSTEM_PROMPT</code>：强制禁用所有用户交互</li>
+            <li><code>needs_user_input</code> 和 <code>awaiting_confirmation</code> 始终强制为 <code>false</code></li>
+            <li>信息缺失时自动推断 + 多情景覆盖，不停下来等用户</li>
+            <li>多候选方案时自动选择最稳妥的方案</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ==================== 13. 工具集 ==================== -->
+<div class="section" id="s13">
+    <h2>十三、工具集一览</h2>
+
+    <table>
+        <tr><th>工具</th><th>分类</th><th>功能</th><th>数据来源</th></tr>
+        <tr><td><code>geocode_address</code></td><td>地理信息</td><td>地址转坐标</td><td>高德地图 API</td></tr>
+        <tr><td><code>reverse_geocode</code></td><td>地理信息</td><td>坐标转地址</td><td>高德地图 API</td></tr>
+        <tr><td><code>get_weather_by_location</code></td><td>地理信息</td><td>实时天气与预报</td><td>高德地图 API</td></tr>
+        <tr><td><code>check_traffic_status</code></td><td>地理信息</td><td>交通拥堵与流量</td><td>高德地图 API</td></tr>
+        <tr><td><code>search_nearby_pois</code></td><td>地理信息</td><td>周边设施查询（医院/消防站等）</td><td>高德地图 API</td></tr>
+        <tr><td><code>plan_dispatch_routes</code></td><td>地理信息</td><td>驾车路线规划</td><td>高德地图 API</td></tr>
+        <tr><td><code>media_caption</code></td><td>多模态</td><td>图片/视频内容识别</td><td>Qwen-VL</td></tr>
+        <tr><td><code>evaluate_incident_severity</code></td><td>预案</td><td>灾情定级（I-IV 级）</td><td>LLM + 预案库</td></tr>
+        <tr><td><code>get_emergency_plan</code></td><td>预案</td><td>预案模块精确取用</td><td>5 份广西交通预案</td></tr>
+        <tr><td><code>query_regulations</code></td><td>知识库</td><td>法规条文关键词检索</td><td>法规切片 JSON</td></tr>
+        <tr><td><code>query_rag</code></td><td>知识库</td><td>RAG 两阶段语义检索</td><td>BGE + 60+ 文档块</td></tr>
+        <tr><td><code>query_historical_cases</code></td><td>知识库</td><td>历史处置案例</td><td>案例 JSON 库</td></tr>
+        <tr><td><code>search_emergency_resources</code></td><td>资源</td><td>搜索仓库/队伍 + 覆盖分析</td><td>仓库/队伍索引</td></tr>
+        <tr><td><code>optimize_dispatch_plan</code></td><td>资源</td><td>贪心选择 + 三梯队编排</td><td>搜索上下文</td></tr>
+        <tr><td><code>search_experts</code></td><td>资源</td><td>专家库匹配</td><td>专家 XLS 数据</td></tr>
+        <tr><td><code>risk_assessment</code></td><td>评估</td><td>方案多维度风险评分</td><td>LLM 评估</td></tr>
+    </table>
+</div>
+
+<!-- ==================== Footer ==================== -->
+<div class="footer">
+    <p>交通应急指挥智能体 &mdash; 项目技术解读文档</p>
+</div>
+
+</div><!-- end container -->
+</body>
+</html>

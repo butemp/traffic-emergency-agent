@@ -2124,6 +2124,98 @@ async def review_final_response_before_display(
     return current_text, last_review_result, True, MAX_FINAL_REVIEW_ROUNDS
 
 
+async def _auto_call_missing_critical_tools(agent: Agent) -> None:
+    """模型多次未能补齐关键工具时，系统自动调用。"""
+    incident = agent.task_state.incident_info
+    coords = incident.location_coords or {}
+    lon = coords.get("longitude")
+    lat = coords.get("latitude")
+
+    # 自动调用 search_experts
+    if (
+        agent_has_tool(agent, "search_experts")
+        and not _tool_called_successfully(agent, "search_experts")
+    ):
+        keywords = [
+            item for item in [
+                incident.incident_type,
+                incident.scene_type,
+                incident.disaster_type,
+                "交通安全",
+                "应急管理",
+            ] if item
+        ] or ["交通安全", "应急管理"]
+        try:
+            logger.info("系统自动调用 search_experts: keywords=%s", keywords)
+            tool = agent.tools.get("search_experts")
+            if tool:
+                result = await cl.make_async(tool.execute)(
+                    keywords=keywords,
+                    incident_type=incident.incident_type or "交通突发事件",
+                    longitude=lon,
+                    latitude=lat,
+                )
+                tool_msg = Message(role=MessageRole.TOOL, content=result, tool_call_id="auto_search_experts")
+                agent.state.add_message(tool_msg)
+                agent.task_state.append_message(tool_msg)
+                agent.after_tool_execution("search_experts", {"keywords": keywords}, result)
+                logger.info("系统自动调用 search_experts 成功")
+        except Exception as e:
+            logger.warning("系统自动调用 search_experts 失败: %s", e)
+
+    # 自动调用 search_emergency_resources
+    if (
+        agent_has_tool(agent, "search_emergency_resources")
+        and not _tool_called_successfully(agent, "search_emergency_resources")
+        and lon is not None and lat is not None
+    ):
+        type_cat_map = {
+            "交通事故": ["WARNING", "RESCUE", "VEHICLE", "PPE", "COMMS"],
+            "危化品泄漏": ["WARNING", "PPE", "FIRE", "RESCUE", "COMMS"],
+            "火灾": ["FIRE", "WARNING", "PPE", "RESCUE", "COMMS"],
+            "地质灾害": ["WARNING", "RESCUE", "TOOL", "VEHICLE", "COMMS"],
+            "洪涝": ["WARNING", "RESCUE", "MATERIAL", "VEHICLE", "COMMS"],
+        }
+        required_cats = type_cat_map.get(
+            incident.incident_type or "",
+            ["WARNING", "RESCUE", "VEHICLE", "PPE", "COMMS"],
+        )
+        try:
+            logger.info("系统自动调用 search_emergency_resources")
+            tool = agent.tools.get("search_emergency_resources")
+            if tool:
+                result = await cl.make_async(tool.execute)(
+                    longitude=lon, latitude=lat,
+                    required_categories=required_cats,
+                )
+                tool_msg = Message(role=MessageRole.TOOL, content=result, tool_call_id="auto_search_resources")
+                agent.state.add_message(tool_msg)
+                agent.task_state.append_message(tool_msg)
+                agent.after_tool_execution("search_emergency_resources", {"longitude": lon, "latitude": lat, "required_categories": required_cats}, result)
+                logger.info("系统自动调用 search_emergency_resources 成功")
+        except Exception as e:
+            logger.warning("系统自动调用 search_emergency_resources 失败: %s", e)
+
+    # 自动调用 optimize_dispatch_plan
+    if (
+        agent_has_tool(agent, "optimize_dispatch_plan")
+        and not _tool_called_successfully(agent, "optimize_dispatch_plan")
+        and _tool_called_successfully(agent, "search_emergency_resources")
+    ):
+        try:
+            logger.info("系统自动调用 optimize_dispatch_plan")
+            tool = agent.tools.get("optimize_dispatch_plan")
+            if tool:
+                result = await cl.make_async(tool.execute)(required_categories=[])
+                tool_msg = Message(role=MessageRole.TOOL, content=result, tool_call_id="auto_optimize_dispatch")
+                agent.state.add_message(tool_msg)
+                agent.task_state.append_message(tool_msg)
+                agent.after_tool_execution("optimize_dispatch_plan", {}, result)
+                logger.info("系统自动调用 optimize_dispatch_plan 成功")
+        except Exception as e:
+            logger.warning("系统自动调用 optimize_dispatch_plan 失败: %s", e)
+
+
 async def _fallback_full_rewrite(agent: Agent, candidate_text: str) -> str:
     """Pipeline 完全失败时，用主模型兜底生成一个完整的 9 章节方案。"""
     section_text = "\n".join(f"- {heading}" for heading in STANDARD_PLAN_SECTIONS)
@@ -2948,12 +3040,13 @@ async def on_message(message: cl.Message):
                         pre_output_issues = collect_pre_output_tool_issues(agent)
                         if pre_output_issues:
                             consecutive_no_progress += 1
-                            # 如果反复退回补工具超过 3 次，不再退回，直接进入输出
+                            # 如果反复退回补工具超过 3 次，不再退回，但先自动补调关键工具
                             if consecutive_no_progress >= 3:
                                 logger.warning(
-                                    "已连续 %s 次退回补工具但模型未能补齐，强制进入最终输出",
+                                    "已连续 %s 次退回补工具但模型未能补齐，自动补调关键工具后进入最终输出",
                                     consecutive_no_progress,
                                 )
+                                await _auto_call_missing_critical_tools(agent)
                             else:
                                 agent.task_state.transition_to(TaskPhase.PLAN_GENERATION)
                                 reminder = Message(
