@@ -176,10 +176,17 @@ class JsonDataLayer(BaseDataLayer):
         pass
 
     async def create_user(self, user) -> None:
-        self._users[getattr(user, "identifier", "") or "default"] = user
+        identifier = getattr(user, "identifier", "") or "default"
+        # 确保存储的用户对象有 id 属性（Chainlit 内部需要）
+        if not hasattr(user, "id"):
+            user.id = identifier
+        self._users[identifier] = user
 
     async def get_user(self, identifier: str) -> Optional[Any]:
-        return self._users.get(identifier)
+        user = self._users.get(identifier)
+        if user and not hasattr(user, "id"):
+            user.id = identifier
+        return user
 
     async def upsert_feedback(self, feedback: "Feedback") -> str:
         return ""
