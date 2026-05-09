@@ -57,7 +57,12 @@ def _parse_positive_int(value: Any, default: int) -> int:
 # ── Agent / Provider 构建（不依赖 Chainlit） ─────────────
 
 def _build_provider_bundle(config: Optional[Dict[str, str]] = None):
-    """根据可选配置构建 chat / caption / evaluation provider。"""
+    """根据可选配置构建 chat / caption / evaluation provider。
+
+    优先级：请求 config > defaults.py 硬编码 > 环境变量。
+    这样不传 config 时始终走项目内置的 deepseek 配置，
+    不会被部署环境中残留的 OPENAI_* 环境变量覆盖。
+    """
     from src.providers import OpenAIProvider
     from src.providers.defaults import (
         DEFAULT_CAPTION_MODEL,
@@ -68,9 +73,9 @@ def _build_provider_bundle(config: Optional[Dict[str, str]] = None):
     )
 
     config = config or {}
-    api_key = config.get("OPENAI_API_KEY") or DEFAULT_TEXT_API_KEY or ""
-    base_url = config.get("OPENAI_BASE_URL") or os.getenv("OPENAI_BASE_URL") or DEFAULT_TEXT_BASE_URL
-    chat_model = config.get("OPENAI_MODEL") or os.getenv("OPENAI_MODEL") or DEFAULT_TEXT_MODEL
+    api_key = config.get("OPENAI_API_KEY") or DEFAULT_TEXT_API_KEY or os.getenv("OPENAI_API_KEY") or ""
+    base_url = config.get("OPENAI_BASE_URL") or DEFAULT_TEXT_BASE_URL or os.getenv("OPENAI_BASE_URL") or ""
+    chat_model = config.get("OPENAI_MODEL") or DEFAULT_TEXT_MODEL or os.getenv("OPENAI_MODEL") or ""
     max_tokens = _parse_positive_int(config.get("OPENAI_MAX_TOKENS"), DEFAULT_TEXT_MAX_TOKENS)
 
     caption_model = os.getenv("CAPTION_MODEL") or DEFAULT_CAPTION_MODEL
@@ -467,6 +472,12 @@ async def _run_agent_loop(
         # ── 无工具调用 → 解析控制块 ──
         consecutive_no_tool_rounds += 1
         control = agent.parse_assistant_control(response.content)
+
+        # API 模式：在 apply 之前强制禁用所有用户交互，
+        # 防止 Agent 进入 WAITING_USER 状态浪费迭代
+        control.needs_user_input = False
+        control.awaiting_confirmation = False
+
         agent.apply_assistant_control(control)
         visible = agent.strip_control_block(response.content)
 
@@ -476,9 +487,13 @@ async def _run_agent_loop(
         agent.task_state.append_message(assistant_msg)
 
         # ── 判断是否进入最终输出 ──
+        # 除了显式 final_output / OUTPUT 阶段，还检测模型是否已经
+        # 在文本中直接输出了完整 9 章节方案结构
+        from web_app import has_standard_plan_structure
         is_final = (
             control.final_output
             or agent.task_state.current_phase in {TaskPhase.OUTPUT, TaskPhase.OUTPUT_COMPLETE}
+            or has_standard_plan_structure(visible)
         )
 
         if is_final:
@@ -512,37 +527,6 @@ async def _run_agent_loop(
             store.update_progress(task_id, current_action="正在生成最终方案（章节化流水线）")
             await _run_final_pipeline(task_id, store, agent, record, seed)
             return
-
-        # ── 用户交互点：全部自动跳过 ──
-        if control.needs_user_input:
-            # 方案选择 → 自动选第一个
-            if agent.task_state.candidate_plans:
-                first_plan = agent.task_state.candidate_plans[0]
-                for plan in agent.task_state.candidate_plans:
-                    plan.selected = plan.plan_id == first_plan.plan_id
-                agent.task_state.clear_pending_question()
-                agent.task_state.transition_to(TaskPhase.PLAN_EVALUATION)
-                auto_msg = Message(
-                    role=MessageRole.USER,
-                    content=f"自动选择方案：{first_plan.title}。请继续推进。",
-                )
-                agent.state.add_message(auto_msg)
-                agent.task_state.append_message(auto_msg)
-                store.update_progress(task_id, current_action=f"自动选择方案: {first_plan.title}")
-                continue
-
-            # 确认 / 补问 → 一律自动确认并继续
-            if agent.task_state.current_phase == TaskPhase.WAITING_USER:
-                agent.task_state.clear_pending_question()
-                agent.task_state.resume_from_waiting()
-            auto_msg = Message(
-                role=MessageRole.USER,
-                content="确认。请基于当前已有信息直接继续推进，缺失信息在方案中标注"待现场确认"并考虑多种情景。",
-            )
-            agent.state.add_message(auto_msg)
-            agent.task_state.append_message(auto_msg)
-            store.update_progress(task_id, current_action="自动确认，继续推进中")
-            continue
 
         # ── DeepSeek 原始 tool call token 泄漏检测 ──
         # 模型有时会把内部 special token 当文本输出，不是真正的工具调用
