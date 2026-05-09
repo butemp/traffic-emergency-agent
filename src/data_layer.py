@@ -11,7 +11,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from chainlit.data import BaseDataLayer, BaseStorageClient
+from chainlit.data import BaseDataLayer
 from chainlit.types import (
     Feedback,
     PageInfo,
