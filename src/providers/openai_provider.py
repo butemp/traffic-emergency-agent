@@ -44,7 +44,8 @@ class OpenAIProvider:
         model: str = DEFAULT_TEXT_MODEL,
         temperature: float = 0.7,
         max_tokens: int = DEFAULT_TEXT_MAX_TOKENS,
-        provider: str = "auto"
+        provider: str = "auto",
+        context_window: Optional[int] = None,
     ):
         """
         初始化OpenAI Provider
@@ -107,6 +108,16 @@ class OpenAIProvider:
         self.model = model
         self.temperature = temperature
         self.max_tokens = max_tokens
+
+        # 上下文窗口：如果未指定，根据模型自动推断
+        if context_window is not None:
+            self.context_window = context_window
+        else:
+            model_lower = model.lower()
+            if any(tag in model_lower for tag in ("deepseek-v4", "deepseek-r2")):
+                self.context_window = DEFAULT_CONTEXT_WINDOW_TOKENS * 2  # V4 系列翻倍
+            else:
+                self.context_window = DEFAULT_CONTEXT_WINDOW_TOKENS
 
         # 初始化OpenAI客户端
         self.client = OpenAI(

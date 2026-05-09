@@ -477,7 +477,7 @@ class Agent:
         messages = self._build_runtime_messages_from_state()
         active_tool_defs = [tool.to_openai_format() for tool in self.get_active_tools()]
         estimated_input = estimate_messages_tokens(messages) + estimate_tools_tokens(active_tool_defs)
-        context_window = _int_env("OPENAI_CONTEXT_WINDOW_TOKENS", DEFAULT_CONTEXT_WINDOW_TOKENS)
+        context_window = getattr(self.provider, "context_window", None) or _int_env("OPENAI_CONTEXT_WINDOW_TOKENS", DEFAULT_CONTEXT_WINDOW_TOKENS)
         compression_ratio = _float_env("OPENAI_CONTEXT_COMPRESSION_RATIO", 0.8)
         compression_threshold = int(context_window * compression_ratio)
 
