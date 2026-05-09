@@ -63,7 +63,26 @@ from src.resource_dispatch import ResourceDispatchEngine
 # 注册历史对话数据层
 import chainlit.data as cl_data
 from src.data_layer import JsonDataLayer
-cl_data._data_layer = JsonDataLayer()
+
+_json_data_layer = JsonDataLayer()
+cl_data._data_layer = _json_data_layer
+
+# 新版 Chainlit 注册方式（兼容）
+try:
+    @cl.data_layer
+    def get_data_layer():
+        return _json_data_layer
+except AttributeError:
+    pass  # 旧版 Chainlit 无此装饰器，回退到 cl_data._data_layer 赋值
+
+# 简单认证（Chainlit 要求有认证系统才会在侧边栏显示历史对话）
+@cl.password_auth_callback
+def auth_callback(username: str, password: str):
+    # 演示环境：任意用户名密码均可登录
+    # 生产环境应替换为真实的用户验证逻辑
+    if username and password:
+        return cl.User(identifier=username, metadata={"role": "user"})
+    return None
 
 # 加载环境变量
 load_dotenv()
