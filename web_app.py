@@ -94,6 +94,22 @@ SETTING_OPENAI_BASE_URL = "OPENAI_BASE_URL"
 SETTING_OPENAI_MAX_TOKENS = "OPENAI_MAX_TOKENS"
 STALL_CONTINUE_REPLY = "请继续行动，直接执行下一步需要的工具；不要停在说明上。"
 MAX_AGENT_ITERATIONS = 24
+
+# ===== 模型预设 =====
+MODEL_PRESETS = {
+    "DeepSeek-V3.2": {
+        SETTING_OPENAI_API_KEY: DEFAULT_TEXT_API_KEY,
+        SETTING_OPENAI_MODEL: "deepseek-ai/DeepSeek-V3.2",
+        SETTING_OPENAI_BASE_URL: "https://ai.gxtri.cn/llm/v1",
+        SETTING_OPENAI_MAX_TOKENS: str(DEFAULT_TEXT_MAX_TOKENS),
+    },
+    "DeepSeek-V4-Flash": {
+        SETTING_OPENAI_API_KEY: "sk-69fabc458779433fb6bf2b2c7727f908",
+        SETTING_OPENAI_MODEL: "deepseek-v4-flash",
+        SETTING_OPENAI_BASE_URL: "https://api.deepseek.com",
+        SETTING_OPENAI_MAX_TOKENS: str(DEFAULT_TEXT_MAX_TOKENS),
+    },
+}
 MAX_FINAL_REVIEW_ROUNDS = 5
 
 
@@ -250,25 +266,29 @@ async def on_chat_start():
     if cl.user_session.get("welcome_shown"):
         return
 
+    # 读取用户选择的模型配置
+    selected_profile = cl.user_session.get("chat_profile") or "DeepSeek-V3.2"
+    preset = MODEL_PRESETS.get(selected_profile, MODEL_PRESETS["DeepSeek-V3.2"])
+    cl.user_session.set(SESSION_RUNTIME_CONFIG_KEY, preset)
+
     runtime_config = await send_runtime_settings_panel()
 
     # 设置页面标题和描述
     base_url_text = runtime_config[SETTING_OPENAI_BASE_URL] or "OpenAI 默认地址"
+    model_name = runtime_config[SETTING_OPENAI_MODEL]
     await cl.Message(
-        content="🚗 **欢迎使用交通应急指挥助手**\n\n"
+        content="**欢迎使用交通应急指挥助手**\n\n"
         "我可以帮助你：\n"
-        "- 📋 查询法规、规则和应急预案\n"
-        "- 📚 参考历史处置案例\n"
-        "- 🔍 检索应急相关文档资料\n"
-        "- ⚠️ 对应急方案进行风险评估\n"
-        "- 🗺️ **地理信息查询**（地址转坐标、周边设施）\n"
-        "- 🚦 **实时交通状况**（拥堵情况查询）\n"
-        "- 🌤️ **天气查询**（实时天气和预报）\n\n"
-        "当前会话模型配置：\n"
-        f"- `OPENAI_MODEL`: `{runtime_config[SETTING_OPENAI_MODEL]}`\n"
-        f"- `OPENAI_BASE_URL`: `{base_url_text}`\n"
-        f"- `OPENAI_MAX_TOKENS`: `{runtime_config[SETTING_OPENAI_MAX_TOKENS]}`\n\n"
-        "如需切换模型或接入其他 OpenAI-compatible 服务，请点击输入框旁的设置按钮修改以上配置。",
+        "- 查询法规、规则和应急预案\n"
+        "- 参考历史处置案例\n"
+        "- 检索应急相关文档资料\n"
+        "- 对应急方案进行风险评估\n"
+        "- 地理信息查询（地址转坐标、周边设施）\n"
+        "- 实时交通状况（拥堵情况查询）\n"
+        "- 天气查询（实时天气和预报）\n\n"
+        f"当前模型：**{selected_profile}** (`{model_name}`)\n"
+        f"接入点：`{base_url_text}`\n\n"
+        "如需切换模型，请点击顶部的模型选择栏重新选择。",
         author="系统"
     ).send()
 
@@ -3682,63 +3702,29 @@ async def set_starters():
 # 在前端head中添加自定义CSS
 @cl.set_chat_profiles
 async def chat_profile():
-    """设置聊天配置文件"""
+    """设置模型选择配置"""
     return [
         cl.ChatProfile(
-        name="交通应急指挥助手",
-        # 图标数据（使用emoji）
-        icon="🚨",
-        # 说明文档
-        markdown_description="我是交通应急指挥助手，专门协助处理交通事故应急响应相关的工作。",
-        instructions="我是交通应急指挥助手，专门协助处理交通事故应急响应相关的工作。",
-        # 自定义CSS
-        markdown_text_style="""@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
-
-:root {
-    --primary-color: #FF6B00;  /* 应急橙 */
-    --secondary-color: #1E88E5;  /* 警示蓝 */
-    --background-color: #F5F5F5;
-    --surface-color: #FFFFFF;
-    --text-color: #333333;
-    --border-radius: 12px;
-}
-
-body {
-    font-family: 'Noto Sans SC', sans-serif;
-}
-
-/* 消息气泡样式 */
-.element {
-    border-radius: var(--border-radius);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-/* 用户消息 */
-.user-message {
-    background: linear-gradient(135deg, var(--secondary-color), #1565C0);
-    color: white;
-}
-
-/* 助手消息 */
-.assistant-message {
-    background: var(--surface-color);
-    border-left: 4px solid var(--primary-color);
-}
-
-/* 快捷提问按钮 */
-.starter-button {
-    background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
-    border: 2px solid var(--primary-color);
-    border-radius: var(--border-radius);
-    transition: all 0.3s ease;
-}
-
-.starter-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3);
-}
-"""
-        )
+            name="DeepSeek-V3.2",
+            icon="https://api.iconify.design/carbon:machine-learning-model.svg?color=%231a73e8",
+            markdown_description=(
+                "**DeepSeek-V3.2**（默认）\n\n"
+                "- 模型：`deepseek-ai/DeepSeek-V3.2`\n"
+                "- 接入点：内部网关\n"
+                "- 适合：常规应急方案生成"
+            ),
+        ),
+        cl.ChatProfile(
+            name="DeepSeek-V4-Flash",
+            icon="https://api.iconify.design/carbon:lightning.svg?color=%23f39c12",
+            markdown_description=(
+                "**DeepSeek-V4-Flash**（推理增强）\n\n"
+                "- 模型：`deepseek-v4-flash`\n"
+                "- 接入点：DeepSeek 官方 API\n"
+                "- 特点：启用深度推理（reasoning_effort=high）\n"
+                "- 适合：复杂事故、需要更精细推理的场景"
+            ),
+        ),
     ]
 
 
