@@ -33,6 +33,7 @@ class JsonDataLayer(BaseDataLayer):
         self.conversations_dir = Path(conversations_dir) if conversations_dir else CONVERSATIONS_DIR
         self._thread_cache: Dict[str, dict] = {}
         self._cache_timestamp: float = 0
+        self._users: Dict[str, Any] = {}
         logger.info("JsonDataLayer 初始化: dir=%s", self.conversations_dir)
 
     def _load_all_sessions(self) -> Dict[str, dict]:
@@ -175,10 +176,10 @@ class JsonDataLayer(BaseDataLayer):
         pass
 
     async def create_user(self, user) -> None:
-        pass
+        self._users[getattr(user, "identifier", "") or "default"] = user
 
     async def get_user(self, identifier: str) -> Optional[Any]:
-        return None
+        return self._users.get(identifier)
 
     async def upsert_feedback(self, feedback: "Feedback") -> str:
         return ""

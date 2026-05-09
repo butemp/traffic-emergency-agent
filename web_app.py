@@ -2622,7 +2622,8 @@ async def on_message(message: cl.Message):
                     assistant_msg = Message(
                         role=MessageRole.ASSISTANT,
                         content=response.content or "",
-                        tool_calls=response.tool_calls
+                        tool_calls=response.tool_calls,
+                        reasoning_content=getattr(response, "reasoning_content", None),
                     )
                     agent.state.add_message(assistant_msg)
                     agent.task_state.append_message(assistant_msg)

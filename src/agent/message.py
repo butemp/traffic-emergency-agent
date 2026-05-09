@@ -58,11 +58,13 @@ class Message:
         content: 消息内容
         tool_calls: 工具调用列表（仅assistant角色可能有）
         tool_call_id: 工具调用ID（仅tool角色需要）
+        reasoning_content: 思维链内容（DeepSeek thinking 模式）
     """
     role: MessageRole
     content: str
     tool_calls: List[ToolCall] = field(default_factory=list)
     tool_call_id: Optional[str] = None
+    reasoning_content: Optional[str] = None
 
     def to_openai_format(self) -> dict:
         """
@@ -86,6 +88,10 @@ class Message:
         # 如果是工具返回消息
         if self.role == MessageRole.TOOL:
             msg["tool_call_id"] = self.tool_call_id
+
+        # DeepSeek thinking 模式：工具调用轮次必须回传 reasoning_content
+        if self.role == MessageRole.ASSISTANT and self.reasoning_content:
+            msg["reasoning_content"] = self.reasoning_content
 
         return msg
 
@@ -132,11 +138,13 @@ class ChatResponse:
         tool_calls: 工具调用列表
         model: 使用的模型名称
         usage: token使用情况
+        reasoning_content: 思维链内容（DeepSeek thinking 模式）
     """
     content: str
     tool_calls: List[ToolCall] = field(default_factory=list)
     model: str = ""
     usage: dict = field(default_factory=dict)
+    reasoning_content: Optional[str] = None
 
     @staticmethod
     def _parse_embedded_tool_calls(content: str) -> tuple[str, List[ToolCall]]:
@@ -223,6 +231,9 @@ class ChatResponse:
             if embedded_tool_calls:
                 tool_calls = embedded_tool_calls
 
+        # 获取思维链内容（DeepSeek thinking 模式）
+        reasoning_content = getattr(message, "reasoning_content", None) or None
+
         return cls(
             content=content,
             tool_calls=tool_calls,
@@ -231,5 +242,6 @@ class ChatResponse:
                 "prompt_tokens": response.usage.prompt_tokens,
                 "completion_tokens": response.usage.completion_tokens,
                 "total_tokens": response.usage.total_tokens
-            } if hasattr(response, "usage") else {}
+            } if hasattr(response, "usage") else {},
+            reasoning_content=reasoning_content,
         )

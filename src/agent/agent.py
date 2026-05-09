@@ -1095,7 +1095,8 @@ class Agent:
                 assistant_msg = Message(
                     role=MessageRole.ASSISTANT,
                     content=response.content or "",
-                    tool_calls=[tool_call]
+                    tool_calls=[tool_call],
+                    reasoning_content=response.reasoning_content,
                 )
                 self.state.add_message(assistant_msg)
 

@@ -144,6 +144,15 @@ class OpenAIProvider:
             "max_tokens": kwargs.get("max_tokens", self.max_tokens),
         }
 
+        # DeepSeek thinking 模式：检测模型名是否为 V4 系列
+        model_name = params["model"].lower()
+        is_thinking_model = any(tag in model_name for tag in ("deepseek-v4", "deepseek-r2"))
+        if is_thinking_model:
+            params["reasoning_effort"] = kwargs.get("reasoning_effort", "high")
+            params["extra_body"] = {"thinking": {"type": "enabled"}}
+            # thinking 模式不支持 temperature
+            params.pop("temperature", None)
+
         # 如果有工具定义，添加工具调用支持
         if tools:
             params["tools"] = tools
