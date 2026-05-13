@@ -3733,24 +3733,35 @@ async def chat_profile():
 @cl.on_chat_resume
 async def on_chat_resume(thread: ThreadDict):
     """恢复会话时，展示历史消息（只读浏览）。"""
-    steps = thread.get("steps", [])
+    steps = thread.get("steps", []) if isinstance(thread, dict) else getattr(thread, "steps", [])
     if not steps:
         await cl.Message(content="该历史会话没有消息记录。", author="系统").send()
         return
 
     for step in steps:
-        role = step.get("name", "") or step.get("type", "")
-        if role == "user" or step.get("type") == "user_message":
-            content = step.get("input") or step.get("output") or ""
+        # 兼容字典和对象两种格式
+        if isinstance(step, dict):
+            role = step.get("name", "")
+            step_type = step.get("type", "")
+            input_text = step.get("input", "")
+            output_text = step.get("output", "")
+        else:
+            role = getattr(step, "name", "")
+            step_type = getattr(step, "type", "")
+            input_text = getattr(step, "input", "")
+            output_text = getattr(step, "output", "")
+
+        if role == "user" or step_type == "user_message":
+            content = input_text or output_text
             if content:
-                await cl.Message(content=content, author="用户（历史）").send()
-        elif role in ("assistant", "assistant_message") or step.get("type") == "assistant_message":
-            content = step.get("output") or step.get("input") or ""
+                await cl.Message(content=content, author="user", type="user_message").send()
+        elif role == "assistant" or step_type == "assistant_message":
+            content = output_text or input_text
             if content:
-                await cl.Message(content=content, author="助手（历史）").send()
+                await cl.Message(content=content, author="assistant", type="assistant_message").send()
 
     await cl.Message(
-        content="以上是历史对话记录（只读浏览）。如需开启新会话，请点击左上角'新对话'。",
+        content="--- 以上是历史对话记录 ---",
         author="系统",
     ).send()
 

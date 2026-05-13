@@ -1,60 +1,31 @@
-"""轮询任务状态直到完成示例。
-
-GET /api/v1/tasks/{task_id}
-"""
+"""创建任务并轮询直到完成。"""
 
 import time
 import requests
 
-BASE_URL = "http://localhost:8000"
+BASE = "http://localhost:8000/api/v1"
 
+# 创建任务
+task_id = requests.post(f"{BASE}/tasks", json={
+    "incident_description": "G72高速K85处三车追尾，2人受伤",
+}).json()["task_id"]
+print(f"任务已创建: {task_id}\n")
 
-def create_task() -> str:
-    resp = requests.post(
-        f"{BASE_URL}/api/v1/tasks",
-        json={"incident_description": "G72高速K85处三车追尾，2人受伤"},
-    )
-    resp.raise_for_status()
-    return resp.json()["task_id"]
+# 轮询（建议 3-5 秒间隔）
+while True:
+    data = requests.get(f"{BASE}/tasks/{task_id}").json()
+    status = data["status"]
+    progress = data.get("progress", {})
+    print(f"[{status}] {progress.get('current_action', '')}")
 
+    if status == "completed":
+        result = data["result"]
+        print(f"\n方案前 500 字:\n{result['plan_markdown'][:500]}")
+        print(f"\n章节: {list(result['sections'].keys())}")
+        break
 
-def poll_until_done(task_id: str, interval: float = 3.0, timeout: float = 600.0):
-    """轮询任务状态，直到 completed / failed / cancelled。"""
-    start = time.time()
-    while time.time() - start < timeout:
-        resp = requests.get(f"{BASE_URL}/api/v1/tasks/{task_id}")
-        resp.raise_for_status()
-        data = resp.json()
+    if status in ("failed", "cancelled"):
+        print(f"\n任务终止: {data.get('error', {})}")
+        break
 
-        status = data["status"]
-        progress = data.get("progress", {})
-        print(
-            f"[{status}] phase={progress.get('phase', '')} "
-            f"iter={progress.get('iteration', 0)} "
-            f"action={progress.get('current_action', '')}"
-        )
-
-        if status == "completed":
-            result = data.get("result", {})
-            print("\n=== 最终方案（前 500 字） ===")
-            print(result.get("plan_markdown", "")[:500])
-            print("\n=== 章节列表 ===")
-            for title in result.get("sections", {}):
-                print(f"  - {title}")
-            return data
-
-        if status in ("failed", "cancelled"):
-            error = data.get("error", {})
-            print(f"\n任务终止: code={error.get('code')} message={error.get('message')}")
-            return data
-
-        time.sleep(interval)
-
-    print("轮询超时")
-    return None
-
-
-if __name__ == "__main__":
-    task_id = create_task()
-    print(f"任务已创建: {task_id}\n")
-    poll_until_done(task_id)
+    time.sleep(5)
