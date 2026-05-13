@@ -16,7 +16,9 @@ while True:
     data = requests.get(f"{BASE}/tasks/{task_id}").json()
     status = data["status"]
     progress = data.get("progress", {})
-    print(f"[{status}] {progress.get('current_action', '')}")
+    pipeline = progress.get('pipeline_status', '')
+    action = progress.get('current_action', '')
+    print(f"[{status}] {action}" + (f" | {pipeline}" if pipeline else ""))
 
     if status == "completed":
         result = data["result"]

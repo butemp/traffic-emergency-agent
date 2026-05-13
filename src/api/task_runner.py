@@ -22,7 +22,7 @@ from .task_store import TaskRecord, TaskStore
 logger = logging.getLogger(__name__)
 
 MAX_AGENT_ITERATIONS = 24
-MAX_FINAL_REVIEW_ROUNDS = 5
+MAX_FINAL_REVIEW_ROUNDS = 2
 # 连续无工具调用且非最终输出的轮次上限，超过后强制进入 Pipeline
 MAX_CONSECUTIVE_STALLS = 3
 
@@ -626,59 +626,7 @@ async def _run_final_pipeline(
         return
 
     final_markdown = pipeline_result.final_markdown
-    store.update_progress(task_id, pipeline_status="reviewing")
-
-    # 全局审核循环
-    reviewer = FinalPlanReviewer(review_provider)
     review_result = None
-
-    for review_round in range(1, MAX_FINAL_REVIEW_ROUNDS + 1):
-        if record.cancel_event.is_set():
-            store.fail(task_id, {
-                "code": "CANCELLED",
-                "message": "任务在审核阶段被取消",
-                "phase": agent.task_state.current_phase.value,
-                "iteration": record.progress.get("iteration", 0),
-            })
-            return
-
-        store.update_progress(
-            task_id,
-            current_action=f"全局审核第 {review_round}/{MAX_FINAL_REVIEW_ROUNDS} 轮",
-            pipeline_status=f"review_round_{review_round}",
-        )
-
-        try:
-            review_result = await asyncio.to_thread(
-                reviewer.review, agent.task_state, final_markdown,
-            )
-        except Exception as exc:
-            logger.warning("审核调用失败: task_id=%s, round=%s, error=%s", task_id, review_round, exc)
-            break
-
-        if review_result.passed:
-            break
-
-        # 未通过 → 章节局部重写
-        store.update_progress(
-            task_id,
-            current_action=f"审核未通过，重写问题章节（第 {review_round} 轮）",
-            pipeline_status=f"repair_round_{review_round}",
-        )
-
-        from web_app import collect_final_plan_guardrail_issues
-        guardrail_issues = collect_final_plan_guardrail_issues(final_markdown, agent)
-
-        try:
-            pipeline_result = await asyncio.to_thread(
-                pipeline.repair_from_review,
-                agent.task_state, pipeline_result,
-                review_result, guardrail_issues, review_round,
-            )
-            final_markdown = pipeline_result.final_markdown
-        except Exception as exc:
-            logger.warning("章节重写失败: task_id=%s, error=%s", task_id, exc)
-            break
 
     # 规范化 Markdown
     from web_app import normalize_final_markdown_for_display
