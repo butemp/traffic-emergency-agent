@@ -633,9 +633,12 @@ async def _run_final_pipeline(
     final_markdown = normalize_final_markdown_for_display(final_markdown)
 
     # 组装结果
+    from src.utils.structured_sections import normalize_structured_sections
+
     result = {
         "plan_markdown": final_markdown,
         "sections": pipeline_result.section_texts,
+        "structured_sections": normalize_structured_sections(pipeline_result.structured_sections),
         "review": review_result.raw_payload if review_result else None,
     }
     process_data = _collect_process_data(agent)

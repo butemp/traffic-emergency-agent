@@ -23,6 +23,7 @@ from .models import (
 )
 from .task_runner import run_task
 from .task_store import TaskStore
+from src.utils.structured_sections import normalize_structured_sections
 
 logger = logging.getLogger(__name__)
 
@@ -39,6 +40,7 @@ def _build_status_response(record) -> TaskStatusResponse:
         result = TaskResult(
             plan_markdown=record.result.get("plan_markdown", ""),
             sections=record.result.get("sections", {}),
+            structured_sections=normalize_structured_sections(record.result.get("structured_sections", {})),
             review=record.result.get("review"),
         )
 

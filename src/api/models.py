@@ -49,6 +49,10 @@ class TaskResult(BaseModel):
 
     plan_markdown: str = ""
     sections: Dict[str, str] = Field(default_factory=dict)
+    structured_sections: Dict[str, Dict[str, Any]] = Field(
+        default_factory=dict,
+        description="按固定字段输出的结构化章节，便于 API 调用方直接读取",
+    )
     review: Optional[Dict[str, Any]] = None
 
 

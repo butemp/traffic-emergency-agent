@@ -1932,12 +1932,18 @@ async def generate_final_plan_pipeline_with_frontend(
 
     final_markdown = pipeline._merge_sections(section_texts)
     pipeline._write_text(run_dir / "final_plan.md", final_markdown)
+    structured_sections = pipeline.build_structured_sections(task_state, section_texts)
+    pipeline._write_text(
+        run_dir / "structured_sections.json",
+        json.dumps(structured_sections, ensure_ascii=False, indent=2, default=str),
+    )
 
     return FinalPlanPipelineResult(
         final_markdown=final_markdown,
         run_dir=run_dir,
         evidence_path=evidence_path,
         section_texts=section_texts,
+        structured_sections=structured_sections,
         section_paths=section_paths,
         review_paths=review_paths,
         exhausted_sections=exhausted_sections,
@@ -2030,12 +2036,18 @@ async def repair_final_plan_pipeline_with_frontend(
     final_markdown = pipeline._merge_sections(section_texts)
     pipeline._write_text(pipeline_result.run_dir / f"final_plan_global_retry_{attempt}.md", final_markdown)
     pipeline._write_text(pipeline_result.run_dir / "final_plan.md", final_markdown)
+    structured_sections = pipeline.build_structured_sections(task_state, section_texts)
+    pipeline._write_text(
+        pipeline_result.run_dir / "structured_sections.json",
+        json.dumps(structured_sections, ensure_ascii=False, indent=2, default=str),
+    )
 
     return FinalPlanPipelineResult(
         final_markdown=final_markdown,
         run_dir=pipeline_result.run_dir,
         evidence_path=pipeline_result.evidence_path,
         section_texts=section_texts,
+        structured_sections=structured_sections,
         section_paths=section_paths,
         review_paths=review_paths,
         exhausted_sections=exhausted_sections,

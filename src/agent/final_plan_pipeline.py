@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from .task_state import TaskState
+from ..utils.structured_sections import normalize_structured_sections
 
 logger = logging.getLogger(__name__)
 
@@ -48,6 +49,7 @@ class FinalPlanPipelineResult:
     run_dir: Path
     evidence_path: Path
     section_texts: Dict[str, str]
+    structured_sections: Dict[str, Dict[str, Any]]
     section_paths: Dict[str, Path]
     review_paths: Dict[str, List[Path]]
     exhausted_sections: List[str] = field(default_factory=list)
@@ -59,13 +61,29 @@ SECTION_SPECS: tuple[SectionSpec, ...] = (
         title="一、事件概述",
         filename="01_event_overview.md",
         min_chars=260,
-        required_terms=("事件类型", "事发时间", "事发位置", "经纬度", "事件描述", "伤亡情况", "道路影响", "天气状况", "路况状况"),
+        required_terms=(
+            "应急处置详情", "事件地点", "天气情况", "事件简述", "周边环境", "主要影响",
+            "事件类型", "事发时间", "事发位置", "经纬度", "伤亡情况",
+        ),
         instructions=(
-            "用表格让指挥员快速掌握事件全貌。必须覆盖事件类型、时间、位置、经纬度、"
-            "伤亡/被困、道路影响、天气、路况、信息来源和待确认项。"
+            "先输出“应急处置详情”固定字段表，字段必须包含：事件地点、天气情况、事件简述、周边环境、主要影响。"
+            "随后可补充事件类型、事发时间、经纬度、伤亡/被困、道路影响、路况、信息来源和待确认项。"
+            "这 5 个固定字段将被 API 结构化提取，名称不能改写。"
         ),
         example=(
             "### 一、事件概述\n"
+            "\n"
+            "#### 应急处置详情\n"
+            "\n"
+            "| 字段 | 内容 |\n"
+            "| --- | --- |\n"
+            "| 事件地点 | G72泉南高速K85公里处（柳州往南宁方向） |\n"
+            "| 天气情况 | 中雨，气温22℃，能见度约500米，可能影响现场通行和救援效率 |\n"
+            "| 事件简述 | 现场发生多车追尾事故，涉及1辆重型半挂车和2辆小型客车，3人被困、2人受伤 |\n"
+            "| 周边环境 | 附近有收费站、服务区、居民点和高速主线车流等敏感点 |\n"
+            "| 主要影响 | 可能造成交通拥堵、人员聚集、燃油泄漏、二次碰撞等次生风险 |\n"
+            "\n"
+            "#### 事件基础信息\n"
             "\n"
             "| 字段 | 内容 |\n"
             "| --- | --- |\n"
@@ -89,21 +107,29 @@ SECTION_SPECS: tuple[SectionSpec, ...] = (
         title="二、响应定级",
         filename="02_response_level.md",
         min_chars=300,
-        required_terms=("响应级别", "定级依据", "响应启动主体", "适用预案", "预案依据", "复核条件"),
+        required_terms=("预案匹配与组织预警和响应", "匹配预案", "事件等级", "预警发布", "启动响应", "判断依据"),
         instructions=(
-            "说明响应级别、级别代码、定级依据、启动主体、适用预案、叠加预案、预案条款摘要、"
-            "复核升级/降级条件。不能只写结论。"
+            "必须先输出“预案匹配与组织预警和响应”固定字段表，字段必须包含：匹配预案、事件等级、预警发布、启动响应、判断依据。"
+            "字段名称不能改写，因为 API 会按这些字段进行结构化提取。随后可补充响应启动主体、预案条款摘要、复核升级/降级条件。"
         ),
         example=(
             "### 二、响应定级\n"
             "\n"
+            "#### 预案匹配与组织预警和响应\n"
+            "\n"
             "| 字段 | 内容 |\n"
             "| --- | --- |\n"
-            "| 响应级别 | 一般级（IV级） |\n"
-            "| 定级依据 | 依据《广西壮族自治区交通运输综合应急预案》附件2中人员伤亡标准：事件造成1人死亡，符合一般级中'造成一般人员伤亡'的标准。事件发生在普通道路（迎宾大道），未涉及高速公路、国道、省道交通中断，也未造成大量车辆积压或旅客滞留，不满足更高级别响应条件。 |\n"
+            "| 匹配预案 | 《广西壮族自治区交通运输综合应急预案》 |\n"
+            "| 事件等级 | 一般级（IV级） |\n"
+            "| 预警发布 | 建议由合浦县交通运输主管部门按一般预警要求发布交通事故预警信息，并通过交通广播、可变信息板和新媒体提示绕行与避险 |\n"
+            "| 启动响应 | 建议启动一般级（IV级）应急响应 |\n"
+            "| 判断依据 | 依据预案附件2人员伤亡标准：事件造成1人死亡，符合一般级响应条件；事故发生在普通道路，暂未达到较大及以上响应标准 |\n"
+            "\n"
+            "#### 补充说明\n"
+            "\n"
+            "| 字段 | 内容 |\n"
+            "| --- | --- |\n"
             "| 响应启动主体 | 合浦县交通运输主管部门主要负责人批准启动，具体流程包括接报信息、初步研判、确认伤亡情况、依据预案条款提出启动建议，并报请批准。 |\n"
-            "| 适用预案 | 《广西壮族自治区交通运输综合应急预案》 |\n"
-            "| 预案依据 | 预案中规定，一般级（IV级）响应适用于造成3人以下死亡（失踪），或危及3人以下生命安全，或10人以下重伤，或1000万元以下直接经济损失的事件。 |\n"
             "| 叠加预案 | 无 |\n"
             "| 预案条款摘要 | 预案附件2明确了一般级响应的启动条件，包括人员伤亡和经济损失标准；同时，预案第2节规定了组织指挥体系，明确由县级交通运输主管部门负责一般级响应的启动与指挥。 |\n"
             "| 复核条件 | 由现场指挥人员每2小时评估一次现场情况，如发现伤亡人数超过3人、事故影响范围扩大或交通中断加剧，需立即上报并建议升级响应级别；如现场确认无新增伤亡且交通恢复，可由合浦县交通运输主管部门降级或终止响应。 |\n"
@@ -114,29 +140,27 @@ SECTION_SPECS: tuple[SectionSpec, ...] = (
         title="三、指挥架构",
         filename="03_command_structure.md",
         min_chars=650,
-        required_terms=("总指挥", "副总指挥", "应急管理", "公安", "消防", "医疗", "专家", "职责", "首要动作"),
+        required_terms=("应急组织机构", "现场指挥组", "综合协调组", "抢险处置组", "医疗救护组", "后勤保障组", "信息发布组", "专家组", "工作组", "牵头单位", "主要职责"),
         instructions=(
-            "必须详细列出总指挥、副总指挥和不少于 7 个工作组。工作组至少覆盖综合协调、"
-            "公安交管、消防救援、医疗救援、抢险清障、专家技术支持、信息发布与舆情、善后安抚。"
-            "如果专家库有结果，必须写专家姓名、单位、专业方向和建议支持方式。"
+            "必须先输出“应急组织机构”固定表格，字段列必须为：工作组、牵头单位、主要职责。"
+            "工作组至少包含：现场指挥组、综合协调组、抢险处置组、医疗救护组、后勤保障组、信息发布组、专家组。"
+            "字段名称不能改写，因为 API 会按这些字段进行结构化提取。"
+            "可在表格后补充总指挥、副总指挥、专家姓名和协同说明。"
         ),
         example=(
             "### 三、指挥架构\n"
             "\n"
-            "依据《广西壮族自治区交通运输综合应急预案》组织指挥体系，结合本次道路运输类交通事故一般级响应要求，建立以下指挥架构：\n"
+            "#### 应急组织机构\n"
             "\n"
-            "| 工作组 | 牵头单位/人员 | 主要职责 | 首要动作建议 |\n"
-            "| --- | --- | --- | --- |\n"
-            "| 总指挥 | 合浦县人民政府分管交通工作领导 | 全面负责应急指挥决策，统筹协调各工作组行动 | 建议由人工联系确认到岗，立即启动应急响应 |\n"
-            "| 副总指挥 | 合浦县交通运输局局长、合浦县公安局交通管理大队队长 | 协助总指挥工作，具体分管现场处置与协调 | 建议拟派至现场，组织各工作组开展先期处置 |\n"
-            "| 综合协调组 | 合浦县交通运输局办公室 | 负责信息汇总、协调联络、工作调度、文件起草 | 建议立即建立信息沟通机制，收集整理事故信息 |\n"
-            "| 公安交管组 | 合浦县公安局交通管理大队 | 负责现场交通秩序维护、交通管制、警戒区域设置 | 建议拟派人员立即赶赴现场，设置警戒区，疏导交通 |\n"
-            "| 消防救援组 | 合浦县消防救援大队 | 负责现场消防救援、被困人员搜救、危险源排查 | 建议立即出动，开展人员搜救和现场消防处置 |\n"
-            "| 医疗救援组 | 合浦县卫生健康局 | 组织医疗资源开展伤员救治和转运 | 建议应由人工联系医疗单位，准备接收和救治伤员 |\n"
-            "| 抢险清障组 | 合浦县公路养护中心 | 负责道路抢通、事故车辆清障、现场清理 | 建议拟派队伍携带清障设备赶赴现场 |\n"
-            "| 专家技术支持组 | 广西交通安全研究中心 | 提供技术支持、风险评估、处置方案咨询 | 建议由指挥部办公室或值班人员人工联系专家参与远程会商或现场技术支持 |\n"
-            "| 信息发布与舆情组 | 合浦县委宣传部 | 负责舆情监控、信息发布、新闻宣传 | 建议立即启动舆情监测，准备信息发布材料 |\n"
-            "| 善后安抚组 | 合浦县民政局 | 负责遇难者家属安抚、临时救助、善后处理 | 建议应由人工联系开展家属联络与安抚工作 |\n"
+            "| 工作组 | 牵头单位 | 主要职责 |\n"
+            "| --- | --- | --- |\n"
+            "| 现场指挥组 | 属地政府或现场应急指挥部 | 统一指挥现场处置，研判态势，统筹警戒、救援、清障、医疗、信息发布等工作 |\n"
+            "| 综合协调组 | 交通运输主管部门或应急管理部门 | 负责信息汇总、部门协调、资源调度、会商组织和指令流转 |\n"
+            "| 抢险处置组 | 消防救援部门、交通养护/运营单位 | 负责人员搜救、现场排险、车辆清障、道路抢通和次生风险控制 |\n"
+            "| 医疗救护组 | 卫生健康部门或属地医疗机构 | 负责伤员检伤分类、现场急救、转运衔接和医疗资源协调 |\n"
+            "| 后勤保障组 | 属地政府、交通运输主管部门 | 负责物资保障、装备补给、人员饮水餐食、照明通信和临时安置保障 |\n"
+            "| 信息发布组 | 宣传部门或指挥部授权单位 | 负责信息报送、新闻发布、舆情监测、公众提示和统一回应口径 |\n"
+            "| 专家组 | 指挥部办公室或行业主管部门 | 负责专业研判、技术咨询、风险评估和处置措施优化建议 |\n"
             "\n"
             "**专家库支持**（依据证据包候选专家名单）：\n"
             "\n"
@@ -241,14 +265,27 @@ SECTION_SPECS: tuple[SectionSpec, ...] = (
         title="五、处置行动方案",
         filename="05_action_plan.md",
         min_chars=900,
-        required_terms=("先期处置", "全面响应", "持续处置", "现场警戒", "交通", "二次排查", "家属", "舆情", "责任单位", "时间要求"),
+        required_terms=(
+            "处置流程建议", "序号", "行动", "责任单位", "协同单位", "引用依据",
+            "先期处置", "全面响应", "持续处置", "后期处置", "新闻发布",
+            "现场警戒", "交通", "二次排查", "家属", "舆情", "时间要求",
+        ),
         instructions=(
-            "按三个阶段写行动表，合计不少于 12 条。每条必须包含行动内容、责任单位、协同单位、"
-            "时间要求、预案/工具依据。必须包含涉险人员二次排查、其他伤员排查、检伤分类和转运、"
-            "家属联络安抚、现场警戒、交通分流、二次事故防范。"
+            "必须输出“处置流程建议（包括后期处置、新闻发布）”固定表格，核心列至少包含：序号、行动、责任单位、协同单位、引用依据。"
+            "随后可按三个阶段展开，合计不少于 12 条。每条必须包含行动内容、责任单位、协同单位、时间要求、预案/工具依据。"
+            "必须包含涉险人员二次排查、其他伤员排查、检伤分类和转运、家属联络安抚、现场警戒、交通分流、二次事故防范、后期处置、新闻发布。"
         ),
         example=(
             "### 五、处置行动方案\n"
+            "\n"
+            "#### 处置流程建议（包括后期处置、新闻发布）\n"
+            "\n"
+            "| 序号 | 行动 | 责任单位 | 协同单位 | 引用依据 |\n"
+            "| --- | --- | --- | --- | --- |\n"
+            "| 1 | 现场警戒与交通管制，设置警示防护设备，防止二次事故 | 合浦县公安局交通管理大队 | 合浦县交通运输局、消防救援大队 | 《广西壮族自治区交通运输综合应急预案》4.5节 |\n"
+            "| 2 | 涉险人员二次排查，确认无遗漏伤亡 | 合浦县消防救援大队 | 合浦县公安局、医疗救援机构 | 《广西壮族自治区交通运输综合应急预案》4.5节 |\n"
+            "| 3 | 家属联络与安抚，联系遇难者家属并开展安抚工作 | 合浦县民政局 | 合浦县公安局、卫生健康局 | 《广西壮族自治区交通运输综合应急预案》4.5节 |\n"
+            "| 4 | 新闻发布与舆情回应，统一发布事故处置进展和交通绕行提示 | 合浦县委宣传部 | 合浦县交通运输局、公安局 | 《广西壮族自治区交通运输综合应急预案》信息发布要求 |\n"
             "\n"
             "#### 第一阶段：先期处置（0-30分钟）\n"
             "\n"
@@ -288,11 +325,13 @@ SECTION_SPECS: tuple[SectionSpec, ...] = (
         filename="06_resource_dispatch.md",
         min_chars=1000,
         required_terms=(
+            "物资装备与调度", "所需物资", "推荐调度来源", "距离", "预计到达时间", "地点、联系人信息", "资源缺口",
             "第一梯队", "第二梯队", "外部资源", "专家技术支持", "资源覆盖", "联系人", "电话",
             "调度路径", "可调配物资", "用途", "缺口", "补充建议",
         ),
         instructions=(
-            "这是最关键章节之一。必须基于实际资源、专家和路线数据写。按 #### 第一梯队、#### 第二梯队、"
+            "这是最关键章节之一。必须先输出“物资装备与调度”固定字段表，列必须包含：“所需物资”“推荐调度来源”“距离”“预计到达时间”“地点、联系人信息”“资源缺口”。"
+            "随后必须基于实际资源、专家和路线数据写。按 #### 第一梯队、#### 第二梯队、"
             "#### 外部资源补充、#### 专家技术支持、#### 资源覆盖与缺口分析组织。"
             "每个资源单独成行，写清资源名称、类型、所属单位/出发地、可调配物资/队伍能力（含用途说明）、距离、"
             "预计到达、调度路径、联系人、电话。物资列要写成'物资名（用途）'格式，直接融入梯队表格，不要单独拆成关键物资用途说明小节。"
@@ -300,6 +339,14 @@ SECTION_SPECS: tuple[SectionSpec, ...] = (
         ),
         example=(
             "### 六、资源调度方案\n"
+            "\n"
+            "#### 物资装备与调度\n"
+            "\n"
+            "| 所需物资 | 推荐调度来源 | 距离 | 预计到达时间 | 地点、联系人信息 | 资源缺口 |\n"
+            "| --- | --- | --- | --- | --- | --- |\n"
+            "| 路锥、标志牌、爆闪灯等警示防护物资 | 北海应急仓库 | 1.76km | 5分钟 | 广西新发展交通集团有限公司南宁高速公路运营分公司；黄世鹏 / 13978923335 | 无 |\n"
+            "| 拖车、清障人员等清障救援能力 | 北海运营分公司应急抢险队伍 | 1.76km | 5分钟 | 广西壮族自治区北海市合浦县廉州镇G7212柳北高速；吴承远 / 13607892598 | 无 |\n"
+            "| 液压破拆、专业搜救、救护车等专业救援能力 | 消防救援部门、卫生健康部门 | 暂未获取 | 待人工确认 | 待人工联系确认 | 内部资源暂未覆盖，需外部协同 |\n"
             "\n"
             "#### 第一梯队（15km内，预计15分钟内到达）\n"
             "\n"
@@ -389,10 +436,11 @@ SECTION_SPECS: tuple[SectionSpec, ...] = (
         title="八、风险提示与注意事项",
         filename="08_risks.md",
         min_chars=1000,
-        required_terms=("安全风险", "处置风险", "衍生风险", "风险描述", "触发条件", "影响后果", "应对措施", "责任单位", "监测指标", "升级条件"),
+        required_terms=("次生风险", "安全风险", "处置风险", "衍生风险", "风险描述", "触发条件", "影响后果", "应对措施", "责任单位", "监测指标", "升级条件"),
         instructions=(
             "必须分为 #### 安全风险、#### 处置风险、#### 衍生风险。每类至少 3 条，优先写 10-12 条。"
-            "每条风险必须用表格写清风险描述、触发条件、影响后果、应对措施、责任单位、监测指标、升级条件，"
+            "每条风险必须用表格写清风险描述、触发条件、影响后果、应对措施、责任单位、监测指标、升级条件；"
+            "其中触发条件、风险描述、影响后果、应对措施、责任单位会被 API 结构化提取，列名不要改写。"
             "并结合本次事故的天气、路况、伤亡、资源缺口、舆情和家属安抚实际情况。"
         ),
         example=(
@@ -431,10 +479,11 @@ SECTION_SPECS: tuple[SectionSpec, ...] = (
         title="九、依据引用",
         filename="09_references.md",
         min_chars=340,
-        required_terms=("预案名称", "引用章节", "引用内容", "支撑", "工具结果", "案例"),
+        required_terms=("引用依据", "预案名称", "引用章节", "引用内容", "支撑", "工具结果", "案例"),
         instructions=(
             "汇总预案、法规/RAG、工具结果、资源调度、路线规划、风险评估和历史案例依据。"
             "用表格写清依据名称、章节/模块、引用内容摘要、支撑哪个处置决策。"
+            "表格列名建议保持为：依据类型、依据名称、引用章节/模块、引用内容摘要、支撑决策，便于 API 结构化提取。"
         ),
         example=(
             "### 九、依据引用\n"
@@ -554,14 +603,26 @@ class FinalPlanPipeline:
             if exhausted:
                 exhausted_sections.append(spec.title)
 
+        structured_sections = self.build_structured_sections(task_state, section_texts)
+        overview_text = self._build_overview_markdown(structured_sections)
+        overview_path = sections_dir / "00_emergency_disposal_overview.md"
+        self._write_text(overview_path, overview_text)
+        section_texts = {"应急处置总览": overview_text, **section_texts}
+        section_paths["应急处置总览"] = overview_path
+
         final_markdown = self._merge_sections(section_texts)
         self._write_text(run_dir / "final_plan.md", final_markdown)
+        self._write_text(
+            run_dir / "structured_sections.json",
+            json.dumps(structured_sections, ensure_ascii=False, indent=2, default=str),
+        )
 
         return FinalPlanPipelineResult(
             final_markdown=final_markdown,
             run_dir=run_dir,
             evidence_path=evidence_path,
             section_texts=section_texts,
+            structured_sections=structured_sections,
             section_paths=section_paths,
             review_paths=review_paths,
             exhausted_sections=exhausted_sections,
@@ -618,15 +679,27 @@ class FinalPlanPipeline:
             if exhausted and spec.title not in exhausted_sections:
                 exhausted_sections.append(spec.title)
 
+        structured_sections = self.build_structured_sections(task_state, section_texts)
+        overview_text = self._build_overview_markdown(structured_sections)
+        overview_path = sections_dir / "00_emergency_disposal_overview.md"
+        self._write_text(overview_path, overview_text)
+        section_texts["应急处置总览"] = overview_text
+        section_paths["应急处置总览"] = overview_path
+
         final_markdown = self._merge_sections(section_texts)
         self._write_text(pipeline_result.run_dir / f"final_plan_global_retry_{attempt}.md", final_markdown)
         self._write_text(pipeline_result.run_dir / "final_plan.md", final_markdown)
+        self._write_text(
+            pipeline_result.run_dir / "structured_sections.json",
+            json.dumps(structured_sections, ensure_ascii=False, indent=2, default=str),
+        )
 
         return FinalPlanPipelineResult(
             final_markdown=final_markdown,
             run_dir=pipeline_result.run_dir,
             evidence_path=pipeline_result.evidence_path,
             section_texts=section_texts,
+            structured_sections=structured_sections,
             section_paths=section_paths,
             review_paths=review_paths,
             exhausted_sections=exhausted_sections,
@@ -898,6 +971,946 @@ class FinalPlanPipeline:
 
         return "\n".join(lines)
 
+    def build_structured_sections(
+        self,
+        task_state: TaskState,
+        section_texts: Dict[str, str],
+    ) -> Dict[str, Dict[str, Any]]:
+        """生成 API 友好的固定字段结构。
+
+        Markdown 仍按完整方案章节生成；这里额外提供面向 API 的稳定字段。
+        未能从章节或状态中提取到的字段统一返回空字符串，便于调用方固定解析。
+        """
+        raw_sections = {
+            "emergency_disposal_detail": self._build_emergency_disposal_detail(
+                task_state=task_state,
+                section_text=section_texts.get("一、事件概述", ""),
+            ),
+            "plan_warning_response": self._build_plan_warning_response(
+                task_state=task_state,
+                section_text=section_texts.get("二、响应定级", ""),
+            ),
+            "emergency_organization": self._build_emergency_organization(
+                task_state=task_state,
+                section_text=section_texts.get("三、指挥架构", ""),
+            ),
+            "material_equipment_dispatch": self._build_material_equipment_dispatch(
+                task_state=task_state,
+                section_text=section_texts.get("六、资源调度方案", ""),
+            ),
+            "disposal_process_recommendations": self._build_disposal_process_recommendations(
+                section_text="\n\n".join(
+                    [
+                        section_texts.get("五、处置行动方案", ""),
+                        section_texts.get("七、信息报送与新闻发布", ""),
+                    ]
+                ),
+            ),
+            "secondary_risks": self._build_secondary_risks(
+                section_text=section_texts.get("八、风险提示与注意事项", ""),
+            ),
+            "reference_basis": self._build_reference_basis(
+                task_state=task_state,
+                section_text=section_texts.get("九、依据引用", ""),
+            ),
+        }
+        normalized_sections = normalize_structured_sections(raw_sections)
+        normalized_sections["emergency_disposal_overview"] = self._build_emergency_disposal_overview(
+            normalized_sections
+        )
+        return normalize_structured_sections(normalized_sections)
+
+    def _build_emergency_disposal_overview(self, sections: Dict[str, Dict[str, Any]]) -> Dict[str, Any]:
+        """基于已结构化章节生成“应急处置总览”固定字段。"""
+        detail = sections.get("emergency_disposal_detail", {})
+        plan_response = sections.get("plan_warning_response", {})
+        material_dispatch = sections.get("material_equipment_dispatch", {})
+        disposal_process = sections.get("disposal_process_recommendations", {})
+        secondary_risks = sections.get("secondary_risks", {})
+
+        scene_overview = self._join_brief(
+            [
+                detail.get("event_location"),
+                detail.get("event_summary"),
+                detail.get("weather_condition"),
+                detail.get("main_impact"),
+            ]
+        )
+        plan_overview = self._join_brief(
+            [
+                plan_response.get("matched_plan"),
+                plan_response.get("event_level"),
+                plan_response.get("response_activation"),
+                plan_response.get("warning_release"),
+            ]
+        )
+        material_overview = self._summarize_material_dispatch_overview(material_dispatch.get("items", []))
+        process_overview = self._summarize_process_overview(disposal_process.get("items", []))
+        risk_overview = self._summarize_risk_overview(secondary_risks.get("items", []))
+
+        return {
+            "section_name": "应急处置总览",
+            "scene_basic_situation_overview": scene_overview,
+            "plan_warning_response_overview": plan_overview,
+            "material_equipment_dispatch_overview": material_overview,
+            "disposal_process_recommendations_overview": process_overview,
+            "secondary_risks_overview": risk_overview,
+            "fields_zh": {
+                "一、事件现场基本情况": scene_overview,
+                "二、预案匹配与组织预警和响应": plan_overview,
+                "三、物资装备与调度": material_overview,
+                "四、处置流程建议": process_overview,
+                "五、次生风险": risk_overview,
+            },
+        }
+
+    def _build_emergency_disposal_detail(
+        self,
+        task_state: TaskState,
+        section_text: str,
+    ) -> Dict[str, Any]:
+        """构建“应急处置详情”固定字段。"""
+        incident = task_state.incident_info
+        environment = task_state.environment_info
+
+        event_location = (
+            incident.location_text
+            or environment.formatted_address
+            or self._extract_markdown_field(section_text, ("事件地点", "事发位置", "地点", "位置"))
+            or ""
+        )
+        weather_condition = (
+            self._format_weather_condition(environment.weather)
+            or self._extract_markdown_field(section_text, ("天气情况", "天气状况"))
+            or ""
+        )
+        event_summary = (
+            self._extract_markdown_field(section_text, ("事件简述", "事件描述"))
+            or self._compose_event_summary(task_state)
+            or ""
+        )
+        surrounding_environment = (
+            self._format_surrounding_environment(environment.nearby_pois)
+            or self._extract_markdown_field(section_text, ("周边环境", "周边敏感点", "周边情况"))
+            or ""
+        )
+        main_impact = (
+            self._extract_markdown_field(section_text, ("主要影响", "道路影响", "影响范围"))
+            or self._compose_main_impact(task_state)
+            or ""
+        )
+
+        return {
+            "section_name": "应急处置详情",
+            "event_location": event_location,
+            "weather_condition": weather_condition,
+            "event_summary": event_summary,
+            "surrounding_environment": surrounding_environment,
+            "main_impact": main_impact,
+            "fields_zh": {
+                "事件地点": event_location,
+                "天气情况": weather_condition,
+                "事件简述": event_summary,
+                "周边环境": surrounding_environment,
+                "主要影响": main_impact,
+            },
+        }
+
+    def _build_plan_warning_response(
+        self,
+        task_state: TaskState,
+        section_text: str,
+    ) -> Dict[str, Any]:
+        """构建“预案匹配与组织预警和响应”固定字段。"""
+        incident = task_state.incident_info
+        matched_plan = (
+            self._extract_markdown_field(section_text, ("匹配预案", "适用预案"))
+            or self._find_primary_plan_name(task_state)
+            or ""
+        )
+        event_level = (
+            incident.response_level
+            or self._extract_markdown_field(section_text, ("事件等级", "响应级别"))
+            or ""
+        )
+        warning_release = (
+            self._extract_markdown_field(section_text, ("预警发布", "预警发布建议"))
+            or self._compose_warning_release(task_state)
+            or ""
+        )
+        response_activation = (
+            self._extract_markdown_field(section_text, ("启动响应", "响应启动", "启动建议"))
+            or self._compose_response_activation(event_level)
+            or ""
+        )
+        judgment_basis = (
+            incident.response_level_reason
+            or self._extract_markdown_field(section_text, ("判断依据", "定级依据", "预案依据"))
+            or ""
+        )
+
+        return {
+            "section_name": "预案匹配与组织预警和响应",
+            "matched_plan": matched_plan,
+            "event_level": event_level,
+            "warning_release": warning_release,
+            "response_activation": response_activation,
+            "judgment_basis": judgment_basis,
+            "fields_zh": {
+                "匹配预案": matched_plan,
+                "事件等级": event_level,
+                "预警发布": warning_release,
+                "启动响应": response_activation,
+                "判断依据": judgment_basis,
+            },
+        }
+
+    @staticmethod
+    def _join_brief(parts: List[Any], max_chars: int = 160) -> str:
+        text = "；".join(str(part).strip() for part in parts if str(part or "").strip())
+        if len(text) <= max_chars:
+            return text
+        return text[: max_chars - 1].rstrip("；，。,. ") + "…"
+
+    def _summarize_material_dispatch_overview(self, items: Any) -> str:
+        if not isinstance(items, list):
+            return ""
+        summaries = []
+        for item in items[:3]:
+            if not isinstance(item, dict):
+                continue
+            material = str(item.get("required_material") or "").strip()
+            source = str(item.get("recommended_dispatch_source") or "").strip()
+            distance = str(item.get("distance") or "").strip()
+            eta = str(item.get("estimated_arrival_time") or "").strip()
+            if not any((material, source, distance, eta)):
+                continue
+            summaries.append(self._join_brief([source, material, distance, eta], max_chars=90))
+        return self._join_brief(summaries, max_chars=180)
+
+    def _summarize_process_overview(self, items: Any) -> str:
+        if not isinstance(items, list):
+            return ""
+        actions = [
+            str(item.get("action") or "").strip()
+            for item in items
+            if isinstance(item, dict) and str(item.get("action") or "").strip()
+        ]
+        return self._join_brief(actions[:5], max_chars=180)
+
+    def _summarize_risk_overview(self, items: Any) -> str:
+        if not isinstance(items, list):
+            return ""
+        risks = []
+        for item in items[:5]:
+            if not isinstance(item, dict):
+                continue
+            risk = str(item.get("risk_description") or "").strip()
+            measure = str(item.get("response_measure") or "").strip()
+            if risk and measure:
+                risks.append(f"{risk}，应对：{measure}")
+            elif risk:
+                risks.append(risk)
+        return self._join_brief(risks, max_chars=180)
+
+    def _build_overview_markdown(self, structured_sections: Dict[str, Dict[str, Any]]) -> str:
+        overview = normalize_structured_sections(structured_sections).get("emergency_disposal_overview", {})
+        fields = overview.get("fields_zh", {}) if isinstance(overview.get("fields_zh"), dict) else {}
+        return "\n".join(
+            [
+                "### 应急处置总览",
+                "",
+                "以下内容用简短描述概括本次应急处置方案的关键点。",
+                "",
+                f"- **一、事件现场基本情况**：{fields.get('一、事件现场基本情况', '')}",
+                f"- **二、预案匹配与组织预警和响应**：{fields.get('二、预案匹配与组织预警和响应', '')}",
+                f"- **三、物资装备与调度**：{fields.get('三、物资装备与调度', '')}",
+                f"- **四、处置流程建议**：{fields.get('四、处置流程建议', '')}",
+                f"- **五、次生风险**：{fields.get('五、次生风险', '')}",
+            ]
+        )
+
+    @staticmethod
+    def _find_primary_plan_name(task_state: TaskState) -> str:
+        for ref in task_state.knowledge_refs:
+            if getattr(ref, "source_type", "") != "emergency_plan":
+                continue
+            title = str(getattr(ref, "title", "") or "").strip()
+            if title:
+                return f"《{title}》" if not title.startswith("《") else title
+        return ""
+
+    @staticmethod
+    def _compose_warning_release(task_state: TaskState) -> str:
+        level = task_state.incident_info.response_level or ""
+        if "特别重大" in level or "I" in level:
+            return "建议按特别重大级事件要求发布红色预警，具体发布主体和流程以对应预案为准"
+        if "重大" in level or "II" in level:
+            return "建议按重大级事件要求发布橙色预警，具体发布主体和流程以对应预案为准"
+        if "较大" in level or "III" in level:
+            return "建议按较大级事件要求发布黄色预警，具体发布主体和流程以对应预案为准"
+        if "一般" in level or "IV" in level:
+            return "建议按一般级事件要求发布蓝色或一般预警，具体发布主体和流程以对应预案为准"
+        return ""
+
+    @staticmethod
+    def _compose_response_activation(event_level: str) -> str:
+        if not event_level or event_level == "待现场确认":
+            return ""
+        return f"建议启动{event_level}应急响应"
+
+    def _build_emergency_organization(
+        self,
+        task_state: TaskState,
+        section_text: str,
+    ) -> Dict[str, Any]:
+        """构建“应急组织机构”固定字段。"""
+        groups = self._extract_organization_groups(section_text)
+        if not groups:
+            groups = self._default_organization_groups(task_state)
+
+        return {
+            "section_name": "应急组织机构",
+            "groups": groups,
+            "fields_zh": {
+                "应急组织机构": groups,
+            },
+        }
+
+    def _build_material_equipment_dispatch(
+        self,
+        task_state: TaskState,
+        section_text: str,
+    ) -> Dict[str, Any]:
+        """构建“物资装备与调度”固定字段。"""
+        items = self._extract_material_dispatch_items(section_text)
+        if not items:
+            items = [
+                item
+                for resource in task_state.available_resources[:20]
+                if (item := self._resource_to_dispatch_item(resource))
+            ]
+        if not items:
+            items = [self._empty_material_dispatch_item()]
+        zh_items = [self._map_item_keys(item, self._material_dispatch_key_map()) for item in items]
+
+        return {
+            "section_name": "物资装备与调度",
+            "items": items,
+            "fields_zh": {
+                "物资装备与调度": zh_items,
+            },
+        }
+
+    def _extract_material_dispatch_items(self, text: str) -> List[Dict[str, str]]:
+        """从资源调度 Markdown 表格中抽取固定字段。"""
+        rows = self._extract_markdown_table_rows(text)
+        items: List[Dict[str, str]] = []
+
+        for row in rows:
+            required_material = self._row_value(
+                row,
+                (
+                    "所需物资", "可调配物资", "可调配物资/队伍能力", "物资装备",
+                    "能力需求", "资源名称",
+                ),
+            )
+            source = self._row_value(
+                row,
+                (
+                    "推荐调度来源", "调度来源", "资源名称", "现有来源",
+                    "所属单位/出发地", "来源",
+                ),
+            )
+            distance = self._row_value(row, ("距离", "距现场距离"))
+            eta = self._row_value(row, ("预计到达时间", "预计到达", "到达时间"))
+            location = self._row_value(row, ("地点、联系人信息", "所属单位/出发地", "地址", "出发地"))
+            contact_name = self._row_value(row, ("联系人", "负责人"))
+            phone = self._row_value(row, ("电话", "联系电话", "联系方式"))
+            gap = self._row_value(row, ("资源缺口", "缺口", "主要缺口"))
+
+            contact_info = location
+            contact_parts = [part for part in (contact_name, phone) if part]
+            if contact_parts:
+                contact_info = "；".join([part for part in (contact_info, " / ".join(contact_parts)) if part])
+
+            item = {
+                "required_material": required_material,
+                "recommended_dispatch_source": source,
+                "distance": distance,
+                "estimated_arrival_time": eta,
+                "location_contact_info": contact_info,
+                "resource_gap": gap,
+            }
+            if any(item.values()):
+                items.append(item)
+
+        return items
+
+    def _resource_to_dispatch_item(self, resource: Dict[str, Any]) -> Dict[str, str]:
+        """把 TaskState 中的资源记录转换为 API 固定字段。"""
+        if not isinstance(resource, dict):
+            return {}
+
+        source_name = str(
+            resource.get("name")
+            or resource.get("warehouse_name")
+            or resource.get("team_name")
+            or ""
+        ).strip()
+        required_material = self._summarize_resource_materials(resource)
+        distance = self._format_distance(resource.get("distance_km") or resource.get("distance"))
+        eta = str(
+            resource.get("estimated_arrival_time")
+            or resource.get("estimated_arrival")
+            or resource.get("eta")
+            or resource.get("duration_min")
+            or ""
+        ).strip()
+        if eta and eta.replace(".", "", 1).isdigit():
+            eta = f"{eta}分钟"
+
+        contact_info = self._resource_contact_info(resource)
+        item = {
+            "required_material": required_material,
+            "recommended_dispatch_source": source_name,
+            "distance": distance,
+            "estimated_arrival_time": eta,
+            "location_contact_info": contact_info,
+            "resource_gap": "",
+        }
+        return item if any(item.values()) else {}
+
+    @staticmethod
+    def _empty_material_dispatch_item() -> Dict[str, str]:
+        return {
+            "required_material": "",
+            "recommended_dispatch_source": "",
+            "distance": "",
+            "estimated_arrival_time": "",
+            "location_contact_info": "",
+            "resource_gap": "",
+        }
+
+    def _build_disposal_process_recommendations(self, section_text: str) -> Dict[str, Any]:
+        """构建“处置流程建议”固定字段。"""
+        items: List[Dict[str, str]] = []
+        rows = self._extract_markdown_table_rows(section_text)
+
+        for row in rows:
+            sequence = self._row_value(row, ("序号", "编号"))
+            action = (
+                self._row_value(row, ("行动", "行动内容", "处置行动", "发布内容"))
+                or self._compose_reporting_action(row)
+            )
+            responsible_unit = self._row_value(row, ("责任单位", "发布主体", "报送单位"))
+            coordinating_unit = self._row_value(row, ("协同单位", "协作单位", "报送对象", "发布渠道"))
+            reference_basis = self._row_value(row, ("引用依据", "预案/工具依据", "依据", "预案依据"))
+
+            item = {
+                "sequence": sequence,
+                "action": action,
+                "responsible_unit": responsible_unit,
+                "coordinating_unit": coordinating_unit,
+                "reference_basis": reference_basis,
+            }
+            if action or responsible_unit or coordinating_unit or reference_basis:
+                items.append(item)
+
+        if not items:
+            items = [self._empty_disposal_process_item()]
+        zh_items = [self._map_item_keys(item, self._disposal_process_key_map()) for item in items]
+
+        return {
+            "section_name": "处置流程建议",
+            "items": items,
+            "fields_zh": {
+                "处置流程建议": zh_items,
+            },
+        }
+
+    def _build_secondary_risks(self, section_text: str) -> Dict[str, Any]:
+        """构建“次生风险”固定字段。"""
+        items: List[Dict[str, str]] = []
+        rows = self._extract_markdown_table_rows(section_text)
+
+        for row in rows:
+            item = {
+                "trigger_condition": self._row_value(row, ("触发条件", "触发场景")),
+                "risk_description": self._row_value(row, ("风险描述", "风险", "次生风险")),
+                "impact_consequence": self._row_value(row, ("影响后果", "后果")),
+                "response_measure": self._row_value(row, ("应对措施", "处置措施", "管控措施")),
+                "responsible_unit": self._row_value(row, ("责任单位", "牵头单位")),
+            }
+            if any(item.values()):
+                items.append(item)
+
+        if not items:
+            items = [self._empty_secondary_risk_item()]
+        zh_items = [self._map_item_keys(item, self._secondary_risk_key_map()) for item in items]
+
+        return {
+            "section_name": "次生风险",
+            "items": items,
+            "fields_zh": {
+                "次生风险": zh_items,
+            },
+        }
+
+    def _build_reference_basis(
+        self,
+        task_state: TaskState,
+        section_text: str,
+    ) -> Dict[str, Any]:
+        """构建“引用依据”固定字段。"""
+        references: List[Dict[str, str]] = []
+        rows = self._extract_markdown_table_rows(section_text)
+
+        for row in rows:
+            item = {
+                "basis_type": self._row_value(row, ("依据类型", "类型")),
+                "basis_name": self._row_value(row, ("依据名称", "预案名称", "工具结果", "案例")),
+                "reference_chapter": self._row_value(row, ("引用章节/模块", "引用章节", "章节/模块", "模块")),
+                "reference_content": self._row_value(row, ("引用内容摘要", "引用内容", "内容摘要")),
+                "supports_decision": self._row_value(row, ("支撑决策", "支撑", "用途")),
+            }
+            if any(item.values()):
+                references.append(item)
+
+        if not references:
+            references = [self._knowledge_ref_to_reference_item(ref) for ref in task_state.knowledge_refs[:20]]
+            references = [item for item in references if any(item.values())]
+        if not references:
+            references = [self._empty_reference_item()]
+        zh_references = [self._map_item_keys(item, self._reference_key_map()) for item in references]
+
+        return {
+            "section_name": "引用依据",
+            "references": references,
+            "fields_zh": {
+                "引用依据": zh_references,
+            },
+        }
+
+    @staticmethod
+    def _map_item_keys(item: Dict[str, str], key_map: Dict[str, str]) -> Dict[str, str]:
+        return {zh_key: str(item.get(en_key, "") or "") for en_key, zh_key in key_map.items()}
+
+    @staticmethod
+    def _material_dispatch_key_map() -> Dict[str, str]:
+        return {
+            "required_material": "所需物资",
+            "recommended_dispatch_source": "推荐调度来源",
+            "distance": "距离",
+            "estimated_arrival_time": "预计到达时间",
+            "location_contact_info": "地点、联系人信息",
+            "resource_gap": "资源缺口",
+        }
+
+    @staticmethod
+    def _disposal_process_key_map() -> Dict[str, str]:
+        return {
+            "sequence": "序号",
+            "action": "行动",
+            "responsible_unit": "责任单位",
+            "coordinating_unit": "协同单位",
+            "reference_basis": "引用依据",
+        }
+
+    @staticmethod
+    def _secondary_risk_key_map() -> Dict[str, str]:
+        return {
+            "trigger_condition": "触发条件",
+            "risk_description": "风险描述",
+            "impact_consequence": "影响后果",
+            "response_measure": "应对措施",
+            "responsible_unit": "责任单位",
+        }
+
+    @staticmethod
+    def _reference_key_map() -> Dict[str, str]:
+        return {
+            "basis_type": "依据类型",
+            "basis_name": "依据名称",
+            "reference_chapter": "引用章节/模块",
+            "reference_content": "引用内容摘要",
+            "supports_decision": "支撑决策",
+        }
+
+    @staticmethod
+    def _empty_disposal_process_item() -> Dict[str, str]:
+        return {
+            "sequence": "",
+            "action": "",
+            "responsible_unit": "",
+            "coordinating_unit": "",
+            "reference_basis": "",
+        }
+
+    @staticmethod
+    def _empty_secondary_risk_item() -> Dict[str, str]:
+        return {
+            "trigger_condition": "",
+            "risk_description": "",
+            "impact_consequence": "",
+            "response_measure": "",
+            "responsible_unit": "",
+        }
+
+    @staticmethod
+    def _empty_reference_item() -> Dict[str, str]:
+        return {
+            "basis_type": "",
+            "basis_name": "",
+            "reference_chapter": "",
+            "reference_content": "",
+            "supports_decision": "",
+        }
+
+    def _knowledge_ref_to_reference_item(self, ref: Any) -> Dict[str, str]:
+        metadata = getattr(ref, "metadata", {}) or {}
+        return {
+            "basis_type": str(getattr(ref, "source_type", "") or ""),
+            "basis_name": str(getattr(ref, "title", "") or ""),
+            "reference_chapter": str(metadata.get("module") or metadata.get("section") or metadata.get("chapter") or ""),
+            "reference_content": self._limit_text(str(getattr(ref, "excerpt", "") or ""), 500),
+            "supports_decision": "",
+        }
+
+    @staticmethod
+    def _compose_reporting_action(row: Dict[str, str]) -> str:
+        report_type = str(row.get("报送类型") or row.get("发布类型") or "").strip()
+        content = str(row.get("发布内容") or row.get("方式") or row.get("时限") or "").strip()
+        if report_type and content:
+            return f"{report_type}：{content}"
+        return report_type
+
+    def _summarize_resource_materials(self, resource: Dict[str, Any]) -> str:
+        if resource.get("type") == "expert" or resource.get("resource_type") == "expert":
+            specialty = resource.get("specialty_field") or resource.get("specialty") or ""
+            return f"专家技术支持（{specialty}）" if specialty else "专家技术支持"
+
+        materials = resource.get("materials_summary_zh") or resource.get("materials_by_category") or {}
+        parts: List[str] = []
+        if isinstance(materials, dict):
+            for category, entries in materials.items():
+                if category == "team_size":
+                    continue
+                if isinstance(entries, list):
+                    for entry in entries[:6]:
+                        if not isinstance(entry, dict):
+                            continue
+                        name = str(entry.get("name") or "").strip()
+                        quantity = entry.get("quantity")
+                        unit = str(entry.get("unit") or "").strip()
+                        if not name:
+                            continue
+                        amount = ""
+                        if quantity not in (None, ""):
+                            amount = f"×{quantity}{unit}"
+                        parts.append(f"{name}{amount}")
+                elif entries:
+                    parts.append(f"{category}: {entries}")
+
+        specialties = resource.get("specialties")
+        if specialties:
+            parts.append("队伍能力：" + "、".join(str(item) for item in specialties))
+        if resource.get("team_size"):
+            parts.append(f"队伍规模：{resource.get('team_size')}人")
+        if not parts and resource.get("categories_zh"):
+            parts.append("、".join(str(item) for item in resource.get("categories_zh", [])))
+
+        return "；".join(parts[:12])
+
+    @staticmethod
+    def _resource_contact_info(resource: Dict[str, Any]) -> str:
+        address = str(resource.get("address") or resource.get("source_org") or resource.get("belong_org_name") or "").strip()
+        contact = resource.get("contact") if isinstance(resource.get("contact"), dict) else {}
+        contact_name = str(
+            contact.get("name")
+            or resource.get("principal")
+            or resource.get("contact_name")
+            or ""
+        ).strip()
+        phone = str(
+            contact.get("phone")
+            or resource.get("contact_phone")
+            or resource.get("phone")
+            or ""
+        ).strip()
+        contact_parts = [part for part in (contact_name, phone) if part]
+        return "；".join([part for part in (address, " / ".join(contact_parts)) if part])
+
+    @staticmethod
+    def _format_distance(distance: Any) -> str:
+        if distance in (None, ""):
+            return ""
+        if isinstance(distance, (int, float)):
+            return f"{distance:.2f}km"
+        distance_text = str(distance).strip()
+        if not distance_text:
+            return ""
+        if distance_text.endswith(("km", "公里", "米", "m")):
+            return distance_text
+        return f"{distance_text}km"
+
+    def _extract_organization_groups(self, text: str) -> List[Dict[str, str]]:
+        """从 Markdown 表格中抽取工作组、牵头单位、主要职责。"""
+        rows = self._extract_markdown_table_rows(text)
+        groups: List[Dict[str, str]] = []
+
+        for row in rows:
+            normalized = {key.strip(): value.strip() for key, value in row.items()}
+            group_name = (
+                normalized.get("工作组")
+                or normalized.get("组织机构")
+                or normalized.get("小组")
+                or normalized.get("组别")
+                or ""
+            )
+            lead_unit = (
+                normalized.get("牵头单位")
+                or normalized.get("牵头单位/人员")
+                or normalized.get("牵头部门")
+                or normalized.get("责任单位")
+                or ""
+            )
+            responsibility = (
+                normalized.get("主要职责")
+                or normalized.get("职责")
+                or normalized.get("工作职责")
+                or ""
+            )
+
+            if not group_name or not responsibility:
+                continue
+            if group_name in {"总指挥", "副总指挥"}:
+                continue
+
+            groups.append(
+                {
+                    "work_group": group_name,
+                    "lead_unit": lead_unit or "待现场确认",
+                    "main_responsibilities": responsibility,
+                }
+            )
+
+        return self._ensure_required_organization_groups(groups)
+
+    def _extract_markdown_table_rows(self, text: str) -> List[Dict[str, str]]:
+        """解析简单 Markdown 表格，返回表头到单元格的映射。"""
+        rows: List[Dict[str, str]] = []
+        lines = [line.strip() for line in (text or "").splitlines()]
+        index = 0
+        while index < len(lines) - 1:
+            header_line = lines[index]
+            separator_line = lines[index + 1]
+            if not self._is_markdown_table_row(header_line) or not self._is_markdown_separator_row(separator_line):
+                index += 1
+                continue
+
+            headers = self._split_markdown_table_row(header_line)
+            index += 2
+            while index < len(lines) and self._is_markdown_table_row(lines[index]):
+                cells = self._split_markdown_table_row(lines[index])
+                if cells and len(cells) >= len(headers):
+                    rows.append({headers[pos]: cells[pos] for pos in range(len(headers))})
+                index += 1
+        return rows
+
+    @staticmethod
+    def _is_markdown_table_row(line: str) -> bool:
+        return line.startswith("|") and line.endswith("|") and line.count("|") >= 2
+
+    @staticmethod
+    def _is_markdown_separator_row(line: str) -> bool:
+        if not line.startswith("|") or not line.endswith("|"):
+            return False
+        cells = [cell.strip() for cell in line.strip("|").split("|")]
+        return bool(cells) and all(re.fullmatch(r":?-{3,}:?", cell or "") for cell in cells)
+
+    @staticmethod
+    def _split_markdown_table_row(line: str) -> List[str]:
+        return [re.sub(r"\s+", " ", cell).strip() for cell in line.strip().strip("|").split("|")]
+
+    @staticmethod
+    def _row_value(row: Dict[str, str], labels: tuple[str, ...]) -> str:
+        """从一行 Markdown 表格映射中按多个候选列名取值。"""
+        normalized = {str(key).strip(): str(value).strip() for key, value in (row or {}).items()}
+        for label in labels:
+            value = normalized.get(label)
+            if value:
+                return value
+        for key, value in normalized.items():
+            if any(label in key for label in labels) and value:
+                return value
+        return ""
+
+    def _ensure_required_organization_groups(self, groups: List[Dict[str, str]]) -> List[Dict[str, str]]:
+        required_defaults = self._default_organization_groups()
+        existing_names = {item.get("work_group", "") for item in groups}
+        for item in required_defaults:
+            if item["work_group"] not in existing_names:
+                groups.append(item)
+        return groups
+
+    @staticmethod
+    def _default_organization_groups(task_state: TaskState | None = None) -> List[Dict[str, str]]:
+        return [
+            {
+                "work_group": "现场指挥组",
+                "lead_unit": "属地政府或现场应急指挥部",
+                "main_responsibilities": "统一指挥现场处置，研判态势，统筹警戒、救援、清障、医疗、信息发布等工作。",
+            },
+            {
+                "work_group": "综合协调组",
+                "lead_unit": "交通运输主管部门或应急管理部门",
+                "main_responsibilities": "负责信息汇总、部门协调、资源调度、会商组织和指令流转。",
+            },
+            {
+                "work_group": "抢险处置组",
+                "lead_unit": "消防救援部门、交通养护或运营单位",
+                "main_responsibilities": "负责人员搜救、现场排险、车辆清障、道路抢通和次生风险控制。",
+            },
+            {
+                "work_group": "医疗救护组",
+                "lead_unit": "卫生健康部门或属地医疗机构",
+                "main_responsibilities": "负责伤员检伤分类、现场急救、转运衔接和医疗资源协调。",
+            },
+            {
+                "work_group": "后勤保障组",
+                "lead_unit": "属地政府、交通运输主管部门",
+                "main_responsibilities": "负责物资保障、装备补给、通信照明、人员饮水餐食和临时安置保障。",
+            },
+            {
+                "work_group": "信息发布组",
+                "lead_unit": "宣传部门或指挥部授权单位",
+                "main_responsibilities": "负责信息报送、新闻发布、舆情监测、公众提示和统一回应口径。",
+            },
+            {
+                "work_group": "专家组",
+                "lead_unit": "指挥部办公室或行业主管部门",
+                "main_responsibilities": "负责专业研判、技术咨询、风险评估和处置措施优化建议。",
+            },
+        ]
+
+    @staticmethod
+    def _extract_markdown_field(text: str, labels: tuple[str, ...]) -> str:
+        """从 Markdown 表格或冒号行里提取指定字段。"""
+        if not text:
+            return ""
+
+        for label in labels:
+            table_pattern = re.compile(
+                rf"\|\s*{re.escape(label)}\s*\|\s*(.*?)\s*\|",
+                re.IGNORECASE,
+            )
+            match = table_pattern.search(text)
+            if match:
+                value = re.sub(r"\s+", " ", match.group(1)).strip()
+                if value and not re.fullmatch(r"-+", value):
+                    return value
+
+            line_pattern = re.compile(
+                rf"(?:^|\n)\s*(?:[-*]\s*)?\*{{0,2}}{re.escape(label)}\*{{0,2}}\s*[：:]\s*(.+)",
+                re.IGNORECASE,
+            )
+            match = line_pattern.search(text)
+            if match:
+                value = re.sub(r"\s+", " ", match.group(1)).strip().strip("|")
+                if value:
+                    return value
+
+        return ""
+
+    @staticmethod
+    def _format_weather_condition(weather: Dict[str, Any]) -> str:
+        if not isinstance(weather, dict) or not weather:
+            return ""
+        if weather.get("status") == "error":
+            return ""
+
+        parts = []
+        if weather.get("weather"):
+            parts.append(str(weather["weather"]))
+        if weather.get("temperature"):
+            parts.append(str(weather["temperature"]))
+        if weather.get("wind_direction") or weather.get("wind_power"):
+            wind = "".join(
+                str(item)
+                for item in (weather.get("wind_direction"), weather.get("wind_power"))
+                if item not in (None, "")
+            )
+            if wind:
+                parts.append(f"{wind}风")
+        if weather.get("humidity"):
+            parts.append(f"湿度{weather['humidity']}")
+
+        if not parts and weather.get("message"):
+            return str(weather["message"])
+        return "，".join(parts)
+
+    @staticmethod
+    def _format_surrounding_environment(pois: List[Dict[str, Any]]) -> str:
+        if not pois:
+            return ""
+
+        names = []
+        sensitive_keywords = ("医院", "学校", "居民", "小区", "幼儿园", "加油站", "商场", "市场", "车站", "收费站")
+        for poi in pois:
+            name = str(poi.get("name") or "").strip()
+            poi_type = str(poi.get("type") or poi.get("typecode") or "").strip()
+            if not name:
+                continue
+            if any(keyword in name or keyword in poi_type for keyword in sensitive_keywords):
+                names.append(name)
+            if len(names) >= 5:
+                break
+
+        if not names:
+            names = [str(poi.get("name") or "").strip() for poi in pois[:5] if poi.get("name")]
+
+        return "周边包含：" + "、".join(names) if names else ""
+
+    @staticmethod
+    def _compose_event_summary(task_state: TaskState) -> str:
+        incident = task_state.incident_info
+        parts = []
+        if incident.incident_type:
+            parts.append(f"现场发生{incident.incident_type}")
+        if incident.vehicles_involved:
+            parts.append(f"涉及{incident.vehicles_involved}")
+        if incident.casualty_status:
+            parts.append(f"伤亡情况为{incident.casualty_status}")
+        elif incident.casualties:
+            parts.append(f"伤亡情况为{incident.casualties}")
+        if incident.scene_status:
+            parts.append(f"现场状态为{incident.scene_status}")
+        return "，".join(parts)
+
+    @staticmethod
+    def _compose_main_impact(task_state: TaskState) -> str:
+        incident = task_state.incident_info
+        environment = task_state.environment_info
+        impacts = []
+
+        if incident.scene_status:
+            impacts.append(incident.scene_status)
+        if incident.road_info:
+            impacts.append(incident.road_info)
+        traffic = environment.traffic if isinstance(environment.traffic, dict) else {}
+        traffic_desc = (
+            traffic.get("description")
+            or (traffic.get("evaluation") or {}).get("status_desc")
+            or traffic.get("message")
+        )
+        if traffic_desc:
+            impacts.append(str(traffic_desc))
+        if incident.casualty_status or incident.casualties:
+            impacts.append("可能引发人员聚集、交通拥堵和次生事故风险")
+
+        return "；".join(str(item) for item in impacts if item)
+
     def _format_resources(self, resources: List[Dict[str, Any]]) -> str:
         if not resources:
             return "暂未记录可用资源。"
@@ -964,6 +1977,10 @@ class FinalPlanPipeline:
             "> 说明：本方案为应急指挥建议稿，系统不会自动通知、派遣或下达现实指令，所有调度动作需由人工指挥席确认执行。",
             "",
         ]
+        overview_text = section_texts.get("应急处置总览", "").strip()
+        if overview_text:
+            lines.append(overview_text)
+            lines.append("")
         for spec in SECTION_SPECS:
             text = section_texts.get(spec.title, "").strip()
             if not text:
