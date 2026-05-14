@@ -1,9 +1,12 @@
 """创建任务并轮询直到完成。"""
 
+import os
 import time
+
 import requests
 
-BASE = "http://localhost:8000/api/v1"
+BASE = os.getenv("TRAFFIC_AGENT_API_BASE", "http://localhost:8000/api/v1")
+POLL_INTERVAL_SECONDS = int(os.getenv("TRAFFIC_AGENT_POLL_INTERVAL_SECONDS", "5"))
 
 EXPECTED_STRUCTURED_FORMAT = {
     "emergency_disposal_overview": [
@@ -60,15 +63,59 @@ def assert_structured_sections_format(sections):
                     raise ValueError(f"{section_key}.{list_key}.{field} 不能是 None，应为空字符串")
 
 
+def build_task_request():
+    """构建创建任务请求体。
+
+    只传 incident_description 也可以正常工作；如果调用方已经有结构化信息，
+    建议同步传入 incident_info，可以减少模型补问和信息抽取误差。
+    """
+    payload = {
+        "incident_description": (
+            "2026年4月8日11时24分，北海市合浦县廉州镇迎宾大道发生交通事故。"
+            "广西南宁李记吊装服务有限公司驾驶员驾驶桂AQ8182大货车右转弯时与电动车相撞，"
+            "电动车驾驶员经抢救无效死亡。现场交通拥堵，需开展交通管制、现场警戒、清障、"
+            "家属安抚和新闻发布等处置。"
+        ),
+        "incident_info": {
+            "incident_type": "交通事故",
+            "location_text": "北海市合浦县廉州镇迎宾大道",
+            "time_text": "2026年4月8日11时24分",
+            "casualty_status": "1人死亡",
+            "scene_status": "现场交通拥堵，需交通管制和清障处置",
+            "vehicles_involved": "大货车1辆、电动车1辆",
+            "road_info": "城市主干道右转弯路段",
+            "additional_context": "需重点关注现场二次事故风险、家属安抚、舆情回应和道路恢复。",
+        },
+        "media_urls": [],
+    }
+
+    config = {
+        key: value
+        for key, value in {
+            "OPENAI_API_KEY": os.getenv("OPENAI_API_KEY"),
+            "OPENAI_BASE_URL": os.getenv("OPENAI_BASE_URL"),
+            "OPENAI_MODEL": os.getenv("OPENAI_MODEL"),
+        }.items()
+        if value
+    }
+    if config:
+        payload["config"] = config
+
+    return payload
+
+
 # 创建任务
-task_id = requests.post(f"{BASE}/tasks", json={
-    "incident_description": "G72高速K85处三车追尾，2人受伤",
-}).json()["task_id"]
+create_response = requests.post(f"{BASE}/tasks", json=build_task_request(), timeout=30)
+create_response.raise_for_status()
+create_payload = create_response.json()
+task_id = create_payload["task_id"]
 print(f"任务已创建: {task_id}\n")
 
 # 轮询（建议 3-5 秒间隔）
 while True:
-    data = requests.get(f"{BASE}/tasks/{task_id}").json()
+    poll_response = requests.get(f"{BASE}/tasks/{task_id}", timeout=30)
+    poll_response.raise_for_status()
+    data = poll_response.json()
     status = data["status"]
     progress = data.get("progress", {})
     pipeline = progress.get('pipeline_status', '')
@@ -151,4 +198,4 @@ while True:
         print(f"\n任务终止: {data.get('error', {})}")
         break
 
-    time.sleep(5)
+    time.sleep(POLL_INTERVAL_SECONDS)
