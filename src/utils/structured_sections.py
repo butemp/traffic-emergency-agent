@@ -100,6 +100,15 @@ ORGANIZATION_FIELDS = {
     "main_responsibilities": "主要职责",
 }
 
+EXPERT_SUPPORT_FIELDS = {
+    "name": "姓名",
+    "work_unit": "所在单位",
+    "specialty_field": "专业方向",
+    "professional_title": "职称",
+    "phone": "联系电话",
+    "dispatch_note": "调度说明",
+}
+
 
 def normalize_structured_sections(value: Any) -> Dict[str, Dict[str, Any]]:
     """把任意结构化章节输出规整到固定 schema。"""
@@ -145,11 +154,26 @@ def _normalize_organization_section(value: Any) -> Dict[str, Any]:
     if not normalized_groups:
         normalized_groups = [_empty_item(ORGANIZATION_FIELDS)]
 
+    # 专家库支持 — 兜底字段，由 pipeline 直接从 task_state.available_resources 注入
+    expert_support_raw = source.get("expert_support")
+    if not isinstance(expert_support_raw, list):
+        fields_zh = source.get("fields_zh", {}) if isinstance(source.get("fields_zh"), Mapping) else {}
+        expert_support_raw = (
+            fields_zh.get("专家库支持") if isinstance(fields_zh.get("专家库支持"), list) else []
+        )
+    normalized_experts = [
+        _normalize_item(item, EXPERT_SUPPORT_FIELDS)
+        for item in expert_support_raw
+        if isinstance(item, Mapping)
+    ]
+
     return {
         "section_name": _text(source.get("section_name") or "应急组织机构"),
         "groups": normalized_groups,
+        "expert_support": normalized_experts,
         "fields_zh": {
             "应急组织机构": [_to_chinese_item(item, ORGANIZATION_FIELDS) for item in normalized_groups],
+            "专家库支持": [_to_chinese_item(item, EXPERT_SUPPORT_FIELDS) for item in normalized_experts],
         },
     }
 

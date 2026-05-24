@@ -1,7 +1,10 @@
-"""创建任务，轮询结果，并打印固定字段字典。"""
+"""创建任务，轮询结果，并把完整 API 响应保存为 JSON 方便查看。"""
 
+import json
 import os
 import time
+from datetime import datetime
+from pathlib import Path
 from pprint import pprint
 
 import requests
@@ -9,6 +12,9 @@ import requests
 
 BASE_URL = os.getenv("TRAFFIC_AGENT_API_BASE", "http://localhost:8000/api/v1")
 POLL_INTERVAL_SECONDS = 5
+
+# 输出 JSON 保存在脚本同目录
+SCRIPT_DIR = Path(__file__).resolve().parent
 
 
 def create_task():
@@ -26,7 +32,7 @@ def create_task():
 
 
 def wait_task_done(task_id):
-    """轮询任务直到完成。"""
+    """轮询任务直到完成，返回完整 API 响应字典。"""
     while True:
         response = requests.get(f"{BASE_URL}/tasks/{task_id}", timeout=30)
         response.raise_for_status()
@@ -37,7 +43,7 @@ def wait_task_done(task_id):
         print(f"[{status}] {progress.get('current_action', '')}")
 
         if status == "completed":
-            return data["result"]
+            return data
         if status in ("failed", "cancelled"):
             raise RuntimeError(data.get("error", {"message": "任务失败"}))
 
@@ -58,7 +64,7 @@ def chinese_fields(section, list_name=None):
 
 
 def build_output_dict(result):
-    """把 API 结果整理成字段清晰的字典。"""
+    """把 API 结果整理成字段清晰的字典（仅控制台预览用）。"""
     sections = result.get("structured_sections", {})
 
     overview = sections.get("emergency_disposal_overview", {})
@@ -86,14 +92,39 @@ def build_output_dict(result):
     }
 
 
+def save_response_to_json(task_id, full_response):
+    """把完整 API 响应（含 plan_markdown / sections / structured_sections / process_data 等）保存为 JSON 文件。"""
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    short_id = (task_id or "unknown")[:8]
+    filename = f"task_response_{short_id}_{timestamp}.json"
+    path = SCRIPT_DIR / filename
+
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(full_response, f, ensure_ascii=False, indent=2)
+
+    # 同时维护一个"最新一次"的固定文件名，方便快速 cat / 打开
+    latest_path = SCRIPT_DIR / "latest_task_response.json"
+    with open(latest_path, "w", encoding="utf-8") as f:
+        json.dump(full_response, f, ensure_ascii=False, indent=2)
+
+    return path, latest_path
+
+
 if __name__ == "__main__":
     task_id = create_task()
     print(f"任务已创建: {task_id}")
 
-    result = wait_task_done(task_id)
+    full_response = wait_task_done(task_id)
+    result = full_response.get("result", {}) or {}
     output = build_output_dict(result)
 
-    print("\n结构化字段字典:")
+    # 保存完整 API 响应到 JSON
+    saved_path, latest_path = save_response_to_json(task_id, full_response)
+    print(f"\n✓ 完整 API 响应已保存到:")
+    print(f"  - {saved_path}  (本次任务存档)")
+    print(f"  - {latest_path}  (始终指向最新一次)")
+
+    print("\n结构化字段字典（控制台预览，每个列表只显示首条）:")
     pprint(output, width=120, sort_dicts=False)
 
 

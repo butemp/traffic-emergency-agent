@@ -156,8 +156,11 @@ SECTION_SPECS: tuple[SectionSpec, ...] = (
         instructions=(
             "输出固定表格，表头列必须是：所需物资、推荐调度来源、距离、预计到达时间、地点、联系人信息、资源缺口。"
             "这 6 个字段会被 API 结构化提取，列名不能改写（'地点、联系人信息' 是一列，中间的'、'是列名的一部分）。"
-            "每行一类资源/能力，基于 search_resources 实际返回数据填充。"
-            "不能编造仓库名、电话、物资。无内容时写'暂未获取'或'待现场确认'。"
+            "每行一类资源/能力，**必须基于 search_emergency_resources / optimize_dispatch_plan 实际返回的仓库或队伍数据填充**："
+            "  - '推荐调度来源' 填仓库/队伍名称；'地点、联系人信息' 填地址+负责人+电话；'距离'填实际距离；'预计到达时间'按距离估算（30km/h 约等于每 2 分钟 1km）；"
+            "  - 资源缺口列：搜到对应类别就写'无'，没搜到才写具体缺口（如'缺消防破拆装备'）。"
+            "**禁止整行全是'暂未获取'/'待现场确认'/'待人工确认'**。如果 evidence 里 search_emergency_resources 真的没返回任何资源，整张表只输出表头加一行说明'evidence 中无内部资源数据，需人工现场调度'即可，不要凑占位行。"
+            "不能编造仓库名、电话、物资。"
             "本章是原'六、资源调度方案'的简化版，不要分梯队子表、不要'关键物资用途说明'、不要'资源覆盖与缺口分析'，整章只用这一张表。"
         ),
         example=(
@@ -169,7 +172,7 @@ SECTION_SPECS: tuple[SectionSpec, ...] = (
             "| 拖车、清障人员等清障救援能力 | 北海运营分公司应急抢险队伍 | 1.76km | 5分钟 | 广西北海市合浦县廉州镇G7212柳北高速；吴承远 / 13607892598 | 无 |\n"
             "| 养护抢险车辆装备等道路抢通能力 | 广西北投交通养护科技集团合浦养护应急队 | 2.71km | 8分钟 | 广西北投交通养护科技集团沿海项目部；李照强 / 13978912640 | 无 |\n"
             "| 反光背心、爆闪灯、照明灯等夜间作业物资 | 公馆工区应急仓库 | 37.34km | 25分钟 | 广西北海市合浦县公馆镇公馆收费站；范先学 / 13607890157 | 无 |\n"
-            "| 液压破拆、专业搜救、救护车等专业救援能力 | 消防救援部门、卫生健康部门 | 暂未获取 | 待人工确认 | 待人工联系确认 | 内部资源暂未覆盖，需外部协同 |\n"
+            "| 液压破拆、专业搜救、救护车等专业救援能力 | 消防救援部门、卫生健康部门 | 待协调 | 待协调 | 由属地指挥部联系当地消防/120 | 内部资源暂未覆盖，需外部协同 |\n"
         ),
     ),
     SectionSpec(
@@ -1045,27 +1048,74 @@ class FinalPlanPipeline:
         if not groups:
             groups = self._default_organization_groups(task_state)
 
+        # 兜底：无论 LLM 在三章节里有没有写"专家库支持"段，都从 task_state 强制注入
+        # 实际搜索到的专家，保证 API 输出里总有 3-5 位专家详情。
+        expert_support = self._build_expert_support(task_state)
+
         return {
             "section_name": "应急组织机构",
             "groups": groups,
+            "expert_support": expert_support,
             "fields_zh": {
                 "应急组织机构": groups,
+                "专家库支持": expert_support,
             },
         }
+
+    def _build_expert_support(self, task_state: TaskState) -> List[Dict[str, str]]:
+        """从 task_state.available_resources 提取专家信息，转为 API 固定字段。
+
+        每位专家产出 {name, work_unit, specialty_field, professional_title, phone, dispatch_note}。
+        """
+        experts: List[Dict[str, str]] = []
+        for resource in task_state.available_resources:
+            if not isinstance(resource, dict):
+                continue
+            if resource.get("type") != "expert" and resource.get("resource_type") != "expert":
+                continue
+
+            contact = resource.get("contact") if isinstance(resource.get("contact"), dict) else {}
+            phone = str(contact.get("phone") or resource.get("phone") or "").strip()
+            name = str(resource.get("name") or contact.get("name") or "").strip()
+            if not name:
+                continue
+
+            experts.append({
+                "name": name,
+                "work_unit": str(resource.get("source_org") or resource.get("work_unit") or "").strip(),
+                "specialty_field": str(resource.get("specialty_field") or "").strip(),
+                "professional_title": str(resource.get("professional_title") or "").strip(),
+                "phone": phone,
+                "dispatch_note": str(
+                    resource.get("dispatch_note")
+                    or "建议由指挥部办公室或值班人员人工联系专家参与远程会商或现场技术支持"
+                ).strip(),
+            })
+
+        return experts[:5]
 
     def _build_material_equipment_dispatch(
         self,
         task_state: TaskState,
         section_text: str,
     ) -> Dict[str, Any]:
-        """构建“物资装备与调度”固定字段。"""
-        items = self._extract_material_dispatch_items(section_text)
-        if not items:
-            items = [
-                item
-                for resource in task_state.available_resources[:20]
-                if (item := self._resource_to_dispatch_item(resource))
-            ]
+        """构建“物资装备与调度”固定字段。
+
+        策略：始终以 task_state.available_resources 为主出表（保证只要工具搜到了资源，
+        API 输出就不会全是“暂未获取”）；章节 Markdown 里 LLM 写出的额外行（不在
+        task_state 里的，例如外部协同来源）合并进来作为补充；最后过滤掉整行均为
+        占位词的行。
+        """
+        ts_items = [
+            item
+            for resource in task_state.available_resources[:30]
+            if (item := self._resource_to_dispatch_item(resource))
+        ]
+        section_items = self._extract_material_dispatch_items(section_text)
+
+        merged = self._merge_material_dispatch_items(ts_items, section_items)
+        items = [item for item in merged if not self._is_placeholder_dispatch_item(item)]
+
         if not items:
             items = [self._empty_material_dispatch_item()]
         zh_items = [self._map_item_keys(item, self._material_dispatch_key_map()) for item in items]
@@ -1077,6 +1127,54 @@ class FinalPlanPipeline:
                 "物资装备与调度": zh_items,
             },
         }
+
+    # 占位词（用于过滤 LLM 写的"暂未获取"行）
+    _DISPATCH_PLACEHOLDER_TOKENS = (
+        "暂未获取", "待现场确认", "待人工确认", "待人工联系确认", "待确认",
+        "暂无", "未知", "无法获取", "未获取", "未提供",
+    )
+
+    @classmethod
+    def _is_placeholder_value(cls, value: Any) -> bool:
+        """判断一个字段值是否为占位/无意义内容。"""
+        if value in (None, "", "无", "-"):
+            return True
+        text = str(value).strip()
+        if not text or text in ("无", "-", "—"):
+            return True
+        return any(token in text for token in cls._DISPATCH_PLACEHOLDER_TOKENS)
+
+    @classmethod
+    def _is_placeholder_dispatch_item(cls, item: Dict[str, str]) -> bool:
+        """判断一个 dispatch item 是否整行都是占位/空 — 这种行不应进 API 输出。"""
+        if not isinstance(item, dict) or not item:
+            return True
+        # 关键识别列：来源 + 联系信息至少一个真实存在才认有效
+        key_fields = ("recommended_dispatch_source", "location_contact_info")
+        if all(cls._is_placeholder_value(item.get(field)) for field in key_fields):
+            return True
+        return False
+
+    def _merge_material_dispatch_items(
+        self,
+        primary_items: List[Dict[str, str]],
+        secondary_items: List[Dict[str, str]],
+    ) -> List[Dict[str, str]]:
+        """合并 task_state 出的 items 和章节 Markdown 出的 items，按"来源"去重，primary 优先。"""
+        merged: List[Dict[str, str]] = list(primary_items)
+        seen_sources = {
+            str(item.get("recommended_dispatch_source") or "").strip()
+            for item in primary_items
+            if item.get("recommended_dispatch_source")
+        }
+        for item in secondary_items:
+            source = str(item.get("recommended_dispatch_source") or "").strip()
+            if source and source in seen_sources:
+                continue
+            merged.append(item)
+            if source:
+                seen_sources.add(source)
+        return merged
 
     def _extract_material_dispatch_items(self, text: str) -> List[Dict[str, str]]:
         """从资源调度 Markdown 表格中抽取固定字段。"""
@@ -1126,6 +1224,10 @@ class FinalPlanPipeline:
     def _resource_to_dispatch_item(self, resource: Dict[str, Any]) -> Dict[str, str]:
         """把 TaskState 中的资源记录转换为 API 固定字段。"""
         if not isinstance(resource, dict):
+            return {}
+
+        # 专家不出现在物资调度表里；专家走 emergency_organization.expert_support
+        if resource.get("type") == "expert" or resource.get("resource_type") == "expert":
             return {}
 
         source_name = str(

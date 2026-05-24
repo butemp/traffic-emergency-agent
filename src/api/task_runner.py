@@ -592,6 +592,185 @@ async def _run_agent_loop(
         })
 
 
+# ── 关键工具自动兜底（API 模式与 web_app._auto_call_missing_critical_tools 等价）
+
+# 事件类型 → 默认所需物资类别
+_TYPE_TO_REQUIRED_CATEGORIES = {
+    "交通事故": ["WARNING", "RESCUE", "VEHICLE", "PPE", "COMMS"],
+    "危化品泄漏": ["WARNING", "PPE", "FIRE", "RESCUE", "COMMS"],
+    "火灾": ["FIRE", "WARNING", "PPE", "RESCUE", "COMMS"],
+    "地质灾害": ["WARNING", "RESCUE", "TOOL", "VEHICLE", "COMMS"],
+    "洪涝": ["WARNING", "RESCUE", "MATERIAL", "VEHICLE", "COMMS"],
+}
+_DEFAULT_REQUIRED_CATEGORIES = ["WARNING", "RESCUE", "VEHICLE", "PPE", "COMMS"]
+
+# 资源搜索半径自适应：50km 没结果就扩 100、200、500
+_RESOURCE_SEARCH_RADII_KM = (50, 100, 200, 500)
+
+
+def _tool_called_successfully(agent, tool_name: str) -> bool:
+    return any(
+        record.tool_name == tool_name and record.success
+        for record in agent.task_state.tool_call_log
+    )
+
+
+def _count_resources_by_type(agent, resource_type: str = "") -> int:
+    """统计 task_state.available_resources 里指定类型的数量。'' 表示总数。"""
+    if not resource_type:
+        return len(agent.task_state.available_resources)
+    return sum(
+        1 for r in agent.task_state.available_resources
+        if r.get("type") == resource_type
+    )
+
+
+async def _ensure_critical_tools_called(agent) -> None:
+    """生成最终方案前，确保关键工具都被调过；模型跳过的由系统自动补上。
+
+    覆盖：
+    1. geocode_address: 缺坐标就根据 location_text 自动定位
+    2. search_emergency_resources: 缺资源就按事件类型自动搜，半径 50/100/200/500 自适应直到搜出非零
+    3. optimize_dispatch_plan: 资源齐了就自动出梯队方案
+    4. search_experts: 缺专家就按事件类型搜，命中 0 时 fallback 到通用关键词
+
+    所有自动调用失败都只打 warn 不抛异常，不阻塞主流程。
+    """
+    from src.agent.message import Message, MessageRole
+
+    incident = agent.task_state.incident_info
+
+    # ─── 1. geocode_address ───
+    coords = incident.location_coords or {}
+    if not coords.get("longitude") or not coords.get("latitude"):
+        if incident.location_text and "geocode_address" in agent.tools:
+            try:
+                tool = agent.tools["geocode_address"]
+                logger.info("[兜底] geocode_address: address=%s", incident.location_text)
+                result = await asyncio.to_thread(tool.execute, address=incident.location_text)
+                tool_msg = Message(role=MessageRole.TOOL, content=result, tool_call_id="auto_geocode")
+                agent.state.add_message(tool_msg)
+                agent.task_state.append_message(tool_msg)
+                agent.after_tool_execution("geocode_address", {"address": incident.location_text}, result)
+                coords = agent.task_state.incident_info.location_coords or {}
+                logger.info("[兜底] geocode 完成: coords=%s", coords)
+            except Exception as e:
+                logger.warning("[兜底] geocode_address 失败: %s", e)
+
+    lon = coords.get("longitude")
+    lat = coords.get("latitude")
+
+    # ─── 2. search_emergency_resources（半径自适应，确保一定有数据）───
+    if (
+        "search_emergency_resources" in agent.tools
+        and not _tool_called_successfully(agent, "search_emergency_resources")
+        and lon is not None and lat is not None
+    ):
+        required_cats = _TYPE_TO_REQUIRED_CATEGORIES.get(
+            incident.incident_type or "", _DEFAULT_REQUIRED_CATEGORIES,
+        )
+        tool = agent.tools["search_emergency_resources"]
+        for radius in _RESOURCE_SEARCH_RADII_KM:
+            try:
+                logger.info("[兜底] search_emergency_resources: radius=%skm, cats=%s", radius, required_cats)
+                result = await asyncio.to_thread(
+                    tool.execute,
+                    longitude=lon, latitude=lat,
+                    required_categories=required_cats,
+                    radius_km=radius,
+                )
+                tool_msg = Message(role=MessageRole.TOOL, content=result, tool_call_id=f"auto_search_resources_r{radius}")
+                agent.state.add_message(tool_msg)
+                agent.task_state.append_message(tool_msg)
+                agent.after_tool_execution(
+                    "search_emergency_resources",
+                    {"longitude": lon, "latitude": lat, "required_categories": required_cats, "radius_km": radius},
+                    result,
+                )
+                # 检查是否真的搜到了
+                non_expert_count = sum(
+                    1 for r in agent.task_state.available_resources
+                    if r.get("type") != "expert"
+                )
+                if non_expert_count > 0:
+                    logger.info("[兜底] 资源搜索成功，命中 %d 条（radius=%skm）", non_expert_count, radius)
+                    break
+                else:
+                    logger.info("[兜底] radius=%skm 仍 0 结果，继续扩大半径", radius)
+            except Exception as e:
+                logger.warning("[兜底] search_emergency_resources(radius=%s) 失败: %s", radius, e)
+
+    # ─── 3. optimize_dispatch_plan（资源已搜到则补出梯队）───
+    if (
+        "optimize_dispatch_plan" in agent.tools
+        and not _tool_called_successfully(agent, "optimize_dispatch_plan")
+        and _tool_called_successfully(agent, "search_emergency_resources")
+    ):
+        try:
+            tool = agent.tools["optimize_dispatch_plan"]
+            logger.info("[兜底] optimize_dispatch_plan")
+            result = await asyncio.to_thread(tool.execute, required_categories=[])
+            tool_msg = Message(role=MessageRole.TOOL, content=result, tool_call_id="auto_optimize_dispatch")
+            agent.state.add_message(tool_msg)
+            agent.task_state.append_message(tool_msg)
+            agent.after_tool_execution("optimize_dispatch_plan", {}, result)
+            logger.info("[兜底] optimize_dispatch_plan 成功")
+        except Exception as e:
+            logger.warning("[兜底] optimize_dispatch_plan 失败: %s", e)
+
+    # ─── 4. search_experts（确保有 3-5 位专家）───
+    if (
+        "search_experts" in agent.tools
+        and not _tool_called_successfully(agent, "search_experts")
+    ):
+        # 第一轮：用事件类型关键词
+        keywords = [
+            item for item in [
+                incident.incident_type,
+                incident.scene_type,
+                incident.disaster_type,
+                "交通安全",
+                "应急管理",
+            ] if item
+        ] or ["交通安全", "应急管理"]
+
+        tool = agent.tools["search_experts"]
+        try:
+            logger.info("[兜底] search_experts: keywords=%s", keywords)
+            result = await asyncio.to_thread(
+                tool.execute,
+                keywords=keywords,
+                incident_type=incident.incident_type or "交通突发事件",
+                longitude=lon, latitude=lat,
+                max_results=5,
+            )
+            tool_msg = Message(role=MessageRole.TOOL, content=result, tool_call_id="auto_search_experts")
+            agent.state.add_message(tool_msg)
+            agent.task_state.append_message(tool_msg)
+            agent.after_tool_execution("search_experts", {"keywords": keywords}, result)
+
+            expert_count = _count_resources_by_type(agent, "expert")
+            logger.info("[兜底] 第一轮 search_experts 命中 %d 位", expert_count)
+
+            # 第二轮兜底：命中 0 时用最通用的关键词再搜一次
+            if expert_count == 0:
+                fallback_keywords = ["交通安全", "应急管理", "安全管理", "公路", "应急"]
+                logger.info("[兜底] 第一轮无命中，fallback 关键词: %s", fallback_keywords)
+                result = await asyncio.to_thread(
+                    tool.execute,
+                    keywords=fallback_keywords,
+                    max_results=5,
+                )
+                tool_msg = Message(role=MessageRole.TOOL, content=result, tool_call_id="auto_search_experts_fallback")
+                agent.state.add_message(tool_msg)
+                agent.task_state.append_message(tool_msg)
+                agent.after_tool_execution("search_experts", {"keywords": fallback_keywords}, result)
+                expert_count = _count_resources_by_type(agent, "expert")
+                logger.info("[兜底] fallback 命中 %d 位", expert_count)
+        except Exception as e:
+            logger.warning("[兜底] search_experts 失败: %s", e)
+
+
 async def _run_final_pipeline(
     task_id: str,
     store: TaskStore,
@@ -602,6 +781,13 @@ async def _run_final_pipeline(
     """执行 FinalPlanPipeline + FinalPlanReviewer 生成最终方案。"""
     from src.agent.final_plan_pipeline import FinalPlanPipeline
     from src.agent.final_plan_reviewer import FinalPlanReviewer
+
+    # ★ 关键兜底：确保 search_resources / search_experts / optimize_dispatch_plan 都被调过
+    store.update_progress(task_id, current_action="正在补齐关键工具调用（资源/专家）")
+    try:
+        await _ensure_critical_tools_called(agent)
+    except Exception as exc:
+        logger.warning("关键工具兜底过程异常（继续生成方案）: %s", exc)
 
     review_provider = _build_review_provider(record.request.get("config"))
     pipeline = FinalPlanPipeline(review_provider)

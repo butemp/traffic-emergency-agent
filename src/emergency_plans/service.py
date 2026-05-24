@@ -94,6 +94,21 @@ class EmergencyPlanService:
 
     # ─────────────── 加载 ───────────────
 
+    def reload(self) -> Dict[str, Any]:
+        """重新扫盘加载预案和索引（用于运行时热更新）。返回变更摘要。"""
+        old_titles = set(self.plans.keys())
+        self.index = self._load_index()
+        self.plans = self._load_plans()
+        new_titles = set(self.plans.keys())
+        summary = {
+            "total": len(self.plans),
+            "added": sorted(new_titles - old_titles),
+            "removed": sorted(old_titles - new_titles),
+            "unchanged": sorted(new_titles & old_titles),
+        }
+        logger.info("EmergencyPlanService.reload: %s", summary)
+        return summary
+
     def _load_index(self) -> Dict[str, Any]:
         if not self.index_path.exists():
             logger.warning("plan_index.json 不存在: %s，将使用空索引", self.index_path)

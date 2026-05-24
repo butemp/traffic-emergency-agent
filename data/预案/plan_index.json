@@ -1,7 +1,6 @@
 {
   "version": "2.0",
   "description": "应急预案索引：scene_plans 把场景类别映射到预案标题；section_aliases 把常用模块名映射到预案 JSON 内的中文章节路径，便于 LLM/工具用简称查询。level_section_map 把响应级别自动映射到对应的 response_measures_X 子节别名。新增预案时，先在 parsered_data/ 下放置 JSON 文件，再在 scene_plans 加一行 scene→plan_name 映射即可（按预案 封面.标题 字段匹配，不依赖文件序号）。",
-
   "scene_plans": {
     "EXPRESSWAY": {
       "preferred_plan_name": "广西壮族自治区高速公路突发事件应急预案",
@@ -59,7 +58,6 @@
       "fallback_to": null
     }
   },
-
   "disaster_supplementary_plans": {
     "FLOOD": "广西壮族自治区交通运输防洪防台应急预案",
     "ICE_SNOW": "广西壮族自治区交通运输低温雨雪冰冻灾害应急预案",
@@ -67,88 +65,232 @@
     "PUBLIC_HEALTH": "广西壮族自治区交通运输公共卫生突发事件应急预案",
     "CYBER": "广西壮族自治区交通运输厅网络安全事件应急预案"
   },
-
   "fallback_plan_name": "广西壮族自治区交通运输综合应急预案",
-
   "level_section_map": {
     "特别重大级": "response_measures_i",
     "重大级": "response_measures_ii",
     "较大级": "response_measures_iii",
     "一般级": "response_measures_iv"
   },
-
   "section_aliases": {
-    "purpose": ["总则.编制目的"],
-    "basis": ["总则.编制依据"],
-    "scope": ["总则.适用范围"],
-    "principles": ["总则.工作原则"],
-    "plan_system": ["总则.预案体系", "总则.与其他应急预案的关系"],
-    "incident_classification": ["总则.事故分级", "总则.事件分级"],
-
-    "command_structure": ["组织体系"],
-    "provincial_command": ["组织体系.自治区应急指挥机构", "组织体系.自治区级应急指挥机构"],
-    "leadership_group": ["组织体系.自治区应急指挥机构.领导小组", "组织体系.自治区级应急指挥机构.领导小组"],
-    "leadership_office": ["组织体系.自治区应急指挥机构.领导小组办公室", "组织体系.自治区级应急指挥机构.领导小组办公室"],
-    "work_groups": ["组织体系.自治区应急指挥机构.应急工作组", "组织体系.自治区级应急指挥机构.应急工作组"],
-    "field_team": ["组织体系.自治区应急指挥机构.现场工作组", "组织体系.自治区级应急指挥机构.现场工作组"],
-    "expert_group": ["组织体系.自治区应急指挥机构.专家组", "组织体系.自治区级应急指挥机构.专家组"],
-
-    "warning_rules": ["预防与预警"],
-    "warning_mechanism": ["预防与预警.预防与预警机制", "预防与预警.预防预警机制"],
-    "warning_collection": ["预防与预警.预警信息收集", "预防与预警.预警信息收集与发布"],
-    "warning_levels": ["预防与预警.防御响应.预警级别", "预防与预警.预警级别"],
-    "warning_activation": ["预防与预警.防御响应.预警启动", "预防与预警.预警启动"],
-    "warning_defense": ["预防与预警.防御响应.防御响应措施", "预防与预警.预防工作"],
-    "warning_termination": ["预防与预警.预警级别调整及终止"],
-
-    "response_grading": ["应急响应.响应分级", "应急响应.响应分级与启动.响应分级"],
-    "info_reporting": ["应急响应.信息报送"],
-    "response_activation": ["应急响应.响应启动", "应急响应.响应分级与启动.响应启动"],
-    "initial_disposal": ["应急响应.先期处置"],
-    "response_measures": ["应急响应.处置措施"],
-    "response_measures_iv": ["应急响应.处置措施.Ⅳ级应急响应处置措施", "应急响应.处置措施.Ⅲ级、Ⅳ级应急响应处置措施"],
-    "response_measures_iii": ["应急响应.处置措施.Ⅲ级应急响应处置措施", "应急响应.处置措施.Ⅲ级、Ⅳ级应急响应处置措施"],
-    "response_measures_ii": ["应急响应.处置措施.Ⅱ级应急响应处置措施"],
-    "response_measures_i": ["应急响应.处置措施.I 级应急响应处置措施", "应急响应.处置措施.Ⅰ级应急响应处置措施"],
-    "category_disposal": ["应急响应.分类处置"],
-    "news_release": ["应急响应.新闻发布"],
-    "response_adjustment": ["应急响应.响应调整及终止", "应急响应.调整及终止"],
-
-    "post_processing": ["后期处置"],
-    "aftermath": ["后期处置.善后处置"],
-    "recovery": ["后期处置.善后处置.恢复重建"],
-    "compensation": ["后期处置.善后处置.抚恤和补助"],
-    "requisition": ["后期处置.善后处置.征用补偿"],
-    "summary_evaluation": ["后期处置.总结评估"],
-
-    "emergency_support": ["应急保障"],
-    "communication_support": ["应急保障.通信保障"],
-    "material_support": ["应急保障.物资保障"],
-    "transport_support": ["应急保障.运力保障"],
-    "team_support": ["应急保障.队伍保障"],
-    "funding_support": ["应急保障.资金保障"],
-    "tech_support": ["应急保障.技术保障"],
-
-    "plan_management": ["预案管理"],
-    "plan_drill": ["预案管理.应急演练", "预案管理.预案演练"],
-    "plan_revision": ["预案管理.评估与修订", "预案管理.预案评估与修订"],
-    "training_publicity": ["预案管理.宣传与培训", "预案管理.宣传和培训"],
-    "accountability": ["预案管理.责任和奖惩"],
-
-    "appendices": ["附件"],
-    "appendix_toc": ["附则.附件目录"],
-    "grading_criteria": ["附件.附件2*", "附件.附件1*"],
-    "warning_grading_criteria": ["附件.附件1*"],
-    "response_grading_criteria": ["附件.附件2*"],
-    "response_flowchart": ["附件.附件3*"],
-    "info_sources": ["附件.附件4*"],
-    "notification_templates": ["附件.附件4*", "附件.附件5*", "附件.附件6*", "附件.附件7*", "附件.附件8*"],
-    "warning_start_template": ["附件.附件4 关于启动Ⅱ级预警的通知", "附件.附件5 关于启动Ⅱ级预警的通知"],
-    "warning_end_template": ["附件.附件5 关于终止Ⅱ级预警的通知", "附件.附件6 关于终止Ⅱ级预警的通知"],
-    "response_start_template": ["附件.附件6 关于启动Ⅱ级应急响应的通知", "附件.附件7 关于启动Ⅱ级应急响应的通知"],
-    "response_end_template": ["附件.附件7 关于终止Ⅱ级应急响应的通知", "附件.附件8 关于终止Ⅱ级应急响应的通知"]
+    "purpose": [
+      "总则.编制目的"
+    ],
+    "basis": [
+      "总则.编制依据"
+    ],
+    "scope": [
+      "总则.适用范围"
+    ],
+    "principles": [
+      "总则.工作原则"
+    ],
+    "plan_system": [
+      "总则.预案体系",
+      "总则.与其他应急预案的关系"
+    ],
+    "incident_classification": [
+      "总则.事故分级",
+      "总则.事件分级"
+    ],
+    "command_structure": [
+      "组织体系"
+    ],
+    "provincial_command": [
+      "组织体系.自治区应急指挥机构",
+      "组织体系.自治区级应急指挥机构"
+    ],
+    "leadership_group": [
+      "组织体系.自治区应急指挥机构.领导小组",
+      "组织体系.自治区级应急指挥机构.领导小组"
+    ],
+    "leadership_office": [
+      "组织体系.自治区应急指挥机构.领导小组办公室",
+      "组织体系.自治区级应急指挥机构.领导小组办公室"
+    ],
+    "work_groups": [
+      "组织体系.自治区应急指挥机构.应急工作组",
+      "组织体系.自治区级应急指挥机构.应急工作组"
+    ],
+    "field_team": [
+      "组织体系.自治区应急指挥机构.现场工作组",
+      "组织体系.自治区级应急指挥机构.现场工作组"
+    ],
+    "expert_group": [
+      "组织体系.自治区应急指挥机构.专家组",
+      "组织体系.自治区级应急指挥机构.专家组"
+    ],
+    "warning_rules": [
+      "预防与预警"
+    ],
+    "warning_mechanism": [
+      "预防与预警.预防与预警机制",
+      "预防与预警.预防预警机制"
+    ],
+    "warning_collection": [
+      "预防与预警.预警信息收集",
+      "预防与预警.预警信息收集与发布"
+    ],
+    "warning_levels": [
+      "预防与预警.防御响应.预警级别",
+      "预防与预警.预警级别"
+    ],
+    "warning_activation": [
+      "预防与预警.防御响应.预警启动",
+      "预防与预警.预警启动"
+    ],
+    "warning_defense": [
+      "预防与预警.防御响应.防御响应措施",
+      "预防与预警.预防工作"
+    ],
+    "warning_termination": [
+      "预防与预警.预警级别调整及终止"
+    ],
+    "response_grading": [
+      "应急响应.响应分级",
+      "应急响应.响应分级与启动.响应分级"
+    ],
+    "info_reporting": [
+      "应急响应.信息报送"
+    ],
+    "response_activation": [
+      "应急响应.响应启动",
+      "应急响应.响应分级与启动.响应启动"
+    ],
+    "initial_disposal": [
+      "应急响应.先期处置"
+    ],
+    "response_measures": [
+      "应急响应.处置措施"
+    ],
+    "response_measures_iv": [
+      "应急响应.处置措施.Ⅳ级应急响应处置措施",
+      "应急响应.处置措施.Ⅲ级、Ⅳ级应急响应处置措施"
+    ],
+    "response_measures_iii": [
+      "应急响应.处置措施.Ⅲ级应急响应处置措施",
+      "应急响应.处置措施.Ⅲ级、Ⅳ级应急响应处置措施"
+    ],
+    "response_measures_ii": [
+      "应急响应.处置措施.Ⅱ级应急响应处置措施"
+    ],
+    "response_measures_i": [
+      "应急响应.处置措施.I 级应急响应处置措施",
+      "应急响应.处置措施.Ⅰ级应急响应处置措施"
+    ],
+    "category_disposal": [
+      "应急响应.分类处置"
+    ],
+    "news_release": [
+      "应急响应.新闻发布"
+    ],
+    "response_adjustment": [
+      "应急响应.响应调整及终止",
+      "应急响应.调整及终止"
+    ],
+    "post_processing": [
+      "后期处置"
+    ],
+    "aftermath": [
+      "后期处置.善后处置"
+    ],
+    "recovery": [
+      "后期处置.善后处置.恢复重建"
+    ],
+    "compensation": [
+      "后期处置.善后处置.抚恤和补助"
+    ],
+    "requisition": [
+      "后期处置.善后处置.征用补偿"
+    ],
+    "summary_evaluation": [
+      "后期处置.总结评估"
+    ],
+    "emergency_support": [
+      "应急保障"
+    ],
+    "communication_support": [
+      "应急保障.通信保障"
+    ],
+    "material_support": [
+      "应急保障.物资保障"
+    ],
+    "transport_support": [
+      "应急保障.运力保障"
+    ],
+    "team_support": [
+      "应急保障.队伍保障"
+    ],
+    "funding_support": [
+      "应急保障.资金保障"
+    ],
+    "tech_support": [
+      "应急保障.技术保障"
+    ],
+    "plan_management": [
+      "预案管理"
+    ],
+    "plan_drill": [
+      "预案管理.应急演练",
+      "预案管理.预案演练"
+    ],
+    "plan_revision": [
+      "预案管理.评估与修订",
+      "预案管理.预案评估与修订"
+    ],
+    "training_publicity": [
+      "预案管理.宣传与培训",
+      "预案管理.宣传和培训"
+    ],
+    "accountability": [
+      "预案管理.责任和奖惩"
+    ],
+    "appendices": [
+      "附件"
+    ],
+    "appendix_toc": [
+      "附则.附件目录"
+    ],
+    "grading_criteria": [
+      "附件.附件2*",
+      "附件.附件1*"
+    ],
+    "warning_grading_criteria": [
+      "附件.附件1*"
+    ],
+    "response_grading_criteria": [
+      "附件.附件2*"
+    ],
+    "response_flowchart": [
+      "附件.附件3*"
+    ],
+    "info_sources": [
+      "附件.附件4*"
+    ],
+    "notification_templates": [
+      "附件.附件4*",
+      "附件.附件5*",
+      "附件.附件6*",
+      "附件.附件7*",
+      "附件.附件8*"
+    ],
+    "warning_start_template": [
+      "附件.附件4 关于启动Ⅱ级预警的通知",
+      "附件.附件5 关于启动Ⅱ级预警的通知"
+    ],
+    "warning_end_template": [
+      "附件.附件5 关于终止Ⅱ级预警的通知",
+      "附件.附件6 关于终止Ⅱ级预警的通知"
+    ],
+    "response_start_template": [
+      "附件.附件6 关于启动Ⅱ级应急响应的通知",
+      "附件.附件7 关于启动Ⅱ级应急响应的通知"
+    ],
+    "response_end_template": [
+      "附件.附件7 关于终止Ⅱ级应急响应的通知",
+      "附件.附件8 关于终止Ⅱ级应急响应的通知"
+    ]
   },
-
   "usage_notes": [
     "section_aliases 中的路径用 '.' 分隔，支持末尾通配符 '*'（匹配以该前缀开头的同级 key，对附件这种带编号的标题特别有用）。",
     "每个 module 别名按列表顺序尝试，命中第一个就返回。",
