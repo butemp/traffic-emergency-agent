@@ -1,4 +1,20 @@
-"""应急预案精确取用服务。"""
+"""应急预案服务（parsered_data 风格）。
+
+数据源：
+- 预案文件目录：data/预案/parsered_data/*.json（中文键、镜像原 PDF 章节结构）
+- 索引文件：data/预案/plan_index.json（scene 路由 + section 别名 + level 映射 + 灾害补充预案）
+
+核心能力：
+- list_plans / list_scenes / get_toc：路由层
+- get_emergency_plan：按 module 别名 / 中文 section 路径 / 关键词搜索取数；返回 content（原始子树）+ content_text（可读 markdown）
+- get_grading_bundle：取主预案 + 灾害补充预案的 grading 表（附件 1/附件 2）
+- normalize_* / infer_*：场景/灾害类别/响应级别推断（关键词规则）
+
+设计原则：
+- 不绑死任何特定预案的结构；通过 plan_index 的别名列表 + 通配符匹配兼容不同预案的命名差异
+- 调用方拿到的 content_text 已经 Markdown 化，可以直接喂给 LLM 或写入方案章节
+- 取数失败时返回 status=not_found + available_top_keys / fallback_chain，方便上层判断和修正
+"""
 
 from __future__ import annotations
 
@@ -10,6 +26,8 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
 
+
+# ─────────────────────────── 常量：场景/灾害/级别关键词 ───────────────────────────
 
 INCIDENT_CATEGORY_ALIASES: Dict[str, List[str]] = {
     "EXPRESSWAY": ["高速公路", "高速公路支线", "连接线"],
@@ -51,37 +69,635 @@ def _normalize_text(value: str) -> str:
     return re.sub(r"\s+", "", value or "").strip().lower()
 
 
+# ─────────────────────────── 主服务类 ───────────────────────────
+
 class EmergencyPlanService:
-    """负责加载预案、映射类别并精确提取模块。"""
+    """读 parsered_data 风格预案的服务，按 scene/module/section 取数。"""
+
+    DEFAULT_PLANS_DIR = "data/预案/parsered_data"
+    DEFAULT_INDEX_PATH = "data/预案/plan_index.json"
 
     def __init__(
         self,
-        data_dir: str = "data/regulations/data",
-        registry_path: Optional[str] = None,
+        plans_dir: Optional[str] = None,
+        index_path: Optional[str] = None,
     ):
-        self.data_dir = Path(data_dir)
-        self.registry_path = Path(registry_path) if registry_path else self.data_dir / "plan_registry.json"
-        self.registry = self._load_registry()
-        self.plans = self._load_plans()
+        self.plans_dir = Path(plans_dir or self.DEFAULT_PLANS_DIR)
+        self.index_path = Path(index_path or self.DEFAULT_INDEX_PATH)
+        self.index = self._load_index()
+        self.plans = self._load_plans()  # title → {meta, content}
 
         logger.info(
-            "EmergencyPlanService 初始化完成: data_dir=%s, registry=%s, plans=%s",
-            self.data_dir,
-            self.registry_path,
-            len(self.plans),
+            "EmergencyPlanService 初始化完成: plans_dir=%s, index_path=%s, plans=%s",
+            self.plans_dir, self.index_path, len(self.plans),
         )
+
+    # ─────────────── 加载 ───────────────
+
+    def _load_index(self) -> Dict[str, Any]:
+        if not self.index_path.exists():
+            logger.warning("plan_index.json 不存在: %s，将使用空索引", self.index_path)
+            return {}
+        with open(self.index_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+
+    def _load_plans(self) -> Dict[str, Dict[str, Any]]:
+        plans: Dict[str, Dict[str, Any]] = {}
+        if not self.plans_dir.exists():
+            logger.warning("预案目录不存在: %s", self.plans_dir)
+            return plans
+        for path in sorted(self.plans_dir.glob("*.json")):
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+            except Exception as e:
+                logger.error("加载预案失败: %s, error=%s", path, e)
+                continue
+            cover = data.get("封面", {}) if isinstance(data.get("封面"), dict) else {}
+            title = cover.get("标题") or data.get("plan_name") or path.stem
+            plans[title] = {
+                "title": title,
+                "file": path.name,
+                "publisher": cover.get("发布单位", ""),
+                "publish_time": cover.get("发布时间", ""),
+                "content": data,
+            }
+        return plans
+
+    # ─────────────── 路由层 ───────────────
+
+    def list_plans(self) -> List[Dict[str, Any]]:
+        return [
+            {
+                "title": p["title"],
+                "file": p["file"],
+                "publisher": p.get("publisher", ""),
+                "publish_time": p.get("publish_time", ""),
+                "top_level_keys": [k for k in p["content"].keys() if k != "目录"],
+            }
+            for p in self.plans.values()
+        ]
+
+    def list_scenes(self) -> List[Dict[str, Any]]:
+        scene_plans = (self.index.get("scene_plans", {}) or {})
+        out = []
+        for scene, entry in scene_plans.items():
+            preferred = entry.get("preferred_plan_name", "")
+            out.append({
+                "scene": scene,
+                "preferred_plan_name": preferred,
+                "available": preferred in self.plans,
+                "fallback_to": entry.get("fallback_to"),
+                "description": entry.get("description", ""),
+            })
+        return out
+
+    def resolve_plan_for_scene(self, scene: str) -> Tuple[Optional[Dict[str, Any]], List[str], str]:
+        """沿 fallback_to 链查找匹配预案。返回 (plan_dict, chain, resolved_via)。"""
+        scene_plans = (self.index.get("scene_plans", {}) or {})
+        fallback_default = self.index.get("fallback_plan_name", "")
+
+        chain: List[str] = []
+        current = (scene or "").upper().strip()
+        visited: set = set()
+
+        while current and current not in visited:
+            visited.add(current)
+            entry = scene_plans.get(current)
+            if not entry:
+                chain.append(f"{current}(未在索引中)")
+                break
+            preferred = entry.get("preferred_plan_name", "")
+            chain.append(f"{current}→{preferred}")
+            if preferred and preferred in self.plans:
+                return self.plans[preferred], chain, f"scene_plans[{current}].preferred_plan_name"
+            nxt = entry.get("fallback_to")
+            if not nxt:
+                break
+            current = nxt
+
+        if fallback_default and fallback_default in self.plans:
+            chain.append(f"fallback_default→{fallback_default}")
+            return self.plans[fallback_default], chain, "fallback_plan_name"
+
+        return None, chain, ""
+
+    def get_toc(self, scene: str = "", plan_name: str = "", depth: int = 3) -> Dict[str, Any]:
+        """返回某预案的章节路径树（深度可调）。"""
+        plan_meta: Optional[Dict[str, Any]] = None
+        chain: List[str] = []
+        if plan_name and plan_name in self.plans:
+            plan_meta = self.plans[plan_name]
+        elif scene:
+            plan_meta, chain, _ = self.resolve_plan_for_scene(scene)
+
+        if plan_meta is None:
+            return {
+                "status": "not_found",
+                "scene": scene,
+                "plan_name": plan_name,
+                "fallback_chain": chain,
+                "message": "未找到匹配预案",
+            }
+
+        toc = self._walk_keys(plan_meta["content"], max_depth=depth)
+        return {
+            "status": "success",
+            "scene": scene,
+            "plan_name": plan_meta["title"],
+            "plan_file": plan_meta["file"],
+            "fallback_chain": chain,
+            "depth": depth,
+            "toc": toc,
+        }
+
+    # ─────────────── 取数核心 ───────────────
+
+    def get_emergency_plan(
+        self,
+        incident_category: str = "",
+        module: str = "",
+        section_path: str = "",
+        search_keyword: str = "",
+        disaster_type: str = "",
+        level: str = "",
+        scene_type: str = "",
+    ) -> Dict[str, Any]:
+        """
+        按 incident_category（场景）路由到预案，再按 module/section_path/search_keyword 取数。
+
+        三选一：必须提供 module / section_path / search_keyword 之一。
+        当 module='response_measures' 且传了 level 时，自动改查对应级别的子节别名
+        （response_measures_i/ii/iii/iv）。
+        """
+        normalized_category = self.normalize_incident_category(incident_category) or incident_category
+        normalized_disaster = self.normalize_disaster_type(disaster_type) or disaster_type
+        normalized_level = self.normalize_response_level(level) or level
+
+        plan_meta, fallback_chain, resolved_via = self.resolve_plan_for_scene(normalized_category)
+        if plan_meta is None:
+            return {
+                "status": "not_found",
+                "incident_category": normalized_category,
+                "disaster_type": normalized_disaster,
+                "module": module,
+                "section_path": section_path,
+                "search_keyword": search_keyword,
+                "level": normalized_level,
+                "fallback_chain": fallback_chain,
+                "message": f"未找到 incident_category={normalized_category} 对应的预案",
+            }
+
+        # 至少要提供一种查询方式
+        if not module and not section_path and not search_keyword:
+            return {
+                "status": "error",
+                "code": "MISSING_QUERY",
+                "incident_category": normalized_category,
+                "plan_name": plan_meta["title"],
+                "message": "请提供 module / section_path / search_keyword 之一",
+                "hint": "可调 get_toc 看预案章节结构，或 list_scenes 看 module 别名清单",
+            }
+
+        plan = plan_meta["content"]
+
+        # 主预案取数
+        primary = self._fetch(
+            plan=plan,
+            plan_meta=plan_meta,
+            module=module,
+            section_path=section_path,
+            search_keyword=search_keyword,
+            level=normalized_level,
+        )
+        primary["incident_category"] = normalized_category
+        primary["disaster_type"] = normalized_disaster
+        primary["level"] = normalized_level
+        primary["scene_type"] = scene_type
+        primary["fallback_chain"] = fallback_chain
+        primary["resolved_via"] = resolved_via
+
+        # 灾害类补充预案（如有）
+        supplementary = None
+        if normalized_disaster:
+            supp_name = (self.index.get("disaster_supplementary_plans", {}) or {}).get(normalized_disaster)
+            if supp_name and supp_name in self.plans and supp_name != plan_meta["title"]:
+                supp_meta = self.plans[supp_name]
+                supplementary = self._fetch(
+                    plan=supp_meta["content"],
+                    plan_meta=supp_meta,
+                    module=module,
+                    section_path=section_path,
+                    search_keyword=search_keyword,
+                    level=normalized_level,
+                )
+                supplementary["role"] = "supplementary_plan"
+        primary["supplementary_plan"] = supplementary
+
+        return primary
+
+    def _fetch(
+        self,
+        plan: Dict[str, Any],
+        plan_meta: Dict[str, Any],
+        module: str,
+        section_path: str,
+        search_keyword: str,
+        level: str,
+    ) -> Dict[str, Any]:
+        """从单份预案里按 module/section_path/search_keyword 取数。"""
+        base = {
+            "plan_name": plan_meta["title"],
+            "plan_file": plan_meta["file"],
+            "module": module,
+            "section_path": section_path,
+            "search_keyword": search_keyword,
+        }
+
+        # ── 关键词搜索 ──
+        if search_keyword:
+            hits = self._search_in_plan(plan, search_keyword)
+            return {
+                **base,
+                "status": "success",
+                "mode": "search",
+                "hit_count": len(hits),
+                "hits": hits[:50],
+                "truncated": len(hits) > 50,
+                "content_text": self._render_search_hits(search_keyword, hits[:20]),
+            }
+
+        # ── module 别名 ──
+        if module:
+            effective_module = module
+            # level 自动映射
+            level_map = self.index.get("level_section_map", {}) or {}
+            if module == "response_measures" and level and level in level_map:
+                mapped = level_map[level]
+                logger.debug("module=response_measures + level=%s → 自动改查 %s", level, mapped)
+                effective_module = mapped
+
+            alias_table = (self.index.get("section_aliases", {}) or {})
+            alias_paths = alias_table.get(effective_module)
+            if not alias_paths:
+                return {
+                    **base,
+                    "status": "not_found",
+                    "mode": "module",
+                    "effective_module": effective_module,
+                    "message": f"未知 module 别名: {effective_module}",
+                    "available_modules": sorted(alias_table.keys()),
+                }
+
+            value, hit_path, used = self._try_aliases(plan, alias_paths)
+            if value is None:
+                return {
+                    **base,
+                    "status": "not_found",
+                    "mode": "module",
+                    "effective_module": effective_module,
+                    "tried_paths": alias_paths,
+                    "message": f"该预案下找不到 module={effective_module} 的任何候选路径",
+                }
+
+            text = self._render_subtree(value, root_title=used[-1] if used else effective_module)
+            return {
+                **base,
+                "status": "success",
+                "mode": "module",
+                "effective_module": effective_module,
+                "hit_path": hit_path,
+                "resolved_segments": used,
+                "content": value,
+                "content_text": text,
+                "source_reference": self._build_source_ref(plan_meta["title"], hit_path),
+            }
+
+        # ── section_path ──
+        if section_path:
+            value, used, found = self._resolve_path(plan, self._split_path(section_path))
+            if not found:
+                return {
+                    **base,
+                    "status": "not_found",
+                    "mode": "section",
+                    "available_top_keys": list(plan.keys()),
+                    "message": f"路径无法解析: {section_path}",
+                }
+            text = self._render_subtree(value, root_title=used[-1] if used else section_path)
+            return {
+                **base,
+                "status": "success",
+                "mode": "section",
+                "hit_path": ".".join(used),
+                "resolved_segments": used,
+                "content": value,
+                "content_text": text,
+                "source_reference": self._build_source_ref(plan_meta["title"], ".".join(used)),
+            }
+
+        return {**base, "status": "error", "code": "UNREACHABLE", "message": "查询模式判定失败"}
+
+    # ─────────────── 定级专用 ───────────────
+
+    def get_grading_bundle(
+        self,
+        incident_category: str = "",
+        disaster_type: str = "",
+    ) -> Dict[str, Any]:
+        """
+        取主预案 + 灾害补充预案的分级标准（附件1/附件2 表格内容）。
+
+        返回:
+        {
+          status,
+          incident_category, disaster_type,
+          main_plan_name, main_grading_table (附件2), main_grading_text,
+          warning_grading_table (附件1, 可选),
+          supplementary_plan_name, supplementary_grading_table, supplementary_grading_text,
+          fallback_chain,
+        }
+        """
+        normalized_category = self.normalize_incident_category(incident_category) or incident_category
+        normalized_disaster = self.normalize_disaster_type(disaster_type) or disaster_type
+
+        plan_meta, chain, _ = self.resolve_plan_for_scene(normalized_category)
+        if plan_meta is None:
+            return {
+                "status": "not_found",
+                "incident_category": normalized_category,
+                "disaster_type": normalized_disaster,
+                "message": "未找到匹配预案",
+                "fallback_chain": chain,
+            }
+
+        main_table_value, _, main_table_path = self._fetch_grading_table(plan_meta["content"], appendix="附件2*")
+        warning_table_value, _, _ = self._fetch_grading_table(plan_meta["content"], appendix="附件1*")
+
+        supplementary = None
+        if normalized_disaster:
+            supp_name = (self.index.get("disaster_supplementary_plans", {}) or {}).get(normalized_disaster)
+            if supp_name and supp_name in self.plans and supp_name != plan_meta["title"]:
+                supp_meta = self.plans[supp_name]
+                supp_value, _, supp_path = self._fetch_grading_table(supp_meta["content"], appendix="附件2*")
+                supplementary = {
+                    "supplementary_plan_name": supp_meta["title"],
+                    "supplementary_grading_table": supp_value,
+                    "supplementary_grading_path": supp_path,
+                    "supplementary_grading_text": self._render_grading_table(supp_value) if supp_value else "",
+                }
+
+        return {
+            "status": "success" if main_table_value else "partial",
+            "incident_category": normalized_category,
+            "disaster_type": normalized_disaster,
+            "main_plan_name": plan_meta["title"],
+            "main_plan_file": plan_meta["file"],
+            "main_grading_table": main_table_value,
+            "main_grading_path": main_table_path,
+            "main_grading_text": self._render_grading_table(main_table_value) if main_table_value else "",
+            "warning_grading_table": warning_table_value,
+            "warning_grading_text": self._render_grading_table(warning_table_value) if warning_table_value else "",
+            "fallback_chain": chain,
+            **(supplementary or {
+                "supplementary_plan_name": "",
+                "supplementary_grading_table": None,
+                "supplementary_grading_path": "",
+                "supplementary_grading_text": "",
+            }),
+        }
+
+    def _fetch_grading_table(self, plan: Dict[str, Any], appendix: str = "附件2*") -> Tuple[Any, List[str], str]:
+        """从预案的附件区取分级表 dict。"""
+        # 优先按 "附件.附件2*" 通配查找
+        value, used, found = self._resolve_path(plan, ["附件", appendix])
+        if found:
+            return value, used, ".".join(used)
+        # 兼容某些预案把分级标准放在顶层"总则"下
+        for candidate in ("总则.事故分级", "总则.事件分级"):
+            value, used, found = self._resolve_path(plan, self._split_path(candidate))
+            if found:
+                return value, used, ".".join(used)
+        return None, [], ""
+
+    # ─────────────── 路径解析底层 ───────────────
+
+    @staticmethod
+    def _split_path(dotted: str) -> List[str]:
+        return [seg for seg in dotted.split(".") if seg]
+
+    @staticmethod
+    def _resolve_path(node: Any, segments: List[str]) -> Tuple[Any, List[str], bool]:
+        """按 segments 逐级下钻。支持末尾 '*' 通配 + 宽松匹配（去空格 / 子串）。"""
+        used: List[str] = []
+        for seg in segments:
+            if not isinstance(node, dict):
+                return None, used, False
+
+            # 末尾 * 通配
+            if seg.endswith("*"):
+                prefix = seg[:-1]
+                candidates = [k for k in node.keys() if k.startswith(prefix)]
+                if not candidates:
+                    return None, used, False
+                chosen = candidates[0]
+                used.append(chosen)
+                node = node[chosen]
+                continue
+
+            # 精确
+            if seg in node:
+                used.append(seg)
+                node = node[seg]
+                continue
+
+            # 宽松：去空格全等 / 子串
+            norm = re.sub(r"\s+", "", seg).lower()
+            matched = None
+            for k in node.keys():
+                if re.sub(r"\s+", "", k).lower() == norm:
+                    matched = k
+                    break
+            if matched is None:
+                for k in node.keys():
+                    if seg in k or k in seg:
+                        matched = k
+                        break
+            if matched is None:
+                return None, used, False
+            used.append(matched)
+            node = node[matched]
+        return node, used, True
+
+    @classmethod
+    def _try_aliases(cls, plan: Dict[str, Any], alias_paths: List[str]) -> Tuple[Any, str, List[str]]:
+        """逐个尝试 alias 路径，返回 (value, hit_alias, used_segments)。"""
+        for alias in alias_paths:
+            value, used, found = cls._resolve_path(plan, cls._split_path(alias))
+            if found:
+                return value, alias, used
+        return None, "", []
+
+    @staticmethod
+    def _walk_keys(node: Any, prefix: str = "", depth: int = 0, max_depth: int = 3) -> List[str]:
+        out: List[str] = []
+        if depth > max_depth:
+            return out
+        if isinstance(node, dict):
+            for k, v in node.items():
+                path = f"{prefix}.{k}" if prefix else k
+                out.append(path)
+                out.extend(EmergencyPlanService._walk_keys(v, path, depth + 1, max_depth))
+        return out
+
+    @staticmethod
+    def _search_in_plan(plan: Any, keyword: str, prefix: str = "") -> List[Dict[str, str]]:
+        hits: List[Dict[str, str]] = []
+        if isinstance(plan, dict):
+            for k, v in plan.items():
+                path = f"{prefix}.{k}" if prefix else k
+                if keyword in str(k):
+                    preview = (
+                        str(v)[:160].replace("\n", " ")
+                        if not isinstance(v, (dict, list))
+                        else f"({type(v).__name__}, {len(v)} items)"
+                    )
+                    hits.append({"path": path, "match": "key", "preview": preview})
+                elif isinstance(v, str) and keyword in v:
+                    idx = v.find(keyword)
+                    start = max(0, idx - 30)
+                    end = min(len(v), idx + 100)
+                    preview = v[start:end].replace("\n", " ")
+                    hits.append({"path": path, "match": "value", "preview": preview})
+                hits.extend(EmergencyPlanService._search_in_plan(v, keyword, path))
+        elif isinstance(plan, list):
+            for i, item in enumerate(plan):
+                hits.extend(EmergencyPlanService._search_in_plan(item, keyword, f"{prefix}[{i}]"))
+        return hits
+
+    # ─────────────── 渲染层（subtree → markdown） ───────────────
+
+    @classmethod
+    def _render_subtree(cls, node: Any, root_title: str = "", depth: int = 0, max_depth: int = 6) -> str:
+        """把任意子树渲染为可读 markdown 文本。"""
+        if depth > max_depth:
+            return "...（嵌套过深，已截断）"
+
+        if isinstance(node, str):
+            return node
+
+        if isinstance(node, (int, float, bool)) or node is None:
+            return str(node)
+
+        if isinstance(node, list):
+            lines = []
+            for item in node:
+                rendered = cls._render_subtree(item, depth=depth + 1, max_depth=max_depth)
+                lines.append(f"- {rendered}")
+            return "\n".join(lines)
+
+        if isinstance(node, dict):
+            # 表格特判：附件1/附件2 那种 {"标题": ..., "表格": {Ⅰ级:..., Ⅱ级:...}}
+            # _render_grading_table 内部会处理标题/表格/注，不要在外层重复渲染
+            if "表格" in node and isinstance(node["表格"], dict):
+                return cls._render_grading_table(node)
+
+            # 普通 dict
+            lines = []
+            heading_prefix = "#" * min(depth + 2, 6)
+            for k, v in node.items():
+                if isinstance(v, str):
+                    lines.append(f"{heading_prefix} {k}\n\n{v}\n")
+                elif isinstance(v, (int, float, bool)) or v is None:
+                    lines.append(f"{heading_prefix} {k}: {v}\n")
+                elif isinstance(v, list):
+                    rendered = cls._render_subtree(v, depth=depth + 1, max_depth=max_depth)
+                    lines.append(f"{heading_prefix} {k}\n\n{rendered}\n")
+                elif isinstance(v, dict):
+                    rendered = cls._render_subtree(v, depth=depth + 1, max_depth=max_depth)
+                    lines.append(f"{heading_prefix} {k}\n\n{rendered}\n")
+            return "\n".join(lines).strip()
+
+        return str(node)
+
+    @staticmethod
+    def _render_grading_table(table_node: Any) -> str:
+        """把附件1/附件2 的分级表渲染为 LLM 友好的「【级别】触发条件 ...」格式。"""
+        if not isinstance(table_node, dict):
+            return ""
+
+        # 找到 "表格" key
+        table = table_node.get("表格") if "表格" in table_node else table_node
+        if not isinstance(table, dict):
+            return ""
+
+        lines: List[str] = []
+        if "标题" in table_node:
+            lines.append(f"**{table_node['标题']}**\n")
+
+        for level_key, level_data in table.items():
+            if not isinstance(level_data, dict):
+                lines.append(f"【{level_key}】{level_data}")
+                continue
+            level_label = level_data.get("级别", level_key)
+            level_desc = level_data.get("级别描述", "")
+            color = level_data.get("颜色标示", "")
+            authority = level_data.get("响应主体", level_data.get("响应启动主体", ""))
+            header = f"【{level_label}{('（' + level_desc + '）') if level_desc else ''}】"
+            if color:
+                header += f" 颜色：{color}"
+            if authority:
+                header += f" 响应主体：{authority}"
+            lines.append(header)
+
+            for field_name in (
+                "事故的严重程度及影响范围",
+                "预计可能发生事故情形",
+                "事件的严重程度及影响范围",
+                "criteria",
+                "触发条件",
+            ):
+                if field_name in level_data:
+                    val = level_data[field_name]
+                    if isinstance(val, list):
+                        for item in val:
+                            lines.append(f"- {item}")
+                    else:
+                        lines.append(f"- {val}")
+            lines.append("")
+
+        if table_node.get("注"):
+            lines.append(f"*{table_node['注']}*")
+
+        return "\n".join(lines).strip()
+
+    @staticmethod
+    def _render_search_hits(keyword: str, hits: List[Dict[str, str]]) -> str:
+        if not hits:
+            return f"未找到关键词「{keyword}」"
+        lines = [f"**关键词「{keyword}」命中 {len(hits)} 处：**\n"]
+        for h in hits:
+            lines.append(f"- `{h['path']}` ({h['match']}): {h['preview']}")
+        return "\n".join(lines)
+
+    @staticmethod
+    def _build_source_ref(plan_name: str, hit_path: str) -> str:
+        if not plan_name:
+            return ""
+        if hit_path:
+            return f"《{plan_name}》{hit_path}".strip()
+        return f"《{plan_name}》"
+
+    # ─────────────── normalize / infer 类方法（沿用旧实现） ───────────────
 
     @classmethod
     def normalize_incident_category(cls, value: str) -> str:
-        """将中文或编码统一转换为场景类别编码。"""
         if not value:
             return ""
-
         raw = str(value).strip()
         upper = raw.upper()
         if upper in INCIDENT_CATEGORY_ALIASES:
             return upper
-
         normalized = _normalize_text(raw)
         for code, aliases in INCIDENT_CATEGORY_ALIASES.items():
             if normalized == _normalize_text(code):
@@ -92,15 +708,12 @@ class EmergencyPlanService:
 
     @classmethod
     def normalize_disaster_type(cls, value: str) -> str:
-        """将中文或编码统一转换为灾害类别编码。"""
         if not value:
             return ""
-
         raw = str(value).strip()
         upper = raw.upper()
         if upper in DISASTER_TYPE_ALIASES:
             return upper
-
         normalized = _normalize_text(raw)
         for code, aliases in DISASTER_TYPE_ALIASES.items():
             if normalized == _normalize_text(code):
@@ -111,20 +724,17 @@ class EmergencyPlanService:
 
     @classmethod
     def normalize_response_level(cls, value: str) -> str:
-        """统一响应级别名称。"""
         if not value:
             return ""
-
         normalized = _normalize_text(value)
-        if normalized in {"i", "i级", "特别重大", "特别重大级", "i级特别重大"}:
+        if normalized in {"i", "i级", "ⅰ", "ⅰ级", "特别重大", "特别重大级"}:
             return "特别重大级"
-        if normalized in {"ii", "ii级", "重大", "重大级", "ii级重大"}:
+        if normalized in {"ii", "ii级", "ⅱ", "ⅱ级", "重大", "重大级"}:
             return "重大级"
-        if normalized in {"iii", "iii级", "较大", "较大级", "iii级较大"}:
+        if normalized in {"iii", "iii级", "ⅲ", "ⅲ级", "较大", "较大级"}:
             return "较大级"
-        if normalized in {"iv", "iv级", "一般", "一般级", "iv级一般"}:
+        if normalized in {"iv", "iv级", "ⅳ", "ⅳ级", "一般", "一般级"}:
             return "一般级"
-
         if "特别重大" in normalized:
             return "特别重大级"
         if normalized.startswith("重大") or normalized.endswith("重大级"):
@@ -136,52 +746,38 @@ class EmergencyPlanService:
         return ""
 
     @classmethod
-    def infer_incident_category(
-        cls,
-        text: str,
-        location_text: str = "",
-        incident_type: str = "",
-    ) -> str:
-        """根据上下文做轻量场景类别推断。"""
-        merged_text = f"{text or ''}\n{location_text or ''}\n{incident_type or ''}"
-
-        if any(keyword in merged_text for keyword in ("高速", "收费站", "服务区")):
+    def infer_incident_category(cls, text: str, location_text: str = "", incident_type: str = "") -> str:
+        merged = f"{text or ''}\n{location_text or ''}\n{incident_type or ''}"
+        if any(k in merged for k in ("高速", "收费站", "服务区")):
             return "EXPRESSWAY"
-        if re.search(r"\bG\d+\b", merged_text):
+        if re.search(r"\bG\d+\b", merged):
             return "EXPRESSWAY"
-        if any(keyword in merged_text for keyword in ("国道", "省道", "县道", "乡道", "公路", "隧道", "桥梁")):
+        if any(k in merged for k in ("国道", "省道", "县道", "乡道", "公路", "隧道", "桥梁")):
             return "HIGHWAY"
-        if any(keyword in merged_text for keyword in ("港口", "码头", "泊位", "客运枢纽")):
+        if any(k in merged for k in ("港口", "码头", "泊位", "客运枢纽")):
             return "PORT"
-        if any(keyword in merged_text for keyword in ("航道", "断航", "船闸")):
+        if any(k in merged for k in ("航道", "断航", "船闸")):
             return "WATERWAY"
-        if any(keyword in merged_text for keyword in ("公交", "公交车站", "公交场站")):
+        if any(k in merged for k in ("公交", "公交车站", "公交场站")):
             return "CITY_BUS"
-        if any(keyword in merged_text for keyword in ("地铁", "轨道交通", "轻轨")):
+        if any(k in merged for k in ("地铁", "轨道交通", "轻轨")):
             return "URBAN_RAIL"
-        if any(keyword in merged_text for keyword in ("施工", "工地", "作业面")):
+        if any(k in merged for k in ("施工", "工地", "作业面", "公路水运工程")):
             return "CONSTRUCTION"
         return ""
 
     @classmethod
-    def infer_disaster_type(
-        cls,
-        text: str,
-        incident_type: str = "",
-        scene_status: str = "",
-    ) -> str:
-        """根据上下文做轻量灾害类别推断。"""
-        merged_text = f"{text or ''}\n{incident_type or ''}\n{scene_status or ''}"
-
-        if any(keyword in merged_text for keyword in ("暴雨", "洪水", "台风", "积水", "内涝", "滑坡", "塌方", "泥石流")):
+    def infer_disaster_type(cls, text: str, incident_type: str = "", scene_status: str = "") -> str:
+        merged = f"{text or ''}\n{incident_type or ''}\n{scene_status or ''}"
+        if any(k in merged for k in ("暴雨", "洪水", "台风", "积水", "内涝", "滑坡", "塌方", "泥石流")):
             return "FLOOD"
-        if any(keyword in merged_text for keyword in ("结冰", "冻雨", "冰雪", "低温", "大雪", "寒潮")):
+        if any(k in merged for k in ("结冰", "冻雨", "冰雪", "低温", "大雪", "寒潮")):
             return "ICE_SNOW"
-        if "地震" in merged_text:
+        if "地震" in merged:
             return "EARTHQUAKE"
-        if any(keyword in merged_text for keyword in ("疫情", "传染病", "公共卫生")):
+        if any(k in merged for k in ("疫情", "传染病", "公共卫生")):
             return "PUBLIC_HEALTH"
-        if any(keyword in merged_text for keyword in ("网络", "系统", "黑客", "攻击")):
+        if any(k in merged for k in ("网络", "系统", "黑客", "攻击")):
             return "CYBER"
         return ""
 
@@ -195,41 +791,34 @@ class EmergencyPlanService:
         raw_text: str = "",
         available_scene_names: Optional[Iterable[str]] = None,
     ) -> str:
-        """根据事故信息匹配更细的分场景处置类型。"""
-        merged_text = f"{incident_category}\n{incident_type}\n{disaster_type}\n{scene_status}\n{raw_text}"
-
+        merged = f"{incident_category}\n{incident_type}\n{disaster_type}\n{scene_status}\n{raw_text}"
         candidate = ""
         for keywords, scene_name in SCENE_TYPE_KEYWORDS:
-            if any(keyword in merged_text for keyword in keywords):
+            if any(k in merged for k in keywords):
                 candidate = scene_name
                 break
 
         if not available_scene_names:
             return candidate
-
         names = list(available_scene_names)
         if not names:
             return candidate
         if not candidate:
             return names[0]
-
         matched = cls.match_scene_name(names, candidate)
         return matched or names[0]
 
     @classmethod
     def match_scene_name(cls, scene_names: Iterable[str], scene_type: str) -> str:
-        """在现有场景名中做宽松匹配。"""
         target = _normalize_text(scene_type)
         if not target:
             return ""
-
         for name in scene_names:
             normalized_name = _normalize_text(name)
             if target == normalized_name:
                 return name
             if target in normalized_name or normalized_name in target:
                 return name
-
         alias_map = {
             "交通事故和危化品泄漏": "交通运输事故和危险化学品泄漏事故",
             "交通事故和危险化学品泄漏": "交通运输事故和危险化学品泄漏事故",
@@ -241,471 +830,3 @@ class EmergencyPlanService:
         if alias:
             return cls.match_scene_name(scene_names, alias)
         return ""
-
-    def get_emergency_plan(
-        self,
-        incident_category: str,
-        module: str,
-        disaster_type: str = "",
-        level: str = "",
-        scene_type: str = "",
-    ) -> Dict[str, Any]:
-        """按条件精确获取预案模块内容。"""
-        normalized_category = self.normalize_incident_category(incident_category)
-        normalized_disaster = self.normalize_disaster_type(disaster_type)
-        normalized_level = self.normalize_response_level(level)
-
-        primary_plan = self._resolve_scene_plan(normalized_category)
-        fallback_plan = self._resolve_fallback_plan()
-        module_plan = primary_plan
-        module_data = (primary_plan or {}).get("modules", {}).get(module)
-        fallback_used = False
-
-        if not module_data and fallback_plan and fallback_plan is not primary_plan:
-            fallback_module = fallback_plan.get("modules", {}).get(module)
-            if fallback_module:
-                module_plan = fallback_plan
-                module_data = fallback_module
-                fallback_used = True
-
-        if module_plan is None or module_data is None:
-            return {
-                "status": "not_found",
-                "message": f"未找到 incident_category={normalized_category or incident_category} 对应的 {module} 模块",
-                "incident_category": normalized_category,
-                "disaster_type": normalized_disaster,
-                "module": module,
-            }
-
-        available_scene_types = self._list_scene_types(module_data)
-        resolved_scene_type = ""
-        if module == "scene_disposal" and scene_type:
-            resolved_scene_type = self.infer_scene_type(
-                incident_category=normalized_category,
-                disaster_type=normalized_disaster,
-                scene_status="",
-                incident_type="",
-                raw_text=scene_type,
-                available_scene_names=available_scene_types,
-            )
-        if scene_type:
-            matched_scene = self.match_scene_name(available_scene_types, scene_type)
-            if matched_scene:
-                resolved_scene_type = matched_scene
-
-        content = self.format_module_content(
-            module=module,
-            module_data=module_data,
-            level=normalized_level,
-            scene_type=resolved_scene_type or scene_type,
-        )
-
-        result: Dict[str, Any] = {
-            "status": "success",
-            "incident_category": normalized_category,
-            "disaster_type": normalized_disaster,
-            "module": module,
-            "level": normalized_level,
-            "scene_type": resolved_scene_type or scene_type,
-            "plan_name": module_plan.get("plan_name", ""),
-            "plan_role": module_plan.get("plan_role", ""),
-            "content": content,
-            "source_reference": self._build_source_reference(module_plan, module_data),
-            "available_scene_types": available_scene_types,
-            "fallback_used": fallback_used,
-            "supplementary_plan": None,
-        }
-
-        supplementary_plan = self._resolve_disaster_plan(normalized_disaster)
-        if supplementary_plan and supplementary_plan is not module_plan:
-            supplementary_module = supplementary_plan.get("modules", {}).get(module)
-            if supplementary_module:
-                result["supplementary_plan"] = {
-                    "plan_name": supplementary_plan.get("plan_name", ""),
-                    "plan_role": supplementary_plan.get("plan_role", ""),
-                    "content": self.format_module_content(
-                        module=module,
-                        module_data=supplementary_module,
-                        level=normalized_level,
-                        scene_type=resolved_scene_type or scene_type,
-                    ),
-                    "source_reference": self._build_source_reference(supplementary_plan, supplementary_module),
-                }
-
-        return result
-
-    def get_grading_bundle(
-        self,
-        incident_category: str,
-        disaster_type: str = "",
-    ) -> Dict[str, Any]:
-        """返回定级时需要的主预案和补充预案模块。"""
-        normalized_category = self.normalize_incident_category(incident_category)
-        normalized_disaster = self.normalize_disaster_type(disaster_type)
-
-        primary_plan = self._resolve_scene_plan(normalized_category) or self._resolve_fallback_plan()
-        supplementary_plan = self._resolve_disaster_plan(normalized_disaster)
-
-        main_module = (primary_plan or {}).get("modules", {}).get("grading_criteria")
-        supplementary_module = (supplementary_plan or {}).get("modules", {}).get("grading_criteria")
-
-        return {
-            "incident_category": normalized_category,
-            "disaster_type": normalized_disaster,
-            "main_plan": primary_plan,
-            "main_module": main_module,
-            "supplementary_plan": supplementary_plan,
-            "supplementary_module": supplementary_module,
-        }
-
-    def format_module_content(
-        self,
-        module: str,
-        module_data: Dict[str, Any],
-        level: str = "",
-        scene_type: str = "",
-    ) -> str:
-        """将模块内容格式化为适合模型阅读的文本。"""
-        if module == "grading_criteria":
-            return self._format_grading_criteria(module_data)
-        if module == "command_structure":
-            return self._format_command_structure(module_data, level)
-        if module == "response_measures":
-            return self._format_response_measures(module_data, level)
-        if module == "scene_disposal":
-            return self._format_scene_disposal(module_data, scene_type)
-        if module == "warning_rules":
-            return self._format_warning_rules(module_data)
-        return json.dumps(module_data, ensure_ascii=False, indent=2)
-
-    def _load_registry(self) -> Dict[str, Any]:
-        if self.registry_path.exists():
-            with open(self.registry_path, "r", encoding="utf-8") as file:
-                return json.load(file)
-        return self._default_registry()
-
-    def _default_registry(self) -> Dict[str, Any]:
-        return {
-            "scene_plans": {
-                "EXPRESSWAY": {
-                    "plan_file": "plan_2.json",
-                    "plan_name": "广西高速公路突发事件应急预案",
-                    "description": "高速公路及其支线、连接线上的突发事件专项预案",
-                },
-                "HIGHWAY": {
-                    "plan_file": "plan_4.json",
-                    "plan_name": "广西壮族自治区公路交通突发事件应急预案",
-                    "description": "普通公路及其桥梁、隧道等设施上的突发事件专项预案",
-                },
-                "ROAD_TRANSPORT": {
-                    "plan_file": "plan_1.json",
-                    "plan_name": "广西壮族自治区交通运输综合应急预案",
-                    "description": "当前仓库中暂无道路运输专项预案，先回退到综合预案",
-                },
-                "PORT": {
-                    "plan_file": "plan_5.json",
-                    "plan_name": "广西壮族自治区港口突发事件应急预案",
-                    "description": "港口、码头、仓储场所等港口突发事件专项预案",
-                },
-                "WATERWAY": {
-                    "plan_file": "plan_1.json",
-                    "plan_name": "广西壮族自治区交通运输综合应急预案",
-                    "description": "当前仓库中暂无航道专项预案，先回退到综合预案",
-                },
-                "WATERWAY_XIJIANG": {
-                    "plan_file": "plan_1.json",
-                    "plan_name": "广西壮族自治区交通运输综合应急预案",
-                    "description": "当前仓库中暂无西江水道专项预案，先回退到综合预案",
-                },
-                "WATER_TRANSPORT": {
-                    "plan_file": "plan_1.json",
-                    "plan_name": "广西壮族自治区交通运输综合应急预案",
-                    "description": "当前仓库中暂无水路运输保障专项预案，先回退到综合预案",
-                },
-                "CITY_BUS": {
-                    "plan_file": "plan_1.json",
-                    "plan_name": "广西壮族自治区交通运输综合应急预案",
-                    "description": "当前仓库中暂无城市公交专项预案，先回退到综合预案",
-                },
-                "URBAN_RAIL": {
-                    "plan_file": "plan_1.json",
-                    "plan_name": "广西壮族自治区交通运输综合应急预案",
-                    "description": "当前仓库中暂无城市轨道交通专项预案，先回退到综合预案",
-                },
-                "CONSTRUCTION": {
-                    "plan_file": "plan_1.json",
-                    "plan_name": "广西壮族自治区交通运输综合应急预案",
-                    "description": "当前仓库中暂无公路水运工程专项预案，先回退到综合预案",
-                },
-            },
-            "disaster_plans": {},
-            "fallback_plan": {
-                "plan_file": "plan_1.json",
-                "plan_name": "广西壮族自治区交通运输综合应急预案",
-                "description": "当前专项预案覆盖不到时使用的总纲预案",
-            },
-        }
-
-    def _load_plans(self) -> Dict[str, Dict[str, Any]]:
-        plans: Dict[str, Dict[str, Any]] = {}
-        if not self.data_dir.exists():
-            logger.warning("预案数据目录不存在: %s", self.data_dir)
-            return plans
-
-        for plan_file in sorted(self.data_dir.glob("plan_*.json")):
-            try:
-                with open(plan_file, "r", encoding="utf-8") as file:
-                    plans[plan_file.name] = json.load(file)
-            except Exception as error:
-                logger.error("加载预案失败: file=%s, error=%s", plan_file, error)
-        return plans
-
-    def _resolve_scene_plan(self, incident_category: str) -> Optional[Dict[str, Any]]:
-        if not incident_category:
-            return None
-
-        registry_item = self.registry.get("scene_plans", {}).get(incident_category)
-        if registry_item:
-            plan = self.plans.get(registry_item.get("plan_file", ""))
-            if plan:
-                return plan
-
-        return self._scan_plan_by_incident_category(incident_category)
-
-    def _resolve_disaster_plan(self, disaster_type: str) -> Optional[Dict[str, Any]]:
-        if not disaster_type:
-            return None
-
-        registry_item = self.registry.get("disaster_plans", {}).get(disaster_type)
-        if registry_item:
-            plan = self.plans.get(registry_item.get("plan_file", ""))
-            if plan:
-                return plan
-
-        return self._scan_plan_by_disaster_type(disaster_type)
-
-    def _resolve_fallback_plan(self) -> Optional[Dict[str, Any]]:
-        fallback = self.registry.get("fallback_plan", {})
-        plan_file = fallback.get("plan_file", "")
-        return self.plans.get(plan_file)
-
-    def _scan_plan_by_incident_category(self, incident_category: str) -> Optional[Dict[str, Any]]:
-        aliases = INCIDENT_CATEGORY_ALIASES.get(incident_category, [])
-        best_plan: Optional[Dict[str, Any]] = None
-        best_role_priority = 99
-        best_match_score = -1
-
-        for plan in self.plans.values():
-            categories = [str(item) for item in plan.get("incident_categories", [])]
-            match_score = sum(1 for category in categories if category in aliases)
-            if not match_score:
-                continue
-
-            role = str(plan.get("plan_role", ""))
-            role_priority = 0 if "专项" in role else 1
-            if (
-                best_plan is None
-                or role_priority < best_role_priority
-                or (role_priority == best_role_priority and match_score > best_match_score)
-            ):
-                best_plan = plan
-                best_role_priority = role_priority
-                best_match_score = match_score
-
-        return best_plan
-
-    def _scan_plan_by_disaster_type(self, disaster_type: str) -> Optional[Dict[str, Any]]:
-        aliases = DISASTER_TYPE_ALIASES.get(disaster_type, [])
-        best_plan: Optional[Dict[str, Any]] = None
-        best_role_priority = 99
-        best_match_score = -1
-
-        for plan in self.plans.values():
-            disaster_types = [str(item) for item in plan.get("disaster_types", [])]
-            match_score = sum(1 for item in disaster_types if item in aliases)
-            if not match_score:
-                continue
-
-            role = str(plan.get("plan_role", ""))
-            role_priority = 0 if "专项" in role else 1
-            if (
-                best_plan is None
-                or role_priority < best_role_priority
-                or (role_priority == best_role_priority and match_score > best_match_score)
-            ):
-                best_plan = plan
-                best_role_priority = role_priority
-                best_match_score = match_score
-
-        return best_plan
-
-    def _build_source_reference(self, plan: Dict[str, Any], module_data: Dict[str, Any]) -> str:
-        plan_name = plan.get("plan_name", "应急预案")
-        source_section = module_data.get("source_section", "")
-        return f"《{plan_name}》{source_section}".strip()
-
-    def _list_scene_types(self, module_data: Dict[str, Any]) -> List[str]:
-        scene_map = module_data.get("scenes") or module_data.get("dispatch_rules") or {}
-        if isinstance(scene_map, dict):
-            return list(scene_map.keys())
-        return []
-
-    def _level_lookup_candidates(self, level: str) -> List[str]:
-        normalized = self.normalize_response_level(level)
-        if normalized == "特别重大级":
-            return ["I", "I_II", "特别重大_重大", "特别重大_重大级"]
-        if normalized == "重大级":
-            return ["II", "I_II", "特别重大_重大", "特别重大_重大级"]
-        if normalized == "较大级":
-            return ["III", "III_IV", "较大_一般", "较大_一般级"]
-        if normalized == "一般级":
-            return ["IV", "III_IV", "较大_一般", "较大_一般级"]
-        return []
-
-    def _pick_level_data(self, by_level: Dict[str, Any], level: str) -> Dict[str, Any]:
-        if not isinstance(by_level, dict) or not by_level:
-            return {}
-        if not level:
-            first_key = next(iter(by_level.keys()))
-            return by_level.get(first_key, {})
-
-        for candidate in self._level_lookup_candidates(level):
-            if candidate in by_level:
-                return by_level[candidate]
-
-        target_level = self.normalize_response_level(level)
-        for key, item in by_level.items():
-            label = _normalize_text(str(item.get("level_label", key)))
-            if _normalize_text(target_level).replace("级", "") in label:
-                return item
-
-        return {}
-
-    def _format_grading_criteria(self, module_data: Dict[str, Any]) -> str:
-        levels = module_data.get("levels", {})
-        if not isinstance(levels, dict) or not levels:
-            return "该预案未提供明确的分级标准。"
-
-        lines = [module_data.get("description", "事件分级标准")]
-        for level_name, level_data in levels.items():
-            normalized_level = self.normalize_response_level(level_name) or level_name
-            response_authority = level_data.get("response_authority", "")
-            lines.append(f"\n【{normalized_level}】")
-            if response_authority:
-                lines.append(f"响应主体：{response_authority}")
-            for criterion in level_data.get("criteria", []) or []:
-                lines.append(f"- {criterion}")
-        return "\n".join(lines).strip()
-
-    def _format_command_structure(self, module_data: Dict[str, Any], level: str) -> str:
-        level_data = self._pick_level_data(module_data.get("by_level", {}), level)
-        if not level_data:
-            return "未找到该级别对应的指挥架构。"
-
-        lines = [module_data.get("description", "组织指挥体系")]
-        if level_data.get("level_label"):
-            lines.append(f"适用级别：{level_data['level_label']}")
-        if level_data.get("command"):
-            lines.append(f"指挥主体：{level_data['command']}")
-        if level_data.get("commander"):
-            lines.append(f"指挥长：{level_data['commander']}")
-        if level_data.get("note"):
-            lines.append(f"说明：{level_data['note']}")
-
-        work_groups = level_data.get("work_groups", []) or []
-        if work_groups:
-            lines.append("工作组职责：")
-            for group in work_groups:
-                name = group.get("name", "工作组")
-                lead = group.get("lead", "未说明")
-                duties = group.get("duties", "")
-                lines.append(f"- {name}（牵头：{lead}）")
-                if duties:
-                    lines.append(f"  职责：{duties}")
-
-        optional_groups = level_data.get("optional_groups", []) or []
-        if optional_groups:
-            lines.append("视情组建：")
-            for group in optional_groups:
-                name = group.get("name", "工作组")
-                condition = group.get("condition", "")
-                duties = group.get("duties", "")
-                detail = f"- {name}"
-                if condition:
-                    detail += f"（{condition}）"
-                lines.append(detail)
-                if duties:
-                    lines.append(f"  职责：{duties}")
-
-        return "\n".join(lines).strip()
-
-    def _format_response_measures(self, module_data: Dict[str, Any], level: str) -> str:
-        level_data = self._pick_level_data(module_data.get("by_level", {}), level)
-        if not level_data:
-            return "未找到该级别对应的响应措施。"
-
-        lines = [module_data.get("description", "应急响应措施")]
-        if level_data.get("level_label"):
-            lines.append(f"适用级别：{level_data['level_label']}")
-        if level_data.get("text"):
-            lines.append(f"总体要求：{level_data['text']}")
-
-        measures = level_data.get("measures", []) or []
-        if measures:
-            lines.append("标准动作：")
-            for measure in measures:
-                if isinstance(measure, str):
-                    lines.append(f"- {measure}")
-                    continue
-                name = measure.get("name", "措施")
-                content = measure.get("content", "")
-                lines.append(f"- {name}：{content}")
-
-        return "\n".join(lines).strip()
-
-    def _format_scene_disposal(self, module_data: Dict[str, Any], scene_type: str) -> str:
-        scene_map = module_data.get("scenes") or module_data.get("dispatch_rules") or {}
-        if not isinstance(scene_map, dict) or not scene_map:
-            return module_data.get("note", "该预案未提供明确的分场景处置内容。")
-
-        if not scene_type:
-            return "可用场景类型：" + "、".join(scene_map.keys())
-
-        matched_scene = self.match_scene_name(scene_map.keys(), scene_type) or scene_type
-        content = scene_map.get(matched_scene)
-        if content is None:
-            return "未找到该场景的处置方案。可用场景类型：" + "、".join(scene_map.keys())
-
-        if isinstance(content, dict):
-            text = content.get("content") or content.get("text") or json.dumps(content, ensure_ascii=False, indent=2)
-        else:
-            text = str(content)
-
-        return f"适用场景：{matched_scene}\n{text}".strip()
-
-    def _format_warning_rules(self, module_data: Dict[str, Any]) -> str:
-        levels = module_data.get("levels", {})
-        if not isinstance(levels, dict) or not levels:
-            return "该预案未提供明确的预警发布规则。"
-
-        lines = [module_data.get("description", "预警发布规则")]
-        for warning_name, warning_data in levels.items():
-            lines.append(f"\n【{warning_name}】")
-            if warning_data.get("trigger"):
-                lines.append(f"触发条件：{warning_data['trigger']}")
-            if warning_data.get("publisher"):
-                lines.append(f"发布主体：{warning_data['publisher']}")
-            if warning_data.get("start_flow"):
-                lines.append(f"发布流程：{warning_data['start_flow']}")
-            if warning_data.get("release_flow"):
-                lines.append(f"发布流程：{warning_data['release_flow']}")
-            if warning_data.get("end_flow"):
-                lines.append(f"解除流程：{warning_data['end_flow']}")
-            defense_measures = warning_data.get("defense_measures")
-            if isinstance(defense_measures, list):
-                lines.append("防御措施：")
-                for item in defense_measures:
-                    lines.append(f"- {item}")
-            elif defense_measures:
-                lines.append(f"防御措施：{defense_measures}")
-        return "\n".join(lines).strip()

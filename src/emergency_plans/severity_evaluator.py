@@ -79,10 +79,10 @@ class SeverityEvaluator:
             incident_category=resolved_category,
             disaster_type=resolved_disaster,
         )
-        main_module = grading_bundle.get("main_module")
-        main_plan = grading_bundle.get("main_plan") or {}
+        main_grading_table = grading_bundle.get("main_grading_table")
+        main_plan_name = grading_bundle.get("main_plan_name") or ""
 
-        available_scene_types = self._collect_scene_types(main_plan)
+        available_scene_types = self._collect_scene_types(resolved_category)
         inferred_scene_type = self.plan_service.infer_scene_type(
             incident_category=resolved_category,
             incident_type=incident_type,
@@ -92,7 +92,7 @@ class SeverityEvaluator:
             available_scene_names=available_scene_types,
         )
 
-        if not main_module:
+        if not main_grading_table:
             return {
                 "status": "error",
                 "message": "未找到可用于定级的主预案分级标准",
@@ -108,6 +108,7 @@ class SeverityEvaluator:
                     scene_status=scene_status,
                 ),
                 "scene_type": inferred_scene_type,
+                "fallback_chain": grading_bundle.get("fallback_chain", []),
             }
 
         try:
@@ -157,10 +158,12 @@ class SeverityEvaluator:
         additional_context: str,
         available_scene_types: List[str],
     ) -> str:
-        main_plan = grading_bundle.get("main_plan") or {}
-        main_module = grading_bundle.get("main_module") or {}
-        supplementary_plan = grading_bundle.get("supplementary_plan") or {}
-        supplementary_module = grading_bundle.get("supplementary_module") or {}
+        main_plan_name = grading_bundle.get("main_plan_name") or "未命名预案"
+        main_grading_text = grading_bundle.get("main_grading_text") or ""
+        main_grading_path = grading_bundle.get("main_grading_path") or ""
+        warning_grading_text = grading_bundle.get("warning_grading_text") or ""
+        supplementary_plan_name = grading_bundle.get("supplementary_plan_name") or ""
+        supplementary_grading_text = grading_bundle.get("supplementary_grading_text") or ""
 
         lines = [
             "请根据下列事件信息进行定级。",
@@ -173,16 +176,25 @@ class SeverityEvaluator:
             f"- scene_status: {scene_status or '无'}",
             f"- additional_context: {additional_context or '无'}",
             "",
-            f"【主预案】{main_plan.get('plan_name', '未命名预案')}",
-            self.plan_service.format_module_content("grading_criteria", main_module),
+            f"【主预案】《{main_plan_name}》（响应分级，章节路径：{main_grading_path}）",
+            main_grading_text,
         ]
 
-        if supplementary_module:
+        if warning_grading_text:
             lines.extend(
                 [
                     "",
-                    f"【补充预案】{supplementary_plan.get('plan_name', '未命名预案')}",
-                    self.plan_service.format_module_content("grading_criteria", supplementary_module),
+                    "【主预案 - 预警分级（附件1，供对照参考）】",
+                    warning_grading_text,
+                ]
+            )
+
+        if supplementary_grading_text:
+            lines.extend(
+                [
+                    "",
+                    f"【补充预案】《{supplementary_plan_name}》（灾害类补充，应叠加判定）",
+                    supplementary_grading_text,
                 ]
             )
 
@@ -216,11 +228,21 @@ class SeverityEvaluator:
         )
         return "\n".join(lines)
 
-    def _collect_scene_types(self, main_plan: Dict[str, Any]) -> List[str]:
-        scene_module = (main_plan.get("modules") or {}).get("scene_disposal") or {}
-        scene_map = scene_module.get("scenes") or scene_module.get("dispatch_rules") or {}
-        if isinstance(scene_map, dict):
-            return list(scene_map.keys())
+    def _collect_scene_types(self, incident_category: str = "") -> List[str]:
+        """
+        返回该 scene 对应预案里 '应急响应.分类处置' 子节的 key 列表。
+        parsered_data 风格预案里通常没有结构化的"分场景"列表，所以多数情况返回空，
+        由 LLM 自由从 SCENE_TYPE_KEYWORDS 推断 scene_type。
+        """
+        if not incident_category:
+            return []
+        plan_meta, _, _ = self.plan_service.resolve_plan_for_scene(incident_category)
+        if plan_meta is None:
+            return []
+        plan = plan_meta.get("content", {})
+        category_disposal = (plan.get("应急响应", {}) or {}).get("分类处置")
+        if isinstance(category_disposal, dict):
+            return list(category_disposal.keys())
         return []
 
     def _extract_json_payload(self, content: str) -> Dict[str, Any]:
@@ -292,7 +314,7 @@ class SeverityEvaluator:
         )
         scene_type = (
             self.plan_service.match_scene_name(
-                self._collect_scene_types(grading_bundle.get("main_plan") or {}),
+                self._collect_scene_types(resolved_category),
                 str(payload.get("scene_type", "")),
             )
             or inferred_scene_type
@@ -302,7 +324,6 @@ class SeverityEvaluator:
         if not reasoning:
             reasoning = "基于灾情描述与预案分级标准完成初步判定。"
 
-        main_plan = grading_bundle.get("main_plan") or {}
         return {
             "status": "success",
             "incident_category": resolved_category,
@@ -313,9 +334,14 @@ class SeverityEvaluator:
             "missing_fields": missing_fields,
             "scene_type": scene_type,
             "plan_reference": {
-                "plan_name": main_plan.get("plan_name", ""),
-                "source_section": ((grading_bundle.get("main_module") or {}).get("source_section", "")),
+                "plan_name": grading_bundle.get("main_plan_name", ""),
+                "source_section": grading_bundle.get("main_grading_path", ""),
             },
+            "supplementary_plan_reference": {
+                "plan_name": grading_bundle.get("supplementary_plan_name", ""),
+                "source_section": grading_bundle.get("supplementary_grading_path", ""),
+            } if grading_bundle.get("supplementary_plan_name") else None,
+            "fallback_chain": grading_bundle.get("fallback_chain", []),
         }
 
     def _infer_missing_fields(

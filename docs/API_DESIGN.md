@@ -97,28 +97,37 @@ GET /api/v1/tasks/{task_id}
   "task_id": "a1b2c3d4e5f6",
   "status": "completed",
   "result": {
-    "plan_markdown": "# 标准化应急指挥方案\n\n### 一、事件概述\n...",
+    "plan_markdown": "# 标准化应急指挥方案\n\n### 【应急处置总览】\n...\n### 【应急处置详情】\n### 一、事件现场基本情况\n...",
     "sections": {
-      "一、事件概述": "...",
-      "二、响应定级": "...",
-      "三、指挥架构": "...",
-      "四、预警发布": "...",
-      "五、处置行动方案": "...",
-      "六、资源调度方案": "...",
-      "七、信息报送与新闻发布": "...",
-      "八、风险提示与注意事项": "...",
-      "九、依据引用": "..."
+      "应急处置总览": "...",
+      "一、事件现场基本情况": "...",
+      "二、预案匹配与组织预警和响应": "...",
+      "三、应急组织机构": "...",
+      "四、物资装备与调度": "...",
+      "五、处置流程建议（包括后期处置、新闻发布）": "...",
+      "六、次生风险": "...",
+      "七、引用依据": "..."
+    },
+    "structured_sections": {
+      "emergency_disposal_overview": { "scene_basic_situation_overview": "...", "plan_warning_response_overview": "...", "material_equipment_dispatch_overview": "...", "disposal_process_recommendations_overview": "...", "secondary_risks_overview": "..." },
+      "emergency_disposal_detail": { "event_location": "...", "weather_condition": "...", "event_summary": "...", "surrounding_environment": "...", "main_impact": "..." },
+      "plan_warning_response": { "matched_plan": "...", "event_level": "...", "warning_release": "...", "response_activation": "...", "judgment_basis": "..." },
+      "emergency_organization": { "groups": [{ "work_group": "现场指挥组", "lead_unit": "...", "main_responsibilities": "..." }] },
+      "material_equipment_dispatch": { "items": [{ "required_material": "...", "recommended_dispatch_source": "...", "distance": "...", "estimated_arrival_time": "...", "location_contact_info": "...", "resource_gap": "..." }] },
+      "disposal_process_recommendations": { "items": [{ "sequence": "1", "action": "...", "responsible_unit": "...", "coordinating_unit": "...", "reference_basis": "..." }] },
+      "secondary_risks": { "items": [{ "trigger_condition": "...", "risk_description": "...", "impact_consequence": "...", "response_measure": "...", "responsible_unit": "..." }] },
+      "reference_basis": { "references": [{ "basis_type": "应急预案", "basis_name": "...", "reference_chapter": "应急响应.处置措施.Ⅱ级应急响应处置措施", "reference_content": "...", "supports_decision": "..." }] }
     },
     "review": { "passed": true, "score": 88, "summary": "方案整体结构完整" }
   },
   "process_data": {
-    "incident_info": { "incident_type": "交通事故", "severity": "high", "response_level": "III级", "..." : "..." },
+    "incident_info": { "incident_type": "交通事故", "severity": "high", "response_level": "重大级", "..." : "..." },
     "environment":   { "formatted_address": "广西壮族自治区...", "weather": {}, "traffic": {} },
     "resources":     [{ "type": "warehouse", "name": "来宾应急仓库", "distance_km": 12.5 }],
     "experts":       [{ "name": "李教授", "specialty_field": "公路安全" }],
     "tool_calls":    [{ "tool_name": "geocode_address", "success": true }],
     "risk_assessment": [{ "overall_score": 75, "risk_level": "较高风险" }],
-    "knowledge_refs":  [{ "source_type": "emergency_plan", "title": "广西交通运输综合应急预案" }]
+    "knowledge_refs":  [{ "source_type": "emergency_plan", "title": "广西交通运输综合应急预案", "metadata": { "hit_path": "应急响应.处置措施.Ⅱ级应急响应处置措施" } }]
   }
 }
 ```

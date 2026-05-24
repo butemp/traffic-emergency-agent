@@ -61,7 +61,7 @@ Base URL: `http://<host>:8000/api/v1` （随 Chainlit 一起启动）
   "status": "completed",
   "result": {
     "plan_markdown": "# 标准化应急指挥方案\n...",
-    "sections": { "一、事件概述": "...", "二、响应定级": "...", "...": "..." },
+    "sections": { "应急处置总览": "...", "一、事件现场基本情况": "...", "二、预案匹配与组织预警和响应": "...", "三、应急组织机构": "...", "四、物资装备与调度": "...", "五、处置流程建议（包括后期处置、新闻发布）": "...", "六、次生风险": "...", "七、引用依据": "..." },
     "structured_sections": {
       "emergency_disposal_overview": {
         "fields_zh": {

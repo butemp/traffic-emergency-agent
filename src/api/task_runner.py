@@ -41,7 +41,7 @@ API_MODE_SYSTEM_PROMPT = """【API 端到端模式——重要】
    - 不要因为信息不完整就停止推进。
 3. **自动推进阶段：** 完成当前阶段可用工具调用后，立即切换到下一阶段，不要等待指令。
 4. **候选方案自动选择：** 如果你生成了多个候选方案，自动选择最稳妥（覆盖最全面、风险最低）的方案继续推进，不要等用户选择。
-5. **目标：** 尽快走完 INTAKE → SITUATIONAL_AWARENESS → PLAN_GENERATION → PLAN_EVALUATION → OUTPUT 全流程，输出完整 9 章节标准化应急指挥方案。
+5. **目标：** 尽快走完 INTAKE → SITUATIONAL_AWARENESS → PLAN_GENERATION → PLAN_EVALUATION → OUTPUT 全流程，输出完整 7 章节标准化应急指挥方案。
 6. **效率：** 一轮能调用工具就调用，不要花一轮来"说明你接下来打算做什么"。
 """
 
@@ -132,7 +132,7 @@ def create_agent_for_api(config: Optional[Dict[str, str]] = None):
         logger.warning("ResourceDispatchEngine 初始化失败: %s", e)
 
     try:
-        plan_service = EmergencyPlanService(data_dir="data/regulations/data")
+        plan_service = EmergencyPlanService()
     except Exception as e:
         logger.warning("EmergencyPlanService 初始化失败: %s", e)
 
@@ -336,7 +336,7 @@ def _force_output_prompt() -> str:
     return (
         "【系统强制指令】你已经连续多轮未调用任何工具也未产出最终方案。\n"
         "当前处于 API 无人值守模式，不允许等待用户。\n"
-        "请立即基于目前已有的全部信息（即使不完整），直接输出完整的 9 章节标准化应急指挥方案。\n"
+        "请立即基于目前已有的全部信息（即使不完整），直接输出完整的 7 章节标准化应急指挥方案。\n"
         "对于缺失的信息，在对应章节写明'待现场确认'并给出多种情景处置建议。\n"
         "在回答末尾附上 agent_control，设置 final_output=true。"
     )
@@ -488,7 +488,7 @@ async def _run_agent_loop(
 
         # ── 判断是否进入最终输出 ──
         # 除了显式 final_output / OUTPUT 阶段，还检测模型是否已经
-        # 在文本中直接输出了完整 9 章节方案结构
+        # 在文本中直接输出了完整 7 章节方案结构
         from web_app import has_standard_plan_structure
         is_final = (
             control.final_output

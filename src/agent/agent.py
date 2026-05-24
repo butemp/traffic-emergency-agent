@@ -96,9 +96,12 @@ class Agent:
 - 如存在多个明显可行方案，应给用户清晰对比并请求选择
 - 对于高风险或 critical 场景，可以先给默认方案，再征求确认
 
-资源与知识规则：
-- 事件定级优先使用 evaluate_incident_severity
-- 预案模块精确取用优先使用 get_emergency_plan
+资源与知识规则:
+- 事件定级优先使用 evaluate_incident_severity（内部会取预案附件2分级表对照判定）
+- 预案模块精确取用优先使用 get_emergency_plan；该工具支持 module 别名 / 中文 section_path / 关键词 search_keyword 三种取数方式
+- get_emergency_plan 现在能取的范围远超旧版：除了 command_structure / response_measures / warning_rules / grading_criteria，还可以取 post_processing（后期处置-善后/抚恤/总结评估）、emergency_support（应急保障-通信/物资/运力/队伍/资金/技术）、plan_management（预案管理）、response_start_template（II级响应启动通知模板）、response_flowchart（应急响应流程图）、info_sources（信息来源一览表）等
+- 当 module 别名找不到时，可以用 section_path 走中文章节路径精确取数（如"组织体系.自治区应急指挥机构.应急工作组"），或用 search_keyword 全文搜
+- 取响应措施时同时传 level，工具会自动改查对应级别的子节（response_measures_i/ii/iii/iv）
 - 特定事件的细粒度处置规则、法规条文和预案要求使用 query_regulations
 - 技术规范、标准指南和更广泛的补充法规使用 query_rag
 - 历史经验补充使用 query_historical_cases
@@ -651,33 +654,40 @@ class Agent:
                 )
 
         elif tool_name == "get_emergency_plan" and result.get("status") == "success":
+            # parsered_data 风格返回字段：content_text（已 Markdown 化）+ hit_path + resolved_segments + fallback_chain
             self.task_state.add_knowledge_reference(
                 KnowledgeReference(
                     source_type="emergency_plan",
                     title=result.get("plan_name", ""),
-                    excerpt=result.get("content", ""),
-                    source_path=result.get("source_reference", ""),
+                    excerpt=result.get("content_text", "") or str(result.get("content", "")),
+                    source_path=result.get("source_reference") or result.get("hit_path", ""),
                     metadata={
-                        "module": result.get("module", ""),
+                        "module": result.get("effective_module") or result.get("module", ""),
                         "level": result.get("level", ""),
                         "scene_type": result.get("scene_type", ""),
-                        "fallback_used": result.get("fallback_used", False),
+                        "hit_path": result.get("hit_path", ""),
+                        "resolved_segments": result.get("resolved_segments", []),
+                        "fallback_chain": result.get("fallback_chain", []),
+                        "mode": result.get("mode", ""),
+                        "plan_file": result.get("plan_file", ""),
                     },
                 )
             )
             supplementary_plan = result.get("supplementary_plan") or {}
-            if supplementary_plan:
+            if supplementary_plan and supplementary_plan.get("status") == "success":
                 self.task_state.add_knowledge_reference(
                     KnowledgeReference(
                         source_type="emergency_plan",
                         title=supplementary_plan.get("plan_name", ""),
-                        excerpt=supplementary_plan.get("content", ""),
-                        source_path=supplementary_plan.get("source_reference", ""),
+                        excerpt=supplementary_plan.get("content_text", "") or str(supplementary_plan.get("content", "")),
+                        source_path=supplementary_plan.get("source_reference") or supplementary_plan.get("hit_path", ""),
                         metadata={
-                            "module": result.get("module", ""),
+                            "module": result.get("effective_module") or result.get("module", ""),
                             "level": result.get("level", ""),
                             "scene_type": result.get("scene_type", ""),
+                            "hit_path": supplementary_plan.get("hit_path", ""),
                             "role": "supplementary_plan",
+                            "plan_file": supplementary_plan.get("plan_file", ""),
                         },
                     )
                 )
