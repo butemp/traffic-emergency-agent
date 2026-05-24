@@ -1,0 +1,16 @@
+{
+  "name": "张三",
+  "sex": "1",
+  "specialty_field": "高速公路安全、应急管理",
+  "professional_title": "高级工程师",
+  "duties": "总工",
+  "work_unit": "广西交通设计研究院",
+  "major": "土木工程",
+  "phone": "13812345678",
+  "email": "zhangsan@example.com",
+  "address": "广西南宁市青秀区民族大道xxx号",
+  "longitude": 108.32,
+  "latitude": 22.84,
+  "declaration_type": "交通运输应急管理",
+  "remark": "（可选备注）"
+}

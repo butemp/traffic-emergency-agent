@@ -660,7 +660,7 @@ async def _ensure_critical_tools_called(agent) -> None:
     lon = coords.get("longitude")
     lat = coords.get("latitude")
 
-    # ─── 2. search_emergency_resources（半径自适应，确保一定有数据）───
+    # ─── 2. search_emergency_resources（半径自适应，至少凑足 5 条非专家资源）───
     if (
         "search_emergency_resources" in agent.tools
         and not _tool_called_successfully(agent, "search_emergency_resources")
@@ -670,6 +670,7 @@ async def _ensure_critical_tools_called(agent) -> None:
             incident.incident_type or "", _DEFAULT_REQUIRED_CATEGORIES,
         )
         tool = agent.tools["search_emergency_resources"]
+        min_resource_count = 5  # 最小资源条数，少于此数继续扩半径直到拉满最大半径
         for radius in _RESOURCE_SEARCH_RADII_KM:
             try:
                 logger.info("[兜底] search_emergency_resources: radius=%skm, cats=%s", radius, required_cats)
@@ -687,16 +688,18 @@ async def _ensure_critical_tools_called(agent) -> None:
                     {"longitude": lon, "latitude": lat, "required_categories": required_cats, "radius_km": radius},
                     result,
                 )
-                # 检查是否真的搜到了
+                # 凑够 min_resource_count 条才停，否则继续扩
                 non_expert_count = sum(
                     1 for r in agent.task_state.available_resources
                     if r.get("type") != "expert"
                 )
-                if non_expert_count > 0:
-                    logger.info("[兜底] 资源搜索成功，命中 %d 条（radius=%skm）", non_expert_count, radius)
+                if non_expert_count >= min_resource_count:
+                    logger.info("[兜底] 资源搜索达标，命中 %d 条（radius=%skm，阈值=%d）",
+                                non_expert_count, radius, min_resource_count)
                     break
                 else:
-                    logger.info("[兜底] radius=%skm 仍 0 结果，继续扩大半径", radius)
+                    logger.info("[兜底] radius=%skm 命中 %d 条，未达阈值 %d，继续扩",
+                                radius, non_expert_count, min_resource_count)
             except Exception as e:
                 logger.warning("[兜底] search_emergency_resources(radius=%s) 失败: %s", radius, e)
 

@@ -1,0 +1,34 @@
+{
+  "warehouse_name": "示例应急物资仓库",
+  "warehouse_type": null,
+  "belong_org_name": "广西交通运输厅直属应急保障中心",
+  "belong_org_code": "9999",
+  "address": "广西南宁市青秀区民族大道xxx号",
+  "latitude": 22.84,
+  "longitude": 108.32,
+  "road_code": null,
+  "stake": null,
+  "principal": "李四",
+  "contact_phone": "13912345678",
+  "verification_state": 1,
+  "last_verified_at": "2026-05-25",
+  "next_due_at": "2026-08-25",
+  "remark": null,
+  "categories": ["WARNING", "PPE", "TOOL", "COMMS"],
+  "material_item_count": 4,
+  "material_kind_count": 4,
+  "materials_by_category": {
+    "WARNING": [
+      {"name": "路锥", "quantity": 200, "unit": "个", "spec_model": null, "material_type": "0"}
+    ],
+    "PPE": [
+      {"name": "反光背心", "quantity": 50, "unit": "件", "spec_model": null, "material_type": "0"}
+    ],
+    "TOOL": [
+      {"name": "切割机", "quantity": 2, "unit": "台", "spec_model": null, "material_type": "1"}
+    ],
+    "COMMS": [
+      {"name": "对讲机", "quantity": 10, "unit": "台", "spec_model": null, "material_type": "0"}
+    ]
+  }
+}
