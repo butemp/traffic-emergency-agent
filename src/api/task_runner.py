@@ -10,6 +10,7 @@ API 模式下采用「一键处置」策略：
 from __future__ import annotations
 
 import asyncio
+import json
 import logging
 import os
 import time
@@ -688,6 +689,16 @@ async def _ensure_critical_tools_called(agent) -> None:
                     {"longitude": lon, "latitude": lat, "required_categories": required_cats, "radius_km": radius},
                     result,
                 )
+                try:
+                    payload = json.loads(result)
+                    freshness = payload.get("data_freshness", {}) or {}
+                    logger.info(
+                        "[DATA_SOURCE] 兜底 search_emergency_resources 返回: warehouse_data_source=%s, team_data_source=%s",
+                        freshness.get("warehouse_data_source", "unknown"),
+                        freshness.get("team_data_source", "unknown"),
+                    )
+                except Exception:
+                    logger.info("[DATA_SOURCE] 兜底 search_emergency_resources 返回非 JSON，无法解析数据源")
                 # 凑够 min_resource_count 条才停，否则继续扩
                 non_expert_count = sum(
                     1 for r in agent.task_state.available_resources
@@ -751,6 +762,15 @@ async def _ensure_critical_tools_called(agent) -> None:
             agent.state.add_message(tool_msg)
             agent.task_state.append_message(tool_msg)
             agent.after_tool_execution("search_experts", {"keywords": keywords}, result)
+            try:
+                payload = json.loads(result)
+                logger.info(
+                    "[DATA_SOURCE] 兜底 search_experts 返回: data_source=%s, count=%s",
+                    payload.get("data_source", "unknown"),
+                    payload.get("count", "unknown"),
+                )
+            except Exception:
+                logger.info("[DATA_SOURCE] 兜底 search_experts 返回非 JSON，无法解析数据源")
 
             expert_count = _count_resources_by_type(agent, "expert")
             logger.info("[兜底] 第一轮 search_experts 命中 %d 位", expert_count)
@@ -768,6 +788,15 @@ async def _ensure_critical_tools_called(agent) -> None:
                 agent.state.add_message(tool_msg)
                 agent.task_state.append_message(tool_msg)
                 agent.after_tool_execution("search_experts", {"keywords": fallback_keywords}, result)
+                try:
+                    payload = json.loads(result)
+                    logger.info(
+                        "[DATA_SOURCE] 兜底 search_experts fallback 返回: data_source=%s, count=%s",
+                        payload.get("data_source", "unknown"),
+                        payload.get("count", "unknown"),
+                    )
+                except Exception:
+                    logger.info("[DATA_SOURCE] 兜底 search_experts fallback 返回非 JSON，无法解析数据源")
                 expert_count = _count_resources_by_type(agent, "expert")
                 logger.info("[兜底] fallback 命中 %d 位", expert_count)
         except Exception as e:

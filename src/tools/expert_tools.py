@@ -101,6 +101,12 @@ class SearchExperts(BaseTool):
         query_terms = self._normalize_terms([*(keywords or []), incident_type])
         query_terms.extend(self._expand_incident_terms(incident_type))
         query_terms = list(dict.fromkeys(query_terms))
+        logger.info(
+            "[DATA_SOURCE] search_experts 使用数据源=%s, experts_loaded=%s, query_terms=%s",
+            self.data_source,
+            len(self.experts),
+            query_terms,
+        )
 
         scored = []
         for expert in self.experts:
@@ -168,6 +174,7 @@ class SearchExperts(BaseTool):
                 ]
                 if experts:
                     self.data_source = "tocc_api"
+                    logger.info("[DATA_SOURCE] 专家库使用 TOCC API: records=%s", len(experts))
                     return experts
                 logger.warning("TOCC 专家接口返回空专家列表，回退本地专家库")
             except ToccApiError as error:
@@ -176,7 +183,9 @@ class SearchExperts(BaseTool):
                 logger.warning("加载 TOCC 专家数据失败，回退本地专家库: %s", error)
 
         self.data_source = "local_fallback" if self.prefer_api else "local"
-        return self._load_local_experts(local_path)
+        experts = self._load_local_experts(local_path)
+        logger.info("[DATA_SOURCE] 专家库使用本地数据: source=%s, records=%s", self.data_source, len(experts))
+        return experts
 
     def _load_local_experts(self, path: Path) -> List[Dict[str, Any]]:
         if not path.exists():

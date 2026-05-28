@@ -149,6 +149,7 @@ class ResourceDispatchEngine:
                 ]
                 if warehouses:
                     self.warehouse_data_source = "tocc_api"
+                    logger.info("[DATA_SOURCE] 仓库使用 TOCC API: records=%s", len(warehouses))
                     return warehouses
                 logger.warning("TOCC 仓库接口无有效经纬度仓库，回退本地仓库索引")
             except ToccApiError as error:
@@ -157,7 +158,9 @@ class ResourceDispatchEngine:
                 logger.warning("加载 TOCC 仓库数据失败，回退本地仓库索引: %s", error)
 
         self.warehouse_data_source = "local_fallback" if self.prefer_api else "local"
-        return self._load_records(local_path)
+        warehouses = self._load_records(local_path)
+        logger.info("[DATA_SOURCE] 仓库使用本地数据: source=%s, records=%s", self.warehouse_data_source, len(warehouses))
+        return warehouses
 
     def _build_category_index(self) -> Dict[str, Dict[str, List[str]]]:
         """构建 category -> resource id 的反向索引。"""
@@ -193,6 +196,11 @@ class ResourceDispatchEngine:
         max_results: int = 10,
     ) -> Dict[str, Any]:
         """执行 NearbySearch + CoverageAnalysis。"""
+        logger.info(
+            "[DATA_SOURCE] search_emergency_resources 数据源: warehouses=%s, teams=%s",
+            self.warehouse_data_source,
+            self.team_data_source,
+        )
         params = {
             "longitude": float(longitude),
             "latitude": float(latitude),
