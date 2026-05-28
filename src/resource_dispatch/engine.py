@@ -21,6 +21,8 @@ import re
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
+from ..tocc_api import ToccApiClient, ToccApiError, map_warehouse_record
+
 logger = logging.getLogger(__name__)
 
 
@@ -65,8 +67,14 @@ class ResourceDispatchEngine:
         self,
         warehouse_index_path: Optional[str] = None,
         team_index_path: Optional[str] = None,
+        client: Optional[ToccApiClient] = None,
+        prefer_api: bool = True,
     ):
         base_dir = Path(__file__).resolve().parents[2] / "data" / "仓库和队伍的物资数据"
+        self.client = client or ToccApiClient()
+        self.prefer_api = prefer_api
+        self.warehouse_data_source = "local"
+        self.team_data_source = "local"
 
         self.warehouse_index_path = self._resolve_data_path(
             warehouse_index_path,
@@ -87,15 +95,17 @@ class ResourceDispatchEngine:
             ],
         )
 
-        self.warehouses = self._load_records(self.warehouse_index_path)
+        self.warehouses = self._load_warehouse_records(self.warehouse_index_path)
         self.teams = self._load_records(self.team_index_path)
         self.category_index = self._build_category_index()
         self.last_search_context: Optional[Dict[str, Any]] = None
 
         logger.info(
-            "资源调度引擎初始化完成: warehouses=%s, teams=%s",
+            "资源调度引擎初始化完成: warehouses=%s(source=%s), teams=%s(source=%s)",
             len(self.warehouses),
+            self.warehouse_data_source,
             len(self.teams),
+            self.team_data_source,
         )
 
     def _resolve_data_path(self, explicit_path: Optional[str], candidates: Sequence[Path]) -> Path:
@@ -127,6 +137,27 @@ class ResourceDispatchEngine:
         with path.open("r", encoding="utf-8") as file:
             data = json.load(file)
         return data if isinstance(data, list) else []
+
+    def _load_warehouse_records(self, local_path: Path) -> List[Dict[str, Any]]:
+        """优先从 TOCC API 加载仓库，失败时回退本地索引。"""
+        if self.prefer_api:
+            try:
+                api_records = self.client.get_all_warehouses()
+                warehouses = [
+                    mapped for mapped in (map_warehouse_record(record) for record in api_records)
+                    if mapped.get("warehouse_id") and mapped.get("latitude") is not None and mapped.get("longitude") is not None
+                ]
+                if warehouses:
+                    self.warehouse_data_source = "tocc_api"
+                    return warehouses
+                logger.warning("TOCC 仓库接口无有效经纬度仓库，回退本地仓库索引")
+            except ToccApiError as error:
+                logger.warning("TOCC 仓库接口不可用，回退本地仓库索引: %s", error)
+            except Exception as error:
+                logger.warning("加载 TOCC 仓库数据失败，回退本地仓库索引: %s", error)
+
+        self.warehouse_data_source = "local_fallback" if self.prefer_api else "local"
+        return self._load_records(local_path)
 
     def _build_category_index(self) -> Dict[str, Dict[str, List[str]]]:
         """构建 category -> resource id 的反向索引。"""
@@ -210,7 +241,11 @@ class ResourceDispatchEngine:
                 "teams": teams,
             },
             "coverage": coverage,
-            "data_freshness": DATA_FRESHNESS,
+            "data_freshness": {
+                **DATA_FRESHNESS,
+                "warehouse_data_source": self.warehouse_data_source,
+                "team_data_source": self.team_data_source,
+            },
         }
 
         self.last_search_context = {
@@ -340,7 +375,11 @@ class ResourceDispatchEngine:
             "status": "success",
             "dispatch_plan": dispatch_plan,
             "coverage_summary": coverage_summary,
-            "data_freshness": DATA_FRESHNESS,
+            "data_freshness": {
+                **DATA_FRESHNESS,
+                "warehouse_data_source": self.warehouse_data_source,
+                "team_data_source": self.team_data_source,
+            },
         }
 
     def _run_nearby_search(self, params: Dict[str, Any]) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:

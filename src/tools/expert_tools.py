@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
 from .base import BaseTool
+from ..tocc_api import ToccApiClient, ToccApiError, map_expert_record
 
 logger = logging.getLogger(__name__)
 
@@ -30,11 +31,19 @@ INCIDENT_EXPERT_KEYWORDS = {
 class SearchExperts(BaseTool):
     """按专业方向检索应急专家。"""
 
-    def __init__(self, data_path: Optional[str] = None):
+    def __init__(
+        self,
+        data_path: Optional[str] = None,
+        client: Optional[ToccApiClient] = None,
+        prefer_api: bool = True,
+    ):
         default_path = Path(__file__).resolve().parents[2] / "data" / "专家数据" / "expert_info.xls"
         super().__init__(data_path=data_path or str(default_path))
-        self.experts = self._load_experts(Path(self.data_path))
-        logger.info("专家库加载完成: experts=%s", len(self.experts))
+        self.client = client or ToccApiClient()
+        self.prefer_api = prefer_api
+        self.data_source = "local"
+        self.experts = self._load_experts_with_fallback(Path(self.data_path))
+        logger.info("专家库加载完成: experts=%s, source=%s", len(self.experts), self.data_source)
 
     @property
     def name(self) -> str:
@@ -43,7 +52,8 @@ class SearchExperts(BaseTool):
     @property
     def description(self) -> str:
         return (
-            "从本地专家库中检索适合参与研判的专家，返回专家姓名、专业方向、职称、单位和联系方式。"
+            "从实时专家库 API 中检索适合参与研判的专家，API 不可用时自动回退本地专家库，"
+            "返回专家姓名、专业方向、职称、单位和联系方式。"
             "适用于危化品、地质灾害、桥隧结构、交通安全、消防、港航等需要专家技术支持的场景。"
         )
 
@@ -135,16 +145,40 @@ class SearchExperts(BaseTool):
         return json.dumps(
             {
                 "status": "success",
+                "data_source": self.data_source,
                 "query_terms": query_terms,
                 "count": len(results),
                 "experts": results,
-                "data_note": "专家库坐标覆盖有限，距离仅在专家记录含经纬度时计算；调度前需人工确认可用状态。",
+                "data_note": (
+                    "专家数据优先来自 TOCC API，接口不可用时回退本地专家库；"
+                    "专家库坐标覆盖有限，距离仅在专家记录含经纬度时计算；调度前需人工确认可用状态。"
+                ),
             },
             ensure_ascii=False,
             indent=2,
         )
 
-    def _load_experts(self, path: Path) -> List[Dict[str, Any]]:
+    def _load_experts_with_fallback(self, local_path: Path) -> List[Dict[str, Any]]:
+        if self.prefer_api:
+            try:
+                api_records = self.client.get_experts()
+                experts = [
+                    mapped for mapped in (map_expert_record(record) for record in api_records)
+                    if mapped.get("name")
+                ]
+                if experts:
+                    self.data_source = "tocc_api"
+                    return experts
+                logger.warning("TOCC 专家接口返回空专家列表，回退本地专家库")
+            except ToccApiError as error:
+                logger.warning("TOCC 专家接口不可用，回退本地专家库: %s", error)
+            except Exception as error:
+                logger.warning("加载 TOCC 专家数据失败，回退本地专家库: %s", error)
+
+        self.data_source = "local_fallback" if self.prefer_api else "local"
+        return self._load_local_experts(local_path)
+
+    def _load_local_experts(self, path: Path) -> List[Dict[str, Any]]:
         if not path.exists():
             raise FileNotFoundError(f"专家库文件不存在: {path}")
 
@@ -184,6 +218,7 @@ class SearchExperts(BaseTool):
                     "latitude": self._clean_float(self._cell(row, index, "latitude")),
                     "on_duty_status": self._cell(row, index, "on_duty_status"),
                     "verification_state": self._cell(row, index, "verification_state"),
+                    "data_source": "local",
                 }
             )
         return experts

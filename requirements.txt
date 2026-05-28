@@ -10,6 +10,9 @@ pyyaml>=6.0
 # 环境变量管理
 python-dotenv>=1.0.0
 
+# HTTP 客户端：高德接口、TOCC 实时数据接口
+requests>=2.31.0
+
 # Excel 数据读取：专家库、仓库/队伍物资 xls 数据
 xlrd>=2.0.1
 
